@@ -1,0 +1,4 @@
+---
+
+k3s_kubeconfig: "/etc/rancher/k3s/k3s.yaml"
+k3s_namespace:  "testing"

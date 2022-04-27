@@ -1,0 +1,10 @@
+---
+# tasks file for ./role/ping
+
+- name: smple conaction test
+  ansible.builtin.shell: |
+    hostname
+  register: return_value
+
+- ansible.builtin.debug:
+    msg: "Result is: {{ return_value.stdout }}"

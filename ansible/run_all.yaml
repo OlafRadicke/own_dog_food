@@ -1,0 +1,8 @@
+---
+
+- name: Run all role over all hosts
+  hosts: all
+  roles:
+    # - ping
+    - k3s_install
+    - k3s_deployment
