@@ -1,0 +1,12 @@
+---
+
+- name: install python3-pip
+  apt:
+    pkg:
+     -            python3-pip
+
+- name: install requiriert python libs
+  pip:
+    name:
+      -           openshift
+      -           pyyaml

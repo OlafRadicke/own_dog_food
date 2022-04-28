@@ -4,5 +4,6 @@
   hosts: all
   roles:
     # - ping
+    - os_configs
     - k3s_install
     - k3s_deployment
