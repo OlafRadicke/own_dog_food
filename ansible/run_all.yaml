@@ -1,6 +1,6 @@
 ---
 
-- name: Run all role over all hosts
+- name: Run all steps
   hosts: all
   roles:
     # - ping
