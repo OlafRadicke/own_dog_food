@@ -1,0 +1,6 @@
+---
+
+- name: Run uninstall
+  hosts: all
+  roles:
+    - k3s_uninstall

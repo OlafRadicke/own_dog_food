@@ -1,0 +1,12 @@
+---
+
+- name: uninstall k3s
+  shell: |
+                /usr/local/bin/k3s-uninstall.sh
+  args:
+    removes:    /usr/local/bin/k3s-uninstall.sh
+  register:     results_of_unsinstall
+
+- debug:
+    msg:        "Retourn: {{ results_of_unsinstall }}"
+  when:         results_of_unsinstall is defined
