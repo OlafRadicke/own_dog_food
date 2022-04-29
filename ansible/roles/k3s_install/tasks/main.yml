@@ -1,16 +1,11 @@
 ---
 
-- name: install k3s
-  ansible.builtin.shell: |
-      curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=stable sh -
-  args:
-    creates: /etc/systemd/system/k3s.service
-  register: return_value
+- name: Setup secret for image pull
+  include_tasks: install_k3s.yaml
 
-- ansible.builtin.debug:
-    msg: "Result is: {{ return_value.stdout }}"
+- name: Setup secret for image pull
+  include_tasks: secret_for_image_pull.yaml
 
-- name: download kubectl config
-  ansible.builtin.fetch:
-    src:  /etc/rancher/k3s/k3s.yaml
-    dest: "./downloads"
+
+
+                

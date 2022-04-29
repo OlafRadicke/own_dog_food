@@ -22,6 +22,17 @@ Enter:
 ansible-playbook -i ./hosts.yaml ./run_all.yaml
 ```
 
+K3s topics
+----------
+
+
+Gerate config file (for generating image pull secret):
+
+```bash
+podman login --authfile ~/.docker/config.json docker.io
+```
+
+
 Todos
 -----
 

@@ -6,6 +6,7 @@
     kubeconfig:       "{{ k3s_kubeconfig }}"
     state:            "{{ k3s_deployment_state }}"
     namespace:        "{{ k3s_namespace }}"
+    wait:             "yes"
     definition:
       apiVersion:     apps/v1
       kind:           Deployment
@@ -25,7 +26,8 @@
           spec:
             containers:
             - name:   olaf-radicke-de
-              image:  olafradicke/olaf-radicke-de:latest
+              image:  olafradicke/olaf-radicke-de:1.0
+              imagePullPolicy: IfNotPresent
               ports:
               - containerPort: 80
 
@@ -34,6 +36,7 @@
     kubeconfig:       "{{ k3s_kubeconfig }}"
     state:            "{{ k3s_deployment_state }}"
     namespace:        "{{ k3s_namespace }}"
+    wait:             "yes"
     definition:
       apiVersion:     v1
       kind:           Service
@@ -52,29 +55,6 @@
           port:       80
 
 ################ IngressRoute ################
-
-- name: create a IngressRoute object http-olaf-radicke-de
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      "{{ k3s_deployment_state }}"
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               traefik.containo.us/v1alpha1
-      kind:                     IngressRoute
-      metadata:
-        name:                   https-olaf-radicke-de
-      spec:
-        entryPoints:
-          -                     web
-        routes:
-          - match:              Host(`new-olaf-radicke.de`)
-            kind:               Rule
-            services:
-              - name:           olaf-radicke-de
-                port:           80
-            middlewares:
-              - name:           https-olaf-radicke-de
-
 
 - name: create a IngressRoute object https-olaf-radicke-de
   kubernetes.core.k8s:
@@ -96,7 +76,7 @@
             service:
               name:             olaf-radicke-de
               port:             80
-        tls: {}
+        # tls: {}
         # rules:
         #   - host:               new-olaf-radicke.de
         #     http:      
@@ -108,7 +88,6 @@
         #               name:     olaf-radicke-de
         #               port:
         #                 number: 80
-
 
 - name: create a Middleware object https-ingressroute
   kubernetes.core.k8s:
@@ -124,6 +103,30 @@
         redirectScheme:
           scheme:               https
           permanent:            true
+
+- name: create a IngressRoute object http-olaf-radicke-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   https-olaf-radicke-de
+      spec:
+        entryPoints:
+          -                     web
+        routes:
+          - match:              Host(`new-olaf-radicke.de`)
+            kind:               Rule
+            services:
+              - name:           olaf-radicke-de
+                port:           80
+            # middlewares:
+            #   - name:           https-olaf-radicke-de
+
+
 
 ################ letsencrypt ################
 

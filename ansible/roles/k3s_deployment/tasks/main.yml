@@ -1,10 +1,4 @@
 ---
-
-- debug:
-    msg: "k3s_deployment_state: {{ k3s_deployment_state }}"
-
-- debug:
-    msg: "k3s_letsencrypt: {{ k3s_letsencrypt }}"
  
 - name: create a k8s namespace testing
   kubernetes.core.k8s:
@@ -16,3 +10,6 @@
 
 - name: Include task for olaf-radicke.de domain
   include_tasks: olaf-radicke-de.yaml
+
+- name: Include task for the-independent-friend.de domain
+  include_tasks: the-independent-friend-de.yaml

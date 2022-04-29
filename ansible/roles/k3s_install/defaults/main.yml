@@ -1,2 +1,3 @@
 ---
-# defaults file for ./roles/k3s_install
+# stable, latest, testing
+k3s_channal: stable
