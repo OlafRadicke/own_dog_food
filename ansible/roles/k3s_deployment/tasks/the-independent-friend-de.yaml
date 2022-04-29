@@ -1,0 +1,212 @@
+---
+
+- name: create deployment
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    wait:                       "yes"
+    definition:
+      apiVersion:               apps/v1
+      kind:                     Deployment
+      metadata:
+        namespace:              "{{ k3s_namespace }}"
+        name:                   the-independent-friend-de
+        labels:
+          app:                  the-independent-friend-de
+      spec:
+        selector:
+          matchLabels:
+            app:                the-independent-friend-de
+        template:
+          metadata:
+            labels:
+              app:              the-independent-friend-de
+          spec:
+            containers:
+            - name:             the-independent-friend-de
+              image:            olafradicke/olaf-radicke-de:1.0
+              imagePullPolicy:  IfNotPresent
+              ports:
+              - containerPort:  80
+            imagePullSecrets:
+            - name:             regcred
+
+- name: create a service object
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    wait:                       "yes"
+    definition:
+      apiVersion:               v1
+      kind:                     Service
+      metadata:
+        name:                   the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+        labels:
+          app:                  the-independent-friend-de
+      spec:
+        selector:
+          app:                  the-independent-friend-de
+        ports:
+        - protocol:             TCP
+          targetPort:           80
+          name:                 port-80-tcp
+          port:                 80
+
+################ IngressRoute ################
+
+- name: create a IngressRoute object https-the-independent-friend-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   https-the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:
+          - match:              Host(`the-independent-friend.de`)
+            kind:               Rule
+            service:
+              name:             the-independent-friend-de
+              port:             80
+        # tls: {}
+        # rules:
+        #   - host:               the-independent-friend.de
+        #     http:      
+        #       paths:
+        #         - path:         /
+        #           pathType:     Exact
+        #           backend:
+        #             service:
+        #               name:     the-independent-friend-de
+        #               port:
+        #                 number: 80
+
+- name: create a Middleware object https-ingressroute
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     Middleware
+      metadata:
+        name:                   https-redirect-the-independent-friend-de
+      spec:
+        redirectScheme:
+          scheme:               https
+          permanent:            true
+
+- name: create a IngressRoute object http-the-independent-friend-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   https-the-independent-friend-de
+      spec:
+        entryPoints:
+          -                     web
+        routes:
+          - match:              Host(`the-independent-friend.de`)
+            kind:               Rule
+            services:
+              - name:           the-independent-friend-de
+                port:           80
+            # middlewares:
+            #   - name:           https-the-independent-friend-de
+
+
+
+################ letsencrypt ################
+
+- name: traefik update
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               helm.cattle.io/v1
+      kind:                     HelmChartConfig
+      metadata:
+        name:                   traefik
+        namespace:              kube-system
+      spec:
+        valuesContent: |-
+          additionalArguments:
+            - "--log.level=DEBUG"
+            - "--certificatesresolvers.le.acme.email={{ k3s_acme_email }}"
+            - "--certificatesresolvers.le.acme.storage=/data/acme.json"
+            - "--certificatesresolvers.le.acme.tlschallenge=true"
+            - "--certificatesresolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
+  when: k3s_letsencrypt == "yes"
+
+
+# - name: set TLSOption
+#   kubernetes.core.k8s:
+#     kubeconfig:                 "{{ k3s_kubeconfig }}"
+#     state:                      "{{ k3s_deployment_state }}"
+#     namespace:                  "{{ k3s_namespace }}"
+#     definition:
+#       apiVersion: traefik.containo.us/v1alpha1
+#       kind: TLSOption
+#       metadata:
+#         name: tlsoptions
+#         namespace: dev
+#       spec:
+#         minVersion: VersionTLS12
+#         cipherSuites:
+#           - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+#           - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+#           - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+#           - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+#           - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+#           - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+#           - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+#           - TLS_AES_256_GCM_SHA384
+#           - TLS_AES_128_GCM_SHA256
+#           - TLS_CHACHA20_POLY1305_SHA256
+#           - TLS_FALLBACK_SCSV
+#         curvePreferences:
+#           - CurveP521
+#           - CurveP384
+#         sniStrict: false
+
+
+- name: new ingress route
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:
+        - kind:                 Rule
+          match:                Host(`the-independent-friend.de`)
+          services:
+          - name:               the-independent-friend-de
+            port:               80
+        tls:
+          certResolver:         le
+          # options:
+          #   name: tlsoptions
+          #   namespace: dev
+  when: k3s_letsencrypt == "yes"
