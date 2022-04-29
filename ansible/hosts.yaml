@@ -5,6 +5,10 @@ all:
   hosts:
     'olaf-radicke-02':
       ansible_host:               92.205.105.117
-      ansible_user:               oradicke
+      ansible_user:               "oradicke"
       ansible_become:             yes
-      ansible_python_interpreter: /usr/bin/python3
+      ansible_python_interpreter: "/usr/bin/python3"
+      k3s_acme_email:             "briefkasten@olaf-radicke.de"
+      k3s_namespace:              "env-live"
+      # k3s_deployment_state:       "absent"
+      # k3s_letsencrypt:            "yes"

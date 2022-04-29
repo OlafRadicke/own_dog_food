@@ -1,12 +1,15 @@
 Playbook for hosteurope server setup
 ====================================
 
-Pre install
------------
+Pre install requirements
+------------------------
 
-Install needed collections and python libs, see:
+Enter to install needed collections:
 
-- [k3s_deployment](ansible/roles/k3s_deployment/README.md)
+
+```bash
+ansible-galaxy collection install kubernetes.core
+```
 
 
 Run setup

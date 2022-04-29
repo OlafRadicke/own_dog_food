@@ -1,135 +1,18 @@
 ---
+
+- debug:
+    msg: "k3s_deployment_state: {{ k3s_deployment_state }}"
+
+- debug:
+    msg: "k3s_letsencrypt: {{ k3s_letsencrypt }}"
  
-
-- name: Include task install_libs_and_tools.yaml
-  include_tasks: install_libs_and_tools.yaml
-
-
 - name: create a k8s namespace testing
   kubernetes.core.k8s:
     kubeconfig:   "{{ k3s_kubeconfig }}"
     name:         "{{ k3s_namespace }}"
     api_version:  v1
     kind:         Namespace
-    state:        present
+    state:        "{{ k3s_deployment_state }}"
 
-- name: create deployment
-  kubernetes.core.k8s:
-    kubeconfig:       "{{ k3s_kubeconfig }}"
-    state:            present
-    namespace:        "{{ k3s_namespace }}"
-    definition:
-      apiVersion:     apps/v1
-      kind:           Deployment
-      metadata:
-        namespace:    "{{ k3s_namespace }}"
-        name:         nginx
-        labels:
-          app:        nginx
-      spec:
-        selector:
-          matchLabels:
-            app:      nginx
-        template:
-          metadata:
-            labels:
-              app:    nginx
-          spec:
-            containers:
-            - name:   nginx
-              image:  nginx:1.21
-              ports:
-              - containerPort: 80
-
-- name: create a service object
-  kubernetes.core.k8s:
-    kubeconfig:       "{{ k3s_kubeconfig }}"
-    state:            present
-    namespace:        "{{ k3s_namespace }}"
-    definition:
-      apiVersion:     v1
-      kind:           Service
-      metadata:
-        name:         nginx
-        namespace:    "{{ k3s_namespace }}"
-        labels:
-          app:        nginx
-      spec:
-        selector:
-          app:        nginx
-        ports:
-        - protocol:   TCP
-          targetPort: 80
-          name:       port-80-tcp
-          port:       80
-
-- name: create a IngressRoute object 1
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      present
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               traefik.containo.us/v1alpha1
-      kind:                     IngressRoute
-      metadata:
-        name:                   http-redirect-ingressroute
-      spec:
-        entryPoints:
-          -                     nginx
-        routes:
-          - match:              Host(`new-olaf-radicke.de`)
-            kind:               Rule
-            services:
-              - name:           nginx
-                port:           80
-            middlewares:
-              - name:           https-ingressroute
-
-
-- name: create a IngressRoute object https-ingressroute
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      present
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               traefik.containo.us/v1alpha1
-      kind:                     IngressRoute
-      metadata:
-        name:                   https-ingressroute
-        namespace:              "{{ k3s_namespace }}"
-      spec:
-        entryPoints:
-          -                     nginx
-        routes:
-          - match:              Host(`new-olaf-radicke.de`)
-            kind:               Rule
-            service:
-              name:             nginx
-              port:             80
-        tls: {}
-        rules:
-          - host:               new-olaf-radicke.de
-            http:      
-              paths:
-                - path:         /
-                  pathType:     Exact
-                  backend:
-                    service:
-                      name:     nginx
-                      port:
-                        number: 80
-
-- name: create a IngressRoute object https-ingressroute
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      present
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               traefik.containo.us/v1alpha1
-      kind:                     Middleware
-      metadata:
-        name:                   https-redirect
-      spec:
-        redirectScheme:
-          scheme:               https
-          permanent:            true
+- name: Include task for olaf-radicke.de domain
+  include_tasks: olaf-radicke-de.yaml
