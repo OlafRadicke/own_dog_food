@@ -124,8 +124,8 @@
             services:
               - name:           the-independent-friend-de
                 port:           80
-            # middlewares:
-            #   - name:           https-the-independent-friend-de
+            middlewares:
+              - name:           https-the-independent-friend-de
 
 
 
