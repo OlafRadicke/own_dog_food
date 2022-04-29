@@ -47,15 +47,90 @@
         labels:
           app:                  the-independent-friend-de
       spec:
+        type:                   ClusterIP
         selector:
           app:                  the-independent-friend-de
         ports:
-        - protocol:             TCP
-          targetPort:           80
-          name:                 port-80-tcp
+        - targetPort:           80
           port:                 80
+        # - protocol:             TCP
+        #   targetPort:           80
+        #   name:                 port-80-tcp
+        #   port:                 80
+
+
+# - name: create a service object NodePort
+#   kubernetes.core.k8s:
+#     kubeconfig:                 "{{ k3s_kubeconfig }}"
+#     state:                      "{{ k3s_deployment_state }}"
+#     namespace:                  "{{ k3s_namespace }}"
+#     wait:                       "yes"
+#     definition:
+#       apiVersion:               v1
+#       kind:                     Service
+#       metadata:
+#         name:                   the-independent-friend-de
+#         namespace:              "{{ k3s_namespace }}"
+#         labels:
+#           app:                  the-independent-friend-de
+#       spec:
+#         type:                   NodePort
+#         selector:
+#           app:                  the-independent-friend-de
+#         ports:
+#         - targetPort:           80
+#           port:                 80
+#           nodePort:             30007
+
+
 
 ################ IngressRoute ################
+
+- name: create a IngressRoute object https-the-independent-friend-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               networking.k8s.io/v1
+      kind:                     Ingress
+      metadata:
+        name:                   the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+        annotations:
+            kubernetes.io/ingress.class: traefik
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+      spec:
+        entryPoints:
+          -                     websecure
+        # routes:
+        #   - match:              Host(`the-independent-friend.de`)
+        #     kind:               Rule
+        #     services:
+        #       - name:           the-independent-friend-de
+        #         port:           80
+
+        rules:
+          - host: "the-independent-friend.de"
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name:  the-independent-friend-de
+                      port:
+                        number: 80
+            https:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name:  the-independent-friend-de
+                      port:
+                        number: 443
+
 
 - name: create a IngressRoute object https-the-independent-friend-de
   kubernetes.core.k8s:
@@ -66,29 +141,18 @@
       apiVersion:               traefik.containo.us/v1alpha1
       kind:                     IngressRoute
       metadata:
-        name:                   https-the-independent-friend-de
+        name:                   the-independent-friend-de
         namespace:              "{{ k3s_namespace }}"
       spec:
         entryPoints:
           -                     websecure
         routes:
-          - match:              Host(`the-independent-friend.de`)
-            kind:               Rule
+          - kind:               Rule
+            match:              Host(`the-independent-friend.de`)
             service:
-              name:             the-independent-friend-de
-              port:             80
-        # tls: {}
-        # rules:
-        #   - host:               the-independent-friend.de
-        #     http:      
-        #       paths:
-        #         - path:         /
-        #           pathType:     Exact
-        #           backend:
-        #             service:
-        #               name:     the-independent-friend-de
-        #               port:
-        #                 number: 80
+              - name:           the-independent-friend-de
+                port:           80
+        tls: {}
 
 - name: create a Middleware object https-ingressroute
   kubernetes.core.k8s:
@@ -99,7 +163,8 @@
       apiVersion:               traefik.containo.us/v1alpha1
       kind:                     Middleware
       metadata:
-        name:                   https-redirect-the-independent-friend-de
+        name:                   middleware-the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
       spec:
         redirectScheme:
           scheme:               https
@@ -114,7 +179,8 @@
       apiVersion:               traefik.containo.us/v1alpha1
       kind:                     IngressRoute
       metadata:
-        name:                   https-the-independent-friend-de
+        name:                   the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
       spec:
         entryPoints:
           -                     web
@@ -125,8 +191,8 @@
               - name:           the-independent-friend-de
                 port:           80
             middlewares:
-              - name:           https-the-independent-friend-de
-
+              - name:           middleware-the-independent-friend-de
+                namespace:      "{{ k3s_namespace }}"
 
 
 ################ letsencrypt ################

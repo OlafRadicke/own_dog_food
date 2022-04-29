@@ -2,7 +2,7 @@
 
 - name: install k3s
   ansible.builtin.shell: |
-              curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=stable sh -
+              curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL={{ k3s_channal }} sh -
   args:
     creates:  /etc/systemd/system/k3s.service
   register:   return_value
