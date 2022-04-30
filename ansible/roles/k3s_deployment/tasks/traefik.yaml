@@ -1,0 +1,65 @@
+---
+
+
+- name: create a IngressRoute object https-the-independent-friend-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:
+          - kind:               Rule
+            match:              Host(`the-independent-friend.de`)
+            service:
+              - name:           the-independent-friend-de
+                port:           80
+        tls: {}
+
+- name: create a Middleware object https-ingressroute
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     Middleware
+      metadata:
+        name:                   middleware-the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        redirectScheme:
+          scheme:               https
+          permanent:            true
+
+- name: create a IngressRoute object http-the-independent-friend-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     web
+        routes:
+          - match:              Host(`the-independent-friend.de`)
+            kind:               Rule
+            services:
+              - name:           the-independent-friend-de
+                port:           80
+            middlewares:
+              - name:           middleware-the-independent-friend-de
+                namespace:      "{{ k3s_namespace }}"
+

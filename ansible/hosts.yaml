@@ -11,5 +11,6 @@ all:
       k3s_acme_email:             "briefkasten@olaf-radicke.de"
       k3s_namespace:              "live"
       # k3s_deployment_state:       "absent"
+      # k3s_traefik:                "yes"
       # k3s_letsencrypt:            "yes"
-      k3s_channal:                latest 
+      # k3s_channal:                latest 
