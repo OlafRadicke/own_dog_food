@@ -13,3 +13,7 @@
 
 - name: Include task for the-independent-friend.de domain
   include_tasks: the-independent-friend-de.yaml
+
+
+- name: Include task for ingress
+  include_tasks: ingress.yaml
