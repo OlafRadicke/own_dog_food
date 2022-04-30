@@ -4,5 +4,6 @@ k3s_kubeconfig:       "/etc/rancher/k3s/k3s.yaml"
 k3s_namespace:        "testing"
 k3s_acme_email:       youremmail@gmail.com
 k3s_deployment_state: "present"
+k3s_native_ingress:   "no"
 k3s_traefik:          "no"
 k3s_letsencrypt:      "no"

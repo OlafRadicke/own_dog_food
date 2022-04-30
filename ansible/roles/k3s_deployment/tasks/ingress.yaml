@@ -19,15 +19,9 @@
             kubernetes.io/ingress.class: traefik
             cert-manager.io/cluster-issuer: letsencrypt-prod
       spec:
-        entryPoints:
-          -                     websecure
-        # routes:
-        #   - match:              Host(`the-independent-friend.de`)
-        #     kind:               Rule
-        #     services:
-        #       - name:           the-independent-friend-de
-        #         port:           80
-
+        # tls:
+        #   - hosts:
+        #       - the-independent-friend.de           
         rules:
           - host: "the-independent-friend.de"
             http:

@@ -32,6 +32,17 @@ Gerate config file (for generating image pull secret):
 podman login --authfile ~/.docker/config.json docker.io
 ```
 
+Troubleshooting
+---------------
+
+
+```bash
+sudo kubectl get ingress -A
+```
+
+```bash
+sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
+```
 
 Todos
 -----

@@ -16,6 +16,7 @@
 
 - name: Include task for ingress
   include_tasks: ingress.yaml
+  when: k3s_native_ingress == "yes"
 
 - name: Include task for traefik
   include_tasks: traefik.yaml
