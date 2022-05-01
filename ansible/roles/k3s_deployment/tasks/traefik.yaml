@@ -10,7 +10,7 @@
       apiVersion:               traefik.containo.us/v1alpha1
       kind:                     IngressRoute
       metadata:
-        name:                   the-independent-friend-de
+        name:                   https-the-independent-friend-de
         namespace:              "{{ k3s_namespace }}"
       spec:
         entryPoints:

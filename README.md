@@ -47,5 +47,8 @@ sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
 Todos
 -----
 
-- Remove password login
+- Remove ssh password login
+- tlsoptions [letsencrypt](ansible/roles/k3s_deployment/tasks/letsencrypt.yaml)
 - hardening [README.md](ansible/roles/k3s_install/README.md)
+- Monitoring
+- Switch olaf-radicke.de

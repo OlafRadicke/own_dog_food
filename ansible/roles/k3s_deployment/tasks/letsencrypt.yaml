@@ -101,6 +101,3 @@
             port:               80
         tls:
           certResolver:         le
-          # certificates:
-          # - certFile: /etc/traefik/conf/certs/fullchain.pem
-          #   keyFile:  /etc/traefik/conf/certs/privkey.pem
