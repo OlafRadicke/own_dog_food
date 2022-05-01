@@ -28,6 +28,10 @@ Dependencies
 Example Playbook
 ----------------
 
+Links
+-----
+
+- [-> https-on-kubernetes-using-traefik-proxy](https://traefik.io/blog/https-on-kubernetes-using-traefik-proxy/)
 
 
 License
