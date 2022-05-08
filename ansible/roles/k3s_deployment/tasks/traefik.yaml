@@ -1,6 +1,5 @@
 ---
 
-
 - name: create a IngressRoute object https-the-independent-friend-de
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"
@@ -26,12 +25,30 @@
             service:
               - name:           test-the-independent-friend-de
                 port:           80
+        tls: {}
+
+- name: create a IngressRoute object https-olaf-radicke-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   https-olaf-radicke-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:
           - kind:               Rule
             match:              Host(`olaf-radicke.de`)
             service:
               - name:           olaf-radicke-de
                 port:           80
         tls: {}
+
 
 - name: create a Middleware object https-ingressroute
   kubernetes.core.k8s:
@@ -80,6 +97,22 @@
             middlewares:
               - name:           middleware-http-to-https
                 namespace:      "{{ k3s_namespace }}"
+
+- name: create a IngressRoute object http-olaf-radicke-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   olaf-radicke-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     web
+        routes:
           - match:              Host(`olaf-radicke.de`)
             kind:               Rule
             services:
@@ -88,4 +121,3 @@
             middlewares:
               - name:           middleware-http-to-https
                 namespace:      "{{ k3s_namespace }}"
-
