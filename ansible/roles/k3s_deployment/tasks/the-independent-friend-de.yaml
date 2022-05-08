@@ -25,7 +25,7 @@
           spec:
             containers:
             - name:             the-independent-friend-de
-              image:            olafradicke/the-independent-friend-de:1.0
+              image:            olafradicke/the-independent-friend-de:2
               imagePullPolicy:  IfNotPresent
               ports:
               - containerPort:  80

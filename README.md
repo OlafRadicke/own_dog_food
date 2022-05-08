@@ -19,7 +19,7 @@ Run setup
 Enter:
 
 ```
-ansible-playbook -i ./hosts.yaml ./run_all.yaml
+sible-playbook -i ./ansible/hosts.yaml ./ansible/run_all.yaml
 ```
 
 K3s topics
@@ -44,12 +44,18 @@ sudo kubectl get ingress -A
 sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
 ```
 
+
+
 Todos
 -----
 
+- Auto update
 - Remove ssh password login
-- tlsoptions [letsencrypt](ansible/roles/k3s_deployment/tasks/letsencrypt.yaml)
+- tlsoptions [letsencrypt](ansible/roles/k3s_deployment/tasks/letsencrypt.yaml) https://www.ssllabs.com/ssltest/analyze.html?d=the-independent-friend.de
 - hardening [README.md](ansible/roles/k3s_install/README.md)
+- mTLS https://doc.traefik.io/traefik/https/tls/#client-authentication-mtls and https://smallstep.com/hello-mtls/doc/server/traefik
 - Monitoring
 - Switch olaf-radicke.de
 - new with https://enbizcard.vishnuraghav.com/ 
+- ArgoCD
+  
