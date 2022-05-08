@@ -12,4 +12,4 @@ all:
       k3s_namespace:              "live"
       # k3s_deployment_state:       "absent"
       k3s_acme_tier:              "production"
-      k3s_letsencrypt:            "no"
+      # k3s_letsencrypt:            "no"
