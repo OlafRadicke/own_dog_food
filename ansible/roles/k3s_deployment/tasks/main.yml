@@ -8,8 +8,11 @@
     kind:         Namespace
     state:        "{{ k3s_deployment_state }}"
 
-# - name: Include task for olaf-radicke.de domain
-#   include_tasks: olaf-radicke-de.yaml
+- name: Include task for olaf-radicke.de domain
+  include_tasks: olaf-radicke-de.yaml
+
+- name: Include task for test-the-independent-friend.de domain
+  include_tasks: test-the-independent-friend-de.yaml
 
 - name: Include task for the-independent-friend.de domain
   include_tasks: the-independent-friend-de.yaml

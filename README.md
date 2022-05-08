@@ -19,7 +19,7 @@ Run setup
 Enter:
 
 ```
-sible-playbook -i ./ansible/hosts.yaml ./ansible/run_all.yaml
+ansible-playbook -i ./ansible/hosts.yaml ./ansible/run_all.yaml
 ```
 
 K3s topics

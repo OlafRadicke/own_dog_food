@@ -89,15 +89,20 @@
         entryPoints:
           -                     websecure
         routes:
-        # - kind:                 Rule
-        #   match:                Host(`olaf-radicke.de`)
-        #   services:
-        #   - name:               olaf-radicke-de
-        #     port:               80
+        - kind:                 Rule
+          match:                Host(`olaf-radicke.de`)
+          services:
+          - name:               olaf-radicke-de
+            port:               80
         - kind:                 Rule
           match:                Host(`the-independent-friend.de`)
           services:
           - name:               the-independent-friend-de
+            port:               80
+        - kind:                 Rule
+          match:                Host(`test.the-independent-friend.de`)
+          services:
+          - name:               test-the-independent-friend-de
             port:               80
         tls:
           certResolver:         le

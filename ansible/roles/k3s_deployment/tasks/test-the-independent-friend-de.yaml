@@ -11,21 +11,21 @@
       kind:                     Deployment
       metadata:
         namespace:              "{{ k3s_namespace }}"
-        name:                   olaf-radicke-de
+        name:                   test-the-independent-friend-de
         labels:
-          app:                  olaf-radicke-de
+          app:                  test-the-independent-friend-de
       spec:
         selector:
           matchLabels:
-            app:                olaf-radicke-de
+            app:                test-the-independent-friend-de
         template:
           metadata:
             labels:
-              app:              olaf-radicke-de
+              app:              test-the-independent-friend-de
           spec:
             containers:
-            - name:             olaf-radicke-de
-              image:            olafradicke/olaf-radicke-de:2.4
+            - name:             test-the-independent-friend-de
+              image:            olafradicke/olaf-radicke-de:2.3
               imagePullPolicy:  IfNotPresent
               ports:
               - containerPort:  80
@@ -42,14 +42,14 @@
       apiVersion:               v1
       kind:                     Service
       metadata:
-        name:                   olaf-radicke-de
+        name:                   test-the-independent-friend-de
         namespace:              "{{ k3s_namespace }}"
         labels:
-          app:                  olaf-radicke-de
+          app:                  test-the-independent-friend-de
       spec:
         type:                   ClusterIP
         selector:
-          app:                  olaf-radicke-de
+          app:                  test-the-independent-friend-de
         ports:
         - targetPort:           80
           port:                 80

@@ -21,6 +21,16 @@
             service:
               - name:           the-independent-friend-de
                 port:           80
+          - kind:               Rule
+            match:              Host(`test.the-independent-friend.de`)
+            service:
+              - name:           test-the-independent-friend-de
+                port:           80
+          - kind:               Rule
+            match:              Host(`olaf-radicke.de`)
+            service:
+              - name:           olaf-radicke-de
+                port:           80
         tls: {}
 
 - name: create a Middleware object https-ingressroute
@@ -32,7 +42,7 @@
       apiVersion:               traefik.containo.us/v1alpha1
       kind:                     Middleware
       metadata:
-        name:                   middleware-the-independent-friend-de
+        name:                   middleware-http-to-https
         namespace:              "{{ k3s_namespace }}"
       spec:
         redirectScheme:
@@ -60,6 +70,22 @@
               - name:           the-independent-friend-de
                 port:           80
             middlewares:
-              - name:           middleware-the-independent-friend-de
+              - name:           middleware-http-to-https
+                namespace:      "{{ k3s_namespace }}"
+          - match:              Host(`test.the-independent-friend.de`)
+            kind:               Rule
+            services:
+              - name:           test-the-independent-friend-de
+                port:           80
+            middlewares:
+              - name:           middleware-http-to-https
+                namespace:      "{{ k3s_namespace }}"
+          - match:              Host(`olaf-radicke.de`)
+            kind:               Rule
+            services:
+              - name:           olaf-radicke-de
+                port:           80
+            middlewares:
+              - name:           middleware-http-to-https
                 namespace:      "{{ k3s_namespace }}"
 
