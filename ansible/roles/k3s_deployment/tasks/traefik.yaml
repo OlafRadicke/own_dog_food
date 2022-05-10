@@ -1,6 +1,6 @@
 ---
 
-- name: create a IngressRoute object https-the-independent-friend-de
+- name: create a IngressRoute object for https
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"
     state:                      "{{ k3s_deployment_state }}"
@@ -14,20 +14,11 @@
       spec:
         entryPoints:
           -                     websecure
-        routes:
-          - kind:               Rule
-            match:              Host(`the-independent-friend.de`)
-            service:
-              - name:           the-independent-friend-de
-                port:           80
-          - kind:               Rule
-            match:              Host(`test.the-independent-friend.de`)
-            service:
-              - name:           test-the-independent-friend-de
-                port:           80
-        tls: {}
+        routes:                 "{{ k3s_routes }}"
+        tls:                    {}
+  when:                         k3s_letsencrypt != "yes"
 
-- name: create a IngressRoute object https-olaf-radicke-de
+- name: create a IngressRoute object for https with letsencrypt support
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"
     state:                      "{{ k3s_deployment_state }}"
@@ -36,19 +27,15 @@
       apiVersion:               traefik.containo.us/v1alpha1
       kind:                     IngressRoute
       metadata:
-        name:                   https-olaf-radicke-de
+        name:                   https-the-independent-friend-de
         namespace:              "{{ k3s_namespace }}"
       spec:
         entryPoints:
           -                     websecure
-        routes:
-          - kind:               Rule
-            match:              Host(`olaf-radicke.de`)
-            service:
-              - name:           olaf-radicke-de
-                port:           80
-        tls: {}
-
+        routes:                 "{{ k3s_routes }}"
+        tls:
+          certResolver:         le
+  when:                         k3s_letsencrypt == "yes"
 
 - name: create a Middleware object https-ingressroute
   kubernetes.core.k8s:
@@ -80,44 +67,5 @@
       spec:
         entryPoints:
           -                     web
-        routes:
-          - match:              Host(`the-independent-friend.de`)
-            kind:               Rule
-            services:
-              - name:           the-independent-friend-de
-                port:           80
-            middlewares:
-              - name:           middleware-http-to-https
-                namespace:      "{{ k3s_namespace }}"
-          - match:              Host(`test.the-independent-friend.de`)
-            kind:               Rule
-            services:
-              - name:           test-the-independent-friend-de
-                port:           80
-            middlewares:
-              - name:           middleware-http-to-https
-                namespace:      "{{ k3s_namespace }}"
+        routes:                 "{{ k3s_middleware_routes }}"
 
-- name: create a IngressRoute object http-olaf-radicke-de
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      "{{ k3s_deployment_state }}"
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               traefik.containo.us/v1alpha1
-      kind:                     IngressRoute
-      metadata:
-        name:                   olaf-radicke-de
-        namespace:              "{{ k3s_namespace }}"
-      spec:
-        entryPoints:
-          -                     web
-        routes:
-          - match:              Host(`olaf-radicke.de`)
-            kind:               Rule
-            services:
-              - name:           olaf-radicke-de
-                port:           80
-            middlewares:
-              - name:           middleware-http-to-https
-                namespace:      "{{ k3s_namespace }}"

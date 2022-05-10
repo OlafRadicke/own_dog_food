@@ -8,14 +8,12 @@
     kind:         Namespace
     state:        "{{ k3s_deployment_state }}"
 
-- name: Include task for olaf-radicke.de domain
-  include_tasks: olaf-radicke-de.yaml
+- name: Include task for site deployment
+  include_tasks: deployments.yaml
 
-- name: Include task for test-the-independent-friend.de domain
-  include_tasks: test-the-independent-friend-de.yaml
-
-- name: Include task for the-independent-friend.de domain
-  include_tasks: the-independent-friend-de.yaml
+- name: Include task for letsencrypt
+  include_tasks: letsencrypt.yaml
+  when: k3s_letsencrypt == "yes"
 
 - name: Include task for ingress
   include_tasks: ingress.yaml
@@ -24,7 +22,3 @@
 - name: Include task for traefik
   include_tasks: traefik.yaml
   when: k3s_traefik == "yes"
-
-- name: Include task for letsencrypt
-  include_tasks: letsencrypt.yaml
-  when: k3s_letsencrypt == "yes"

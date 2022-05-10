@@ -11,26 +11,27 @@
       kind:                     Deployment
       metadata:
         namespace:              "{{ k3s_namespace }}"
-        name:                   olaf-radicke-de
+        name:                   "{{ item.name }}"
         labels:
-          app:                  olaf-radicke-de
+          app:                  "{{ item.name }}"
       spec:
         selector:
           matchLabels:
-            app:                olaf-radicke-de
+            app:                "{{ item.name }}"
         template:
           metadata:
             labels:
-              app:              olaf-radicke-de
+              app:              "{{ item.name }}"
           spec:
             containers:
-            - name:             olaf-radicke-de
-              image:            olafradicke/olaf-radicke-de:2.10
+            - name:             "{{ item.name }}"
+              image:            "{{ item.image }}"
               imagePullPolicy:  IfNotPresent
               ports:
               - containerPort:  80
             imagePullSecrets:
             - name:             regcred
+  loop:                         "{{ k3s_projects }}"
 
 - name: create a service object
   kubernetes.core.k8s:
@@ -42,17 +43,18 @@
       apiVersion:               v1
       kind:                     Service
       metadata:
-        name:                   olaf-radicke-de
+        name:                   "{{ item.name }}"
         namespace:              "{{ k3s_namespace }}"
         labels:
-          app:                  olaf-radicke-de
+          app:                  "{{ item.name }}"
       spec:
         type:                   ClusterIP
         selector:
-          app:                  olaf-radicke-de
+          app:                  "{{ item.name }}"
         ports:
         - targetPort:           80
           port:                 80
+  loop:                         "{{ k3s_projects }}"
 
 
 

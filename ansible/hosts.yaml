@@ -12,3 +12,55 @@ all:
       k3s_namespace:              "live"
       # k3s_deployment_state:       "absent"
       # k3s_acme_tier:              "production"
+      # k3s_letsencrypt:  "no"
+      k3s_projects:
+        - name:                   "olaf-radicke-de"
+          image:                  "olafradicke/olaf-radicke-de:2.10"
+          fqdn:                   "olaf-radicke.de"
+        - name:                   "the-independent-friend-de"
+          image:                  "olafradicke/the-independent-friend-de:2"
+          fqdn:                   "the-independent-friend.de"
+        - name:                   "test-the-independent-friend-de"
+          image:                  "olafradicke/the-independent-friend-de:2"
+          fqdn:                   "test.the-independent-friend.de"
+      k3s_routes:
+        - match:                  Host(`olaf-radicke.de`)
+          kind:                   Rule
+          services:
+          - name:                 olaf-radicke-de
+            port:                 80
+        - match:                  Host(`the-independent-friend.de`)
+          kind:                   Rule
+          services:
+          - name:                 the-independent-friend-de
+            port:                 80
+        - match:                  Host(`test.the-independent-friend.de`)
+          kind:                   Rule
+          services:
+          - name:                 test-the-independent-friend-de
+            port:                 80
+      k3s_middleware_routes:      
+        - match:                  Host(`olaf-radicke.de`)
+          kind:                   Rule
+          services:
+          - name:                 olaf-radicke-de
+            port:                 80
+          middlewares:
+          - name:               middleware-http-to-https
+            namespace:          "{{ k3s_namespace }}"
+        - match:                  Host(`the-independent-friend.de`)
+          kind:                   Rule
+          services:
+          - name:                 the-independent-friend-de
+            port:                 80
+          middlewares:
+          - name:               middleware-http-to-https
+            namespace:          "{{ k3s_namespace }}"
+        - match:                  Host(`test.the-independent-friend.de`)
+          kind:                   Rule
+          services:
+          - name:               test-the-independent-friend-de
+            port:               80
+          middlewares:
+          - name:               middleware-http-to-https
+            namespace:          "{{ k3s_namespace }}"

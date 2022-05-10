@@ -1,6 +1,6 @@
 ---
 
-- name: create a IngressRoute object https-the-independent-friend-de
+- name: create a Ingress object https-the-independent-friend-de
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"
     state:                      "{{ k3s_deployment_state }}"
@@ -9,66 +9,33 @@
       apiVersion:               networking.k8s.io/v1
       kind:                     Ingress
       metadata:
-        name:                   the-independent-friend-de
+        name:                   "{{ item.name }}"
         namespace:              "{{ k3s_namespace }}"
         annotations:
             kubernetes.io/ingress.class: traefik
             cert-manager.io/cluster-issuer: letsencrypt-prod
       spec:     
         rules:
-          - host: "the-independent-friend.de"
+          - host:               "{{ item.fqdn }}"
             http:
               paths:
-                - path: /
-                  pathType: Prefix
+                - path:         /
+                  pathType:     Prefix
                   backend:
                     service:
-                      name:  the-independent-friend-de
+                      name:     "{{ item.name }}"
                       port:
                         number: 80
             https:
               paths:
-                - path: /
-                  pathType: Prefix
+                - path:         /
+                  pathType:     Prefix
                   backend:
                     service:
-                      name:  the-independent-friend-de
+                      name:     "{{ item.name }}"
                       port:
                         number: 443
+  loop:                         "{{ k3s_projects }}"
 
 
-- name: create a IngressRoute object https-olaf-radicke-de
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      "{{ k3s_deployment_state }}"
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               networking.k8s.io/v1
-      kind:                     Ingress
-      metadata:
-        name:                   olaf-radicke-de
-        namespace:              "{{ k3s_namespace }}"
-        annotations:
-            kubernetes.io/ingress.class: traefik
-            cert-manager.io/cluster-issuer: letsencrypt-prod
-      spec:     
-        rules:
-          - host: "olaf-radicke-de"
-            http:
-              paths:
-                - path: /
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name:  olaf-radicke-de
-                      port:
-                        number: 80
-            https:
-              paths:
-                - path: /
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name:  olaf-radicke-de
-                      port:
-                        number: 443
+
