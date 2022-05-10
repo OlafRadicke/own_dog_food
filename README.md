@@ -49,7 +49,8 @@ sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
 Todos
 -----
 
-- Auto update
+- Auto build and push of images
+- Auto update (OS)
 - Remove ssh password login
 - tlsoptions [letsencrypt](ansible/roles/k3s_deployment/tasks/letsencrypt.yaml) https://www.ssllabs.com/ssltest/analyze.html?d=the-independent-friend.de
 - hardening [README.md](ansible/roles/k3s_install/README.md)

@@ -25,7 +25,7 @@
           spec:
             containers:
             - name:             olaf-radicke-de
-              image:            olafradicke/olaf-radicke-de:2.4
+              image:            olafradicke/olaf-radicke-de:2.10
               imagePullPolicy:  IfNotPresent
               ports:
               - containerPort:  80
