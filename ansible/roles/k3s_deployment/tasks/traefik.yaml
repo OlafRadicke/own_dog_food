@@ -1,5 +1,41 @@
 ---
 
+- name: set TLSOption
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     TLSOption
+      metadata:
+        name:                   tlsoptions
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        minVersion:             VersionTLS12
+        cipherSuites:
+                                - TLS_CHACHA20_POLY1305_SHA256
+                                - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                                - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                                # - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                                - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                                - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                                - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                                - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+                                # - TLS_AES_256_GCM_SHA384
+                                # - TLS_AES_128_GCM_SHA256
+                                - TLS_FALLBACK_SCSV
+        curvePreferences:
+                                - CurveP521
+                                - CurveP384
+        sniStrict:              false
+        # clientAuth:    # https://doc.traefik.io/traefik/routing/providers/kubernetes-crd/#kind-tlsoption
+        #   secretNames:                                
+        #     - secret-ca1
+        #     - secret-ca2
+        #   clientAuthType: VerifyClientCertIfGiven     
+
+
 - name: create a IngressRoute object for https
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"
@@ -35,6 +71,9 @@
         routes:                 "{{ k3s_routes }}"
         tls:
           certResolver:         le
+          options:
+            name:               tlsoptions
+            namespace:          "{{ k3s_namespace }}"
   when:                         k3s_letsencrypt == "yes"
 
 - name: create a Middleware object https-ingressroute
