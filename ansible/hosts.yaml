@@ -14,7 +14,7 @@ all:
       k3s_acme_tier:              "production"
       k3s_projects:
         - name:                   "olaf-radicke-de"
-          image:                  "olafradicke/olaf-radicke-de:2.10"
+          image:                  "olafradicke/olaf-radicke-de:2.11"
           fqdn:                   "olaf-radicke.de"
         - name:                   "the-independent-friend-de"
           image:                  "olafradicke/the-independent-friend-de:2"
