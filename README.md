@@ -19,7 +19,7 @@ Run setup
 Enter:
 
 ```
-ansible-playbook -i ./ansible/hosts.yaml ./ansible/run_all.yaml
+ansible-playbook -i ./ansible/hosts.yaml ./ansible/install_and_update.yaml
 ```
 
 K3s topics
@@ -50,7 +50,7 @@ Todos
 -----
 
 - Auto build and push of images
-- Auto update (OS)
+- [Auto update (OS)](https://linoxide.com/enable-automatic-updates-on-ubuntu-20-04/)
 - Remove ssh password login
 - tlsoptions [letsencrypt](ansible/roles/k3s_deployment/tasks/letsencrypt.yaml) https://www.ssllabs.com/ssltest/analyze.html?d=the-independent-friend.de
 - hardening [README.md](ansible/roles/k3s_install/README.md)

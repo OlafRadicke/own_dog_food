@@ -76,6 +76,36 @@
             namespace:          "{{ k3s_namespace }}"
   when:                         k3s_letsencrypt == "yes"
 
+
+- name: create a IngressRoute object for mTLS
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   mtls-routes
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:                 "{{ k3s_routes_mtls }}"
+        tls:
+          options:
+            default:
+              clientAuth:
+                # in PEM format. each file can contain multiple CAs.
+                secretNames:
+                  - mtls-ca
+                # caFiles:
+                #   - tests/clientca1.crt
+                #   - tests/clientca2.crt
+                clientAuthType: RequireAndVerifyClientCert
+  when: k3s_routes_mtls is defined
+
+
 - name: create a Middleware object https-ingressroute
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"

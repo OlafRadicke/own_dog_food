@@ -1,0 +1,11 @@
+---
+
+- name: Download step
+  get_url:
+    url:    "https://dl.step.sm/gh-release/cli/docs-cli-install/v{{ k3s_mtls_step_version }}/step-cli_{{ k3s_mtls_step_version }}_amd64.deb"
+    dest:   "/tmp/step-cli_{{ k3s_mtls_step_version }}_amd64.deb"
+    mode:   '0440'
+
+- name: Install stap package
+  apt:
+    deb:    "/tmp/step-cli_{{ k3s_mtls_step_version }}_amd64.deb"

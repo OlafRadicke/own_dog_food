@@ -1,0 +1,34 @@
+---
+
+- name: create a directory for private pki ca
+  ansible.builtin.file:
+    path:         "{{ k3s_mtls_dir }}"
+    state:        directory
+
+
+- name: create mtls-root_ca
+  ansible.builtin.shell: |
+                  step  certificate create  \
+                  "mtls_root_ca"  \
+                  {{ k3s_mtls_dir }}/mtls-root-ca.crt  \
+                  {{ k3s_mtls_dir }}/mtls-root-ca.key  \
+                  --no-password \
+                  --insecure \
+                  --profile root-ca \
+                  --san mtls-root_ca.olaf-radicke.de \
+                  --not-after 2160h \
+                  --kty RSA \
+                  --size 4096 \
+                  --force
+  args:
+    creates:      "{{ k3s_mtls_dir }}/mtls-root-ca.crt"
+
+- name: delete old secret for pulling images
+  ansible.builtin.shell: |
+                  step certificate inspect --short {{ k3s_mtls_dir }}/mtls-root-ca.crt
+  register:       shell_result
+
+- debug:
+    msg:          "{{ shell_result }}"
+  when:           shell_result is defined
+

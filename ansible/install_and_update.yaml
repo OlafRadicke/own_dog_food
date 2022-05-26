@@ -4,7 +4,8 @@
   hosts: all
   roles:
     # - ping
-    - os_configs
-    - k3s_install
-    - k8s_ansible_support_install
-    - k3s_deployment
+    - k3s_mtls
+    # - os_configs
+    # - k3s_install
+    # - k8s_ansible_support_install
+    # - k3s_deployment

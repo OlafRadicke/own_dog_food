@@ -1,0 +1,10 @@
+---
+
+# - name: Setup step
+#   include_tasks: install_steap.yaml
+
+- name: Setup root ca for mTLS
+  include_tasks: create_root_ca.yaml
+
+- name: Setup secret for mTLS
+  include_tasks: secret_for_mtlsl.yaml
