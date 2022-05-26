@@ -6,5 +6,11 @@
 - name: Setup root ca for mTLS
   include_tasks: create_root_ca.yaml
 
+- name: Setup intermediate ca for mTLS
+  include_tasks: create_intermediate_ca.yaml
+
+- name: Setup client cert for mTLS
+  include_tasks: create_client_cert.yaml
+
 - name: Setup secret for mTLS
   include_tasks: secret_for_mtlsl.yaml
