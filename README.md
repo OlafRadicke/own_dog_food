@@ -1,6 +1,11 @@
 Playbook for hosteurope server setup
 ====================================
 
+Mission
+-------
+
+*"Eating your own dog food"* :sweat_smile:
+
 Pre install requirements
 ------------------------
 
@@ -26,7 +31,7 @@ K3s topics
 ----------
 
 
-Gerate config file (for generating image pull secret):
+Generate config file (for generating image pull secret):
 
 ```bash
 podman login --authfile ~/.docker/config.json docker.io
@@ -52,11 +57,8 @@ Todos
 - Auto build and push of images
 - [Auto update (OS)](https://linoxide.com/enable-automatic-updates-on-ubuntu-20-04/)
 - Remove ssh password login
-- tlsoptions [letsencrypt](ansible/roles/k3s_deployment/tasks/letsencrypt.yaml) https://www.ssllabs.com/ssltest/analyze.html?d=the-independent-friend.de
 - hardening [README.md](ansible/roles/k3s_install/README.md)
 - mTLS https://doc.traefik.io/traefik/https/tls/#client-authentication-mtls and https://smallstep.com/hello-mtls/doc/server/traefik
-- Monitoring
-- Switch olaf-radicke.de
-- new with https://enbizcard.vishnuraghav.com/ 
+- Extended monitoring
 - ArgoCD
   
