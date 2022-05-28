@@ -16,13 +16,10 @@ all:
       k3s_projects:
         - name:                   "olaf-radicke-de"
           image:                  "olafradicke/olaf-radicke-de:2.12"
-          fqdn:                   "olaf-radicke.de"
         - name:                   "the-independent-friend-de"
           image:                  "olafradicke/the-independent-friend-de:4.2.4"
-          fqdn:                   "the-independent-friend.de"
         - name:                   "test-the-independent-friend-de"
           image:                  "olafradicke/the-independent-friend-de:4.2.4"
-          fqdn:                   "test.the-independent-friend.de"
       k3s_routes:
         - match:                  Host(`olaf-radicke.de`)
           kind:                   Rule

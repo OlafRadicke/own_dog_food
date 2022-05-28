@@ -42,7 +42,7 @@ Troubleshooting
 
 
 ```bash
-sudo kubectl get ingress -A
+sudo kubectl get IngressRoute -A
 ```
 
 ```bash
