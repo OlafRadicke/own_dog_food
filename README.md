@@ -27,8 +27,8 @@ Enter:
 ansible-playbook -i ./ansible/hosts.yaml ./ansible/install_and_update.yaml
 ```
 
-K3s topics
-----------
+K3s / podman topics
+-------------------
 
 
 Generate config file (for generating image pull secret):

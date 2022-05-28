@@ -2,18 +2,18 @@
 
 - name: create mtls-client-ca
   ansible.builtin.shell: |
-                  step  certificate create  \
-                  "mTLS client CA"  \
-                  {{ k3s_mtls_dir }}/mtls-client-ca.crt  \
-                  {{ k3s_mtls_dir }}/mtls-client-ca.key  \
-                  --no-password \
-                  --insecure \
-                  --profile leaf \
-                  --san mtls-client-ca.olaf-radicke.de \
-                  --not-after 2160h \
-                  --kty RSA \
-                  --size 4096 \
-                  --ca {{ k3s_mtls_dir }}/mtls-intermediate-ca.crt  \
+                  step  certificate create                              \
+                  "mTLS client certificate"                             \
+                  {{ k3s_mtls_dir }}/mtls-client-ca.crt                 \
+                  {{ k3s_mtls_dir }}/mtls-client-ca.key                 \  
+                  --no-password                                         \
+                  --insecure                                            \
+                  --profile leaf                                        \
+                  --san mtls-client-ca.olaf-radicke.de                  \
+                  --not-after 2160h                                     \
+                  --kty RSA                                             \
+                  --size 4096                                           \
+                  --ca {{ k3s_mtls_dir }}/mtls-intermediate-ca.crt      \
                   --ca-key {{ k3s_mtls_dir }}/mtls-intermediate-ca.key  \
                   --bundle \
                   --force
@@ -31,11 +31,35 @@
 
 - name: double check mtls-client-ca.crt
   ansible.builtin.shell: |
-                  step certificate verify \
-                    {{ k3s_mtls_dir }}/mtls-client-ca.crt \
+                  step certificate verify                       \
+                    {{ k3s_mtls_dir }}/mtls-client-ca.crt       \
                     --roots {{ k3s_mtls_dir }}/mtls-root-ca.crt 
   register:       shell_result
 
 - debug:
     msg:          "{{ shell_result }}"
   when:           shell_result is defined
+
+- name: convert client certificate to PKCS#12
+  ansible.builtin.shell: |
+                  step certificate p12                             \
+                  {{ k3s_mtls_dir }}/mtls-client-ca.p12            \
+                  {{ k3s_mtls_dir }}/mtls-client-ca.crt            \
+                  {{ k3s_mtls_dir }}/mtls-client-ca.key            \
+                  --ca {{ k3s_mtls_dir }}/mtls-intermediate-ca.crt \
+                  --no-password                                    \
+                  --insecure                                       \
+                  --force
+  args:
+    creates:      "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
+
+- name: create a directory for client certificate download
+  ansible.builtin.file:
+    path:         "./downloads"
+    state:        directory
+  delegate_to:    localhost
+
+- name: download client certificate
+  ansible.builtin.fetch:
+    src:          "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
+    dest:         ./downloads/

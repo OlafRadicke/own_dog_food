@@ -3,18 +3,18 @@
 
 - name: create mtls-intermediate-ca
   ansible.builtin.shell: |
-                  step  certificate create  \
-                  "mTLS Intermediate CA"  \
-                  {{ k3s_mtls_dir }}/mtls-intermediate-ca.crt  \
-                  {{ k3s_mtls_dir }}/mtls-intermediate-ca.key  \
-                  --no-password \
-                  --insecure \
-                  --profile intermediate-ca \
-                  --san mtls-intermediate-ca.olaf-radicke.de \
-                  --not-after 8760h \
-                  --kty RSA \
-                  --size 4096 \
-                  --ca {{ k3s_mtls_dir }}/mtls-root-ca.crt  \
+                  step  certificate create                      \
+                  "mTLS Intermediate CA"                        \
+                  {{ k3s_mtls_dir }}/mtls-intermediate-ca.crt   \
+                  {{ k3s_mtls_dir }}/mtls-intermediate-ca.key   \
+                  --no-password                                 \
+                  --insecure                                    \
+                  --profile intermediate-ca                     \
+                  --san mtls-intermediate-ca.olaf-radicke.de    \
+                  --not-after 8760h                             \
+                  --kty RSA                                     \
+                  --size 4096                                   \
+                  --ca {{ k3s_mtls_dir }}/mtls-root-ca.crt      \
                   --ca-key {{ k3s_mtls_dir }}/mtls-root-ca.key  \
                   --force
   args:

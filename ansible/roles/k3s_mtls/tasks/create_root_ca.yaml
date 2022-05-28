@@ -1,5 +1,12 @@
 ---
 
+
+- name: reset private pki ca
+  ansible.builtin.file:
+    path:         "{{ k3s_mtls_dir }}"
+    state:        absent
+  when:           private_pki_reset == "yes"
+
 - name: create a directory for private pki ca
   ansible.builtin.file:
     path:         "{{ k3s_mtls_dir }}"
@@ -8,17 +15,17 @@
 
 - name: create mtls-root-ca
   ansible.builtin.shell: |
-                  step  certificate create  \
-                  "mTLS root CA"  \
+                  step  certificate create             \
+                  "mTLS root CA"                       \
                   {{ k3s_mtls_dir }}/mtls-root-ca.crt  \
                   {{ k3s_mtls_dir }}/mtls-root-ca.key  \
-                  --no-password \
-                  --insecure \
-                  --profile root-ca \
-                  --san mtls-root_ca.olaf-radicke.de \
-                  --not-after 87600h \
-                  --kty RSA \
-                  --size 4096 \
+                  --no-password                        \
+                  --insecure                           \
+                  --profile root-ca                    \
+                  --san mtls-root_ca.olaf-radicke.de   \
+                  --not-after 87600h                   \
+                  --kty RSA                            \
+                  --size 4096                          \
                   --force
   args:
     creates:      "{{ k3s_mtls_dir }}/mtls-root-ca.crt"

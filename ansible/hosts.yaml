@@ -11,6 +11,7 @@ all:
       k3s_acme_email:             "briefkasten@olaf-radicke.de"
       k3s_namespace:              "live"
       # k3s_deployment_state:       "absent"
+      # private_pki_reset:          "yes"
       k3s_acme_tier:              "production"
       k3s_projects:
         - name:                   "olaf-radicke-de"
