@@ -39,3 +39,13 @@
     msg:          "{{ shell_result }}"
   when:           shell_result is defined
 
+- name: convert mtls-root-ca to PEM
+  ansible.builtin.shell: |
+                  step crypto key format                    \
+                  {{ k3s_mtls_dir }}/mtls-root-ca.crt       \
+                  --out {{ k3s_mtls_dir }}/mtls-root-ca.pem \
+                  --insecure                                \
+                  --no-password
+
+  args:
+    creates:      "{{ k3s_mtls_dir }}/mtls-root-ca.pem"

@@ -35,11 +35,6 @@ all:
           - name:                 the-independent-friend-de
             port:                 80
       k3s_routes_mtls:
-        # - match:                  Host(`test.the-independent-friend.de`)
-        #   kind:                   Rule
-        #   services:
-        #   - name:                 test-the-independent-friend-de
-        #     port:                 80
         - match:                  Host(`test.the-independent-friend.de`)
           kind:                   Rule
           services:
