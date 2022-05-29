@@ -53,10 +53,16 @@ sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
 Todos
 -----
 
-- Auto build and push of images
 - [Auto update (OS)](https://linoxide.com/enable-automatic-updates-on-ubuntu-20-04/)
 - Remove ssh password login
-- hardening [README.md](ansible/roles/k3s_install/README.md)
-- Extended monitoring
+- hardening: 
+  - [hardening_guide](https://rancher.com/docs/k3s/latest/en/security/hardening_guide/)
+  - [kubescape](https://github.com/armosec/kubescape)
+  - [kubescape docu](https://hub.armo.cloud/docs)
+  - [YouTube](https://www.youtube.com/watch?v=ZATGiDIDBQk)
+- Extended monitoring:
+  - [netways prometheus-operator](https://nws.netways.de/de/tutorials/monitoring-kubernetes-mit-prometheus/)
+  - [prometheus-operator](https://sysdig.com/blog/kubernetes-monitoring-prometheus-operator-part3/)
 - ArgoCD
+  - Auto build and push of images
   
