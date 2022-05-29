@@ -53,7 +53,6 @@ sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
 Todos
 -----
 
-- Remove ssh password login
 - hardening: 
   - [hardening_guide](https://rancher.com/docs/k3s/latest/en/security/hardening_guide/)
   - [kubescape](https://github.com/armosec/kubescape)
