@@ -53,7 +53,6 @@ sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
 Todos
 -----
 
-- [Auto update (OS)](https://linoxide.com/enable-automatic-updates-on-ubuntu-20-04/)
 - Remove ssh password login
 - hardening: 
   - [hardening_guide](https://rancher.com/docs/k3s/latest/en/security/hardening_guide/)

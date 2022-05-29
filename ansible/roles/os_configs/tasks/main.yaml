@@ -1,6 +1,9 @@
 ---
 
+
 - name: Set timezone to Europe/Berlin 
   community.general.timezone:
     name:         Europe/Berlin
 
+- name: Setup auto upgrade
+  include_tasks:  auto_upgrade.yaml
