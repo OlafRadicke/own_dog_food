@@ -4,7 +4,7 @@ Playbook for hosteurope server setup
 Mission
 -------
 
-*"Eating your own dog food"* :sweat_smile:
+*"Eating your (my) own dog food"* :sweat_smile:
 
 
 Pre install requirements
