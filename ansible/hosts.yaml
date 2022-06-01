@@ -17,9 +17,9 @@ all:
         - name:                   "olaf-radicke-de"
           image:                  "olafradicke/olaf-radicke-de:2.12"
         - name:                   "the-independent-friend-de"
-          image:                  "olafradicke/the-independent-friend-de:4.2.7"
+          image:                  "olafradicke/the-independent-friend-de:4.2.8"
         - name:                   "test-the-independent-friend-de"
-          image:                  "olafradicke/the-independent-friend-de:4.2.7"
+          image:                  "olafradicke/the-independent-friend-de:4.2.8"
       k3s_routes:
         - match:                  Host(`olaf-radicke.de`)
           kind:                   Rule
