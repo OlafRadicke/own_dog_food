@@ -1,0 +1,12 @@
+---
+
+argocd_app_name:            "argocd"
+argocd_namespace:           "argocd"
+argocd_fqdn_match:          "Host(`argocd.olaf-radicke.de`)"
+argocd_reset:               false
+argocd_kubeconfig:          "/etc/rancher/k3s/k3s.yaml"
+argocd_deployment_state:    "present"
+argocd_letsencrypt:         false
+argocd_mtls:                true
+
+

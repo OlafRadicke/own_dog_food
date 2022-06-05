@@ -4,6 +4,8 @@
 all:
   hosts:
     'olaf-radicke-02':
+      argocd_reset:               false 
+      argocd_letsencrypt:         true
       ansible_host:               92.205.105.117
       ansible_user:               "oradicke"
       ansible_become:             yes
@@ -13,6 +15,9 @@ all:
       # k3s_deployment_state:       "absent"
       # private_pki_reset:          "yes"
       k3s_acme_tier:              "production"
+      mtls_secreat_namespaces:
+        -                         "live"
+        -                         "argocd"
       k3s_projects:
         - name:                   "olaf-radicke-de"
           image:                  "olafradicke/olaf-radicke-de:2.12"
@@ -47,6 +52,8 @@ all:
           - name:                 olaf-radicke-de
             port:                 80
           middlewares:
+          - name:                 middleware-http-to-https
+            namespace:            "{{ k3s_namespace }}"
           - name:                 middleware-http-to-https
             namespace:            "{{ k3s_namespace }}"
         - match:                  Host(`the-independent-friend.de`)

@@ -1,0 +1,32 @@
+---
+
+- name: delete ArgoCD namespace
+  kubernetes.core.k8s:
+    kubeconfig:         "{{ argocd_kubeconfig }}"
+    name:               "{{ argocd_namespace }}"
+    api_version:        v1
+    kind:               Namespace
+    state:              absent
+    wait:               yes
+  when:                 argocd_reset == true
+
+- name: create ArgoCD namespace
+  kubernetes.core.k8s:
+    kubeconfig:         "{{ argocd_kubeconfig }}"
+    name:               "{{ argocd_namespace }}"
+    api_version:        v1
+    kind:               Namespace
+    state:              present
+    wait:               yes
+
+- name: Copy ArgoCD install file 
+  ansible.builtin.copy:
+    src:                "install.yaml"
+    dest:               "/tmp/argo-insecure-install.yaml"
+
+- name: Install ArgoCD with yaml file
+  kubernetes.core.k8s:
+    kubeconfig:         "{{ argocd_kubeconfig }}"
+    namespace:          "argocd"
+    api_version:        v1
+    src:                "/tmp/argo-insecure-install.yaml"
