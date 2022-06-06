@@ -21,9 +21,11 @@ spec:
                           - CurveP384
   sniStrict:              false
   clientAuth:
-    clientAuthType:   RequireAndVerifyClientCert
+    clientAuthType:       RequireAndVerifyClientCert
     secretNames:
       -                   mtls-ca
+
+
 ---
 
 apiVersion:               traefik.containo.us/v1alpha1

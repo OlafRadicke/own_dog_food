@@ -18,6 +18,7 @@ all:
       mtls_secreat_namespaces:
         -                         "live"
         -                         "argocd"
+        -                         "monitoring"
       k3s_projects:
         - name:                   "olaf-radicke-de"
           image:                  "olafradicke/olaf-radicke-de:2.12"
