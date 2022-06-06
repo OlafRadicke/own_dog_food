@@ -29,6 +29,9 @@
         destination:
           server:               "https://kubernetes.default.svc"
           namespace:            argocd
+          syncPolicy:
+        automated:
+          prune: true
 
 - name: add ArgoCD app Prometheus
   kubernetes.core.k8s:
@@ -49,6 +52,8 @@
         destination:
           server:               "https://kubernetes.default.svc"
           namespace:            argocd
+        automated:
+          prune: true
 
 - name: add ArgoCD app Prometheus
   kubernetes.core.k8s:
