@@ -1,0 +1,80 @@
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     TLSOption
+metadata:
+  name:                   "m-tls-options-prometheus"
+  namespace:              "monitoring"
+spec:
+  minVersion:             VersionTLS12
+  cipherSuites:
+                          - TLS_CHACHA20_POLY1305_SHA256
+                          - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                          - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                          - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                          - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                          - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                          - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+                          - TLS_FALLBACK_SCSV
+  curvePreferences:
+                          - CurveP521
+                          - CurveP384
+  sniStrict:              false
+  clientAuth:
+    clientAuthType:   RequireAndVerifyClientCert
+    secretNames:
+      -                   mtls-ca
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     Middleware
+metadata:
+  name:                   prometheus-redirect
+  namespace:              "monitoring"
+spec:
+  redirectScheme:
+    scheme:               https
+    permanent:            true
+
+---
+
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   "https-prometheus"
+  namespace:              "monitoring"
+spec:
+  entryPoints:
+    -                     websecure
+  routes:
+    - match:              "prometheus.olaf-radicke.de"
+      kind:               Rule
+      services:
+      - name:             prometheus-server 
+        port:             80
+  tls:
+    certResolver:         le
+    options:
+      name:               "m-tls-options-prometheus"
+      namespace:          "monitoring"
+
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   "http-prometheus"
+  namespace:              "monitoring"
+spec:
+  entryPoints:
+    -                     web
+  routes:
+    - match:              "prometheus.olaf-radicke.de"
+      kind:               Rule
+      services:
+      - name:             prometheus-server 
+        port:             80
+      middlewares:
+      - name:             prometheus-redirect
+        namespace:        "monitoring"
