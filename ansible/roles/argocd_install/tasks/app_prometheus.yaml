@@ -10,30 +10,8 @@
     wait:               yes
   when:                 argocd_reset == true
 
-- name: add ArgoCD app raw yaml
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
-    namespace:                  "{{ argocd_namespace }}"
-    definition:
-      apiVersion:               argoproj.io/v1alpha1
-      kind:                     Application
-      metadata:
-        name:                   argocd-raw-yaml
-      spec:
-        project:                default
-        source:
-          repoURL:              https://github.com/OlafRadicke/own_dog_food.git
-          targetRevision:       feature/prometheus
-          path:                 argocd
-        destination:
-          server:               "https://kubernetes.default.svc"
-          namespace:            argocd
-          syncPolicy:
-        automated:
-          prune: true
 
-- name: add ArgoCD app Prometheus
+- name: add ArgoCD app Prometheus yamls
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
@@ -55,7 +33,7 @@
         automated:
           prune: true
 
-- name: add ArgoCD app Prometheus
+- name: add ArgoCD app Prometheus helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
