@@ -25,7 +25,7 @@
         project:                default
         source:
           repoURL:              https://github.com/OlafRadicke/own_dog_food.git
-          targetRevision:       feature/prometheus
+          targetRevision:       feature/prometheus_rules
           path:                 argocd/prometheus
         destination:
           server:               "https://kubernetes.default.svc"
