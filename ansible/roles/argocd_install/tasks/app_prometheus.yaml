@@ -1,16 +1,16 @@
 ---
 
-# - name: create monitoring namespace
-#   kubernetes.core.k8s:
-#     kubeconfig:                 "{{ argocd_kubeconfig }}"
-#     name:                       "monitoring"
-#     api_version:                v1
-#     kind:                       Namespace
-#     state:                      present
-#     wait:                       yes
+- name: delete ArgoCD namespace
+  kubernetes.core.k8s:
+    kubeconfig:         "{{ argocd_kubeconfig }}"
+    name:               "monitoring"
+    api_version:        v1
+    kind:               Namespace
+    state:              absent
+    wait:               yes
+  when:                 argocd_reset == true
 
-
-- name: add ArgoCD app Prometheus
+- name: add ArgoCD app raw yaml
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
@@ -26,6 +26,26 @@
           repoURL:              https://github.com/OlafRadicke/own_dog_food.git
           targetRevision:       feature/prometheus
           path:                 argocd
+        destination:
+          server:               "https://kubernetes.default.svc"
+          namespace:            argocd
+
+- name: add ArgoCD app Prometheus
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_deployment_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   argocd-prometheus-yaml
+      spec:
+        project:                default
+        source:
+          repoURL:              https://github.com/OlafRadicke/own_dog_food.git
+          targetRevision:       feature/prometheus
+          path:                 argocd/prometheus
         destination:
           server:               "https://kubernetes.default.svc"
           namespace:            argocd

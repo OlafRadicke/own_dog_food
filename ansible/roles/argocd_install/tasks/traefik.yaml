@@ -1,36 +1,5 @@
 ---
 
-# - name: set TLSOption for ArgoCD
-#   kubernetes.core.k8s:
-#     kubeconfig:                 "{{ argocd_kubeconfig }}"
-#     state:                      "{{ argocd_deployment_state }}"
-#     namespace:                  "{{ argocd_namespace }}"
-#     definition:
-#       apiVersion:               traefik.containo.us/v1alpha1
-#       kind:                     TLSOption
-#       metadata:
-#         name:                   "tls-options-{{ argocd_app_name }}"
-#         namespace:              "{{ argocd_namespace }}"
-#       spec:
-#         minVersion:             VersionTLS12
-#         cipherSuites:
-#                                 - TLS_CHACHA20_POLY1305_SHA256
-#                                 - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
-#                                 - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-#                                 # - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
-#                                 - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
-#                                 - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
-#                                 - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
-#                                 - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
-#                                 # - TLS_AES_256_GCM_SHA384
-#                                 # - TLS_AES_128_GCM_SHA256
-#                                 - TLS_FALLBACK_SCSV
-#         curvePreferences:
-#                                 - CurveP521
-#                                 - CurveP384
-#         sniStrict:              false
-
-
 - name: set mTLS Option vor ArgoCD
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
