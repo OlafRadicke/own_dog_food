@@ -1,0 +1,56 @@
+---
+
+# - name: create monitoring namespace
+#   kubernetes.core.k8s:
+#     kubeconfig:                 "{{ argocd_kubeconfig }}"
+#     name:                       "monitoring"
+#     api_version:                v1
+#     kind:                       Namespace
+#     state:                      present
+#     wait:                       yes
+
+
+- name: add ArgoCD app Prometheus
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_deployment_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   argocd-raw-yaml
+      spec:
+        project:                default
+        source:
+          repoURL:              https://github.com/OlafRadicke/own_dog_food.git
+          targetRevision:       HEAD
+          path:                 argocd
+        destination:
+          server:               "https://kubernetes.default.svc"
+          namespace:            argocd
+
+- name: add ArgoCD app Prometheus
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_deployment_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   prometheus
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        source:
+          chart:                prometheus
+          repoURL:              https://prometheus-community.github.io/helm-charts
+          targetRevision:       15.9.1
+          helm:
+            releaseName:        prometheus
+            # valueFiles:
+            #   - https://github.com/bla/values.yaml
+        destination:
+          server:               "https://kubernetes.default.svc"
+          namespace:            monitoring
