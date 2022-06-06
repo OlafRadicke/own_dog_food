@@ -31,7 +31,7 @@
           server:               "https://kubernetes.default.svc"
           namespace:            argocd
         automated:
-          prune: true
+          prune:                true
 
 - name: add ArgoCD app Prometheus helm chart
   kubernetes.core.k8s:
