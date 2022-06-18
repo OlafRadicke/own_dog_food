@@ -1,6 +1,10 @@
 ---
 
-
+- name: Remove old client certificate
+  ansible.builtin.file:
+    path:         "{{ k3s_mtls_dir }}/mtls-client-ca.crt"
+    state:        absent
+  when:           refresh_client_certificate == true
 
 
 - name: create mtls-client-ca
