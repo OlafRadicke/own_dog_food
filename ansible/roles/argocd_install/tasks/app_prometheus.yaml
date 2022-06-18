@@ -18,29 +18,29 @@
     kind:               Namespace
     wait:               yes
 
-- name: add ArgoCD app Prometheus yamls
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
-    namespace:                  "{{ argocd_namespace }}"
-    definition:
-      apiVersion:               argoproj.io/v1alpha1
-      kind:                     Application
-      metadata:
-        name:                   argocd-prometheus-yaml
-      spec:
-        project:                default
-        source:
-          repoURL:              https://github.com/OlafRadicke/own_dog_food.git
-          targetRevision:       feature/prometheus_rules
-          path:                 argocd/prometheus
-        destination:
-          server:               "https://kubernetes.default.svc"
-          namespace:            argocd
-        automated:
-          prune:                true
+# - name: add ArgoCD app Prometheus yamls
+#   kubernetes.core.k8s:
+#     kubeconfig:                 "{{ argocd_kubeconfig }}"
+#     state:                      "{{ argocd_deployment_state }}"
+#     namespace:                  "{{ argocd_namespace }}"
+#     definition:
+#       apiVersion:               argoproj.io/v1alpha1
+#       kind:                     Application
+#       metadata:
+#         name:                   argocd-prometheus-yaml
+#       spec:
+#         project:                default
+#         source:
+#           repoURL:              https://github.com/OlafRadicke/own_dog_food.git
+#           targetRevision:       feature/prometheus_rules
+#           path:                 argocd/prometheus
+#         destination:
+#           server:               "https://kubernetes.default.svc"
+#           namespace:            argocd
+#         automated:
+#           prune:                true
 
-- name: add ArgoCD app Prometheus helm chart
+- name: add ArgoCD app Prometheus main helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
@@ -49,10 +49,17 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   prometheus
+        name:                   prometheus-main
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
+        syncPolicy:
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        destination:
+          server:               https://kubernetes.default.svc
+          namespace:            monitoring
         source:
           chart:                prometheus
           repoURL:              https://prometheus-community.github.io/helm-charts
@@ -67,7 +74,7 @@
                                     etcd: false
                                 serverFiles:
                                   ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
-                                  alerting_rules.yml: {}
+                                  alerting_rules.yml: 
                                     groups:
                                       - name: Instances
                                         rules:
@@ -80,9 +87,32 @@
                                               description: '\{\{ $labels.instance \}\} of job \{\{ $labels.job \}\} has been down for more than 5 minutes.'
                                               summary: 'Instance \{\{ $labels.instance \}\} down'
 
-          destination:
-            server:             "https://kubernetes.default.svc"
-            namespace:          monitoring
 
 
-
+- name: add ArgoCD app Prometheus rule helm chart
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_deployment_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   prometheus-rules
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        source:
+          chart:                prometheus_rules
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.1.0
+          # helm:
+            # values: |
+            #                     nameOverride: ""
+        destination:
+          server:             "https://kubernetes.default.svc"
+          namespace:          monitoring

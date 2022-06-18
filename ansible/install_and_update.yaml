@@ -3,10 +3,10 @@
 - name: Run all steps
   hosts: all
   roles:
-    - ping
-    - os_configs
-    - k3s_install
-    - k8s_ansible_support_install
-    - k3s_deployment
+    # - ping
+    # - os_configs
+    # - k3s_install
+    # - k8s_ansible_support_install
+    # - k3s_deployment
     - argocd_install
-    - k3s_mtls
+    # - k3s_mtls

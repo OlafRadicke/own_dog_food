@@ -25,5 +25,5 @@ Use chart repo:
 
 ```
 helm repo add own_dog_food https://olafradicke.github.io/own_dog_food/helm/charts/
-helm search prometheus_rules
+helm search repo prometheus_rules
 ```
