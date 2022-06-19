@@ -1,0 +1,18 @@
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   "http-{{ .Values.app.name }}"
+  namespace:              "{{ .Release.Namespace }}"
+spec:
+  entryPoints:
+    -                     web
+  routes:
+    - match:              "Host(`prometheus.olaf-radicke.de`)"
+      kind:               Rule
+      services:
+      - name:             {{ .Values.app.name }}-server 
+        port:             80
+      middlewares:
+      - name:             {{ .Values.app.name }}-redirect
+        namespace:        "{{ .Release.Namespace }}"

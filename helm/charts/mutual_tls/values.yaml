@@ -1,0 +1,4 @@
+app: {}
+  # name: exampleapp
+  # fqdn: exampleapp.exampledom.com
+secretnames: mtls-ca

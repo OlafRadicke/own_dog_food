@@ -10,4 +10,9 @@ Todos
   - [netways prometheus-operator](https://nws.netways.de/de/tutorials/monitoring-kubernetes-mit-prometheus/)
   - [prometheus-operator](https://sysdig.com/blog/kubernetes-monitoring-prometheus-operator-part3/)
 - ArgoCD
-  - Auto build and push of images
+  - Move routing in helm charts
+- cI/CD
+  - [argo-workflows](https://argoproj.github.io/argo-workflows/quick-start/)
+  - [concourse](https://concourse-ci.org/)
+    - Build and push containerimages
+    - Build and push helm charts

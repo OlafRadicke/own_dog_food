@@ -88,8 +88,7 @@
                                               summary: 'Instance \{\{ $labels.instance \}\} down'
 
 
-
-- name: add ArgoCD app Prometheus rule helm chart
+- name: add ArgoCD app Prometheus routing helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
@@ -98,7 +97,7 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   prometheus-rules
+        name:                   prometheus-routes
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -106,13 +105,18 @@
           syncOptions:
           -                     PruneLast=true
           -                     Replace=true
-        source:
-          chart:                prometheus_rules
-          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.0
-          # helm:
-            # values: |
-            #                     nameOverride: ""
         destination:
           server:             "https://kubernetes.default.svc"
           namespace:          monitoring
+        source:
+          chart:                mutual_tls
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.1.1
+          helm:
+            values: |
+                                app:
+                                  name: prometheus
+                                  fqdn: prometheus.olaf-radicke.de
+                                secretnames: mtls-ca
+
+
