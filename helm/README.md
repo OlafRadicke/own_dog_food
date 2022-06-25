@@ -1,15 +1,16 @@
-Aout this helmchart repository
+About this helmchart repository
 ===============================
 
 Check:
 
 ```
-helm lint ./helm/charts/prometheus_rules/*/
+helm lint ./helm/charts/*/*/
 ```
 
 Packaging:
 
 ```
+helm lint ./helm/charts/*/
 rm ./helm/charts/*.tgz
 helm package ./helm/charts/*/
 mv ./*.tgz ./helm/charts/
@@ -31,6 +32,11 @@ helm install \
   myroutes \
   own_dog_food/mutual_tls --debug
 
-helm install -f ./values.yaml -n monitoring myroute own_dog_food/mutual_tls
-helm get all myroutes -n monitoring
+helm install -f ./values.yaml -n monitoring mutual_tls own_dog_food/mutual_tls
+helm get all mutual_tls -n monitoring
 ```
+
+Links
+-----
+
+- [bitnami/argo-workflows](https://github.com/bitnami/charts/tree/master/bitnami/argo-workflows)

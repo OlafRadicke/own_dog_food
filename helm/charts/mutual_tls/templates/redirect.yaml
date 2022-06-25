@@ -8,7 +8,7 @@ spec:
   entryPoints:
     -                     web
   routes:
-    - match:              "Host(`prometheus.olaf-radicke.de`)"
+    - match:              "Host(`{{ .Values.app.fqdn }}`)"
       kind:               Rule
       services:
       - name:             {{ .Values.app.name }}-server 

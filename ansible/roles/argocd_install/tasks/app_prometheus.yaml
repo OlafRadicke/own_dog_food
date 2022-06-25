@@ -18,27 +18,6 @@
     kind:               Namespace
     wait:               yes
 
-# - name: add ArgoCD app Prometheus yamls
-#   kubernetes.core.k8s:
-#     kubeconfig:                 "{{ argocd_kubeconfig }}"
-#     state:                      "{{ argocd_deployment_state }}"
-#     namespace:                  "{{ argocd_namespace }}"
-#     definition:
-#       apiVersion:               argoproj.io/v1alpha1
-#       kind:                     Application
-#       metadata:
-#         name:                   argocd-prometheus-yaml
-#       spec:
-#         project:                default
-#         source:
-#           repoURL:              https://github.com/OlafRadicke/own_dog_food.git
-#           targetRevision:       feature/prometheus_rules
-#           path:                 argocd/prometheus
-#         destination:
-#           server:               "https://kubernetes.default.svc"
-#           namespace:            argocd
-#         automated:
-#           prune:                true
 
 - name: add ArgoCD app Prometheus main helm chart
   kubernetes.core.k8s:
@@ -110,8 +89,8 @@
           -                     PruneLast=true
           -                     Replace=true
         destination:
-          server:             "https://kubernetes.default.svc"
-          namespace:          monitoring
+          server:               "https://kubernetes.default.svc"
+          namespace:            monitoring
         source:
           chart:                mutual_tls
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/

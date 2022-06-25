@@ -1,5 +1,8 @@
 ---
 
 
+- name: Include argocd workflow support
+  include_tasks: argrocd_workflow.yaml
+  
 - name: Include Prometheus sub task
   include_tasks: app_prometheus.yaml
