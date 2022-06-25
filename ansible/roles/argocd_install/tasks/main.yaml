@@ -1,10 +1,5 @@
 ---
 
-# - name: Include install sub task
-#   include_tasks: install.yaml
-
-# - name: Include traefik sub task
-#   include_tasks: traefik.yaml
 
 - name: Include Prometheus sub task
   include_tasks: app_prometheus.yaml

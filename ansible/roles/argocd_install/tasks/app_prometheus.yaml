@@ -121,7 +121,7 @@
                                 app:
                                   name: prometheus
                                   fqdn: prometheus.olaf-radicke.de
-                                  service_name: prometheus-main-server
+                                  service: prometheus-main-server
                                 secretnames: mtls-ca
 
 
