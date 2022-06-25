@@ -1,4 +1,5 @@
 app: {}
   # name: exampleapp
   # fqdn: exampleapp.exampledom.com
+  # service: example-main-server
 secretnames: mtls-ca

@@ -12,7 +12,7 @@ spec:
     - match:              "Host(`{{ .Values.app.fqdn }}`)"
       kind:               Rule
       services:
-      - name:             {{ .Values.app.name }}-server 
+      - name:             {{ .Values.app.service }} 
         port:             80
   tls:
     certResolver:         le

@@ -22,6 +22,15 @@ Use chart repo:
 helm repo add own_dog_food https://olafradicke.github.io/own_dog_food/helm/charts/
 helm repo update
 helm search repo mutual_tls
+helm install \
+  -f ./values.yaml \
+  -n monitoring  \
+  --dry-run \
+  --debug  \
+  --version 0.1.2  \
+  myroutes \
+  own_dog_food/mutual_tls --debug
+
 helm install -f ./values.yaml -n monitoring myroute own_dog_food/mutual_tls
 helm get all myroutes -n monitoring
 ```
