@@ -27,6 +27,17 @@ Enter:
 ansible-playbook -i ./ansible/hosts.yaml ./ansible/install_and_update.yaml
 ```
 
+Change workflow
+---------------
+
+- Change helm chart (if necessary )
+- Rebuild chart and reposytory (see [helm/README.md](helm/README.md))
+- Commit changes (include new helm tgz file)
+- Push changes
+- Change playbook 
+  - Change helm chart version (if necessary )
+  - Change helm values (if necessary )
+- Run playbook
 
 K3s / podman topics
 -------------------
