@@ -72,7 +72,7 @@
         source:
           chart:                mutual_tls
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.4
+          targetRevision:       0.1.5
           helm:
             values: |
                                 app:

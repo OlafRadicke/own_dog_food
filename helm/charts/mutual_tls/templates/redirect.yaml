@@ -11,7 +11,7 @@ spec:
     - match:              "Host(`{{ .Values.app.fqdn }}`)"
       kind:               Rule
       services:
-      - name:             {{ .Values.app.name }}-server 
+      - name:             {{ .Values.app.service }}
         port:             80
       middlewares:
       - name:             {{ .Values.app.name }}-redirect
