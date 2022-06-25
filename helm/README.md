@@ -11,7 +11,7 @@ Packaging:
 
 ```
 helm lint ./helm/charts/*/
-rm ./helm/charts/*.tgz
+# rm ./helm/charts/*.tgz
 helm package ./helm/charts/*/
 mv ./*.tgz ./helm/charts/
 helm repo index --url https://olafradicke.github.io/own_dog_food/helm/charts/ ./helm/charts/
