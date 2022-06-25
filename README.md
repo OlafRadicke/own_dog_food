@@ -32,7 +32,7 @@ Change workflow
 
 - Change helm chart (if necessary )
 - Rebuild chart and reposytory (see [helm/README.md](helm/README.md))
-- Commit changes (include new helm tgz file)
+- Commit changes (include add new helm tgz file)
 - Push changes
 - Change playbook 
   - Change helm chart version (if necessary )
@@ -102,3 +102,10 @@ The install yaml need a change:
               configMapKeyRef:
                 key: server.insecure
 ```
+
+
+Links
+-----
+
+- [bitnami/argo-workflows](https://github.com/bitnami/charts/tree/master/bitnami/argo-workflows)
+- [helm repos on github](https://medium.com/@mattiaperi/create-a-public-helm-chart-repository-with-github-pages-49b180dbb417)

@@ -35,8 +35,3 @@ helm install \
 helm install -f ./values.yaml -n monitoring mutual_tls own_dog_food/mutual_tls
 helm get all mutual_tls -n monitoring
 ```
-
-Links
------
-
-- [bitnami/argo-workflows](https://github.com/bitnami/charts/tree/master/bitnami/argo-workflows)
