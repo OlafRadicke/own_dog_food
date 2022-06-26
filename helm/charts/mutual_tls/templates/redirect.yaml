@@ -12,7 +12,7 @@ spec:
       kind:               Rule
       services:
       - name:             {{ .Values.app.service }}
-        port:             80
+        port:             {{ .Values.app.service_port }}
       middlewares:
       - name:             redirect-{{ .Values.app.name }}
         namespace:        {{ .Release.Namespace }}

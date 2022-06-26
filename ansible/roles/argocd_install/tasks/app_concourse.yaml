@@ -61,13 +61,14 @@
         source:
           chart:                mutual_tls
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.6
+          targetRevision:       0.1.7
           helm:
             values: |
                                 app:
                                   name: concourse
                                   fqdn: concourse.olaf-radicke.de
-                                  service: concourse
+                                  service: concourse-web
+                                  service_port: 8080
                                 secretnames: mtls-ca
 
 
