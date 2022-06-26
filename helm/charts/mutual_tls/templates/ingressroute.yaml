@@ -3,13 +3,13 @@
 apiVersion:               traefik.containo.us/v1alpha1
 kind:                     IngressRoute
 metadata:
-  name:                   "https-{{ .Values.app.name }}"
-  namespace:              "{{ .Release.Namespace }}"
+  name:                   https-{{ .Values.app.name }}
+  namespace:              {{ .Release.Namespace }}
 spec:
   entryPoints:
     -                     websecure
   routes:
-    - match:              "Host(`{{ .Values.app.fqdn }}`)"
+    - match:              Host(`{{ .Values.app.fqdn }}`)
       kind:               Rule
       services:
       - name:             {{ .Values.app.service }} 
@@ -17,5 +17,5 @@ spec:
   tls:
     certResolver:         le
     options:
-      name:               "m-tls-options-{{ .Values.app.name }}"
-      namespace:          "{{ .Release.Namespace }}"
+      name:               m-tls-options-{{ .Values.app.name }}
+      namespace:          {{ .Release.Namespace }}

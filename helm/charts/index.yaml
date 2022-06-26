@@ -3,7 +3,17 @@ entries:
   mutual_tls:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-06-25T13:33:33.829127326+02:00"
+    created: "2022-06-26T09:39:52.305329225+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 373452103e601f6ea1263097e1b789dc4d955048fc1ea301e65ab2f35b1b64f2
+    name: mutual_tls
+    type: application
+    urls:
+    - https://olafradicke.github.io/own_dog_food/helm/charts/mutual_tls-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-26T09:39:52.3051345+02:00"
     description: A Helm chart for Kubernetes
     digest: 350c5e277881331738b663fcd857416d5608df7863ff811983d2199f596cf4b7
     name: mutual_tls
@@ -11,15 +21,4 @@ entries:
     urls:
     - https://olafradicke.github.io/own_dog_food/helm/charts/mutual_tls-0.1.5.tgz
     version: 0.1.5
-  prometheus_rules:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2022-06-25T13:33:33.829745419+02:00"
-    description: A Helm chart for Kubernetes
-    digest: 0adad57f91018ba122c13b9451a87e39a03f81208d06b3e2346555deab552433
-    name: prometheus_rules
-    type: application
-    urls:
-    - https://olafradicke.github.io/own_dog_food/helm/charts/prometheus_rules-0.1.0.tgz
-    version: 0.1.0
-generated: "2022-06-25T13:33:33.827876674+02:00"
+generated: "2022-06-26T09:39:52.304566584+02:00"
