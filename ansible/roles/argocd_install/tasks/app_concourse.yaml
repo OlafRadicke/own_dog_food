@@ -27,12 +27,16 @@
           chart:                concourse
           repoURL:              https://concourse-charts.storage.googleapis.com/
           targetRevision:       17.0.6
-          # helm:
-          #   values: |
-          #                       server:
-          #                         auth:
-          #                           enabled: true
-          #                           mode:    client
+          helm:
+            values: |
+                                concourse:
+                                  web:
+                                    externalUrl: https://concourse.olaf-radicke.de/
+                                  auth:
+                                    mainTeam:
+                                      localUser: admin
+                                secrets:
+                                  localUsers: admin:admin
                                     
 
 
