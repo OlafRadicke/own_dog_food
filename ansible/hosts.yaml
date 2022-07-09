@@ -39,10 +39,11 @@ all:
           - name:                 the-independent-friend-de
             port:                 80
       # k3s_routes_mtls: 
-      #   - match:                  Host(`test.the-independent-friend.de`)
+      #   - match:                  Host(`argocd.olaf-radicke.de`)
       #     kind:                   Rule
       #     services:
-      #     - name:                 test-the-independent-friend-de
+      #     - name:                 argocd-server
+      #       namespace:            argocd
       #       port:                 80
       #     middlewares:
       #     - name:                 middleware-http-to-https

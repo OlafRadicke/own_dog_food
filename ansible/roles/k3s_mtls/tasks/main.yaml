@@ -1,7 +1,7 @@
 ---
 
 - name: Setup step
-  include_tasks: install_steap.yaml
+  include_tasks: install_step.yaml
 
 - name: Setup root ca for mTLS
   include_tasks: create_root_ca.yaml

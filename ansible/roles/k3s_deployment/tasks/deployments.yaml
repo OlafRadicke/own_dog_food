@@ -1,6 +1,6 @@
 ---
 
-- name: create deployment
+- name:                         create deployment
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"
     state:                      "{{ k3s_deployment_state }}"
@@ -33,7 +33,7 @@
             - name:             regcred
   loop:                         "{{ k3s_projects }}"
 
-- name: create a service object
+- name:                         create a service object
   kubernetes.core.k8s:
     kubeconfig:                 "{{ k3s_kubeconfig }}"
     state:                      "{{ k3s_deployment_state }}"
