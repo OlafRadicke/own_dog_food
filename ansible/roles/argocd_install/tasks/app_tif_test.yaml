@@ -1,0 +1,71 @@
+---
+
+
+- name:                         add concourse helm chart
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_deployment_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   concourse
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        destination:
+          server:               https://kubernetes.default.svc
+          namespace:            argocd
+        source:
+          chart:                the_independent_friend_de
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.1.0
+          helm:
+            values: |
+                                app:
+                                  name: "test-the-independent-friend-de"
+                                    
+
+- name: add concourse routing
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_deployment_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   concourse-routes
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        destination:
+          server:               "https://kubernetes.default.svc"
+          namespace:            argocd
+        source:
+          chart:                mutual_tls
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.1.7
+          helm:
+            values: |
+                                app:
+                                  name:         test-the-independent-friend-de
+                                  fqdn:         test.the-independent-friend.de
+                                  service:      test-the-independent-friend-de
+                                  service_port: 80
+                                secretnames:    mtls-ca
+
+

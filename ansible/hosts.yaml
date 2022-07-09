@@ -25,8 +25,8 @@ all:
           image:                  "olafradicke/olaf-radicke-de:2.12"
         - name:                   "the-independent-friend-de"
           image:                  "olafradicke/the-independent-friend-de:4.4.2"
-        - name:                   "test-the-independent-friend-de"
-          image:                  "olafradicke/the-independent-friend-de:4.4.2"
+        # - name:                   "test-the-independent-friend-de"
+        #   image:                  "olafradicke/the-independent-friend-de:4.4.2"
       k3s_routes:
         - match:                  Host(`olaf-radicke.de`)
           kind:                   Rule
@@ -38,15 +38,15 @@ all:
           services:
           - name:                 the-independent-friend-de
             port:                 80
-      k3s_routes_mtls:
-        - match:                  Host(`test.the-independent-friend.de`)
-          kind:                   Rule
-          services:
-          - name:                 test-the-independent-friend-de
-            port:                 80
-          middlewares:
-          - name:                 middleware-http-to-https
-            namespace:            "{{ k3s_namespace }}"
+      k3s_routes_mtls: {}
+        # - match:                  Host(`test.the-independent-friend.de`)
+        #   kind:                   Rule
+        #   services:
+        #   - name:                 test-the-independent-friend-de
+        #     port:                 80
+        #   middlewares:
+        #   - name:                 middleware-http-to-https
+        #     namespace:            "{{ k3s_namespace }}"
       k3s_middleware_routes:      
         - match:                  Host(`olaf-radicke.de`)
           kind:                   Rule

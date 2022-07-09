@@ -9,3 +9,6 @@
 
 - name: Include Prometheus sub task
   include_tasks: app_prometheus.yaml
+
+- name: Include test site sub task
+  include_tasks: app_tif_test.yaml
