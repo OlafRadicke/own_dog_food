@@ -1,7 +1,7 @@
 ---
 
 
-- name:                         add concourse helm chart
+- name:                         add test TIF helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
@@ -10,7 +10,7 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   concourse
+        name:                   tif-test-main
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -26,14 +26,14 @@
         source:
           chart:                the_independent_friend_de
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.0
+          targetRevision:       0.1.1
           helm:
             values: |
                                 app:
                                   name: "test-the-independent-friend-de"
                                     
 
-- name: add concourse routing
+- name:                         add   test TIF routing
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
@@ -42,7 +42,7 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   concourse-routes
+        name:                   tif-test-routes
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
