@@ -30,7 +30,7 @@ helm install \
   --debug  \
   --version 0.1.2  \
   myroutes \
-  own_dog_food/mutual_tls --debug
+  own_dog_food/mutual_tls
 
 helm install -f ./values.yaml -n monitoring mutual_tls own_dog_food/mutual_tls
 helm get all mutual_tls -n monitoring
