@@ -3,4 +3,4 @@ app: {}
   # fqdn: exampleapp.exampledom.com
   # service: example-main-server
   # servive_port: 80
-secretnames: mtls-ca
+# secretnames: mtls-ca

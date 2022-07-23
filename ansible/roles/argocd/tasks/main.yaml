@@ -1,16 +1,19 @@
 ---
 
-- name: Include argocd install
-  include_tasks: argocd_install.yaml
+- name:           Include argocd install
+  include_tasks:  argocd_install.yaml
 
-- name: Include argocd workflow support
-  include_tasks: app_argocd_workflow.yaml
+- name:           Include argocd workflow support
+  include_tasks:  app_argocd_workflow.yaml
 
-- name: Include concourse sub task
-  include_tasks: app_concourse.yaml
+- name:           Include concourse sub task
+  include_tasks:  app_concourse.yaml
 
-- name: Include Prometheus sub task
-  include_tasks: app_prometheus.yaml
+- name:           Include Prometheus sub task
+  include_tasks:  app_prometheus.yaml
 
-- name: Include test site sub task
-  include_tasks: app_tif_test.yaml
+- name:           Include TIF life sub task
+  include_tasks:  app_tif_live.yaml
+
+- name:           Include TIF test sub task
+  include_tasks:  app_tif_test.yaml

@@ -1,12 +1,8 @@
 ---
- 
-- name: create a k8s namespace testing
-  kubernetes.core.k8s:
-    kubeconfig:   "{{ k3s_kubeconfig }}"
-    name:         "{{ k3s_namespace }}"
-    api_version:  v1
-    kind:         Namespace
-    state:        "{{ k3s_deployment_state }}"
+
+
+- name: Include task for namespaces
+  include_tasks: namespaces.yaml
 
 - name: Include task for site deployment
   include_tasks: deployments.yaml

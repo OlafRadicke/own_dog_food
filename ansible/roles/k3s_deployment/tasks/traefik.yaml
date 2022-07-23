@@ -124,7 +124,7 @@
           -                     websecure
         routes:                 "{{ k3s_routes_mtls }}"
         tls:
-          options: 
+          options:
             name:               m-tls-options
             namespace:          "{{ k3s_namespace }}"
   when: k3s_routes_mtls is defined

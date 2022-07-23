@@ -4,7 +4,7 @@
 all:
   hosts:
     'olaf-radicke-02':
-      argocd_reset:               false 
+      argocd_reset:               false
       argocd_letsencrypt:         true
       ansible_host:               92.205.105.117
       ansible_user:               "oradicke"
@@ -16,6 +16,10 @@ all:
       # private_pki_reset:          "yes"
       refresh_client_certificate: false
       k3s_acme_tier:              "production"
+      namespaces:
+        -                         "live"
+        -                         "argocd"
+        -                         "monitoring"
       mtls_secreat_namespaces:
         -                         "live"
         -                         "argocd"
@@ -23,9 +27,7 @@ all:
       k3s_projects:
         - name:                   "olaf-radicke-de"
           image:                  "olafradicke/olaf-radicke-de:2.12"
-        - name:                   "the-independent-friend-de"
-          image:                  "olafradicke/the-independent-friend-de:4.4.2"
-        # - name:                   "test-the-independent-friend-de"
+        # - name:                   "the-independent-friend-de"
         #   image:                  "olafradicke/the-independent-friend-de:4.4.2"
       k3s_routes:
         - match:                  Host(`olaf-radicke.de`)
@@ -33,22 +35,12 @@ all:
           services:
           - name:                 olaf-radicke-de
             port:                 80
-        - match:                  Host(`the-independent-friend.de`)
-          kind:                   Rule
-          services:
-          - name:                 the-independent-friend-de
-            port:                 80
-      # k3s_routes_mtls: 
-      #   - match:                  Host(`argocd.olaf-radicke.de`)
-      #     kind:                   Rule
-      #     services:
-      #     - name:                 argocd-server
-      #       namespace:            argocd
-      #       port:                 80
-      #     middlewares:
-      #     - name:                 middleware-http-to-https
-      #       namespace:            "{{ k3s_namespace }}"
-      k3s_middleware_routes:      
+        # - match:                  Host(`the-independent-friend.de`)
+        #   kind:                   Rule
+        #   services:
+        #   - name:                 the-independent-friend-de
+        #     port:                 80
+      k3s_middleware_routes:
         - match:                  Host(`olaf-radicke.de`)
           kind:                   Rule
           services:
@@ -57,13 +49,11 @@ all:
           middlewares:
           - name:                 middleware-http-to-https
             namespace:            "{{ k3s_namespace }}"
-          - name:                 middleware-http-to-https
-            namespace:            "{{ k3s_namespace }}"
-        - match:                  Host(`the-independent-friend.de`)
-          kind:                   Rule
-          services:
-          - name:                 the-independent-friend-de
-            port:                 80
-          middlewares:
-          - name:                 middleware-http-to-https
-            namespace:            "{{ k3s_namespace }}"
+        # - match:                  Host(`the-independent-friend.de`)
+        #   kind:                   Rule
+        #   services:
+        #   - name:                 the-independent-friend-de
+        #     port:                 80
+        #   middlewares:
+        #   - name:                 middleware-http-to-https
+        #     namespace:            "{{ k3s_namespace }}"
