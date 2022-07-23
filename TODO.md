@@ -2,6 +2,8 @@ Todos
 =====
 
 - Move routing in helm charts
+- Prometeus: PersistentVolumeClaim "prometheus-main-alertmanager" is invalid
+- Add node-exporter
 - hardening: 
   - [hardening_guide](https://rancher.com/docs/k3s/latest/en/security/hardening_guide/)
   - [kubescape](https://github.com/armosec/kubescape)

@@ -1,16 +1,16 @@
 ---
 
 
-- name:                         add concourse helm chart
+- name:                         add ArgoCD workflow helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
+    state:                      "{{ argocd_app_argocd_workflow_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   concourse
+        name:                   argocd-workflow
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -24,32 +24,25 @@
           server:               https://kubernetes.default.svc
           namespace:            argocd
         source:
-          chart:                concourse
-          repoURL:              https://concourse-charts.storage.googleapis.com/
-          targetRevision:       17.0.6
+          chart:                argo-workflows
+          repoURL:              https://charts.bitnami.com/bitnami
+          targetRevision:       2.3.4
           helm:
             values: |
-                                concourse:
-                                  web:
-                                    externalUrl: https://concourse.olaf-radicke.de/
+                                server:
                                   auth:
-                                    mainTeam:
-                                      localUser: admin
-                                secrets:
-                                  localUsers: admin:admin
-                                    
+                                    enabled: false
 
-
-- name: add concourse routing
+- name: add ArgoCD workflow routing
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
+    state:                      "{{ argocd_app_argocd_workflow_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   concourse-routes
+        name:                   workflow-routes
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -65,28 +58,27 @@
         source:
           chart:                mutual_tls
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.7
+          targetRevision:       0.1.5
           helm:
             values: |
                                 app:
-                                  name: concourse
-                                  fqdn: concourse.olaf-radicke.de
-                                  service: concourse-web
-                                  service_port: 8080
+                                  name: workflow
+                                  fqdn: workflow.olaf-radicke.de
+                                  service: argocd-workflow-argo-workflows-server
                                 secretnames: mtls-ca
 
 
-# - name:                 add concourse example
+# - name:                 add ArgoCD workflow example
 #   kubernetes.core.k8s:
 #     kubeconfig:         "{{ argocd_kubeconfig }}"
-#     state:              "{{ argocd_deployment_state }}"
+#     state:              "{{ argocd_app_argocd_workflow_state }}"
 #     namespace:          "{{ argocd_namespace }}"
 #     wait:               yes
 #     definition:
 #       apiVersion:       argoproj.io/v1alpha1
 #       kind:             Workflow
 #       metadata:
-#         generateName:   hello-world-
+#         generateName:   hello-argocd-workflow
 #         labels:
 #           workflows.argoproj.io/archive-strategy: "false"
 #         annotations:

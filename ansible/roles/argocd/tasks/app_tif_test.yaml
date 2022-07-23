@@ -4,7 +4,7 @@
 - name:                         add test TIF helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
+    state:                      "{{ argocd_app_tif_test_state}}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
@@ -31,12 +31,12 @@
             values: |
                                 app:
                                   name: "test-the-independent-friend-de"
-                                    
+
 
 - name:                         add   test TIF routing
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
+    state:                      "{{ argocd_app_tif_test_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1

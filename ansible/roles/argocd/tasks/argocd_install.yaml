@@ -19,19 +19,10 @@
     state:              present
     wait:               yes
 
-- name: Copy ArgoCD install file 
+- name: Copy ArgoCD install file
   ansible.builtin.copy:
     src:                "install.yaml"
     dest:               "/tmp/argo-insecure-install.yaml"
-
-# - name: Install ArgoCD with yaml file
-#   kubernetes.core.k8s:
-#     kubeconfig:         "{{ argocd_kubeconfig }}"
-#     namespace:          "argocd"
-#     api_version:        v1
-#     src:                "/tmp/argo-insecure-install.yaml"
-#     wait:               "yes"
-#     wait_timeout:       600
 
 - name: Install ArgoCD with yaml file
   ansible.builtin.shell: kubectl apply -f /tmp/argo-insecure-install.yaml -n argocd
@@ -120,7 +111,7 @@
           options:
             name:               "m-tls-options-{{ argocd_app_name }}"
             namespace:          "{{ argocd_namespace }}"
-  when:                         
+  when:
     -                           argocd_letsencrypt == true
     -                           argocd_mtls == true
 
@@ -146,10 +137,10 @@
             - name:             argocd-server
               port:             80
         tls:
-          options: 
+          options:
             name:               "m-tls-options-{{ argocd_app_name }}"
             namespace:          "{{ argocd_namespace }}"
-  when:                         
+  when:
     -                           argocd_letsencrypt == false
     -                           argocd_mtls == true
 

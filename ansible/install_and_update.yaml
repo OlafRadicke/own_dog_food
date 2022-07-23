@@ -8,5 +8,5 @@
     - k3s_install
     - k8s_ansible_support_install
     - k3s_deployment
-    - argocd_install
+    - argocd
     - k3s_mtls

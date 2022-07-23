@@ -3,9 +3,9 @@
 - name: Include argocd install
   include_tasks: argocd_install.yaml
 
-# - name: Include argocd workflow support
-#   include_tasks: argrocd_workflow.yaml
-  
+- name: Include argocd workflow support
+  include_tasks: app_argocd_workflow.yaml
+
 - name: Include concourse sub task
   include_tasks: app_concourse.yaml
 

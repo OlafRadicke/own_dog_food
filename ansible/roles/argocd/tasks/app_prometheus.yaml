@@ -1,28 +1,9 @@
 ---
 
-- name: delete ArgoCD namespace
-  kubernetes.core.k8s:
-    kubeconfig:         "{{ argocd_kubeconfig }}"
-    name:               "monitoring"
-    api_version:        v1
-    kind:               Namespace
-    state:              absent
-    wait:               yes
-  when:                 argocd_reset == true
-
-- name: create ArgoCD namespace
-  kubernetes.core.k8s:
-    kubeconfig:         "{{ argocd_kubeconfig }}"
-    name:               "monitoring"
-    api_version:        v1
-    kind:               Namespace
-    wait:               yes
-
-
 - name: add ArgoCD app Prometheus main helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
+    state:                      "{{ argocd_app_prometheus_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
@@ -55,7 +36,7 @@
                                     etcd: false
                                 serverFiles:
                                   ## Ref: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
-                                  alerting_rules.yml: 
+                                  alerting_rules.yml:
                                     groups:
                                       - name: Instances
                                         rules:
@@ -72,7 +53,7 @@
 - name: add ArgoCD app Prometheus routing helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_deployment_state }}"
+    state:                      "{{ argocd_app_prometheus_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
