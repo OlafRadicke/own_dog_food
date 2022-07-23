@@ -66,6 +66,5 @@
                                   fqdn:         the-independent-friend.de
                                   service:      the-independent-friend-de
                                   service_port: 80
-                                secretnames:    mtls-ca
 
 
