@@ -20,9 +20,9 @@ spec:
                           - CurveP521
                           - CurveP384
   sniStrict:              false
-{{ if .Values.secretnames }}
+{{- if .Values.mtls.enabled }}
   clientAuth:
     clientAuthType:       RequireAndVerifyClientCert
     secretNames:
-      -                   {{ .Values.secretnames }}
-{{ end }}
+      -                   {{ .Values.mtls.secretnames }}
+{{- end }}
