@@ -1,0 +1,71 @@
+---
+
+
+- name:                         add live TIF helm chart
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_app_tif_test_state}}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   tif-live-main
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        destination:
+          server:               https://kubernetes.default.svc
+          namespace:            argocd
+        source:
+          chart:                the_independent_friend_de
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.1.1
+          helm:
+            values: |
+                                app:
+                                  name: "the-independent-friend-de"
+
+
+- name:                         add live TIF routing
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    state:                      "{{ argocd_app_tif_test_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   tif-live-routes
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        destination:
+          server:               "https://kubernetes.default.svc"
+          namespace:            argocd
+        source:
+          chart:                tls_routing
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.1.1
+          helm:
+            values: |
+                                app:
+                                  name:         the-independent-friend-de
+                                  fqdn:         the-independent-friend.de
+                                  service:      the-independent-friend-de
+                                  service_port: 80
+                                secretnames:    mtls-ca
+
+

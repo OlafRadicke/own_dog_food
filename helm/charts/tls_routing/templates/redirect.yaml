@@ -1,0 +1,18 @@
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   http-{{ .Values.app.name }}
+  namespace:              {{ .Release.Namespace }}
+spec:
+  entryPoints:
+    -                     web
+  routes:
+    - match:              Host(`{{ .Values.app.fqdn }}`)
+      kind:               Rule
+      services:
+      - name:             {{ .Values.app.service }}
+        port:             {{ .Values.app.service_port }}
+      middlewares:
+      - name:             redirect-{{ .Values.app.name }}
+        namespace:        {{ .Release.Namespace }}

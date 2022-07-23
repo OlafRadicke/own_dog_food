@@ -3,9 +3,9 @@ entries:
   mutual_tls:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-07-09T09:48:18.326035389+02:00"
+    created: "2022-07-23T14:50:02.752450519+02:00"
     description: A Helm chart for Kubernetes
-    digest: 383241a4c1452f586f25e18a3694da1031ed4a1851aebd9269243fa77801334f
+    digest: c1e4e425ffde63de4ed3e71e1d64bf3dab3c628f7aff4aca300a1ac55da714b0
     name: mutual_tls
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-09T09:48:18.325844929+02:00"
+    created: "2022-07-23T14:50:02.752234244+02:00"
     description: A Helm chart for Kubernetes
     digest: 373452103e601f6ea1263097e1b789dc4d955048fc1ea301e65ab2f35b1b64f2
     name: mutual_tls
@@ -23,7 +23,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-09T09:48:18.325622326+02:00"
+    created: "2022-07-23T14:50:02.752000758+02:00"
     description: A Helm chart for Kubernetes
     digest: 350c5e277881331738b663fcd857416d5608df7863ff811983d2199f596cf4b7
     name: mutual_tls
@@ -34,9 +34,9 @@ entries:
   the_independent_friend_de:
   - apiVersion: v2
     appVersion: 4.4.2
-    created: "2022-07-09T09:48:18.32640208+02:00"
+    created: "2022-07-23T14:50:02.752830572+02:00"
     description: Install the website the-independent-friend.de
-    digest: e8b9ebdc0681e74dd06ba508ff1c5c5427990240a83fb75fd5f67e47a0a60c66
+    digest: a39deeab3830f06e9d4fa7eb4e256cf36badd465e57952617eac5500ac9d03b9
     name: the_independent_friend_de
     type: application
     urls:
@@ -44,7 +44,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 4.4.2
-    created: "2022-07-09T09:48:18.326219847+02:00"
+    created: "2022-07-23T14:50:02.752633389+02:00"
     description: Install the website the-independent-friend.de
     digest: 28aa247a3864bc8367790d3400c6371f20ef6c0519147919b1b3ac2b27ae6fd6
     name: the_independent_friend_de
@@ -52,4 +52,15 @@ entries:
     urls:
     - https://olafradicke.github.io/own_dog_food/helm/charts/the_independent_friend_de-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-09T09:48:18.325256385+02:00"
+  tls_routing:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-07-23T14:50:02.753036128+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 4fd4884a39e52c57834a00e142ed352162ef8223e6359d7543def5a37f84907f
+    name: tls_routing
+    type: application
+    urls:
+    - https://olafradicke.github.io/own_dog_food/helm/charts/tls_routing-0.1.1.tgz
+    version: 0.1.1
+generated: "2022-07-23T14:50:02.751298749+02:00"
