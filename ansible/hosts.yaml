@@ -20,10 +20,12 @@ all:
         -                         "live"
         -                         "argocd"
         -                         "monitoring"
+        -                         "tekton"
       mtls_secreat_namespaces:
         -                         "live"
         -                         "argocd"
         -                         "monitoring"
+        -                         "tekton"
       k3s_projects:
         - name:                   "olaf-radicke-de"
           image:                  "olafradicke/olaf-radicke-de:2.12"

@@ -12,6 +12,9 @@
 - name:           Include Prometheus sub task
   include_tasks:  app_prometheus.yaml
 
+- name:           Include Tekon sub task
+  include_tasks:  app_tekton.yaml
+
 - name:           Include TIF life sub task
   include_tasks:  app_tif_live.yaml
 
