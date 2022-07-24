@@ -2,8 +2,18 @@ apiVersion: v1
 entries:
   tekton:
   - apiVersion: v2
+    appVersion: 0.37.2
+    created: "2022-07-24T14:20:57.928965732+02:00"
+    description: A Helm chart for Kubernete
+    digest: 95786b3f0206c6180a5098c2e88c30e7084b7c78ff85adbb5440132995bb2591
+    name: tekton
+    type: application
+    urls:
+    - https://olafradicke.github.io/own_dog_food/helm/charts/tekton-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
     appVersion: 0.37.2-latest
-    created: "2022-07-24T12:56:13.941083802+02:00"
+    created: "2022-07-24T14:20:57.928384127+02:00"
     description: A Helm chart for Kubernetes
     digest: e5fcd2b05a21aeb431ba745349749c62a6906133aa43ffa7683b21b132416991
     name: tekton
@@ -13,7 +23,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.37.2
-    created: "2022-07-24T12:56:13.939632901+02:00"
+    created: "2022-07-24T14:20:57.927667967+02:00"
     description: A Helm chart for Kubernetes
     digest: 6d940f10a17b7848ab21626976313a5af6efe3a992c23a50684973a48b3ab4b1
     name: tekton
@@ -24,9 +34,9 @@ entries:
   the_independent_friend_de:
   - apiVersion: v2
     appVersion: 4.4.2
-    created: "2022-07-24T12:56:13.941655517+02:00"
+    created: "2022-07-24T14:20:57.929624578+02:00"
     description: Install the website the-independent-friend.de
-    digest: 14bcc03e0313c3eac955a3f1431b14d90ea3e4a529ae0ec9690d740fa4a84969
+    digest: c437db43c90f3d0067d6c836057dbcbf8603b0904968f10e9f812dc5fa172289
     name: the_independent_friend_de
     type: application
     urls:
@@ -34,7 +44,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 4.4.2
-    created: "2022-07-24T12:56:13.94142455+02:00"
+    created: "2022-07-24T14:20:57.929346092+02:00"
     description: Install the website the-independent-friend.de
     digest: 28aa247a3864bc8367790d3400c6371f20ef6c0519147919b1b3ac2b27ae6fd6
     name: the_independent_friend_de
@@ -45,9 +55,9 @@ entries:
   tls_routing:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-07-24T12:56:13.94248657+02:00"
+    created: "2022-07-24T14:20:57.930590189+02:00"
     description: A Helm chart for Kubernetes
-    digest: 17eb6049938f1e90e66c62d8dc743e4562cd98d385bffe55017ab12c6921d5f7
+    digest: 1d1cf4068a4b7b8599cbc5ceb3cc2650200f5ff6755dbe52b097031934775a9b
     name: tls_routing
     type: application
     urls:
@@ -55,7 +65,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-07-24T12:56:13.942250365+02:00"
+    created: "2022-07-24T14:20:57.930322195+02:00"
     description: A Helm chart for Kubernetes
     digest: 94b287dafec8f2d0aa1ef97c06069b6a9020c88f498fa87d028c62fc3610eb1f
     name: tls_routing
@@ -65,7 +75,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-07-24T12:56:13.941997713+02:00"
+    created: "2022-07-24T14:20:57.930017082+02:00"
     description: A Helm chart for Kubernetes
     digest: 4fd4884a39e52c57834a00e142ed352162ef8223e6359d7543def5a37f84907f
     name: tls_routing
@@ -73,4 +83,4 @@ entries:
     urls:
     - https://olafradicke.github.io/own_dog_food/helm/charts/tls_routing-0.1.1.tgz
     version: 0.1.1
-generated: "2022-07-24T12:56:13.938772854+02:00"
+generated: "2022-07-24T14:20:57.926606498+02:00"

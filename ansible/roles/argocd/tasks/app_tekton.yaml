@@ -25,7 +25,7 @@
         source:
           chart:                tekton
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.0.2
+          targetRevision:       0.0.3
 
 
 # - name:                         add Tekton routing
