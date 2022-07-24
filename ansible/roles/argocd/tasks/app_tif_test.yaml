@@ -56,9 +56,9 @@
           server:               "https://kubernetes.default.svc"
           namespace:            argocd
         source:
-          chart:                mutual_tls
+          chart:                tls_routing
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.7
+          targetRevision:       0.1.3
           helm:
             values: |
                                 app:
@@ -66,6 +66,9 @@
                                   fqdn:         test.the-independent-friend.de
                                   service:      test-the-independent-friend-de
                                   service_port: 80
-                                secretnames:    mtls-ca
+                                mtls:
+                                  enabled: true
+                                  secretnames: mtls-ca
+
 
 
