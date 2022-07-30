@@ -58,8 +58,8 @@
                                 app:
                                   name:         tekton-olaf-radicke-de
                                   fqdn:         tekton.olaf-radicke.de
-                                  service:      tekton-service
-                                  service_port: 80
+                                  service:      tekton-dashboard
+                                  service_port: 9097
                                 mtls:
                                   enabled: true
                                   secretnames: mtls-ca
