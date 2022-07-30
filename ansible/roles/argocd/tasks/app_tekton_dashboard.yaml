@@ -36,7 +36,7 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   tekton-routes
+        name:                   tekton-dashboard-routes
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
