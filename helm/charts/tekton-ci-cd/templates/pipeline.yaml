@@ -1,0 +1,19 @@
+---
+
+
+apiVersion:               tekton.dev/v1beta1
+kind:                     Pipeline
+metadata:
+  namespace:              {{ .Release.Namespace }}
+  name:                   hello-goodbye
+spec:
+  tasks:
+    - name:               hello
+      taskRef:
+        name:             hello
+    - name:               goodbye
+      runAfter:
+                          - hello
+      taskRef:
+        name:             goodbye
+

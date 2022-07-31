@@ -1,0 +1,29 @@
+---
+
+apiVersion:               tekton.dev/v1beta1
+kind:                     Task
+metadata:
+  namespace:              {{ .Release.Namespace }}
+  name:                   hello
+spec:
+  steps:
+    - name:               echo
+      image:              alpine
+      script:             |
+                          #!/bin/sh
+                          echo "Hello World"
+
+
+apiVersion:               tekton.dev/v1beta1
+kind:                     Task
+metadata:
+  namespace:              {{ .Release.Namespace }}
+  name:                   goodbye
+spec:
+  steps:
+    - name:               goodbye
+      image:              ubuntu
+      script:             |
+                          #!/bin/bash
+                          echo "Goodbye World!" && false &&  dygwdyg                        false
+

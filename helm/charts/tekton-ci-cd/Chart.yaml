@@ -1,0 +1,6 @@
+apiVersion:   v2
+name:         tekton-ci-cd
+description:  Automatisation of ci/cd tasks
+type:         application
+version:      0.0.1
+appVersion:   "0.0.1"

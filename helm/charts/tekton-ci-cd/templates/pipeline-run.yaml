@@ -1,0 +1,14 @@
+---
+
+
+
+apiVersion:               tekton.dev/v1beta1
+kind:                     PipelineRun
+metadata:
+  namespace:              {{ .Release.Namespace }}
+  name:                   hello-goodbye-run
+spec:
+  pipelineRef:
+    name:                 hello-goodbye-2
+
+
