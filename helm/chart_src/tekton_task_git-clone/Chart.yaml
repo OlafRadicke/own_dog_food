@@ -1,0 +1,8 @@
+apiVersion:   v2
+name:         tekton_task_git-clone
+description:  |
+              A Helm chart for installing Tekton task git-clone
+              See: https://hub.tekton.dev/tekton/task/git-clone
+type:         application
+version:      0.0.1
+appVersion:   "0.6.0"

@@ -1,29 +1,16 @@
 ---
 
-apiVersion:               tekton.dev/v1beta1
-kind:                     Task
+apiVersion:     tekton.dev/v1beta1
+kind:           Task
 metadata:
-  namespace:              {{ .Release.Namespace }}
-  name:                   hello
+  name:         show-readme
+  description:  Read and display README file.
 spec:
+  workspaces:
+  - name:       source
   steps:
-    - name:               echo
-      image:              alpine
-      script:             |
-                          #!/bin/sh
-                          echo "Hello World"
-
-
-apiVersion:               tekton.dev/v1beta1
-kind:                     Task
-metadata:
-  namespace:              {{ .Release.Namespace }}
-  name:                   goodbye
-spec:
-  steps:
-    - name:               goodbye
-      image:              ubuntu
-      script:             |
-                          #!/bin/bash
-                          echo "Goodbye World!" && false &&  dygwdyg                        false
-
+  - name:       read
+    image:      alpine:latest
+    script:     |
+                #!/usr/bin/env sh
+                cat $(workspaces.source.path)/README.md

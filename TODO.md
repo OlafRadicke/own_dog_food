@@ -10,6 +10,7 @@ Todos
   - [concourse](https://concourse-ci.org/)
     - Build and push containerimages
     - Build and push helm charts
+  - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)
 - Prometeus:
   - PersistentVolumeClaim "prometheus-main-alertmanager" is invalid
   - Add node-exporter

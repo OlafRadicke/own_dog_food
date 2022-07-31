@@ -159,5 +159,13 @@
       spec:
         entryPoints:
           -                     web
-        routes:                 "{{ k3s_middleware_routes }}"
+        routes:
+          - match:              Host(`olaf-radicke.de`)
+            kind:               Rule
+            services:
+            - name:             olaf-radicke-de
+              port:             80
+            middlewares:
+            - name:             middleware-http-to-https
+              namespace:        "{{ k3s_namespace }}"
 
