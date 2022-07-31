@@ -21,7 +21,7 @@ all:
         -                         "argocd"
         -                         "monitoring"
         -                         "tekton-pipelines"
-        -                         "tekton-cicd"
+        -                         "tekton-ci-cd"
       mtls_secreat_namespaces:
         -                         "live"
         -                         "argocd"

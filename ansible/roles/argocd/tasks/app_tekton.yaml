@@ -48,7 +48,7 @@
           -                     Replace=true
         destination:
           server:               https://kubernetes.default.svc
-          namespace:            tekton-pipelines
+          namespace:            tekton-ci-cd
         source:
           chart:                tekton_task_git-clone
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
@@ -76,7 +76,7 @@
           -                     Replace=true
         destination:
           server:               https://kubernetes.default.svc
-          namespace:            "tekton-cicd"
+          namespace:            "tekton-ci-cd"
         source:
           chart:                tekton-ci-cd
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
