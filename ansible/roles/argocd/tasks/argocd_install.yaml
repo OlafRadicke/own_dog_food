@@ -2,7 +2,7 @@
 
 - name: delete ArgoCD namespace
   kubernetes.core.k8s:
-    kubeconfig:         "{{ argocd_kubeconfig }}"
+    kubeconfig:         "{{ global_kubeconfig }}"
     name:               "{{ argocd_namespace }}"
     api_version:        v1
     kind:               Namespace
@@ -12,7 +12,7 @@
 
 - name: create ArgoCD namespace
   kubernetes.core.k8s:
-    kubeconfig:         "{{ argocd_kubeconfig }}"
+    kubeconfig:         "{{ global_kubeconfig }}"
     name:               "{{ argocd_namespace }}"
     api_version:        v1
     kind:               Namespace
@@ -37,7 +37,7 @@
 
 - name: set mTLS Option vor ArgoCD
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -71,7 +71,7 @@
 
 - name: create a Middleware object for ArgoCD
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -88,7 +88,7 @@
 
 - name: IngressRoute for ArogoCD with letsencrypt / mTLS support
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -118,7 +118,7 @@
 
 - name: IngressRoute for ArgoCD for mTLS
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -147,7 +147,7 @@
 
 - name: IngressRoute for ArgoCD redirect http to https
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_deployment_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:

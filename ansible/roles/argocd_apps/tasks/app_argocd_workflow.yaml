@@ -3,7 +3,7 @@
 
 - name:                         add ArgoCD workflow helm chart
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_argocd_workflow_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -35,7 +35,7 @@
 
 - name: add ArgoCD workflow routing
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_argocd_workflow_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -73,7 +73,7 @@
 
 # - name:                 add ArgoCD workflow example
 #   kubernetes.core.k8s:
-#     kubeconfig:         "{{ argocd_kubeconfig }}"
+#     kubeconfig:         "{{ global_kubeconfig }}"
 #     state:              "{{ argocd_app_argocd_workflow_state }}"
 #     namespace:          "{{ argocd_namespace }}"
 #     wait:               yes

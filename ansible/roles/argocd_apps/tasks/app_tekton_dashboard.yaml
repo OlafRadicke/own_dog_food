@@ -1,16 +1,15 @@
 ---
 
-
-- name:                         add test TIF helm chart
+- name:                         add ArgoCD app Tekton Dashboard
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_app_tif_test_state}}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_app_tekton_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   tif-test-main
+        name:                   tekton-dashboard-main
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -22,27 +21,22 @@
           -                     Replace=true
         destination:
           server:               https://kubernetes.default.svc
-          namespace:            argocd
+          namespace:            tekton-pipelines
         source:
-          chart:                the_independent_friend_de
+          chart:                tekton_dashboard_release_readonly
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.1
-          helm:
-            values: |
-                                app:
-                                  name: "test-the-independent-friend-de"
+          targetRevision:       0.0.1
 
-
-- name:                         add   test TIF routing
+- name:                         add Tekton dashboard routing
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
-    state:                      "{{ argocd_app_tif_test_state }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_app_tekton_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   tif-test-routes
+        name:                   tekton-dashboard-routes
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -54,7 +48,7 @@
           -                     Replace=true
         destination:
           server:               "https://kubernetes.default.svc"
-          namespace:            argocd
+          namespace:            tekton-pipelines
         source:
           chart:                tls_routing
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
@@ -62,10 +56,10 @@
           helm:
             values: |
                                 app:
-                                  name:         test-the-independent-friend-de
-                                  fqdn:         test.the-independent-friend.de
-                                  service:      test-the-independent-friend-de
-                                  service_port: 80
+                                  name:         tekton-olaf-radicke-de
+                                  fqdn:         tekton.olaf-radicke.de
+                                  service:      tekton-dashboard
+                                  service_port: 9097
                                 mtls:
                                   enabled: true
                                   secretnames: mtls-ca

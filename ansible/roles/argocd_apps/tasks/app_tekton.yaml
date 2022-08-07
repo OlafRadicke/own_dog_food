@@ -2,7 +2,7 @@
 
 - name:                         add ArgoCD app Tekton
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_tekton_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -29,7 +29,7 @@
 
 - name:                         add ArgoCD app Tekton
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_tekton_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -57,7 +57,7 @@
 
 - name:                         add ci/cd jobs
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_tekton_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:

@@ -4,6 +4,7 @@
 all:
   hosts:
     'olaf-radicke-02':
+      global_kubeconfig:          "/etc/rancher/k3s/k3s.yaml"
       argocd_reset:               false
       argocd_letsencrypt:         true
       ansible_host:               92.205.105.117

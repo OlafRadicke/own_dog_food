@@ -1,16 +1,16 @@
 ---
 
 
-- name:                         add live TIF helm chart
+- name:                         add test TIF helm chart
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_tif_test_state}}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   tif-live-main
+        name:                   tif-test-main
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -30,23 +30,19 @@
           helm:
             values: |
                                 app:
-                                  name: "the-independent-friend-de"
-                                image:
-                                  repository: "olafradicke/the-independent-friend-de"
-                                  pullPolicy: IfNotPresent
-                                  tag: "4.4.3"
+                                  name: "test-the-independent-friend-de"
 
 
-- name:                         add live TIF routing
+- name:                         add   test TIF routing
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_tif_test_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   tif-live-routes
+        name:                   tif-test-routes
         namespace:              "{{ argocd_namespace }}"
       spec:
         project:                default
@@ -66,9 +62,13 @@
           helm:
             values: |
                                 app:
-                                  name:         the-independent-friend-de
-                                  fqdn:         the-independent-friend.de
-                                  service:      the-independent-friend-de
+                                  name:         test-the-independent-friend-de
+                                  fqdn:         test.the-independent-friend.de
+                                  service:      test-the-independent-friend-de
                                   service_port: 80
+                                mtls:
+                                  enabled: true
+                                  secretnames: mtls-ca
+
 
 

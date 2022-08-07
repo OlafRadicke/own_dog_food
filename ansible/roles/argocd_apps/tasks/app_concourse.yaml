@@ -3,7 +3,7 @@
 
 - name:                         add concourse helm chart
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_concourse_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -42,7 +42,7 @@
 
 - name: add concourse routing
   kubernetes.core.k8s:
-    kubeconfig:                 "{{ argocd_kubeconfig }}"
+    kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_app_concourse_state }}"
     namespace:                  "{{ argocd_namespace }}"
     definition:
@@ -80,7 +80,7 @@
 
 # - name:                 add concourse example
 #   kubernetes.core.k8s:
-#     kubeconfig:         "{{ argocd_kubeconfig }}"
+#     kubeconfig:         "{{ global_kubeconfig }}"
 #     state:              "{{ argocd_deployment_state }}"
 #     namespace:          "{{ argocd_namespace }}"
 #     wait:               yes
