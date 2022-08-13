@@ -23,7 +23,7 @@ spec:
 {{- if .Values.mtls.enabled }}
   clientAuth:
     clientAuthType:       RequireAndVerifyClientCert
-    secretNames:
-      -                   this_will_be_never_exist
+    # secretNames:
+    #   -                   this_will_be_never_exist
 {{- end }}
 

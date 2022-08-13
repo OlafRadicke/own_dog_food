@@ -13,9 +13,5 @@
         namespace:              default
       spec:
         clientAuth:
-          secretNames:
-                                - this_will_be_never_exist
           clientAuthType:       RequireAndVerifyClientCert
-
-
   loop:      "{{ mtls_secreat_namespaces }}"
