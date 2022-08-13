@@ -24,6 +24,6 @@ spec:
   clientAuth:
     clientAuthType:       RequireAndVerifyClientCert
     secretNames:
-      -                   - this_will_be_never_exist
+      -                   this_will_be_never_exist
 {{- end }}
 
