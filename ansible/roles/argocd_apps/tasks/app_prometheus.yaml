@@ -183,41 +183,41 @@
 
 
 
-# - name: add ArgoCD app Prometheus routing helm chart
-#   kubernetes.core.k8s:
-#     kubeconfig:                 "{{ global_kubeconfig }}"
-#     state:                      "{{ argocd_app_prometheus_state }}"
-#     namespace:                  "{{ argocd_namespace }}"
-#     definition:
-#       apiVersion:               argoproj.io/v1alpha1
-#       kind:                     Application
-#       metadata:
-#         name:                   prometheus-routes
-#         namespace:              "{{ argocd_namespace }}"
-#       spec:
-#         project:                default
-#         syncPolicy:
-#           automated:
-#             prune:              true
-#           syncOptions:
-#           -                     PruneLast=true
-#           -                     Replace=true
-#         destination:
-#           server:               "https://kubernetes.default.svc"
-#           namespace:            monitoring
-#         source:
-#           chart:                tls_routing
-#           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-#           targetRevision:       0.1.3
-#           helm:
-#             values: |
-#                                 app:
-#                                   name: prometheus
-#                                   fqdn: prometheus.olaf-radicke.de
-#                                   service: prometheus-main-server
-#                                   service_port: 80
-#                                 mtls:
-#                                   enabled: true
-#                                   secretnames: mtls-ca
+- name: add ArgoCD app Prometheus routing helm chart
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_app_prometheus_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   prometheus-routes
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        destination:
+          server:               "https://kubernetes.default.svc"
+          namespace:            monitoring
+        source:
+          chart:                tls_routing
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.2.0
+          helm:
+            values: |
+                                app:
+                                  name: prometheus
+                                  fqdn: prometheus.olaf-radicke.de
+                                  service: prometheus-main-server
+                                  service_port: 80
+                                mtls:
+                                  enabled: true
+                                  secretnames: mtls-ca
 
 

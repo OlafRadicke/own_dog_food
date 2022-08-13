@@ -1,0 +1,15 @@
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     TLSOption
+metadata:
+  name:                   default
+  namespace:              {{ .Release.Namespace }}
+spec:
+{{- if .Values.mtls.enabled }}
+  clientAuth:
+    clientAuthType:       RequireAndVerifyClientCert
+    secretNames:
+      -                   - this_will_be_never_exist
+{{- end }}
+

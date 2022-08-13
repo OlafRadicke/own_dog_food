@@ -18,6 +18,7 @@ all:
       refresh_client_certificate: false
       k3s_acme_tier:              "production"
       namespaces:
+        -                         "default"
         -                         "live"
         -                         "argocd"
         -                         "monitoring"

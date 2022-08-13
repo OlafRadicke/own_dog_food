@@ -1,6 +1,5 @@
 ---
 
-
 - name:                         add test TIF helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
@@ -26,7 +25,7 @@
         source:
           chart:                the_independent_friend_de
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.1.1
+          targetRevision:       0.2.0
           helm:
             values: |
                                 app:

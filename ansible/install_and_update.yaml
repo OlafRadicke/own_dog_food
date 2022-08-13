@@ -10,4 +10,4 @@
     - k3s_deployment
     # - argocd
     - argocd_apps
-    # - k3s_mtls
+    - k3s_mtls

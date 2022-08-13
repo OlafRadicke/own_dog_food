@@ -1,7 +1,7 @@
 ---
 
 
-- name: create mtls-intermediate-ca
+- name:           create mtls-intermediate-ca
   ansible.builtin.shell: |
                   step  certificate create                      \
                   "mTLS Intermediate CA"                        \
@@ -22,7 +22,7 @@
 
 
 
-- name: check mtls-intermediate-ca.crt
+- name:           check mtls-intermediate-ca.crt
   ansible.builtin.shell: |
                   step certificate inspect --short {{ k3s_mtls_dir }}/mtls-intermediate-ca.crt
   register:       shell_result

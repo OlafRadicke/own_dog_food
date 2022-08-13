@@ -1,16 +1,19 @@
 ---
 
-- name: Setup step
-  include_tasks: install_step.yaml
+- name:           Setup step
+  include_tasks:  install_step.yaml
 
-- name: Setup root ca for mTLS
-  include_tasks: create_root_ca.yaml
+- name:           Setup root ca for mTLS
+  include_tasks:  create_root_ca.yaml
 
-- name: Setup intermediate ca for mTLS
-  include_tasks: create_intermediate_ca.yaml
+- name:           Setup intermediate ca for mTLS
+  include_tasks:  create_intermediate_ca.yaml
 
-- name: Setup client cert for mTLS
-  include_tasks: create_client_cert.yaml
+- name:           Setup client cert for mTLS
+  include_tasks:  create_client_cert.yaml
 
-- name: Setup secret for mTLS
-  include_tasks: secret_for_mtlsl.yaml
+- name:           Setup secret for mTLS
+  include_tasks:  secret_for_mtlsl.yaml
+
+# - name:           Setup default of tls options
+#   include_tasks:  set_default_of_tls_options.yaml
