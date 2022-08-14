@@ -3,9 +3,9 @@ entries:
   tekton:
   - apiVersion: v2
     appVersion: 0.37.2
-    created: "2022-08-14T12:55:11.567159271+02:00"
+    created: "2022-08-14T13:09:07.631010355+02:00"
     description: A Helm chart for Kubernete
-    digest: 8f37a393097c26109e0fee58b32abc3a900b098f3abfcc14d88423502c0cf0be
+    digest: 33d9da4bc8a7ccb64e286533623bc55a34d1d6f875e1b60711798211b653f73a
     name: tekton
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.37.2-latest
-    created: "2022-08-14T12:55:11.565120865+02:00"
+    created: "2022-08-14T13:09:07.629079532+02:00"
     description: A Helm chart for Kubernetes
     digest: e5fcd2b05a21aeb431ba745349749c62a6906133aa43ffa7683b21b132416991
     name: tekton
@@ -23,7 +23,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.37.2
-    created: "2022-08-14T12:55:11.562119653+02:00"
+    created: "2022-08-14T13:09:07.627274766+02:00"
     description: A Helm chart for Kubernetes
     digest: 6d940f10a17b7848ab21626976313a5af6efe3a992c23a50684973a48b3ab4b1
     name: tekton
@@ -34,7 +34,17 @@ entries:
   tekton-ci-cd:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-08-14T12:55:11.576886571+02:00"
+    created: "2022-08-14T13:09:07.638005073+02:00"
+    description: Automatisation of ci/cd tasks
+    digest: 0088a8600a8f0a61c46d922cc3af1d591b5ecd74721e95f0b125c33da2ba6b4b
+    name: tekton-ci-cd
+    type: application
+    urls:
+    - https://olafradicke.github.io/own_dog_food/helm/charts/tekton-ci-cd-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-08-14T13:09:07.636563071+02:00"
     description: Automatisation of ci/cd tasks
     digest: 176e4fd3ac575c5835fb6594931fe0a65545b777f3775a963a2dc96c713af7f7
     name: tekton-ci-cd
@@ -44,7 +54,7 @@ entries:
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-08-14T12:55:11.574183619+02:00"
+    created: "2022-08-14T13:09:07.635125973+02:00"
     description: Automatisation of ci/cd tasks
     digest: 2f9f3d1f3a4d62b0ffb4f56f9f16607abf9cfe25227fbb5889d080dc352a5d22
     name: tekton-ci-cd
@@ -54,7 +64,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-08-14T12:55:11.571634335+02:00"
+    created: "2022-08-14T13:09:07.633700251+02:00"
     description: Automatisation of ci/cd tasks
     digest: 75ca0ba61b1e9459cf470765b591c737dac2729dfedf189b82960471ee7d8f7d
     name: tekton-ci-cd
@@ -64,7 +74,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-08-14T12:55:11.569348913+02:00"
+    created: "2022-08-14T13:09:07.632333755+02:00"
     description: Automatisation of ci/cd tasks
     digest: 2533a86043f841108a8e711cad68e8390380c4f3b0c130ee3122a72dbb99714a
     name: tekton-ci-cd
@@ -75,9 +85,9 @@ entries:
   tekton_dashboard_release_readonly:
   - apiVersion: v2
     appVersion: 0.28.0
-    created: "2022-08-14T12:55:11.580492289+02:00"
+    created: "2022-08-14T13:09:07.643497483+02:00"
     description: A dashbord for Tekton
-    digest: 115d4e4e6ac4bc7cfec0d09f1a0ac6015c01f1565fff21e2b5913624029d2472
+    digest: 784303a8c1ab2e7e730d182489fdfc7d945b45f4f191d3092ccf732d1ea63b5c
     name: tekton_dashboard_release_readonly
     type: application
     urls:
@@ -85,7 +95,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.28.0
-    created: "2022-08-14T12:55:11.57968221+02:00"
+    created: "2022-08-14T13:09:07.641473787+02:00"
     description: A dashbord for Tekton
     digest: e4619df55538c62ab0ea4359cb672134f823d9eb0c3d05639e25c59bfd79e84b
     name: tekton_dashboard_release_readonly
@@ -95,7 +105,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.28.0
-    created: "2022-08-14T12:55:11.578753489+02:00"
+    created: "2022-08-14T13:09:07.640061498+02:00"
     description: A dashbord for Tekton
     digest: aa69c9694665ac55397c2cecf0fc363fc82a9e590f7d6277aec9fc8d7a53e3cd
     name: tekton_dashboard_release_readonly
@@ -105,7 +115,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.28.0
-    created: "2022-08-14T12:55:11.577884126+02:00"
+    created: "2022-08-14T13:09:07.638731654+02:00"
     description: A Helm chart for Kubernetes
     digest: 3b19255e3acdd9444af51d6cd57726396b59413c03b8fadd9d2a237338c8c55f
     name: tekton_dashboard_release_readonly
@@ -116,9 +126,9 @@ entries:
   tekton_task_git-clone:
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2022-08-14T12:55:11.582098396+02:00"
+    created: "2022-08-14T13:09:07.645045727+02:00"
     description: 'A Helm chart for installing Tekton task git-clone See: https://hub.tekton.dev/tekton/task/git-clone '
-    digest: 505b9320e54c0b9f709d684038e5a1f0bf5e0c8a5a31fb28aace082b7a959d45
+    digest: 2057d3476096967317de734236619c2397e9df43b50e363f63b25b2629c8d471
     name: tekton_task_git-clone
     type: application
     urls:
@@ -127,9 +137,9 @@ entries:
   the_independent_friend_de:
   - apiVersion: v2
     appVersion: 4.4.3
-    created: "2022-08-14T12:55:11.583623872+02:00"
+    created: "2022-08-14T13:09:07.646844094+02:00"
     description: Install the website the-independent-friend.de
-    digest: c02174f71f6096d8697d096b4cb53e63c6e827a7953b5315e4dd7458dbf6ca34
+    digest: 28fa15e631b9d849d5f223d6965a7c32ddfeba63aee84e604c9d211595e1ce01
     name: the_independent_friend_de
     type: application
     urls:
@@ -137,7 +147,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 4.4.2
-    created: "2022-08-14T12:55:11.582865649+02:00"
+    created: "2022-08-14T13:09:07.645800196+02:00"
     description: Install the website the-independent-friend.de
     digest: 28aa247a3864bc8367790d3400c6371f20ef6c0519147919b1b3ac2b27ae6fd6
     name: the_independent_friend_de
@@ -148,9 +158,9 @@ entries:
   tls_routing:
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.593853149+02:00"
+    created: "2022-08-14T13:09:07.653521403+02:00"
     description: A Helm chart for Kubernetes
-    digest: 43f5f17abbf4456c3955f6f2d57fe4043396a1cff1db79015a7abcc61e815e3c
+    digest: 4c7362527cda3b45624fa5f24fc8515e90f44f6a8dcc73bb332a87e03e276d4a
     name: tls_routing
     type: application
     urls:
@@ -158,7 +168,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.592985888+02:00"
+    created: "2022-08-14T13:09:07.65277775+02:00"
     description: A Helm chart for Kubernetes
     digest: 475dfd6bf03ede1c3c7b8f634a96c8790a7de5a84ca906ee159ab88c34ba07cd
     name: tls_routing
@@ -168,7 +178,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.592148191+02:00"
+    created: "2022-08-14T13:09:07.652070218+02:00"
     description: A Helm chart for Kubernetes
     digest: 86b8b6476b0db9d8514514d098abb73fd713f67dc5e50c446640d8a1dce74f41
     name: tls_routing
@@ -178,7 +188,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.590183042+02:00"
+    created: "2022-08-14T13:09:07.651266424+02:00"
     description: A Helm chart for Kubernetes
     digest: 9b1933761b4f805096f3cd070f106ad15a3b10a11660ce49d74b4f7a4e009f37
     name: tls_routing
@@ -188,7 +198,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.588577322+02:00"
+    created: "2022-08-14T13:09:07.65050754+02:00"
     description: A Helm chart for Kubernetes
     digest: 0889aa464a221cf8b56975b97fe19e40ccd551e48772b4fdeb0580ff48ab13fa
     name: tls_routing
@@ -198,7 +208,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.586504952+02:00"
+    created: "2022-08-14T13:09:07.649786583+02:00"
     description: A Helm chart for Kubernetes
     digest: caf02be4fd5e021fe02d34248c8770fc0ba3543de6c9d02b1aee0296316b8008
     name: tls_routing
@@ -208,7 +218,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.585604541+02:00"
+    created: "2022-08-14T13:09:07.649048641+02:00"
     description: A Helm chart for Kubernetes
     digest: 94b287dafec8f2d0aa1ef97c06069b6a9020c88f498fa87d028c62fc3610eb1f
     name: tls_routing
@@ -218,7 +228,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-08-14T12:55:11.58472847+02:00"
+    created: "2022-08-14T13:09:07.648045746+02:00"
     description: A Helm chart for Kubernetes
     digest: 4fd4884a39e52c57834a00e142ed352162ef8223e6359d7543def5a37f84907f
     name: tls_routing
@@ -226,4 +236,4 @@ entries:
     urls:
     - https://olafradicke.github.io/own_dog_food/helm/charts/tls_routing-0.1.1.tgz
     version: 0.1.1
-generated: "2022-08-14T12:55:11.558995727+02:00"
+generated: "2022-08-14T13:09:07.625086587+02:00"
