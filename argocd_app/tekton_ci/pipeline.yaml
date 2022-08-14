@@ -38,3 +38,10 @@ spec:
     workspaces:
     - name:         source
       workspace:    shared-data
+  - name:           helm-build
+    runAfter:       ["show-readme"]
+    taskRef:
+      name:         helm-build
+    workspaces:
+    - name:         source
+      workspace:    shared-data

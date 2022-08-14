@@ -1,0 +1,16 @@
+---
+
+apiVersion:     tekton.dev/v1beta1
+kind:           Task
+metadata:
+  namespace:    "tekton-ci-cd"
+  name:         helm-build
+  description:  Build all helm charts.
+spec:
+  workspaces:
+  - name:       source
+  steps:
+  - name:       helm-build-script
+    image:      alpine/helm:latest
+    script:     |
+                sh $(workspaces.source.path)/helm/scrips/build.sh

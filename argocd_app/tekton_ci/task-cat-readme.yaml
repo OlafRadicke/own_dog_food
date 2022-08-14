@@ -16,7 +16,8 @@ spec:
                 #!/usr/bin/env sh
                 cat $(workspaces.source.path)/README.md
                 cat $(workspaces.source.path)/helm/README.md
+                cat $(workspaces.source.path)/helm/scrips/build.sh
   - name:       chart-build
     image:      alpine/helm:latest
     script:     |
-                $(workspaces.source.path)/helm/scrips/build.sh
+                sh $(workspaces.source.path)/helm/scrips/build.sh
