@@ -3,7 +3,7 @@
 apiVersion:         tekton.dev/v1beta1
 kind:               Pipeline
 metadata:
-  namespace:        {{ .Release.Namespace }}
+  namespace:        "tekton-ci-cd"
   name:             clone-read
 spec:
   description:      |

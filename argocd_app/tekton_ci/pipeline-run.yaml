@@ -3,7 +3,7 @@
 apiVersion:               tekton.dev/v1beta1
 kind:                     PipelineRun
 metadata:
-  namespace:              {{ .Release.Namespace }}
+  namespace:              "tekton-ci-cd"
   name:                   clone-read-run
 spec:
   pipelineRef:
