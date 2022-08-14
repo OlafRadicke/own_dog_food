@@ -1,5 +1,33 @@
 ---
 
+# - name:                         add ci/cd jobs
+#   kubernetes.core.k8s:
+#     kubeconfig:                 "{{ global_kubeconfig }}"
+#     state:                      "{{ argocd_app_tekton_state }}"
+#     namespace:                  "{{ argocd_namespace }}"
+#     definition:
+#       apiVersion:               argoproj.io/v1alpha1
+#       kind:                     Application
+#       metadata:
+#         name:                   tekton-ci-cd
+#         namespace:              "{{ argocd_namespace }}"
+#       spec:
+#         project:                default
+#         syncPolicy:
+#           automated:
+#             prune:              true
+#           syncOptions:
+#           -                     PruneLast=true
+#           -                     Replace=true
+#         destination:
+#           server:               https://kubernetes.default.svc
+#           namespace:            "tekton-ci-cd"
+#         source:
+#           chart:                tekton-ci-cd
+#           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+#           targetRevision:       0.0.6
+
+
 - name:                         add ci/cd jobs
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
@@ -9,8 +37,10 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   tekton-ci-cd
+        name:                   tekton-ci
         namespace:              "{{ argocd_namespace }}"
+        # name:                   guestbook
+        # namespace:              argocd
       spec:
         project:                default
         syncPolicy:
@@ -23,6 +53,6 @@
           server:               https://kubernetes.default.svc
           namespace:            "tekton-ci-cd"
         source:
-          chart:                tekton-ci-cd
-          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.0.5
+          repoURL:              https://github.com/OlafRadicke/own_dog_food.git
+          targetRevision:       develop
+          path:                 argocd_app/tekton_ci
