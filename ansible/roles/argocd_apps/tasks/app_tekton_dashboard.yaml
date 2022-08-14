@@ -25,7 +25,7 @@
         source:
           chart:                tekton_dashboard_release_readonly
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.0.1
+          targetRevision:       0.2.0
 
 - name:                         add Tekton dashboard routing
   kubernetes.core.k8s:
@@ -52,7 +52,7 @@
         source:
           chart:                tls_routing
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.2.2
+          targetRevision:       0.3.0
           helm:
             values: |
                                 app:

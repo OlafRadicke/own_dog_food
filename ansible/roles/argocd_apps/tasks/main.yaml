@@ -12,8 +12,11 @@
 - name:           Include Tekon sub task
   include_tasks:  app_tekton.yaml
 
-- name:           Include Tekon sub task
+- name:           Include Tekon dashboard sub task
   include_tasks:  app_tekton_dashboard.yaml
+
+- name:           Include Tekon ci/cd sub task
+  include_tasks:  app_tekton_ci-cd.yaml
 
 - name:           Include TIF life sub task
   include_tasks:  app_tif_live.yaml

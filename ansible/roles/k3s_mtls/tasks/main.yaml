@@ -15,5 +15,3 @@
 - name:           Setup secret for mTLS
   include_tasks:  secret_for_mtlsl.yaml
 
-# - name:           Setup default of tls options
-#   include_tasks:  set_default_of_tls_options.yaml

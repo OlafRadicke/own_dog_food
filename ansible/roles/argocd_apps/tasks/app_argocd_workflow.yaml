@@ -58,7 +58,7 @@
         source:
           chart:                tls_routing
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
-          targetRevision:       0.2.2
+          targetRevision:       0.3.0
           helm:
             values: |
                                 app:
