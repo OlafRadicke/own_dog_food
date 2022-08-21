@@ -77,7 +77,7 @@
           -                     Replace=true
         destination:
           server:               https://kubernetes.default.svc
-          namespace:            tekton-ci-cd
+          namespace:            tekton-pipelines
         source:
           chart:                tekton_trigger
           repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/

@@ -6,6 +6,7 @@ Todos
   - Tekton
     - [Tekton Pipelines](https://tekton.dev/docs/getting-started/tasks/)
     - [Tekton Dashboard](https://tekton.dev/docs/dashboard/install/)
+    - [Trigger](https://www.arthurkoziel.com/tutorial-tekton-triggers-with-github-integration/)
   - [argo-workflows](https://argoproj.github.io/argo-workflows/quick-start/)
   - [concourse](https://concourse-ci.org/)
     - Build and push containerimages
