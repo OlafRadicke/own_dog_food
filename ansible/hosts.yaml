@@ -4,37 +4,44 @@
 all:
   hosts:
     'olaf-radicke-02':
-      global_kubeconfig:          "/etc/rancher/k3s/k3s.yaml"
-      argocd_reset:               false
-      argocd_letsencrypt:         true
-      ansible_host:               92.205.105.117
-      ansible_user:               "oradicke"
-      ansible_become:             yes
-      ansible_python_interpreter: "/usr/bin/python3"
-      k3s_acme_email:             "briefkasten@olaf-radicke.de"
-      k3s_namespace:              "live"
-      # k3s_deployment_state:       "absent"
-      # private_pki_reset:          "yes"
-      refresh_client_certificate: false
-      k3s_acme_tier:              "production"
-      namespaces:
-        -                         "default"
-        -                         "live"
-        -                         "argocd"
-        -                         "monitoring"
-        -                         "tekton-pipelines"
-        -                         "tekton-ci-cd"
-      mtls_secreat_namespaces:
-        -                         "live"
-        -                         "argocd"
-        -                         "monitoring"
-        -                         "tekton-pipelines"
+      ansible_host:                     92.205.105.117
+      ansible_user:                     "oradicke"
+      ansible_become:                   yes
+      ansible_python_interpreter:       "/usr/bin/python3"
+      global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
+      argocd_reset:                     false
+      argocd_letsencrypt:               true
+      k3s_acme_email:                   "briefkasten@olaf-radicke.de"
+      k3s_namespace:                    "live"
+      # k3s_deployment_state:           "absent"
+      # private_pki_reset:              "yes"
+      k3s_refresh_client_certificate:       false
+      k3s_acme_tier:                    "production"
+      k3s_namespaces:
+        -                               "default"
+        -                               "live"
+        -                               "argocd"
+        -                               "monitoring"
+        -                               "tekton-pipelines"
+        -                               "tekton-ci-cd"
+      k3s_mtls_secreat_namespaces:
+        -                               "live"
+        -                               "argocd"
+        -                               "monitoring"
+        -                               "tekton-pipelines"
       k3s_projects:
-        - name:                   "olaf-radicke-de"
-          image:                  "olafradicke/olaf-radicke-de:2.12"
+        - name:                         "olaf-radicke-de"
+          image:                        "olafradicke/olaf-radicke-de:2.12"
       k3s_routes:
-        - match:                  Host(`olaf-radicke.de`)
-          kind:                   Rule
+        - match:                        Host(`olaf-radicke.de`)
+          kind:                         Rule
           services:
-          - name:                 olaf-radicke-de
-            port:                 80
+          - name:                       olaf-radicke-de
+            port:                       80
+      argocd_namespace:                 "argocd"
+      argocd_app_concourse_state:       "absent"
+      argocd_app_prometheus_state:      "present"
+      argocd_app_prometheus_pvc_state:  "absent"
+      argocd_app_tekton_state:          "present"
+      argocd_app_tif_test_state:        "present"
+      argocd_app_argocd_workflow_state: "absent"

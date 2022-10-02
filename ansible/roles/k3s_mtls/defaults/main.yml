@@ -4,5 +4,5 @@ k3s_mtls_step_version:      "0.19.0"
 # k3s_mtls_dir:           /home/{{ ansible_user }}/private_pki/
 k3s_mtls_dir:               "/srv/private_pki"
 private_pki_reset:          "no"
-mtls_secreat_namespaces:    []
-refresh_client_certificate: false
+k3s_mtls_secreat_namespaces:    []
+k3s_refresh_client_certificate: false

@@ -12,5 +12,5 @@
         name:                   "{{ item }}"
         labels:
           name:                 "{{ item }}"
-  loop:                         "{{ namespaces }}"
+  loop:                         "{{ k3s_namespaces }}"
 
