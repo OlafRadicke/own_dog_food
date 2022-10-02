@@ -5,8 +5,8 @@ kind:           Task
 metadata:
   namespace:    "tekton-ci-cd"
   name:         show-readme
-  description:  Read and display README file.
 spec:
+  description:  Read and display README file.
   workspaces:
   - name:       source
   steps:
