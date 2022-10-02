@@ -40,9 +40,9 @@ all:
           - name:                       olaf-radicke-de
             port:                       80
       argocd_namespace:                 "argocd"
-      argocd_app_concourse_state:       "absent"
       argocd_app_prometheus_state:      "present"
-      argocd_app_prometheus_pvc_state:  "absent"
       argocd_app_tekton_state:          "present"
       argocd_app_tif_test_state:        "present"
+      argocd_app_concourse_state:       "absent"
+      argocd_app_prometheus_pvc_state:  "absent"
       argocd_app_argocd_workflow_state: "absent"

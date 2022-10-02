@@ -5,7 +5,7 @@ kind:           Task
 metadata:
   namespace:    "tekton-ci-cd"
   name:         helm-build
-  description:  Build all helm charts.
+  description:  "Build all helm charts"
 spec:
   workspaces:
   - name:       source
