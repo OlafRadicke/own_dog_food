@@ -1,5 +1,10 @@
 ---
 
+- name:           Remove old intermediate certificate
+  ansible.builtin.file:
+    path:         "{{ k3s_mtls_dir }}/mtls-intermediate-ca.crt"
+    state:        absent
+  when:           k3s_refresh_inter_certificate == true
 
 - name:           create mtls-intermediate-ca
   ansible.builtin.shell: |

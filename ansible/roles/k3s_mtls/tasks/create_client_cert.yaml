@@ -7,6 +7,12 @@
   when:           k3s_refresh_client_certificate == true
 
 
+- name:           Remove old browser client certificate
+  ansible.builtin.file:
+    path:         "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
+    state:        absent
+  when:           k3s_refresh_client_certificate == true
+
 - name:           create mtls-client-ca
   ansible.builtin.shell: |
                   step  certificate create                              \
@@ -60,13 +66,20 @@
   args:
     creates:      "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
 
+- name:           Delete the directory for client certificate download
+  ansible.builtin.file:
+    path:         "{{ k3s_download_dir }}"
+    state:        absent
+  delegate_to:    localhost
+  when:           k3s_refresh_client_certificate == true
+
 - name:           create a directory for client certificate download
   ansible.builtin.file:
-    path:         "./downloads"
+    path:         "{{ k3s_download_dir }}"
     state:        directory
   delegate_to:    localhost
 
 - name:           download client certificate
   ansible.builtin.fetch:
     src:          "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
-    dest:         ./downloads/
+    dest:         "{{ k3s_download_dir }}"
