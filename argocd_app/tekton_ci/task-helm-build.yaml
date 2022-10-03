@@ -4,7 +4,7 @@ apiVersion:     tekton.dev/v1beta1
 kind:           Task
 metadata:
   namespace:    "tekton-ci-cd"
-  name:         helm-build
+  name:         task-helm-build
 spec:
   description:  "Build all helm charts"
   workspaces:
