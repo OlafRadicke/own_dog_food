@@ -1,0 +1,26 @@
+# ---
+
+# apiVersion:   triggers.tekton.dev/v1alpha1
+# kind:         TriggerBinding
+# metadata:
+#   name:       github-pr-binding
+# spec:
+#   params:
+#     - name:   gitrepositoryurl
+#       value:  $(body.repository.clone_url)
+#     - name:   gitrevision
+#       value:  $(body.pull_request.head.sha)
+
+
+---
+
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: triggerbinding-cron-binding
+spec:
+  params:
+  - name: gitrevision
+    value: master
+  - name: gitrepositoryurl
+    value: https://github.com/tektoncd/triggers
