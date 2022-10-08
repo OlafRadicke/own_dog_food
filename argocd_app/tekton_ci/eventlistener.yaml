@@ -67,6 +67,13 @@ spec:
   triggers:
     - name: cron-trig
       bindings:
-      - ref: triggerbinding-cron-binding
+      # - ref: triggerbinding-cron-binding
+      - name: message-binding
+        spec:
+          params:
+          - name: gitrevision
+            value: master
+          - name: gitrepositoryurl
+            value: https://github.com/tektoncd/triggers
       template:
         ref: triggertemplate-pipeline-template
