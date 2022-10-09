@@ -1,0 +1,14 @@
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rolebinding-triggers-eventlistener
+subjects:
+- kind: ServiceAccount
+  name: sa-tekton-triggers-example
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: role-tekton-triggers-example
