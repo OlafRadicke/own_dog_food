@@ -18,10 +18,10 @@ spec:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
     metadata:
-      generateName: simple-pipeline-run-
+      generateName: run-pipeline-simple-
     spec:
       pipelineRef:
-        name: simple-pipeline
+        name: pipeline-simple
       params:
       - name: message
         value: $(tt.params.message)
