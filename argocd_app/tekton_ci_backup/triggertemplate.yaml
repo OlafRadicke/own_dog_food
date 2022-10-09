@@ -1,0 +1,69 @@
+# ---
+
+# apiVersion: triggers.tekton.dev/v1alpha1
+# kind: TriggerTemplate
+# metadata:
+#   name: github-pr-pipeline-template
+# spec:
+#   params:
+#     - name: gitrevision
+#       description: The git revision (SHA)
+#       default: master
+#     - name: gitrepositoryurl
+#       description: The git repository url ("https://github.com/foo/bar.git")
+#   resourcetemplates:
+#     - apiVersion: tekton.dev/v1beta1
+#       kind: PipelineRun
+#       metadata:
+#         generateName: github-pr-pipeline-run-
+#       spec:
+#         pipelineRef:
+#           name: github-pr-pipeline
+#         resources:
+#           - name: source
+#             resourceSpec:
+#               type: git
+#               params:
+#                 - name: revision
+#                   value: $(tt.params.gitrevision)
+#                 - name: url
+#                   value: $(tt.params.gitrepositoryurl)
+
+---
+
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: triggertemplate-pipeline-template
+spec:
+  params:
+  - name: gitrevision
+    description: The git revision
+    default: main
+  - name: gitrepositoryurl
+    description: The git repository url
+  - name: message
+    description: The message to print
+    default: This is the default message
+  - name: contenttype
+    description: The Content-Type of the event
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      generateName: simple-pipeline-run-
+    spec:
+      pipelineRef:
+        name: simple-pipeline
+      params:
+      - name: message
+        value: $(tt.params.message)
+      - name: contenttype
+        value: $(tt.params.contenttype)
+      - name: git-revision
+        value: $(tt.params.gitrevision)
+      - name: git-url
+        value: $(tt.params.gitrepositoryurl)
+      workspaces:
+      - name: git-source
+        emptyDir: {}
