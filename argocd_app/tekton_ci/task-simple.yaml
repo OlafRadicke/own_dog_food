@@ -1,0 +1,19 @@
+
+
+
+
+apiVersion:     tekton.dev/v1beta1
+kind:           Task
+metadata:
+  namespace:    "tekton-ci-cd"
+  name:         task-simple
+spec:
+  description:  Say hello.
+  workspaces:
+  - name:       source
+  steps:
+  - name:       step-echo
+    image:      alpine:latest
+    script:     |
+                #!/usr/bin/env sh
+                echo HALLO $(params.message) $(tt.params.message)
