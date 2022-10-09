@@ -7,7 +7,7 @@ metadata:
   name: rolebinding-triggers-eventlistener
 subjects:
 - kind: ServiceAccount
-  name: serviceaccount-tekton-triggers
+  name: tekton-triggers-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
