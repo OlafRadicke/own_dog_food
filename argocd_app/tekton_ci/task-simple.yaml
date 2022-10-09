@@ -10,16 +10,16 @@ spec:
   description:  Say hello.
   params:
   - name: message
-    value: $(tt.params.message)
+    type: string
   - name: contenttype
-    value: $(tt.params.contenttype)
+    type: string
   - name: git-revision
-    value: $(tt.params.gitrevision)
+    type: string
   - name: git-url
-    value: $(tt.params.gitrepositoryurl)
+    type: string
   steps:
   - name:       step-echo
     image:      alpine:latest
     script:     |
                 #!/usr/bin/env sh
-                echo HALLO $(params.message) $(tt.params.message)
+                echo HALLO $(params.message)
