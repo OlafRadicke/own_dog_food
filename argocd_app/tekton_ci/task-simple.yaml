@@ -5,12 +5,18 @@
 apiVersion:     tekton.dev/v1beta1
 kind:           Task
 metadata:
-  namespace:    "tekton-ci-cd"
   name:         task-simple
 spec:
   description:  Say hello.
-  workspaces:
-  - name:       source
+  params:
+  - name: message
+    value: $(tt.params.message)
+  - name: contenttype
+    value: $(tt.params.contenttype)
+  - name: git-revision
+    value: $(tt.params.gitrevision)
+  - name: git-url
+    value: $(tt.params.gitrepositoryurl)
   steps:
   - name:       step-echo
     image:      alpine:latest
