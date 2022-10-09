@@ -1,5 +1,8 @@
 ---
 
+- name:           Include namespaces
+  include_tasks:  namespaces.yaml
+
 - name:           Include argocd workflow support
   include_tasks:  app_argocd_workflow.yaml
 

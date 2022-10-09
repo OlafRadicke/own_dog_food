@@ -1,5 +1,5 @@
 ---
-
+global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
 argocd_namespace:                 "argocd"
 argocd_app_concourse_state:       "absent"
 argocd_app_prometheus_state:      "present"

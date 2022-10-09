@@ -63,7 +63,7 @@ kind: EventListener
 metadata:
   name: eventlistener-cron-listener
 spec:
-  serviceAccountName: tekton-triggers-example-sa
+  serviceAccountName: sa-tekton-triggers-example
   triggers:
     - name: cron-trig
       bindings:
