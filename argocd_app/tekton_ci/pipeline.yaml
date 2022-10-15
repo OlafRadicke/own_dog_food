@@ -17,6 +17,6 @@ spec:
         name: task-simple
       params:
       - name: firstname
-        value: $(tt.params.message)
+        value: $(tt.params.firstname)
       - name: lastname
-        value: $(tt.params.contenttype)
+        value: $(tt.params.lastname)
