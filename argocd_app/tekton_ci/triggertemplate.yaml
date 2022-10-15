@@ -19,9 +19,9 @@ spec:
         name: pipeline-simple
       params:
       - name: firstname
-        value: $(tt.params.firstname)
+        value: $(params.firstname)
       - name: lastname
-        value: $(tt.params.lastname)
+        value: $(params.lastname)
       workspaces:
       - name: git-source
         emptyDir: {}
