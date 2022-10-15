@@ -7,6 +7,6 @@ spec:
   triggers:
     - name: cron-trig
       bindings:
-      - ref: cron-binding
+      - ref: triggerbinding-hello
       template:
         ref: triggertemplate-simple
