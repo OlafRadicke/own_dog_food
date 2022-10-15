@@ -20,5 +20,5 @@ spec:
                 echo HALLO $(params.firstname) $(params.lastname)
                 sleep 120
 
-  debug:
-    breakpoint: ["onFailure"]
+  # debug:
+  #   breakpoint: ["onFailure"]
