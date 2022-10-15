@@ -18,6 +18,7 @@ spec:
     args:       ["sleep", "600"]
     script:     |
                 #!/usr/bin/env sh
+                sleep 120
                 echo HALLO $(params.firstname) $(params.lastname)
                 sleep 120
 
