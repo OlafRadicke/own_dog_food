@@ -6,8 +6,8 @@ kind:           Task
 metadata:
   name:         task-simple
 spec:
-  # debug:
-  #   breakpoint: ["onFailure"]
+  debug:
+    breakpoint: ["onFailure"]
   description:  Say hello.
   params:
     - name:     firstname
