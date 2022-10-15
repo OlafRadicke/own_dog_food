@@ -8,10 +8,10 @@ metadata:
 spec:
   description:  Say hello.
   params:
-  - name: firstname
-    type: string
-  - name: lastname
-    type: string
+    - name:     firstname
+      type:     string
+    - name:     lastname
+      type:     string
   steps:
   - name:       step-echo
     image:      alpine:latest
@@ -19,3 +19,6 @@ spec:
                 #!/usr/bin/env sh
                 echo HALLO $(params.firstname) $(params.lastname)
                 sleep 120
+
+  debug:
+    breakpoint: ["onFailure"]
