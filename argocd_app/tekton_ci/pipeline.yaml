@@ -1,0 +1,22 @@
+---
+
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-simple
+spec:
+  params:
+    - name: firstname
+      description: The first name
+      default: peter
+    - name: lastname
+      description: The last name
+  tasks:
+    - name: run-task-simple
+      taskRef:
+        name: task-simple
+      params:
+      - name: firstname
+        value: $(tt.params.message)
+      - name: lastname
+        value: $(tt.params.contenttype)

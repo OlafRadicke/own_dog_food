@@ -1,5 +1,4 @@
-
-
+---
 
 
 apiVersion:     tekton.dev/v1beta1
@@ -9,17 +8,13 @@ metadata:
 spec:
   description:  Say hello.
   params:
-  - name: message
+  - name: firstname
     type: string
-  - name: contenttype
-    type: string
-  - name: git-revision
-    type: string
-  - name: git-url
+  - name: lastname
     type: string
   steps:
   - name:       step-echo
     image:      alpine:latest
     script:     |
                 #!/usr/bin/env sh
-                echo HALLO $(params.message)
+                echo HALLO $(params.firstname) $(params.lastname)

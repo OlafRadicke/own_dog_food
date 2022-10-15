@@ -9,4 +9,4 @@ spec:
       bindings:
       - ref: cron-binding
       template:
-        ref: pipeline-template
+        ref: triggertemplate-simple
