@@ -15,7 +15,7 @@ spec:
   steps:
   - name:       step-echo
     image:      alpine:latest
-    args:       ["sleep", "600"]
+    # args:       ["sleep", "600"]
     script:     |
                 #!/usr/bin/env sh
                 sleep 120
