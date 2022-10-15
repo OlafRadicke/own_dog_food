@@ -18,8 +18,10 @@ spec:
   - name:       step-echo
     image:      alpine:latest
     # args:       ["sleep", "600"]
-    script:     |
-                echo HALLO $(params.firstname) $(params.lastname)
+    command:    ["echo"]
+      args:     ["HALLO $(params.firstname) $(params.lastname)"]
+    # script:     |
+    #             echo HALLO $(params.firstname) $(params.lastname)
     # script:     |
     #             #!/usr/bin/env sh
     #             echo HALLO $(params.firstname) $(params.lastname)
