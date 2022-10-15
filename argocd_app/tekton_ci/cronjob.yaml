@@ -12,5 +12,4 @@ spec:
           - name: hello
             image: curlimages/curl
             args: ["curl", "-X", "POST", "--data", "{}", "el-eventlistener-hello:8080"]
-            # args: ["curl", "-X", "POST", "--data", "{}", "el-cron-listener.default.svc.cluster.local:8080"]
           restartPolicy: Never

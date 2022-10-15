@@ -18,3 +18,4 @@ spec:
     script:     |
                 #!/usr/bin/env sh
                 echo HALLO $(params.firstname) $(params.lastname)
+                sleep 120
