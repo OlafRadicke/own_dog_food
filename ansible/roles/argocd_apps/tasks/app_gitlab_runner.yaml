@@ -21,7 +21,7 @@
           -                     Replace=true
         destination:
           server:               https://kubernetes.default.svc
-          namespace:            tekton-pipelines
+          namespace:            argocd-apps
         source:
           chart:                gitlab-runner
           repoURL:              https://charts.gitlab.io
