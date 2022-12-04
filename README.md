@@ -24,7 +24,10 @@ Run setup
 Enter:
 
 ```
-ansible-playbook -i ./ansible/hosts.yaml ./ansible/install_and_update.yaml
+ansible-playbook \
+  -i ./ansible/hosts.yaml \
+  --vault-password-file ~/.ssh/ansible_vault \
+  ./ansible/install_and_update.yaml --check
 ```
 
 Change workflow
@@ -34,10 +37,12 @@ Change workflow
 - Rebuild chart and reposytory (see [helm/README.md](helm/README.md))
 - Commit changes (include add new helm tgz file)
 - Push changes
-- Change playbook 
+- Change playbook
   - Change helm chart version (if necessary )
   - Change helm values (if necessary )
 - Run playbook
+
+***Note:*** the helm chart repository is maped onliy on the develop branch!
 
 K3s / podman topics
 -------------------

@@ -7,4 +7,4 @@ argocd_app_prometheus_pvc_state:  "absent"
 argocd_app_tekton_state:          "present"
 argocd_app_tif_test_state:        "present"
 argocd_app_argocd_workflow_state: "absent"
-
+argocd_app_gitlab_runner_state:   "present"

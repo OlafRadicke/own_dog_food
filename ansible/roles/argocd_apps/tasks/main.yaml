@@ -26,3 +26,6 @@
 
 - name:           Include TIF test sub task
   include_tasks:  app_tif_test.yaml
+
+- name:           Include gitlab runner sub task
+  include_tasks:  app_gitlab_runner.yaml
