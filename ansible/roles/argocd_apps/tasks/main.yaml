@@ -31,4 +31,4 @@
   include_tasks:  app_gitlab_runner.yaml
 
 - name:           Include cronjob sub task
-  include_tasks:  app_custom_cronjob.yaml
+  include_tasks:  app_custom-cronjob.yaml

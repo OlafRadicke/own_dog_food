@@ -34,7 +34,7 @@
                                 image:
                                   repository: "olafradicke/the-independent-friend-de"
                                   pullPolicy: IfNotPresent
-                                  tag: "4.5.6"
+                                  tag: "4.5.7"
 
 
 - name:                         add live TIF routing
