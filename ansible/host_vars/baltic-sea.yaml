@@ -14,7 +14,7 @@ global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
 
 argocd_fqdn_match:                "Host(`argocd-mngt.olaf-radicke.de`)"
 argocd_mtls:                      true
-argocd_letsencrypt:               true
+argocd_letsencrypt:               false
 k3s_mtls_secreat_namespaces:
   -                               "argocd-apps"
   -                               "argocd"

@@ -8,3 +8,5 @@ ansible_python_interpreter:       "/usr/bin/python3"
 # ---- ARGOCD ----
 
 argocd_fqdn_match:                "Host(`argocd.olaf-radicke.de`)"
+argocd_mtls:                      true
+argocd_letsencrypt:               false
