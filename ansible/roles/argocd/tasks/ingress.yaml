@@ -90,7 +90,7 @@
       apiVersion:               traefik.containo.us/v1alpha1
       kind:                     IngressRoute
       metadata:
-        name:                   "mtls-routes-{{ argocd_app_name }}"
+        name:                   "https-{{ argocd_app_name }}"
         namespace:              "{{ argocd_namespace }}"
       spec:
         entryPoints:
