@@ -13,5 +13,5 @@
   include_tasks:  create_client_cert.yaml
 
 - name:           Setup secret for mTLS
-  include_tasks:  secret_for_mtlsl.yaml
+  include_tasks:  namespace_loop.yaml
 

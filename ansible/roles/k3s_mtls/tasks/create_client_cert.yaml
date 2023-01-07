@@ -16,7 +16,7 @@
 - name:           create mtls-client-ca
   ansible.builtin.shell: |
                   step  certificate create                              \
-                  "mTLS client certificate"                             \
+                  "{{ inventory_hostname_short }} mTLS client certificate" \
                   {{ k3s_mtls_dir }}/mtls-client-ca.crt                 \
                   {{ k3s_mtls_dir }}/mtls-client-ca.key                 \
                   --no-password                                         \
@@ -72,12 +72,6 @@
     state:        absent
   delegate_to:    localhost
   when:           k3s_refresh_client_certificate == true
-
-- name:           create a directory for client certificate download
-  ansible.builtin.file:
-    path:         "{{ k3s_download_dir }}"
-    state:        directory
-  delegate_to:    localhost
 
 - name:           download client certificate
   ansible.builtin.fetch:

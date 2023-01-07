@@ -5,7 +5,7 @@
   ansible.builtin.file:
     path:         "{{ k3s_mtls_dir }}"
     state:        absent
-  when:           private_pki_reset == "yes"
+  when:           k3s_mtls_private_pki_reset == "yes"
 
 - name:           create a directory for private pki ca
   ansible.builtin.file:

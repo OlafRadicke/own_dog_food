@@ -10,7 +10,7 @@ argocd_letsencrypt:               true
 k3s_acme_email:                   "briefkasten@olaf-radicke.de"
 k3s_namespace:                    "live"
 # k3s_deployment_state:           "absent"
-# private_pki_reset:              "yes"
+# k3s_mtls_private_pki_reset:              "yes"
 k3s_refresh_client_certificate:   false
 k3s_refresh_inter_certificate:    false
 k3s_acme_tier:                    "production"

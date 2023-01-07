@@ -3,9 +3,8 @@
 - name: Setup secret for image pull
   include_tasks: install_k3s.yaml
 
-- name: Setup secret for image pull
-  include_tasks: secret_for_image_pull.yaml
+# - name: Setup secret for image pull
+#   include_tasks: secret_for_image_pull.yaml
 
 
 
-                

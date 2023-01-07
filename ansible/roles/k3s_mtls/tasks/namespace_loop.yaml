@@ -1,0 +1,8 @@
+---
+
+- name: Loop over namespaces
+  include_tasks:  add_secret_for_mtls.yaml
+  loop:           "{{ k3s_mtls_secreat_namespaces }}"
+
+
+

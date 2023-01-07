@@ -1,0 +1,22 @@
+---
+
+ansible_host:                     92.205.23.191
+ansible_user:                     "oradicke"
+ansible_become:                   yes
+ansible_python_interpreter:       "/usr/bin/python3"
+
+# ---- GLOBAL ----
+
+global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
+
+
+# ---- ARGOCD ----
+
+argocd_fqdn_match:                "Host(`argocd-mngt.olaf-radicke.de`)"
+argocd_mtls:                      true
+argocd_letsencrypt:               true
+k3s_mtls_secreat_namespaces:
+  -                               "argocd-apps"
+  -                               "argocd"
+
+
