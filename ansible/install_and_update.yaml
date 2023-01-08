@@ -16,8 +16,9 @@
     # - os_configs
     # - k3s_install
     # - k8s_ansible_requirements
-    - argocd
-    # - k3s_mtls
+    # - argocd
+    - prometheus
+    - k3s_mtls
 
 # - name: Run all steps
 #   hosts: olaf-radicke-02

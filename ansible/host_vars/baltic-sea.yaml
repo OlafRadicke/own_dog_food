@@ -8,15 +8,22 @@ ansible_python_interpreter:       "/usr/bin/python3"
 # ---- GLOBAL ----
 
 global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
-
+# debug_mode:                       True
 
 # ---- ARGOCD ----
 
+argocd_namespace:                 "argocd"
 argocd_fqdn_match:                "Host(`argocd-mngt.olaf-radicke.de`)"
 argocd_mtls:                      true
 argocd_letsencrypt:               false
 k3s_mtls_secreat_namespaces:
   -                               "argocd-apps"
   -                               "argocd"
+  -                               "monitoring"
 
+#  ---- PROMETHEUS ----
 
+prometheus_namespace:             "monitoring"
+prometheus_state:                 "present" #"absent" #
+prometheus_pvc_state:             "present"
+prometheus_fqdn:                  "prometheus.olaf-radicke.de"
