@@ -17,10 +17,10 @@
       apiVersion: v1
       kind: PersistentVolume
       metadata:
-        name: "prometheus-main-pv-{{ item }}"
+        name: "{{ prometheus_pvc_prefix }}-pv-{{ item }}"
         namespace: "{{ prometheus_namespace }}"
         labels:
-          app: prometheus-main-pv
+          app: prometheus-main
         finalizers:
         - kubernetes.io/pv-protection
       spec:
@@ -29,10 +29,11 @@
         volumeMode: Filesystem
         accessModes:
         - ReadWriteOnce
-        persistentVolumeReclaimPolicy: Delete
+        persistentVolumeReclaimPolicy: Retain
+        # Delete
         storageClassName: local-path
         local:
-          path: "/{{ prometheus_pvc_dir }}/prometheus-main-pv-{{ item }}"
+          path: "/{{ prometheus_pvc_dir }}/{{ prometheus_pvc_prefix }}-pv-{{ item }}"
         # hostPath:
         #   path: /tmp/prometheus-main-pv
         #   type: DirectoryOrCreate
@@ -49,7 +50,7 @@
     - server
     - pushgateway
 
-- name: "Create PersistentVolumeClaim {{ item }}"
+- name: "Create PersistentVolumeClaim"
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ prometheus_pvc_state }}"
@@ -65,7 +66,7 @@
           chart: prometheus-15.9.1
           component: server
           release: prometheus-main
-        name: "prometheus-{{ item }}"
+        name: "{{ prometheus_pvc_prefix }}-pvc-{{ item }}"
         namespace: "{{ prometheus_namespace }}"
       spec:
         accessModes:
@@ -74,7 +75,7 @@
           requests:
             storage: 1Gi
         storageClassName: local-path
-        volumeName: "prometheus-main-pv-{{ item }}"
+        volumeName: "{{ prometheus_pvc_prefix }}-pv-{{ item }}"
         volumeMode: Filesystem
         selector:
           matchLabels:
@@ -83,3 +84,4 @@
     - alertmanager
     - server
     - pushgateway
+

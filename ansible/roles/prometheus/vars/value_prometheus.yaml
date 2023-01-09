@@ -216,7 +216,7 @@ alertmanager:
     ## alertmanager data Persistent Volume existing claim name
     ## Requires alertmanager.persistentVolume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
-    existingClaim: "{{ prometheus_pvc_name }}-alertmanager"
+    existingClaim: "{{ prometheus_pvc_prefix }}-alertmanager"
 
     ## alertmanager data Persistent Volume mount root path
     ##
@@ -926,7 +926,7 @@ server:
     ## Prometheus server data Persistent Volume existing claim name
     ## Requires server.persistentVolume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
-    existingClaim: "{{ prometheus_pvc_name }}-server"
+    existingClaim: "{{ prometheus_pvc_prefix }}-server"
 
     ## Prometheus server data Persistent Volume mount root path
     ##
@@ -1373,7 +1373,7 @@ pushgateway:
     ## pushgateway data Persistent Volume existing claim name
     ## Requires pushgateway.persistentVolume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
-    existingClaim: "{{ prometheus_pvc_name }}-pushgateway"
+    existingClaim: "{{ prometheus_pvc_prefix }}-pushgateway"
 
     ## pushgateway data Persistent Volume mount root path
     ##
