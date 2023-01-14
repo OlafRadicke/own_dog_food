@@ -70,12 +70,12 @@
   args:
     creates:      "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
 
-- name:           Delete the directory for client certificate download
-  ansible.builtin.file:
-    path:         "{{ k3s_download_dir }}"
-    state:        absent
-  delegate_to:    localhost
-  when:           k3s_refresh_client_certificate == true
+# - name:           Delete the directory for client certificate download
+#   ansible.builtin.file:
+#     path:         "{{ k3s_download_dir }}"
+#     state:        absent
+#   delegate_to:    localhost
+#   when:           k3s_refresh_client_certificate == true
 
 - name:           download client certificate
   ansible.builtin.fetch:

@@ -16,6 +16,21 @@ argocd_namespace:                 "argocd"
 argocd_fqdn_match:                "Host(`argocd-mngt.olaf-radicke.de`)"
 argocd_mtls:                      true
 argocd_letsencrypt:               false
+
+# --- K3S ACME ----
+
+k3s_acme_email:                   "briefkasten@olaf-radicke.de"
+k3s_acme_tier:                    "production"
+
+
+# --- K3S ----
+
+
+
+# ---- mTLS ----
+
+k3s_refresh_client_certificate:   false
+k3s_refresh_inter_certificate:    false
 k3s_mtls_secreat_namespaces:
   -                               "argocd-apps"
   -                               "argocd"
