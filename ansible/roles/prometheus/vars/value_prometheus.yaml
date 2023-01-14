@@ -216,7 +216,7 @@ alertmanager:
     ## alertmanager data Persistent Volume existing claim name
     ## Requires alertmanager.persistentVolume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
-    existingClaim: "{{ prometheus_pvc_prefix }}-alertmanager"
+    # existingClaim: "{{ prometheus_pvc_prefix }}-alertmanager"
 
     ## alertmanager data Persistent Volume mount root path
     ##
@@ -260,7 +260,7 @@ alertmanager:
     ## Persistent Volume Name
     ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
     ##
-    # volumeName: ""
+    volumeName: "prometheus-main-pv-alertmanager"
 
   emptyDir:
     ## alertmanager emptyDir volume size limit
@@ -926,7 +926,7 @@ server:
     ## Prometheus server data Persistent Volume existing claim name
     ## Requires server.persistentVolume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
-    existingClaim: "{{ prometheus_pvc_prefix }}-server"
+    # existingClaim: "{{ prometheus_pvc_prefix }}-server"
 
     ## Prometheus server data Persistent Volume mount root path
     ##
@@ -970,7 +970,7 @@ server:
     ## Persistent Volume Name
     ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
     ##
-    # volumeName: ""
+    volumeName: "prometheus-main-pv-server"
 
   emptyDir:
     ## Prometheus server emptyDir volume size limit
@@ -1373,7 +1373,7 @@ pushgateway:
     ## pushgateway data Persistent Volume existing claim name
     ## Requires pushgateway.persistentVolume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
-    existingClaim: "{{ prometheus_pvc_prefix }}-pushgateway"
+    # existingClaim: "{{ prometheus_pvc_prefix }}-pushgateway"
 
     ## pushgateway data Persistent Volume mount root path
     ##
@@ -1407,7 +1407,7 @@ pushgateway:
     ## Persistent Volume Name
     ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
     ##
-    # volumeName: ""
+    volumeName: "prometheus-main-pv-pushgateway"
 
 ## alertmanager ConfigMap entries
 ##

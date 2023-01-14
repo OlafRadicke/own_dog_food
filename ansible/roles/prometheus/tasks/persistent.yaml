@@ -53,7 +53,8 @@
 - name: "Create PersistentVolumeClaim"
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
-    state:                      "{{ prometheus_pvc_state }}"
+    state:                      "absent"
+     #"{{ prometheus_pvc_state }}"
     wait:                       yes
     namespace:                  "{{ prometheus_namespace }}"
     definition:
