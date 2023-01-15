@@ -1,8 +1,5 @@
 ---
 
-# Based on https://github.com/prometheus-community/helm-charts
-
-
 - include_tasks:  values.yaml
 - include_tasks:  persistent.yaml
 - include_tasks:  core.yaml
