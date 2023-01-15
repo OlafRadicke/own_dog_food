@@ -1471,6 +1471,8 @@ serverFiles:
         static_configs:
           - targets:
             - localhost:9090
+            - 92.205.105.117:9100
+            - 92.205.23.191:9100
 
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)

@@ -10,15 +10,16 @@
       path:         "{{ k3s_download_dir }}"
       state:        directory
 
-# - name: Run baltic-sea
-#   hosts: baltic-sea
-#   roles:
+- name: Run baltic-sea
+  hosts: baltic-sea
+  roles:
 #     - os_configs
 #     - k3s_install
 #     - k8s_ansible_requirements
 #     - argocd
-#     - prometheus
+    - prometheus
 #     - k3s_mtls
+    - prometheus-node-exporter
 
 - name: Run all steps
   hosts: atlantic-ocean
@@ -29,5 +30,6 @@
     # - k8s_ansible_requirements
     # - k3s_deployment
     # - argocd
-    - argocd_apps
+    # - argocd_apps
     # - k3s_mtls
+    - prometheus-node-exporter

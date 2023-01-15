@@ -9,8 +9,8 @@
     kind:               Namespace
     wait:               yes
 
-- name:                         Include variable of value_prometheus.yaml
+- name:                 Include variable of value_prometheus.yaml
   ansible.builtin.include_vars:
-    file:                       value_prometheus.yaml
-    name:                       prometheus_values
+    file:               value_prometheus.yaml
+    name:               prometheus_values
 
