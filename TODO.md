@@ -2,8 +2,9 @@ Todos
 =====
 
 
-- Prometeus:
-  - Add node-exporter
+- Grafana:
+  - https://github.com/grafana-operator/grafana-operator/tree/v4.8.0/documentation
+- Loki https://loki-operator.dev/docs/prologue/introduction.md/
 - Extended monitoring:
   - [netways prometheus-operator](https://nws.netways.de/de/tutorials/monitoring-kubernetes-mit-prometheus/)
   - [prometheus-operator](https://sysdig.com/blog/kubernetes-monitoring-prometheus-operator-part3/)
