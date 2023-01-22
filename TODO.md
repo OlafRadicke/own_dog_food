@@ -4,10 +4,10 @@ Todos
 
 - Grafana:
   - https://github.com/grafana-operator/grafana-operator/tree/v4.8.0/documentation
+
+- (Grafana) backup https://velero.io/
 - Loki https://loki-operator.dev/docs/prologue/introduction.md/
-- Extended monitoring:
-  - [netways prometheus-operator](https://nws.netways.de/de/tutorials/monitoring-kubernetes-mit-prometheus/)
-  - [prometheus-operator](https://sysdig.com/blog/kubernetes-monitoring-prometheus-operator-part3/)
+-
 - [argocd with app-of-apps pattern](https://medium.com/dzerolabs/turbocharge-argocd-with-app-of-apps-pattern-and-kustomized-helm-ea4993190e7c)
 - CI/CD
   - Review ArgoCD WorkFlow
