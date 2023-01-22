@@ -1,14 +1,14 @@
 ---
 
-- name: Local operations
-  hosts:            localhost
-  connection:       local
-  gather_facts:     false
-  tasks:
-  - name:           create a directory for client certificate download
-    ansible.builtin.file:
-      path:         "{{ k3s_download_dir }}"
-      state:        directory
+# - name: Local operations
+#   hosts:            localhost
+#   connection:       local
+#   gather_facts:     false
+#   tasks:
+#   - name:           create a directory for client certificate download
+#     ansible.builtin.file:
+#       path:         "{{ k3s_download_dir }}"
+#       state:        directory
 
 - name: Run baltic-sea
   hosts: baltic-sea
@@ -18,18 +18,19 @@
 #     - k8s_ansible_requirements
 #     - argocd
     - prometheus
-#     - k3s_mtls
+    - k3s_mtls
     - prometheus-node-exporter
+    - grafana
 
-- name: Run all steps
-  hosts: atlantic-ocean
-  roles:
-    # - ping
-    # - os_configs
-    # - k3s_install
-    # - k8s_ansible_requirements
-    # - k3s_deployment
-    # - argocd
-    # - argocd_apps
-    # - k3s_mtls
-    - prometheus-node-exporter
+# - name: Run all steps
+#   hosts: atlantic-ocean
+#   roles:
+#     - ping
+#     - os_configs
+#     - k3s_install
+#     - k8s_ansible_requirements
+#     - k3s_deployment
+#     - argocd
+#     - argocd_apps
+#     - k3s_mtls
+#     - prometheus-node-exporter

@@ -1,5 +1,6 @@
 ---
 
+
 - name: Add Grafana core helm chart
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
@@ -30,4 +31,29 @@
           targetRevision:       6.50.0
           helm:
             values:             |
-                                {{ grafana_values | to_nice_yaml }}
+                                securityContext:
+                                  runAsUser: 472
+                                  runAsGroup: 472
+                                  fsGroup: 472
+
+                                adminUser: "{{ grafana_user }}"
+                                adminPassword: "{{ grafana_password }}"
+
+
+  # datasources: {}
+  # #  datasources.yaml:
+  # #    apiVersion: 1
+  # #    datasources:
+  # #    - name: Prometheus
+  # #      type: prometheus
+  # #      url: http://prometheus-prometheus-server
+  # #      access: proxy
+  # #      isDefault: true
+  # #    - name: CloudWatch
+  # #      type: cloudwatch
+  # #      access: proxy
+  # #      uid: cloudwatch
+  # #      editable: false
+  # #      jsonData:
+  # #        authType: default
+  # #        defaultRegion: us-east-1

@@ -79,5 +79,9 @@
 
 - name:           download client certificate
   ansible.builtin.fetch:
-    src:          "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
+    src:          "{{ k3s_mtls_dir }}/{{ item }}"
     dest:         "{{ k3s_download_dir }}"
+  loop:
+    - "mtls-client-ca.p12"
+    - "mtls-client-ca.crt"
+    - "mtls-client-ca.key"

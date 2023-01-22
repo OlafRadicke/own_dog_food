@@ -28,7 +28,7 @@ k3s_namespaces:
 
 # ---- mTLS ----
 
-k3s_refresh_client_certificate:   true #false
+k3s_refresh_client_certificate:   false
 k3s_refresh_inter_certificate:    false
 k3s_mtls_secreat_namespaces:
   -                               "live"
