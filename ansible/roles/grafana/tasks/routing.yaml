@@ -1,0 +1,40 @@
+---
+
+- name: Add Grafana routing helm chart
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ grafana_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   grafana-routes
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+          -                     ApplyOutOfSyncOnly=true
+          # -                     CreateNamespace=true
+        destination:
+          server:               "https://kubernetes.default.svc"
+          namespace:            "{{ grafana_namespace }}"
+        source:
+          chart:                tls_routing
+          repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+          targetRevision:       0.3.0
+          helm:
+            values: |
+                                app:
+                                  name: grafana
+                                  fqdn: {{ grafana_fqdn }}
+                                  service: grafana-main
+                                  service_port: 80
+                                mtls:
+                                  enabled: true
+                                  secretnames: mtls-ca
