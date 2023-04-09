@@ -1,0 +1,73 @@
+---
+
+- name: create a secret with gitlab access token
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_app_external_secrets_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               v1
+      kind:                     Secret
+      metadata:
+        name:                   gitlab-secret
+        labels:
+          type:                 gitlab
+      type:                     Opaque
+      stringData:
+        token:                  !vault |
+                                $ANSIBLE_VAULT;1.1;AES256
+                                33306638333236666438313533303063643139636432623839666561353664303733643663633832
+                                6136393737343338306335613265366230393365353930350a633134333231393264396461303962
+                                63336237313635616431356362316166386562333833363932333133663762356235636338313134
+                                3862376335303065640a356235663266393830633162373830393834323866343562666130626564
+                                34636661343731306435663437666131646238343266376566336166323032633833
+
+
+- name: configuring the secret store
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_app_external_secrets_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               external-secrets.io/v1beta1
+      kind:                     SecretStore
+      metadata:
+        name:                   gitlab-secret-store
+      spec:
+        provider:
+          gitlab:
+            # url:                https://gitlab.com/
+            auth:
+              SecretRef:
+                accessToken:
+                  name:         gitlab-secret
+                  key:          token
+            projectID:          "45021336"
+            groupIDs:
+              -                 "61071541"
+            inheritFromGroups:  False
+            # environment: "**environment scope goes here**"
+
+
+- name: creating external secret
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_app_external_secrets_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               external-secrets.io/v1beta1
+      kind:                     ExternalSecret
+      metadata:
+        name:                   gitlab-external-secret-example
+      spec:
+        refreshInterval:        3m
+        secretStoreRef:
+          kind:                 SecretStore
+          name:                 gitlab-secret-store
+        target:
+          name:                 gitlab-secret-to-create
+          creationPolicy:       Owner
+        data:
+          - secretKey:          secretKey
+            remoteRef:
+              key:              GROUPKEY

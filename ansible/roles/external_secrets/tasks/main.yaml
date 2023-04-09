@@ -1,0 +1,31 @@
+---
+
+- name: add ArgoCD app external_secrets with Helm
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_app_external_secrets_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   external-secrets
+        namespace:              "{{ argocd_namespace }}"
+      spec:
+        project:                default
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+          -                     CreateNamespace=true
+        destination:
+          server:               https://kubernetes.default.svc
+          namespace:            external-secrets
+        source:
+          chart:                external-secrets
+          repoURL:              https://charts.external-secrets.io
+          targetRevision:       0.8.1
+
+- include_tasks:                gitlab.yaml
