@@ -20,3 +20,4 @@ spec:
     name:                 in-cluster
   sourceNamespaces:
   - app-of-app
+  - argocd-raw-apps
