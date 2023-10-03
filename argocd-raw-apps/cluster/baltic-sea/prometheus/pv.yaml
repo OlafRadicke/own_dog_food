@@ -19,7 +19,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path:             "/srv/k3s_pvc"/prometheus-pv-main"
+    path:             /srv/k3s_pvc"/prometheus-pv-main
   nodeAffinity:
     required:
       nodeSelectorTerms:
