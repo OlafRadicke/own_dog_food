@@ -9,9 +9,6 @@ metadata:
                           - resources-finalizer.argocd.argoproj.io
 spec:
   description:            project of apps of apps from plain yaml
-  syncPolicy:
-    syncOptions:
-                          - Replace=true
   sourceRepos:
                           - '*'
   destinations:
