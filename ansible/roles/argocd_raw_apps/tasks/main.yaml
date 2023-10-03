@@ -1,5 +1,17 @@
 ---
 
+- name:                         create namespace argocd-raw-apps
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    wait:                       "yes"
+    definition:
+      api_version:              v1
+      kind:                     Namespace
+      metadata:
+        name:                   "argocd-raw-apps"
+        labels:
+          name:                 "argocd-raw-apps"
+
 - name:                         add projekt from plain yaml
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
@@ -24,6 +36,9 @@
         - namespace:            argocd-raw-apps
           server:               https://kubernetes.default.svc
           name:                 in-cluster
+        sourceNamespaces:
+                              - argocd
+                              - argocd-raw-apps
 
 
 
