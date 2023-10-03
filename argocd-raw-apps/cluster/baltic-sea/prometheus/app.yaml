@@ -15,6 +15,3 @@ spec:
   - namespace:            argocd-raw-apps
     server:               https://kubernetes.default.svc
     name:                 in-cluster
-  sourceNamespaces:
-                        - argocd
-                        - argocd-raw-apps
