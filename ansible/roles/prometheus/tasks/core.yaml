@@ -31,3 +31,5 @@
           helm:
             values:             |
                                 {{ prometheus_values | to_nice_yaml }}
+
+

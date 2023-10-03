@@ -1,0 +1,54 @@
+---
+
+- name:                         add projekt from plain yaml
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_raw_apps_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     AppProject
+      metadata:
+        name:                   app-of-app
+        namespace:              argocd
+        finalizers:
+                                - resources-finalizer.argocd.argoproj.io
+      spec:
+        description:            project of apps of apps from plain yaml
+        sourceRepos:
+                                - '*'
+        destinations:
+        - namespace:            argocd-raw-apps
+          server:               https://kubernetes.default.svc
+          name:                 in-cluster
+
+
+
+- name:                         add app of app
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ argocd_raw_apps_state }}"
+    namespace:                  "{{ argocd_namespace }}"
+    definition:
+      apiVersion:               argoproj.io/v1alpha1
+      kind:                     Application
+      metadata:
+        name:                   app-of-app
+        namespace:              "{{ argocd_namespace }}"
+        finalizers:
+          - resources-finalizer.argocd.argoproj.io
+      spec:
+        project:                app-of-app
+        syncPolicy:
+          automated:
+            prune:              true
+          syncOptions:
+          -                     PruneLast=true
+          -                     Replace=true
+        source:
+          repoURL:              https://github.com/OlafRadicke/own_dog_food.git
+          targetRevision:       "{{ argocd_raw_apps_gitbranch }}"
+          path:                 "{{ argocd_raw_apps_gitpath }}"
+        destination:
+          server:               https://kubernetes.default.svc
+          namespace:            argocd-raw-apps

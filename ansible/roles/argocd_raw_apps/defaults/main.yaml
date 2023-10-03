@@ -1,0 +1,4 @@
+---
+argocd_raw_apps_state:     "present"
+argocd_raw_apps_gitbranch: "develop"
+argocd_raw_apps_gitpath:   "argocd-raw-apps/cluster/baltic-sea"

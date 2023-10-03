@@ -39,6 +39,12 @@ k3s_mtls_secreat_namespaces:
 #  ---- PROMETHEUS ----
 
 prometheus_namespace:             "monitoring"
-prometheus_state:                 "present" #"absent" #
-prometheus_pvc_state:             "present"
+prometheus_state:                 "absent" #"present"
+prometheus_pvc_state:             "absent" #"present"
 prometheus_fqdn:                  "prometheus.olaf-radicke.de"
+
+#------ APP OF APP ------------
+
+argocd_raw_apps_state:            "present"
+argocd_raw_apps_gitbranch:        "develop"
+argocd_raw_apps_gitpath:          "argocd-raw-apps/cluster/baltic-sea"

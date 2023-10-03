@@ -1,0 +1,34 @@
+---
+
+apiVersion:               argoproj.io/v1alpha1
+kind:                     Application
+metadata:
+  name:                   prometheus-routes
+  namespace:              "argocd-raw-apps"
+spec:
+  project:                prometheus
+  syncPolicy:
+    automated:
+      prune:              true
+    syncOptions:
+    -                     PruneLast=true
+    -                     Replace=true
+    -                     ApplyOutOfSyncOnly=true
+    -                     CreateNamespace=true
+  destination:
+    server:               "https://kubernetes.default.svc"
+    namespace:            "argocd-raw-apps"
+  source:
+    chart:                tls_routing
+    repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/
+    targetRevision:       0.3.0
+    helm:
+      values: |
+                          app:
+                            name: prometheus
+                            fqdn: prometheus.olaf-radicke.de
+                            service: prometheus-main-server
+                            service_port: 80
+                          mtls:
+                            enabled: true
+                            secretnames: mtls-ca

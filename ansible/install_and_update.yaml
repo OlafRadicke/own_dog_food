@@ -18,6 +18,7 @@
     - k8s_ansible_requirements
     - argocd
     - external_secrets
+    - ansible/roles/argocd_raw_apps
     # - prometheus
     # - k3s_mtls
     # - prometheus-node-exporter

@@ -1,0 +1,17 @@
+---
+
+apiVersion:               argoproj.io/v1alpha1
+kind:                     AppProject
+metadata:
+  name:                   prometheus
+  namespace:              argocd
+  finalizers:
+                          - resources-finalizer.argocd.argoproj.io
+spec:
+  description:            project of apps of apps from plain yaml
+  sourceRepos:
+                          - '*'
+  destinations:
+  - namespace:            argocd-raw-apps
+    server:               https://kubernetes.default.svc
+    name:                 in-cluster
