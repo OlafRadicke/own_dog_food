@@ -15,14 +15,11 @@ spec:
   volumeMode:         Filesystem
   accessModes:
                       - ReadWriteOnce
+  # Delete or Retain
   persistentVolumeReclaimPolicy: Retain
-  # Delete
-  storageClassName:   local-path
+  storageClassName: local-storage
   local:
     path:             "/srv/k3s_pvc"/prometheus-pv-main"
-  # hostPath:
-  #   path: /tmp/prometheus-main-pv
-  #   type: DirectoryOrCreate
   nodeAffinity:
     required:
       nodeSelectorTerms:

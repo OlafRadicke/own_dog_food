@@ -36,19 +36,22 @@
         name:                   app-of-app
         namespace:              "{{ argocd_namespace }}"
         finalizers:
-          - resources-finalizer.argocd.argoproj.io
+                                - resources-finalizer.argocd.argoproj.io
       spec:
         project:                app-of-app
         syncPolicy:
           automated:
             prune:              true
           syncOptions:
-          -                     PruneLast=true
-          -                     Replace=true
+                                - PruneLast=true
+                                - Replace=true
+                                - CreateNamespace=true
         source:
           repoURL:              https://github.com/OlafRadicke/own_dog_food.git
           targetRevision:       "{{ argocd_raw_apps_gitbranch }}"
           path:                 "{{ argocd_raw_apps_gitpath }}"
+          directory:
+            recurse: true
         destination:
           server:               https://kubernetes.default.svc
           namespace:            argocd-raw-apps
