@@ -33,6 +33,9 @@
         - namespace:            argocd-raw-apps
           server:               https://kubernetes.default.svc
           name:                 in-cluster
+        - namespace:            argocd-raw-apps
+          server:               https://kubernetes.default.svc
+          name:                 in-cluster
 
 
 - name:                         add app of app
