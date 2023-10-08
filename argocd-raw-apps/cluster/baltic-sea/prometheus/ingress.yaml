@@ -4,7 +4,7 @@ apiVersion:               argoproj.io/v1alpha1
 kind:                     Application
 metadata:
   name:                   prometheus-routes
-  namespace:              "argocd"
+  namespace:              "app-of-app"
 spec:
   project:                prometheus
   syncPolicy:
