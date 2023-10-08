@@ -3,10 +3,10 @@
 apiVersion:               argoproj.io/v1alpha1
 kind:                     Application
 metadata:
-  name:                   prometheus-routes
+  name:                   prometheus-routes-02
   namespace:              "argocd-raw-apps"
 spec:
-  project:                prometheus
+  project:                prometheus-02
   syncPolicy:
     automated:
       prune:              true

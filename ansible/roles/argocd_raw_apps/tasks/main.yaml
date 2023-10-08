@@ -16,12 +16,12 @@
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_raw_apps_state }}"
-    namespace:                  "argocd-raw-apps"
+    namespace:                  "argocd"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     AppProject
       metadata:
-        name:                   app-of-app
+        name:                   app-of-app-02
         namespace:              argocd-raw-apps
         finalizers:
                                 - resources-finalizer.argocd.argoproj.io
@@ -42,17 +42,17 @@
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ argocd_raw_apps_state }}"
-    namespace:                  "argocd-raw-apps"
+    namespace:                  "argocd"
     definition:
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   app-of-app
+        name:                   app-of-app-02
         namespace:              "argocd-raw-apps"
         finalizers:
                                 - resources-finalizer.argocd.argoproj.io
       spec:
-        project:                app-of-app
+        project:                app-of-app-02
         syncPolicy:
           automated:
             prune:              true

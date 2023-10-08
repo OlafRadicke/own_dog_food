@@ -3,7 +3,7 @@
 apiVersion:               argoproj.io/v1alpha1
 kind:                     AppProject
 metadata:
-  name:                   prometheus
+  name:                   prometheus-02
   namespace:              argocd-raw-apps
   finalizers:
                           - resources-finalizer.argocd.argoproj.io
