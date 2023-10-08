@@ -4,7 +4,7 @@
 # kind:                 PersistentVolume
 # metadata:
 #   name:               "prometheus-pv-main"
-#   namespace:          "argocd-raw-apps"
+#   namespace:          "argocd-raw-apps-03"
 #   labels:
 #     app:              prometheus-main
 #   finalizers:

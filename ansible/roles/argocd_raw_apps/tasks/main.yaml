@@ -1,6 +1,6 @@
 ---
 
-- name:                         create namespace argocd-raw-apps
+- name:                         create namespace argocd-raw-apps-03
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
     wait:                       "yes"
@@ -8,9 +8,9 @@
       api_version:              v1
       kind:                     Namespace
       metadata:
-        name:                   "argocd-raw-apps"
+        name:                   "argocd-raw-apps-03"
         labels:
-          name:                 "argocd-raw-apps"
+          name:                 "argocd-raw-apps-03"
 
 - name:                         add projekt from plain yaml
   kubernetes.core.k8s:
@@ -21,8 +21,8 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     AppProject
       metadata:
-        name:                   app-of-app-02
-        namespace:              argocd-raw-apps
+        name:                   app-of-app-03
+        namespace:              argocd-raw-apps-03
         finalizers:
                                 - resources-finalizer.argocd.argoproj.io
       spec:
@@ -30,10 +30,10 @@
         sourceRepos:
                                 - '*'
         destinations:
-        - namespace:            argocd-raw-apps
+        - namespace:            argocd-raw-apps-03
           server:               https://kubernetes.default.svc
           name:                 in-cluster
-        - namespace:            argocd-raw-apps
+        - namespace:            argocd-raw-apps-03
           server:               https://kubernetes.default.svc
           name:                 in-cluster
 
@@ -47,12 +47,12 @@
       apiVersion:               argoproj.io/v1alpha1
       kind:                     Application
       metadata:
-        name:                   app-of-app-02
-        namespace:              "argocd-raw-apps"
+        name:                   app-of-app-03
+        namespace:              "argocd-raw-apps-03"
         finalizers:
                                 - resources-finalizer.argocd.argoproj.io
       spec:
-        project:                app-of-app-02
+        project:                app-of-app-03
         syncPolicy:
           automated:
             prune:              true
@@ -68,4 +68,4 @@
             recurse: true
         destination:
           server:               https://kubernetes.default.svc
-          namespace:            argocd-raw-apps
+          namespace:            argocd-raw-apps-03

@@ -4,7 +4,7 @@ apiVersion:               argoproj.io/v1alpha1
 kind:                     AppProject
 metadata:
   name:                   prometheus-02
-  namespace:              argocd-raw-apps
+  namespace:              argocd-raw-apps-03
   finalizers:
                           - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,6 +12,6 @@ spec:
   sourceRepos:
                           - '*'
   destinations:
-  - namespace:            argocd-raw-apps
+  - namespace:            argocd-raw-apps-03
     server:               https://kubernetes.default.svc
     name:                 in-cluster

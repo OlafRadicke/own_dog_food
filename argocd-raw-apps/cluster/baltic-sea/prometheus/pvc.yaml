@@ -10,7 +10,7 @@
 #     component:    server
 #     release:      prometheus-main
 #   name:           "prometheus-pv-main-alertmanager"
-#   namespace:      "argocd-raw-apps"
+#   namespace:      "argocd-raw-apps-03"
 # spec:
 #   accessModes:
 #                   - ReadWriteOnce
@@ -35,7 +35,7 @@
 #     component:    server
 #     release:      prometheus-main
 #   name:           "prometheus-pv-main-server"
-#   namespace:      "argocd-raw-apps"
+#   namespace:      "argocd-raw-apps-03"
 # spec:
 #   accessModes:
 #                   - ReadWriteOnce
@@ -59,7 +59,7 @@
 #     component:    server
 #     release:      prometheus-main
 #   name:           "prometheus-pv-main-pushgateway"
-#   namespace:      "argocd-raw-apps"
+#   namespace:      "argocd-raw-apps-03"
 # spec:
 #   accessModes:
 #                   - ReadWriteOnce
