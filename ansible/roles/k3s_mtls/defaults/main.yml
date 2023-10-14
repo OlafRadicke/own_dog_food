@@ -4,14 +4,13 @@ k3s_mtls_state:                 "present"
 k3s_mtls_step_version:          "0.21.0"
 # k3s_mtls_dir:                 /home/{{ ansible_user }}/private_pki/
 k3s_mtls_dir:                   "/srv/private_pki"
-k3s_mtls_secreat_namespaces: {}
+k3s_mtls_private_pki_reset:     "no"
+k3s_mtls_secreat_namespaces:    []
   # -                               "default"
   # -                               "env-live"
   # -                               "env-test"
   # -                               "argocd-apps"
   # -                               "argocd"
-k3s_mtls_private_pki_reset:     "no"
-k3s_mtls_secreat_namespaces:    []
 k3s_refresh_client_certificate: false
 k3s_refresh_inter_certificate:  false
 k3s_download_dir:               "./downloads/"

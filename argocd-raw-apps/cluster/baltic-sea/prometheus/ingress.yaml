@@ -4,7 +4,7 @@ apiVersion:               argoproj.io/v1alpha1
 kind:                     Application
 metadata:
   name:                   prometheus-routes-02
-  namespace:              "argocd-raw-apps-03"
+  namespace:              "argocd"
   finalizers:
                           - resources-finalizer.argocd.argoproj.io
 spec:
@@ -19,7 +19,7 @@ spec:
     -                     CreateNamespace=true
   destination:
     server:               "https://kubernetes.default.svc"
-    namespace:            "argocd-raw-apps-03"
+    namespace:            "argocd-raw-apps"
   source:
     chart:                tls_routing
     repoURL:              https://olafradicke.github.io/own_dog_food/helm/charts/

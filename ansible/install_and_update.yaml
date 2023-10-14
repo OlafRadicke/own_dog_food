@@ -17,10 +17,10 @@
     - k3s_install
     - k8s_ansible_requirements
     - argocd
-    - external_secrets
-    - ansible/roles/argocd_raw_apps
+    # - external_secrets
+    - argocd_raw_apps
     # - prometheus
-    # - k3s_mtls
+    - k3s_mtls
     # - prometheus-node-exporter
     # - grafana
 
