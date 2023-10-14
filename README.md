@@ -18,8 +18,8 @@ ansible-galaxy collection install kubernetes.core
 ```
 
 
-Run setup
----------
+Run Ansible setup
+-----------------
 
 Enter:
 
@@ -29,6 +29,13 @@ ansible-playbook \
   --vault-password-file ~/.ssh/ansible_vault \
   ./ansible/install_and_update.yaml --check
 ```
+
+Pulumi
+------
+
+
+
+
 
 Change workflow
 ---------------
