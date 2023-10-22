@@ -1,7 +1,7 @@
 Todos
 =====
 
-
+- https://www.pulumi.com/registry/packages/kubernetes/api-docs/helm/v3/chart/
 - Grafana:
   - https://github.com/grafana-operator/grafana-operator/tree/v4.8.0/documentation
 

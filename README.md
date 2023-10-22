@@ -33,7 +33,15 @@ ansible-playbook \
 Pulumi
 ------
 
+To start Pulumi enter:
 
+```bash
+cd ./pulumi/baltic-sea/
+# check the cluster:
+kubectx
+export PULUMI_CONFIG_PASSPHRASE_FILE=${HOME}/.ssh/pulumi-passwd
+pulumi up
+```
 
 
 Change workflow
