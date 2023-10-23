@@ -1,9 +1,11 @@
 package main
 
 import (
+	// "fmt"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/helm/v3"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
 
 func createNamespace(ctx *pulumi.Context, nameSpaceName string) error {
@@ -62,9 +64,9 @@ func createPrometheusIngress(ctx *pulumi.Context, nameSpaceName string) error {
 
 // Documentation: https://github.com/oauth2-proxy/manifests
 func createOauth2Proxy(ctx *pulumi.Context, nameSpaceName string) error {
-
-	cfg := config.New(ctx, "")
-	oauth2ProxyclientSecret = cfg.requireSecret("oauth2ProxyclientSecret")
+	conf := config.New(ctx, "")
+	oauth2ProxyclientSecret := conf.GetSecret("oauth2ProxyclientSecret")
+	// strOauth2ProxyclientSecret := fmt.Sprintf("%v", oauth2ProxyclientSecret)
 
 	_, err := helm.NewChart(ctx, "oauth2-proxy", helm.ChartArgs{
 		Namespace: pulumi.String(nameSpaceName),
@@ -77,7 +79,7 @@ func createOauth2Proxy(ctx *pulumi.Context, nameSpaceName string) error {
 			"extraArgs": pulumi.Map{
 				"provider":        pulumi.String("keycloak-oidc"),
 				"client-id":       pulumi.String("<your client's id>"),
-				"client-secret":   pulumi.String(oauth2ProxyclientSecret),
+				"client-secret":   oauth2ProxyclientSecret,
 				"redirect-url":    pulumi.String("https://internal.yourcompany.com/oauth2/callback"),
 				"oidc-issuer-url": pulumi.String("https://<keycloak host>/auth/realms/<your realm>"),
 				"email-domain":    pulumi.String("<yourcompany.com>"),
@@ -98,13 +100,13 @@ func createKeycloak(ctx *pulumi.Context, nameSpaceName string) error {
 	if err != nil {
 		return err
 	}
-	_, err := yaml.NewConfigFile(ctx, nameSpaceName, &yaml.ConfigFileArgs{
+	_, err = yaml.NewConfigFile(ctx, nameSpaceName, &yaml.ConfigFileArgs{
 		File: "yaml/keycloak/02_keycloaks.k8s.keycloak.org-v1.yml",
 	})
 	if err != nil {
 		return err
 	}
-	_, err := yaml.NewConfigFile(ctx, nameSpaceName, &yaml.ConfigFileArgs{
+	_, err = yaml.NewConfigFile(ctx, nameSpaceName, &yaml.ConfigFileArgs{
 		File: "yaml/keycloak/03_kubernetes.yml",
 	})
 	if err != nil {
