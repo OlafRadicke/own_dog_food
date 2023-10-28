@@ -1,0 +1,33 @@
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-pv-volume
+  namespace: pulumi-apps
+  labels:
+    type: local
+    app: postgres
+spec:
+  storageClassName: postgres-manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/srv/k3s_pvc"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-pv-claim  # Sets name of PVC
+  namespace: pulumi-apps
+  labels:
+    app: postgres
+spec:
+  storageClassName: postgres-manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
