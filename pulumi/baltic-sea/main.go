@@ -62,7 +62,6 @@ func createPrometheusIngress(ctx *pulumi.Context, nameSpaceName string) error {
 	return err
 }
 
-// Documentation: https://github.com/oauth2-proxy/manifests
 func createOauth2Proxy(ctx *pulumi.Context, nameSpaceName string) error {
 	conf := config.New(ctx, "")
 	oauth2ProxyclientSecret := conf.GetSecret("oauth2ProxyclientSecret")
@@ -93,7 +92,7 @@ func createOauth2Proxy(ctx *pulumi.Context, nameSpaceName string) error {
 	return err
 }
 
-func createKeycloakOperator(ctx *pulumi.Context, nameSpaceName string) error {
+func installKeycloakOperator(ctx *pulumi.Context, nameSpaceName string) error {
 	_, err := yaml.NewConfigFile(ctx, "operator-keycloak-realm-imports", &yaml.ConfigFileArgs{
 		File: "yaml/keycloak_operator/01_keycloakrealmimports.k8s.keycloak.org-v1.yml",
 	})
@@ -116,20 +115,21 @@ func createKeycloakOperator(ctx *pulumi.Context, nameSpaceName string) error {
 }
 
 func createKeycloakPostres(ctx *pulumi.Context, nameSpaceName string) error {
+
 	_, err := yaml.NewConfigFile(ctx, "keycloak-01-postgres-config", &yaml.ConfigFileArgs{
-		File: "pulumi/baltic-sea/yaml/keycloak/postgres-config.yaml",
+		File: "yaml/keycloak/postgres-config.yaml",
 	})
 	if err != nil {
 		return err
 	}
 	_, err = yaml.NewConfigFile(ctx, "keycloak-01-postgres-deployment", &yaml.ConfigFileArgs{
-		File: "pulumi/baltic-sea/yaml/keycloak/postgres-deployment.yaml",
+		File: "yaml/keycloak/postgres-deployment.yaml",
 	})
 	if err != nil {
 		return err
 	}
 	_, err = yaml.NewConfigFile(ctx, "keycloak-01-postgres-pvc-pv", &yaml.ConfigFileArgs{
-		File: "pulumi/baltic-sea/yaml/keycloak/postgres-pvc-pv.yaml",
+		File: "yaml/keycloak/postgres-pvc-pv.yaml",
 	})
 	if err != nil {
 		return err
@@ -141,19 +141,19 @@ func createKeycloakPostres(ctx *pulumi.Context, nameSpaceName string) error {
 func createKeycloak(ctx *pulumi.Context, nameSpaceName string) error {
 
 	_, err := yaml.NewConfigFile(ctx, "keycloak-01-example-tls-secret", &yaml.ConfigFileArgs{
-		File: "pulumi/baltic-sea/yaml/keycloak/example-tls-secret.yaml",
+		File: "yaml/keycloak/example-tls-secret.yaml",
 	})
 	if err != nil {
 		return err
 	}
 	_, err = yaml.NewConfigFile(ctx, "keycloak-01-keycloak-db-secret", &yaml.ConfigFileArgs{
-		File: "pulumi/baltic-sea/yaml/keycloak/keycloak-db-secret.yaml",
+		File: "yaml/keycloak/keycloak-db-secret.yaml",
 	})
 	if err != nil {
 		return err
 	}
 	_, err = yaml.NewConfigFile(ctx, "keycloak-01-keycloak", &yaml.ConfigFileArgs{
-		File: "pulumi/baltic-sea/yaml/keycloak/keycloak.yaml",
+		File: "yaml/keycloak/keycloak.yaml",
 	})
 	if err != nil {
 		return err
@@ -185,7 +185,7 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	err = createKeycloakOperator(ctx, nameSpaceName)
+	err = installKeycloakOperator(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}
