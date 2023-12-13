@@ -15,6 +15,18 @@ func createNamespace(ctx *pulumi.Context, nameSpaceName string) error {
 	return err
 }
 
+func createDebugContainer(ctx *pulumi.Context, nameSpaceName string) error {
+
+	_, err := yaml.NewConfigFile(ctx, "debug-container", &yaml.ConfigFileArgs{
+		File: "yaml/debugging/fedora-deployment.yaml",
+	})
+	if err != nil {
+		return err
+	}
+	return nil
+
+}
+
 func createPrometheus(ctx *pulumi.Context, nameSpaceName string) error {
 	_, err := helm.NewChart(ctx, "prometheus", helm.ChartArgs{
 		Namespace: pulumi.String(nameSpaceName),
@@ -134,6 +146,12 @@ func createKeycloakPostres(ctx *pulumi.Context, nameSpaceName string) error {
 	if err != nil {
 		return err
 	}
+	_, err = yaml.NewConfigFile(ctx, "keycloak-01-postgres-service", &yaml.ConfigFileArgs{
+		File: "yaml/keycloak/postgers-service.yaml",
+	})
+	if err != nil {
+		return err
+	}
 	return nil
 
 }
@@ -166,6 +184,11 @@ var balticSea = func(ctx *pulumi.Context) error {
 	nameSpaceName := "pulumi-apps"
 
 	err := createNamespace(ctx, nameSpaceName)
+	if err != nil {
+		return err
+	}
+
+	err = createDebugContainer(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}

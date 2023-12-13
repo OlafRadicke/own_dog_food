@@ -9,6 +9,7 @@ spec:
   db:
     vendor: postgres
     host: postgres-db
+    database: keycloakdb
     usernameSecret:
       name: keycloak-db-secret
       key: username
