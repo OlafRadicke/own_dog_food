@@ -24,15 +24,15 @@
     # - prometheus-node-exporter
     # - grafana
 
-# - name: Run all steps
-#   hosts: atlantic-ocean
-#   roles:
+- name: Run all steps
+  hosts: atlantic-ocean
+  roles:
 # #     - ping
-# #     - os_configs
-# #     - k3s_install
-# #     - k8s_ansible_requirements
-# #     - k3s_deployment
-#     - argocd
-#     - argocd_apps
-#     - k3s_mtls
+      # - os_configs
+      # - k3s_install
+      # - k8s_ansible_requirements
+      # - k3s_deployment
+      - argocd
+      - argocd_apps
+      - k3s_mtls
 #     - prometheus-node-exporter
