@@ -2,12 +2,12 @@ Todos
 =====
 
 - https://www.pulumi.com/registry/packages/kubernetes/api-docs/helm/v3/chart/
+   - [HTTPS with Cert-Manager and Letsencrypt](https://k3s.rocks/https-cert-manager-letsencrypt/)
 - Grafana:
   - https://github.com/grafana-operator/grafana-operator/tree/v4.8.0/documentation
 
 - (Grafana) backup https://velero.io/
 - Loki https://loki-operator.dev/docs/prologue/introduction.md/
--
 - [argocd with app-of-apps pattern](https://medium.com/dzerolabs/turbocharge-argocd-with-app-of-apps-pattern-and-kustomized-helm-ea4993190e7c)
 - CI/CD
   - Review ArgoCD WorkFlow
