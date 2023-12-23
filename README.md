@@ -66,6 +66,7 @@ Other READMEs
 - [Known issue](doc/Known-issue.md)
 - ***Ansible roles***
   - [os_config](ansible/roles/os_configs/README.md)
+  - [k3s_cert_manager](ansible/roles/k3s_cert_manager/README.md)
   - [k3s_install](ansible/roles/k3s_install/README.md)
   - [k8s_ansible_requirements](ansible/roles/k8s_ansible_requirements/README.md)
   - [argocd](ansible/roles/argocd/README.md)

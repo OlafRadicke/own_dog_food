@@ -31,26 +31,6 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	// err = createPrometheusIngress(ctx, nameSpaceName)
-	// if err != nil {
-	// 	return err
-	// }
-
-	err = createKeycloakPostres(ctx, nameSpaceName)
-	if err != nil {
-		return err
-	}
-
-	err = installKeycloakOperator(ctx, nameSpaceName)
-	if err != nil {
-		return err
-	}
-
-	err = createKeycloak(ctx, nameSpaceName)
-	if err != nil {
-		return err
-	}
-
 	err = createTifTest(ctx, nameSpaceName)
 	if err != nil {
 		return err
@@ -60,6 +40,26 @@ var balticSea = func(ctx *pulumi.Context) error {
 	if err != nil {
 		return err
 	}
+
+	// err = createPrometheusIngress(ctx, nameSpaceName)
+	// if err != nil {
+	// 	return err
+	// }
+
+	// err = createKeycloakPostres(ctx, nameSpaceName)
+	// if err != nil {
+	// 	return err
+	// }
+
+	// err = installKeycloakOperator(ctx, nameSpaceName)
+	// if err != nil {
+	// 	return err
+	// }
+
+	// err = createKeycloak(ctx, nameSpaceName)
+	// if err != nil {
+	// 	return err
+	// }
 
 	return nil
 }

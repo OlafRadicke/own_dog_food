@@ -1,0 +1,97 @@
+---
+
+- name: create namespaces
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ k3s_cert_manager_state }}"
+    wait:                       "yes"
+    definition:
+      api_version:              v1
+      kind:                     Namespace
+      metadata:
+        name:                   "{{ k3s_cert_manager_namespaces }}"
+        labels:
+          name:                 "{{ k3s_cert_manager_namespaces }}"
+
+
+- name: download operator
+  ansible.builtin.get_url:
+    url:                        "{{ k3s_cert_manager_download }}"
+    dest:                       "/tmp/cert-manager.yaml"
+    mode:                       '0440'
+
+- name: create operator
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ k3s_cert_manager_state }}"
+    wait:                       "yes"
+    src:                        "/tmp/cert-manager.yaml"
+
+- name: "add ClusterIssuer {{ k3s_cert_manager_mail }}"
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ k3s_cert_manager_state }}"
+    namespace:                  "{{ k3s_cert_manager_namespaces }}"
+    definition:
+      apiVersion:               cert-manager.io/v1
+      kind:                     ClusterIssuer
+      metadata:
+        name:                   "{{ k3s_cert_manager_stage }}"
+      spec:
+        acme:
+          email:                "{{ k3s_cert_manager_mail }}"
+          server:               https://acme-v02.api.letsencrypt.org/directory
+          privateKeySecretRef:
+            name:               "{{ k3s_cert_manager_stage }}"
+          solvers:
+            - http01:
+                ingress:
+                  class:          traefik
+
+- name: add Middleware
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ k3s_cert_manager_state }}"
+    namespace:                  "{{ k3s_cert_manager_namespaces }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     Middleware
+      metadata:
+        name:                   redirect-https
+      spec:
+        redirectScheme:
+          scheme:               https
+          permanent:            true
+
+- name: add Ingress
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "absent"
+    namespace:                  "pulumi-apps"
+    definition:
+      apiVersion:               networking.k8s.io/v1
+      kind:                     Ingress
+      metadata:
+        name:                   tif-test-ingress
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          cert-manager.io/cluster-issuer: "{{ k3s_cert_manager_stage }}"
+          traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+      spec:
+        rules:
+          - host:               "test.the-independent-friend.de"
+            http:
+              paths:
+                - path:         /
+                  pathType:     Prefix
+                  backend:
+                    service:
+                      name:     test-the-independent-friend-de
+                      port:
+                        number: 5678
+        tls:
+          - secretName:         test-the-independent-friend-de-tls
+            hosts:
+              -                 "test.the-independent-friend.de"
+
+

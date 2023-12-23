@@ -13,14 +13,18 @@
 - name: Run baltic-sea
   hosts: baltic-sea
   roles:
-    - os_configs
-    - k3s_install
-    - k8s_ansible_requirements
-    - argocd
+    # - os_configs
+    # - k3s_install
+    # - k8s_ansible_requirements
+    - k3s_cert_manager
+
+
+
+    # - argocd
     # - external_secrets
-    - argocd_raw_apps
+    # - argocd_raw_apps
     # - prometheus
-    - k3s_mtls
+    # - k3s_mtls
     # - prometheus-node-exporter
     # - grafana
 

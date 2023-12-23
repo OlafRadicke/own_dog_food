@@ -1,0 +1,26 @@
+---
+
+apiVersion:               networking.k8s.io/v1
+kind:                     Ingress
+metadata:
+  name:                   tif-test-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+spec:
+  rules:
+    - host:               test.the-independent-friend.de
+      http:
+        paths:
+          - path:         /
+            pathType:     Prefix
+            backend:
+              service:
+                name:     test-the-independent-friend-de
+                port:
+                  number: 80
+  tls:
+    - secretName:         test-the-independent-friend-de-tls
+      hosts:
+        -                 test.the-independent-friend.de
