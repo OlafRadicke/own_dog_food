@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+  creationTimestamp: "2023-12-23T17:32:40Z"
+  generation: 1
+  name: tif-test-ingress
+  namespace: pulumi-apps
+  resourceVersion: "2013080"
+  uid: f2351f1b-d143-4716-a9b1-1d53505f2759
+spec:
+  rules:
+  - host: test.the-independent-friend.de
+    http:
+      paths:
+      - backend:
+          service:
+            name: test-the-independent-friend-de
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - test.the-independent-friend.de
+    secretName: test-the-independent-friend-de-tls
+status:
+  loadBalancer:
+    ingress:
+    - ip: 92.205.23.191
