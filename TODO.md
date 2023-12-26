@@ -1,6 +1,7 @@
 Todos
 =====
 
+- [Check ssl](https://www.ssllabs.com/ssltest/?ref=traefik.io)
 - https://www.pulumi.com/registry/packages/kubernetes/api-docs/helm/v3/chart/
    - [HTTPS with Cert-Manager and Letsencrypt](https://k3s.rocks/https-cert-manager-letsencrypt/)
 - Grafana:
