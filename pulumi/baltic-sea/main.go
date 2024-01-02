@@ -22,7 +22,7 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	err = createDebugContainer(ctx, nameSpaceName)
+	err = goprojects.CreateDebugContainer(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}
@@ -47,7 +47,7 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	err = createTestOlafRadickeDE(ctx, nameSpaceName)
+	err = goprojects.CreateTestOlafRadickeDE(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}

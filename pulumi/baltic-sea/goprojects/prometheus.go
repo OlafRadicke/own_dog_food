@@ -1,11 +1,11 @@
-package main
+package goprojects
 
 import (
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/helm/v3"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func createPrometheus(ctx *pulumi.Context, nameSpaceName string) error {
+func CreatePrometheus(ctx *pulumi.Context, nameSpaceName string) error {
 	_, err := helm.NewChart(ctx, "prometheus", helm.ChartArgs{
 		Namespace: pulumi.String(nameSpaceName),
 		Chart:     pulumi.String("prometheus"),
@@ -28,7 +28,7 @@ func createPrometheus(ctx *pulumi.Context, nameSpaceName string) error {
 	return err
 }
 
-func createPrometheusIngress(ctx *pulumi.Context, nameSpaceName string) error {
+func CreatePrometheusIngress(ctx *pulumi.Context, nameSpaceName string) error {
 	_, err := helm.NewChart(ctx, "prometheus-ingress", helm.ChartArgs{
 		Namespace: pulumi.String(nameSpaceName),
 		Chart:     pulumi.String("tls_routing"),

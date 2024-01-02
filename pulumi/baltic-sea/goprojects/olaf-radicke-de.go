@@ -1,11 +1,11 @@
-package main
+package goprojects
 
 import (
 	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func createOlafRadickeDE(ctx *pulumi.Context, nameSpaceName string) error {
+func CreateOlafRadickeDE(ctx *pulumi.Context, nameSpaceName string) error {
 
 	yamlConfig := &yaml.ConfigFileArgs{
 		File: "yaml/olaf-radicke-de/deployment.yaml",
