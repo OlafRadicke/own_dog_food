@@ -28,26 +28,6 @@ func createTifTest(ctx *pulumi.Context, nameSpaceName string) error {
 	return err
 }
 
-// func createTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
-// 	_, err := helm.NewChart(ctx, "tif-test-ingress", helm.ChartArgs{
-// 		Namespace: pulumi.String(nameSpaceName),
-// 		Chart:     pulumi.String("tls_routing"),
-// 		Version:   pulumi.String("0.3.0"),
-// 		FetchArgs: helm.FetchArgs{
-// 			Repo: pulumi.String("https://olafradicke.github.io/own_dog_food/helm/charts/"),
-// 		},
-// 		Values: pulumi.Map{
-// 			"app": pulumi.Map{
-// 				"name":         pulumi.String("test-the-independent-friend-de"),
-// 				"fqdn":         pulumi.String("test.the-independent-friend.de"),
-// 				"service":      pulumi.String("test-the-independent-friend-de"),
-// 				"service_port": pulumi.Int(80),
-// 			},
-// 		},
-// 	})
-// 	return err
-// }
-
 func createTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
 	yamlConfig := &yaml.ConfigFileArgs{
 		File: "yaml/tif-test/ingress.yaml",

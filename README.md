@@ -27,7 +27,19 @@ Enter:
 ansible-playbook \
   -i ./ansible/hosts.yaml \
   --vault-password-file ~/.ssh/ansible_vault \
-  ./ansible/install_and_update.yaml --check
+  ./ansible/install_and_update.yaml \
+  --check
+```
+
+or
+
+```bash
+ansible-playbook \
+ -i ./ansible/hosts.yaml \
+ --vault-password-file ~/.ssh/ansible_vault \
+ ./ansible/install_and_update.yaml \
+ -l baltic-sea \
+  --check
 ```
 
 Pulumi
