@@ -27,28 +27,7 @@
     wait:                       "yes"
     src:                        "/tmp/cert-manager.yaml"
 
-- name: "add ClusterIssuer {{ k3s_cert_manager_stage }}"
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ global_kubeconfig }}"
-    state:                      "{{ k3s_cert_manager_state }}"
-    namespace:                  "{{ k3s_cert_manager_namespaces }}"
-    definition:
-      apiVersion:               cert-manager.io/v1
-      kind:                     ClusterIssuer
-      metadata:
-        name:                   "{{ k3s_cert_manager_stage }}"
-      spec:
-        acme:
-          email:                "{{ k3s_cert_manager_mail }}"
-          server:               https://acme-v02.api.letsencrypt.org/directory
-          privateKeySecretRef:
-            name:               "{{ k3s_cert_manager_stage }}"
-          solvers:
-            - http01:
-                ingress:
-                  class:        traefik
-
-- name: "add ClusterIssuer {{k3s_cert_manager_production }}"
+- name: "add ClusterIssuer {{ k3s_cert_manager_production }}"
   kubernetes.core.k8s:
     kubeconfig:                 "{{ global_kubeconfig }}"
     state:                      "{{ k3s_cert_manager_state }}"
@@ -68,3 +47,26 @@
             - http01:
                 ingress:
                   class:        traefik
+
+- name: "add ClusterIssuer {{ k3s_cert_manager_stage }}"
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ global_kubeconfig }}"
+    state:                      "{{ k3s_cert_manager_state }}"
+    namespace:                  "{{ k3s_cert_manager_namespaces }}"
+    definition:
+      apiVersion:               cert-manager.io/v1
+      kind:                     ClusterIssuer
+      metadata:
+        name:                   "{{ k3s_cert_manager_stage }}"
+      spec:
+        acme:
+          email:                "{{ k3s_cert_manager_mail }}"
+          server:               https://acme-staging-v02.api.letsencrypt.org/directory
+          privateKeySecretRef:
+            name:               "{{ k3s_cert_manager_stage }}"
+          solvers:
+            - http01:
+                ingress:
+                  class:        traefik
+
+

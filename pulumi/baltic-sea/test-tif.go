@@ -36,5 +36,6 @@ func createTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
 	if err != nil {
 		return err
 	}
-	return err
+
+	return nil
 }

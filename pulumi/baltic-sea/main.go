@@ -41,6 +41,11 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
+	err = createTestOlafRadickeDE(ctx, nameSpaceName)
+	if err != nil {
+		return err
+	}
+
 	// err = createPrometheusIngress(ctx, nameSpaceName)
 	// if err != nil {
 	// 	return err
