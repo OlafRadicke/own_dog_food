@@ -2,6 +2,7 @@ package main
 
 import (
 	// "fmt"
+	"baltic-sea/goprojects"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -37,6 +38,16 @@ var balticSea = func(ctx *pulumi.Context) error {
 	}
 
 	err = createTifTestIngress(ctx, nameSpaceName)
+	if err != nil {
+		return err
+	}
+
+	err = goprojects.CreateTheIndependentFriendDe(ctx, nameSpaceName)
+	if err != nil {
+		return err
+	}
+
+	err = goprojects.CreateTheIndependentFriendDeIngress(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}
