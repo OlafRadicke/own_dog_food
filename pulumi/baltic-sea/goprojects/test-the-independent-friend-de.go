@@ -1,4 +1,4 @@
-package main
+package goprojects
 
 import (
 	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
@@ -6,7 +6,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func createTifTest(ctx *pulumi.Context, nameSpaceName string) error {
+func CreateTifTest(ctx *pulumi.Context, nameSpaceName string) error {
 	_, err := helm.NewChart(ctx, "tif-test", helm.ChartArgs{
 		Namespace: pulumi.String(nameSpaceName),
 		Chart:     pulumi.String("the_independent_friend_de"),
@@ -28,7 +28,7 @@ func createTifTest(ctx *pulumi.Context, nameSpaceName string) error {
 	return err
 }
 
-func createTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
+func CreateTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
 	yamlConfig := &yaml.ConfigFileArgs{
 		File: "yaml/tif-test/ingress.yaml",
 	}

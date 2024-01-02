@@ -27,17 +27,12 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	err = createPrometheus(ctx, nameSpaceName)
+	err = goprojects.CreateTifTest(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}
 
-	err = createTifTest(ctx, nameSpaceName)
-	if err != nil {
-		return err
-	}
-
-	err = createTifTestIngress(ctx, nameSpaceName)
+	err = goprojects.CreateTifTestIngress(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}
@@ -62,17 +57,7 @@ var balticSea = func(ctx *pulumi.Context) error {
 	// 	return err
 	// }
 
-	// err = createKeycloakPostres(ctx, nameSpaceName)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// err = installKeycloakOperator(ctx, nameSpaceName)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// err = createKeycloak(ctx, nameSpaceName)
+	// err = createPrometheus(ctx, nameSpaceName)
 	// if err != nil {
 	// 	return err
 	// }
