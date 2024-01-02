@@ -3,28 +3,28 @@
 apiVersion:               traefik.containo.us/v1alpha1
 kind:                     IngressRoute
 metadata:
-  name:                   the-independent-friend-de
+  name:                   olaf-radicke-de
 spec:
   entryPoints:
                           - web
                           - websecure
   routes:
-    - match:              Host(`the-independent-friend.de`) && PathPrefix(`/`)
+    - match:              Host(`olaf-radicke.de`) && PathPrefix(`/`)
       kind:               Rule
       services:
-        - name:           the-independent-friend-de
+        - name:           olaf-radicke-de
           port:           80
       middlewares:
         - name:           redirect-https-pulumi
   tls:
-    secretName:           the-independent-friend-de
+    secretName:           olaf-radicke-de
 
 ---
 
 apiVersion:               traefik.containo.us/v1alpha1
 kind:                     Middleware
 metadata:
-  name:                   the-independent-friend-de
+  name:                   olaf-radicke-de
 spec:
   redirectScheme:
     scheme:               https
@@ -35,11 +35,11 @@ spec:
 apiVersion:               cert-manager.io/v1
 kind:                     Certificate
 metadata:
-  name:                   the-independent-friend-de
+  name:                   olaf-radicke-de
 spec:
   dnsNames:
-                          - the-independent-friend.de
-  secretName:             the-independent-friend-de
+                          - olaf-radicke.de
+  secretName:             olaf-radicke-de
   issuerRef:
     # name:                 letsencrypt-staging
     name:                 letsencrypt-production
