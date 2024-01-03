@@ -1,46 +1,46 @@
----
+# ---
 
-- name: configure helm chart of traefik (staging)
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      "{{ k3s_deployment_state }}"
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               helm.cattle.io/v1
-      kind:                     HelmChartConfig
-      metadata:
-        name:                   traefik
-        namespace:              kube-system
-      spec:
-        valuesContent: |-
-          additionalArguments:
-            - "--log.level=DEBUG"
-            - "--certificatesresolvers.le.acme.email={{ k3s_acme_email }}"
-            - "--certificatesresolvers.le.acme.storage=/data/acme.json"
-            - "--certificatesresolvers.le.acme.tlschallenge=true"
-            - "--certificatesresolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
-  when: k3s_acme_tier == "staging"
+# - name: configure helm chart of traefik (staging)
+#   kubernetes.core.k8s:
+#     kubeconfig:                 "{{ k3s_kubeconfig }}"
+#     state:                      "{{ k3s_deployment_state }}"
+#     namespace:                  "{{ k3s_namespace }}"
+#     definition:
+#       apiVersion:               helm.cattle.io/v1
+#       kind:                     HelmChartConfig
+#       metadata:
+#         name:                   traefik
+#         namespace:              kube-system
+#       spec:
+#         valuesContent: |-
+#           additionalArguments:
+#             - "--log.level=DEBUG"
+#             - "--certificatesresolvers.le.acme.email={{ k3s_acme_email }}"
+#             - "--certificatesresolvers.le.acme.storage=/data/acme.json"
+#             - "--certificatesresolvers.le.acme.tlschallenge=true"
+#             - "--certificatesresolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
+#   when: k3s_acme_tier == "staging"
 
 
-- name: configure helm chart of traefik (production)
-  kubernetes.core.k8s:
-    kubeconfig:                 "{{ k3s_kubeconfig }}"
-    state:                      "{{ k3s_deployment_state }}"
-    namespace:                  "{{ k3s_namespace }}"
-    definition:
-      apiVersion:               helm.cattle.io/v1
-      kind:                     HelmChartConfig
-      metadata:
-        name:                   traefik
-        namespace:              kube-system
-      spec:
-        valuesContent: |-
-          additionalArguments:
-            - "--log.level=DEBUG"
-            - "--certificatesresolvers.le.acme.email={{ k3s_acme_email }}"
-            - "--certificatesresolvers.le.acme.storage=/data/acme.json"
-            - "--certificatesresolvers.le.acme.tlschallenge=true"
-            - "--certificatesresolvers.le.acme.caServer=https://acme-v02.api.letsencrypt.org/directory"
-  when: k3s_acme_tier == "production"
+# - name: configure helm chart of traefik (production)
+#   kubernetes.core.k8s:
+#     kubeconfig:                 "{{ k3s_kubeconfig }}"
+#     state:                      "{{ k3s_deployment_state }}"
+#     namespace:                  "{{ k3s_namespace }}"
+#     definition:
+#       apiVersion:               helm.cattle.io/v1
+#       kind:                     HelmChartConfig
+#       metadata:
+#         name:                   traefik
+#         namespace:              kube-system
+#       spec:
+#         valuesContent: |-
+#           additionalArguments:
+#             - "--log.level=DEBUG"
+#             - "--certificatesresolvers.le.acme.email={{ k3s_acme_email }}"
+#             - "--certificatesresolvers.le.acme.storage=/data/acme.json"
+#             - "--certificatesresolvers.le.acme.tlschallenge=true"
+#             - "--certificatesresolvers.le.acme.caServer=https://acme-v02.api.letsencrypt.org/directory"
+#   when: k3s_acme_tier == "production"
 
 

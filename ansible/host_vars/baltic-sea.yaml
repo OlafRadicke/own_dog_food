@@ -10,22 +10,6 @@ ansible_python_interpreter:       "/usr/bin/python3"
 global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
 # debug_mode:                       True
 
-# ---- ARGOCD ----
-
-argocd_namespace:                 "argocd"
-argocd_fqdn_match:                "Host(`argocd-mngt.olaf-radicke.de`)"
-argocd_mtls:                      true
-argocd_letsencrypt:               false
-
-# --- K3S ACME ----
-
-k3s_acme_email:                   "briefkasten@olaf-radicke.de"
-k3s_acme_tier:                    "production"
-
-
-# --- K3S ----
-
-
 
 # ---- mTLS ----
 
@@ -36,15 +20,16 @@ k3s_mtls_secreat_namespaces:
   -                               "argocd"
   -                               "monitoring"
 
-#  ---- PROMETHEUS ----
+# ---- ARGOCD ----
 
-prometheus_namespace:             "monitoring"
-prometheus_state:                 "absent" #"present"
-prometheus_pvc_state:             "absent" #"present"
-prometheus_fqdn:                  "prometheus.olaf-radicke.de"
+# argocd_namespace:                 "argocd"
+# argocd_fqdn_match:                "Host(`argocd-mngt.olaf-radicke.de`)"
+# argocd_mtls:                      true
+# argocd_letsencrypt:               false
+
 
 #------ APP OF APP ------------
 
-argocd_raw_apps_state:            "present"
-argocd_raw_apps_gitbranch:        "develop"
-argocd_raw_apps_gitpath:          "argocd-raw-apps/cluster/baltic-sea"
+# argocd_raw_apps_state:            "present"
+# argocd_raw_apps_gitbranch:        "develop"
+# argocd_raw_apps_gitpath:          "argocd-raw-apps/cluster/baltic-sea"
