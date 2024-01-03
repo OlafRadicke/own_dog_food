@@ -1,5 +1,0 @@
----
-
-
-- name:           Include argocd workflow support
-  include_tasks:  argocd_install.yaml

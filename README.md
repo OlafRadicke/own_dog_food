@@ -18,8 +18,8 @@ ansible-galaxy collection install kubernetes.core
 ```
 
 
-Run setup
----------
+Run Ansible setup
+-----------------
 
 Enter:
 
@@ -27,8 +27,45 @@ Enter:
 ansible-playbook \
   -i ./ansible/hosts.yaml \
   --vault-password-file ~/.ssh/ansible_vault \
-  ./ansible/install_and_update.yaml --check
+  ./ansible/install_and_update.yaml \
+  --check
 ```
+
+or
+
+```bash
+ansible-playbook \
+ -i ./ansible/hosts.yaml \
+ --vault-password-file ~/.ssh/ansible_vault \
+ ./ansible/install_and_update.yaml \
+ -l baltic-sea \
+  --check
+```
+
+and
+
+```bash
+ansible-playbook \
+ -i ./ansible/hosts.yaml \
+ --vault-password-file ~/.ssh/ansible_vault \
+ ./ansible/install_and_update.yaml \
+ -l atlantic-ocean \
+  --check
+```
+
+Pulumi
+------
+
+To start Pulumi enter:
+
+```bash
+cd ./pulumi/baltic-sea/
+# check the cluster:
+kubectx
+export PULUMI_CONFIG_PASSPHRASE_FILE=${HOME}/.ssh/pulumi-passwd
+pulumi up
+```
+
 
 Change workflow
 ---------------
@@ -44,70 +81,22 @@ Change workflow
 
 ***Note:*** the helm chart repository is maped onliy on the develop branch!
 
-K3s / podman topics
--------------------
+Other READMEs
+-------------
 
-Generate config file (for generating image pull secret):
-
-```bash
-podman login --authfile ~/.docker/config.json docker.io
-```
-
-
-Troubleshooting
----------------
-
-### Routing
-
-```bash
-sudo kubectl get IngressRoute -A
-```
-
-```bash
-sudo kubectl logs -f traefik-75b67cbc98-bvzzx -n kube-system
-```
-
-### ArgoCD
-
-To find out password enter:
-
-```
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-```
-
-Connect without ingress enter:
-
-```
-sudo kubectl port-forward svc/argocd-server -n argocd 8080:443
-```
-
-```
- ssh -L localhost:8080:localhost:8080 oradicke@92.205.105.117
-```
-
-Known issue
------------
-
-### ArgoCD => ERR_TOO_MANY_REDIRECTS
-
-The install yaml need a change:
-
-```
-*** 10235,10244 ****
---- 10235,10245 ----
-                topologyKey: kubernetes.io/hostname
-              weight: 5
-        containers:
-        - command:
-          - argocd-server
-+         - --insecure
-          env:
-          - name: ARGOCD_SERVER_INSECURE
-            valueFrom:
-              configMapKeyRef:
-                key: server.insecure
-```
-
+- [K3s / podman topics](doc/K3s-podman-topics.md)
+- [Troubleshooting](doc/Troubleshooting.md)
+- [Known issue](doc/Known-issue.md)
+- ***Ansible roles***
+  - [os_config](ansible/roles/os_configs/README.md)
+  - [k3s_cert_manager](ansible/roles/k3s_cert_manager/README.md)
+  - [k3s_install](ansible/roles/k3s_install/README.md)
+  - [k8s_ansible_requirements](ansible/roles/k8s_ansible_requirements/README.md)
+  - [argocd](ansible/roles/argocd/README.md)
+  - [k3s_mtls](ansible/roles/k3s_mtls/README.md)
+  - [grafana](ansible/roles/grafana/README.md)
+  - [Prometheus](ansible/roles/prometheus/README.md)
+- [pulumi]()
 
 Links
 -----

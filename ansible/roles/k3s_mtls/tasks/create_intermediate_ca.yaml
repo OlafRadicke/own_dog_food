@@ -34,5 +34,7 @@
 
 - debug:
     msg:          "{{ shell_result }}"
-  when:           shell_result is defined
+  when:
+    -             shell_result is defined
+    -             debug_mode is defined
 

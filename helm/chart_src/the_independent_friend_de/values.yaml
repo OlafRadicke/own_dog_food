@@ -5,5 +5,5 @@ image:
   repository: "olafradicke/the-independent-friend-de"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag:        "4.4.4"
+  tag:        "4.5.16"
 

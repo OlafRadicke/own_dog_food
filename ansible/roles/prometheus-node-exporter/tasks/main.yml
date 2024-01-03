@@ -1,0 +1,20 @@
+---
+
+- name: Install node exporter
+  ansible.builtin.package:
+    name:     prometheus-node-exporter
+    state:    present
+
+- name: Copy prometheus-node-exporter config
+  ansible.builtin.copy:
+    src:      prometheus-node-exporter
+    dest:     /etc/default/prometheus-node-exporter
+    owner:    root
+    group:    root
+    mode:     u+rw,g-wx,o-wx
+
+- name: Enable and run node exporter
+  ansible.builtin.systemd:
+    name:     prometheus-node-exporter
+    enabled:  yes
+    state:    started

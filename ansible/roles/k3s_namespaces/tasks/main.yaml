@@ -1,0 +1,16 @@
+---
+
+- name:                         create namespaces
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    wait:                       "yes"
+    definition:
+      api_version:              v1
+      kind:                     Namespace
+      metadata:
+        name:                   "{{ item }}"
+        labels:
+          name:                 "{{ item }}"
+  loop:                         "{{ k3s_namespaces }}"
+

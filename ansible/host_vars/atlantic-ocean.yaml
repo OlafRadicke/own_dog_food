@@ -1,0 +1,30 @@
+---
+
+ansible_host:                     92.205.105.117
+ansible_user:                     "oradicke"
+ansible_become:                   yes
+ansible_python_interpreter:       "/usr/bin/python3"
+
+# ---- GLOBAL ----
+
+global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
+
+
+k3s_namespace:                    "live"
+# k3s_deployment_state:           "absent"
+# k3s_mtls_private_pki_reset:              "yes"
+k3s_namespaces:
+  -                               "default"
+  -                               "live"
+  -                               "argocd"
+  -                               "argocd-apps"
+
+# ---- mTLS ----
+
+k3s_refresh_client_certificate:   false
+k3s_refresh_inter_certificate:    false
+k3s_mtls_secreat_namespaces:      []
+  # -                               "live"
+  # -                               "argocd"
+
+

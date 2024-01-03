@@ -16,7 +16,7 @@
 - name:           create mtls-client-ca
   ansible.builtin.shell: |
                   step  certificate create                              \
-                  "mTLS client certificate"                             \
+                  "{{ inventory_hostname_short }} mTLS client certificate" \
                   {{ k3s_mtls_dir }}/mtls-client-ca.crt                 \
                   {{ k3s_mtls_dir }}/mtls-client-ca.key                 \
                   --no-password                                         \
@@ -40,7 +40,9 @@
 
 - debug:
     msg:          "{{ shell_result }}"
-  when:           shell_result is defined
+  when:
+    -             shell_result is defined
+    -             debug_mode is defined
 
 - name:           double check mtls-client-ca.crt
   ansible.builtin.shell: |
@@ -51,7 +53,9 @@
 
 - debug:
     msg:          "{{ shell_result }}"
-  when:           shell_result is defined
+  when:
+    -             shell_result is defined
+    -             debug_mode is defined
 
 - name:           covert client certificate to PKCS#12
   ansible.builtin.shell: |
@@ -66,20 +70,18 @@
   args:
     creates:      "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
 
-- name:           Delete the directory for client certificate download
-  ansible.builtin.file:
-    path:         "{{ k3s_download_dir }}"
-    state:        absent
-  delegate_to:    localhost
-  when:           k3s_refresh_client_certificate == true
-
-- name:           create a directory for client certificate download
-  ansible.builtin.file:
-    path:         "{{ k3s_download_dir }}"
-    state:        directory
-  delegate_to:    localhost
+# - name:           Delete the directory for client certificate download
+#   ansible.builtin.file:
+#     path:         "{{ k3s_download_dir }}"
+#     state:        absent
+#   delegate_to:    localhost
+#   when:           k3s_refresh_client_certificate == true
 
 - name:           download client certificate
   ansible.builtin.fetch:
-    src:          "{{ k3s_mtls_dir }}/mtls-client-ca.p12"
+    src:          "{{ k3s_mtls_dir }}/{{ item }}"
     dest:         "{{ k3s_download_dir }}"
+  loop:
+    - "mtls-client-ca.p12"
+    - "mtls-client-ca.crt"
+    - "mtls-client-ca.key"

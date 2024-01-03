@@ -1,0 +1,46 @@
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   olaf-radicke-de
+spec:
+  entryPoints:
+                          - web
+                          - websecure
+  routes:
+    - match:              Host(`olaf-radicke.de`) && PathPrefix(`/`)
+      kind:               Rule
+      services:
+        - name:           olaf-radicke-de
+          port:           80
+      middlewares:
+        - name:           redirect-https-pulumi
+  tls:
+    secretName:           olaf-radicke-de
+
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     Middleware
+metadata:
+  name:                   olaf-radicke-de
+spec:
+  redirectScheme:
+    scheme:               https
+    permanent:            true
+
+---
+
+apiVersion:               cert-manager.io/v1
+kind:                     Certificate
+metadata:
+  name:                   olaf-radicke-de
+spec:
+  dnsNames:
+                          - olaf-radicke.de
+  secretName:             olaf-radicke-de
+  issuerRef:
+    # name:                 letsencrypt-staging
+    name:                 letsencrypt-production
+    kind:                 ClusterIssuer

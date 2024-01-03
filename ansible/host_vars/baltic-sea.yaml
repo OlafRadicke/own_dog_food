@@ -1,0 +1,35 @@
+---
+
+ansible_host:                     92.205.23.191
+ansible_user:                     "oradicke"
+ansible_become:                   yes
+ansible_python_interpreter:       "/usr/bin/python3"
+
+# ---- GLOBAL ----
+
+global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
+# debug_mode:                       True
+
+
+# ---- mTLS ----
+
+k3s_refresh_client_certificate:   false
+k3s_refresh_inter_certificate:    false
+k3s_mtls_secreat_namespaces:
+  -                               "argocd-apps"
+  -                               "argocd"
+  -                               "monitoring"
+
+# ---- ARGOCD ----
+
+# argocd_namespace:                 "argocd"
+# argocd_fqdn_match:                "Host(`argocd-mngt.olaf-radicke.de`)"
+# argocd_mtls:                      true
+# argocd_letsencrypt:               false
+
+
+#------ APP OF APP ------------
+
+# argocd_raw_apps_state:            "present"
+# argocd_raw_apps_gitbranch:        "develop"
+# argocd_raw_apps_gitpath:          "argocd-raw-apps/cluster/baltic-sea"

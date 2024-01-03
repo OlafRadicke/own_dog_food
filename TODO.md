@@ -1,7 +1,27 @@
 Todos
 =====
 
-- Move routing in helm charts
+- [Check ssl](https://www.ssllabs.com/ssltest/?ref=traefik.io)
+- https://www.pulumi.com/registry/packages/kubernetes/api-docs/helm/v3/chart/
+   - [HTTPS with Cert-Manager and Letsencrypt](https://k3s.rocks/https-cert-manager-letsencrypt/)
+- Grafana:
+  - https://github.com/grafana-operator/grafana-operator/tree/v4.8.0/documentation
+
+- (Grafana) backup https://velero.io/
+- Loki https://loki-operator.dev/docs/prologue/introduction.md/
+- [argocd with app-of-apps pattern](https://medium.com/dzerolabs/turbocharge-argocd-with-app-of-apps-pattern-and-kustomized-helm-ea4993190e7c)
+- CI/CD
+  - Review ArgoCD WorkFlow
+- hardening:
+  - [hardening_guide](https://rancher.com/docs/k3s/latest/en/security/hardening_guide/)
+  - [kubescape](https://github.com/armosec/kubescape)
+  - [kubescape docu](https://hub.armo.cloud/docs)
+  - [YouTube](https://www.youtube.com/watch?v=ZATGiDIDBQk)
+
+
+Won't do
+--------
+
 - CI/CD
   - Tekton
     - [Tekton Pipelines](https://tekton.dev/docs/getting-started/tasks/)
@@ -12,18 +32,8 @@ Todos
     - Build and push containerimages
     - Build and push helm charts
   - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)
-- Prometeus:
-  - PersistentVolumeClaim "prometheus-main-alertmanager" is invalid
-  - Add node-exporter
-- hardening:
-  - [hardening_guide](https://rancher.com/docs/k3s/latest/en/security/hardening_guide/)
-  - [kubescape](https://github.com/armosec/kubescape)
-  - [kubescape docu](https://hub.armo.cloud/docs)
-  - [YouTube](https://www.youtube.com/watch?v=ZATGiDIDBQk)
-- Extended monitoring:
-  - [netways prometheus-operator](https://nws.netways.de/de/tutorials/monitoring-kubernetes-mit-prometheus/)
-  - [prometheus-operator](https://sysdig.com/blog/kubernetes-monitoring-prometheus-operator-part3/)
-
+Promethes
+---------
 
 Example:
 

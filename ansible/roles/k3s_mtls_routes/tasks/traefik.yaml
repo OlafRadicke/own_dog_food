@@ -1,0 +1,171 @@
+---
+
+- name: set TLSOption
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               apiextensions.k8s.io/v1beta1
+      kind:                     TLSOption
+      metadata:
+        name:                   tlsoptions
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        minVersion:             VersionTLS12
+        cipherSuites:
+                                - TLS_CHACHA20_POLY1305_SHA256
+                                - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                                - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                                # - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                                - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                                - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                                - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                                - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+                                # - TLS_AES_256_GCM_SHA384
+                                # - TLS_AES_128_GCM_SHA256
+                                - TLS_FALLBACK_SCSV
+        curvePreferences:
+                                - CurveP521
+                                - CurveP384
+        sniStrict:              false
+
+
+- name: set mTLSOption
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     TLSOption
+      metadata:
+        name:                   m-tls-options
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        minVersion:             VersionTLS12
+        cipherSuites:
+                                - TLS_CHACHA20_POLY1305_SHA256
+                                - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                                - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+                                # - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+                                - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                                - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+                                - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+                                - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+                                # - TLS_AES_256_GCM_SHA384
+                                # - TLS_AES_128_GCM_SHA256
+                                - TLS_FALLBACK_SCSV
+        curvePreferences:
+                                - CurveP521
+                                - CurveP384
+        sniStrict:              false
+        clientAuth:
+          clientAuthType:   RequireAndVerifyClientCert
+          # in PEM format. each file can contain multiple CAs.
+          secretNames:
+            -               mtls-ca
+
+
+- name: create a IngressRoute object for https
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   https-the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:                 "{{ k3s_routes }}"
+        tls:                    {}
+  when:                         k3s_letsencrypt != "yes"
+
+- name: create a IngressRoute object for https with letsencrypt support
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   https-the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:                 "{{ k3s_routes }}"
+        tls:
+          certResolver:         le
+          options:
+            name:               tlsoptions
+            namespace:          "{{ k3s_namespace }}"
+  when:                         k3s_letsencrypt == "yes"
+
+
+- name: create a IngressRoute object for mTLS
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   mtls-routes
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     websecure
+        routes:                 "{{ k3s_routes_mtls }}"
+        tls:
+          options:
+            name:               m-tls-options
+            namespace:          "{{ k3s_namespace }}"
+  when: k3s_routes_mtls is defined
+
+- name: create a Middleware object https-ingressroute
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     Middleware
+      metadata:
+        name:                   middleware-http-to-https
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        redirectScheme:
+          scheme:               https
+          permanent:            true
+
+- name: create a IngressRoute object http-the-independent-friend-de
+  kubernetes.core.k8s:
+    kubeconfig:                 "{{ k3s_kubeconfig }}"
+    state:                      "{{ k3s_deployment_state }}"
+    namespace:                  "{{ k3s_namespace }}"
+    definition:
+      apiVersion:               traefik.containo.us/v1alpha1
+      kind:                     IngressRoute
+      metadata:
+        name:                   the-independent-friend-de
+        namespace:              "{{ k3s_namespace }}"
+      spec:
+        entryPoints:
+          -                     web
+        routes:
+          - match:              Host(`olaf-radicke.de`)
+            kind:               Rule
+            services:
+            - name:             olaf-radicke-de
+              port:             80
+            middlewares:
+            - name:             middleware-http-to-https
+              namespace:        "{{ k3s_namespace }}"
+

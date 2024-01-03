@@ -1,0 +1,20 @@
+---
+
+
+- name: create ArgoCD namespace
+  kubernetes.core.k8s:
+    kubeconfig:         "{{ global_kubeconfig }}"
+    name:               "{{ item }}"
+    api_version:        v1
+    kind:               Namespace
+    state:              present
+    wait:               yes
+  loop:           "{{ k3s_mtls_secreat_namespaces }}"
+
+
+- name: Loop over namespaces
+  include_tasks:  add_secret_for_mtls.yaml
+  loop:           "{{ k3s_mtls_secreat_namespaces }}"
+
+
+

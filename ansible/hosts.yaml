@@ -3,4 +3,7 @@
 
 all:
   hosts:
+    localhost:
     'olaf-radicke-02':
+    atlantic-ocean:
+    baltic-sea:
