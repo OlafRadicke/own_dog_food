@@ -1,0 +1,12 @@
+---
+
+k3s_cert_manager_state:       "present"
+k3s_cert_manager_namespaces:  "cert-manager"
+k3s_cert_manager_stage:       "letsencrypt-staging"
+k3s_cert_manager_production:  "letsencrypt-production"
+k3s_cert_manager_version:     "v1.12.7"
+# k3s_cert_manager_version:     "v1.11.0"
+k3s_cert_manager_download:    "https://github.com/jetstack/cert-manager/releases/download/{{ k3s_cert_manager_version }}/cert-manager.yaml"
+k3s_cert_manager_mail:        "breiefkasten@olaf-radicke.de"
+
+

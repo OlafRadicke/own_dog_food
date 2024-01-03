@@ -1,0 +1,17 @@
+---
+
+apiVersion:               v1
+kind:                     Service
+metadata:
+  name:                   "test-olaf-radicke-de"
+  labels:
+    app:                  "test-olaf-radicke-de"
+spec:
+  type:                   ClusterIP
+  selector:
+    app:                  "test-olaf-radicke-de"
+  ports:
+    - targetPort:         80
+      port:               80
+
+

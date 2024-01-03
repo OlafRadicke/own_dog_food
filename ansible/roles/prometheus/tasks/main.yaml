@@ -1,9 +1,0 @@
----
-
-- include_tasks:  values.yaml
-- include_tasks:  persistent.yaml
-- include_tasks:  core.yaml
-- include_tasks:  routing.yaml
-
-
-

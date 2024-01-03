@@ -1,0 +1,46 @@
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   test-olaf-radicke-de-ingressroute
+spec:
+  entryPoints:
+                          - web
+                          - websecure
+  routes:
+    - match:              Host(`test.olaf-radicke.de`) && PathPrefix(`/`)
+      kind:               Rule
+      services:
+        - name:           test-olaf-radicke-de
+          port:           80
+      middlewares:
+        - name:           redirect-https-pulumi
+  tls:
+    secretName:           test-olaf-radicke-de
+
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     Middleware
+metadata:
+  name:                   test-olaf-radicke-de
+spec:
+  redirectScheme:
+    scheme:               https
+    permanent:            true
+
+---
+
+apiVersion:               cert-manager.io/v1
+kind:                     Certificate
+metadata:
+  name:                   test-olaf-radicke-de
+spec:
+  dnsNames:
+                          - test.olaf-radicke.de
+  secretName:             test-olaf-radicke-de
+  issuerRef:
+    name:                 letsencrypt-staging
+    # name:                 letsencrypt-production
+    kind:                 ClusterIssuer

@@ -1,0 +1,10 @@
+---
+
+
+- name: Include task for namespaces
+  include_tasks: namespaces.yaml
+
+
+- name: Include task for traefik
+  include_tasks: traefik.yaml
+  when: k3s_traefik == "yes"
