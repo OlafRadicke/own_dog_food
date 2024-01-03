@@ -9,12 +9,6 @@ ansible_python_interpreter:       "/usr/bin/python3"
 
 global_kubeconfig:                "/etc/rancher/k3s/k3s.yaml"
 
-# --- K3S ACME ----
-
-k3s_acme_email:                   "briefkasten@olaf-radicke.de"
-k3s_acme_tier:                    "production"
-
-# ---- K3S ----
 
 k3s_namespace:                    "live"
 # k3s_deployment_state:           "absent"
@@ -25,45 +19,12 @@ k3s_namespaces:
   -                               "argocd"
   -                               "argocd-apps"
 
-
 # ---- mTLS ----
 
 k3s_refresh_client_certificate:   false
 k3s_refresh_inter_certificate:    false
-k3s_mtls_secreat_namespaces:
-  -                               "live"
-  -                               "argocd"
-
-# ---- low level projectes ----
-
-k3s_projects:
-  - name:                         "olaf-radicke-de"
-    image:                        "olafradicke/olaf-radicke-de:2.12"
-k3s_routes:
-  - match:                        Host(`olaf-radicke.de`)
-    kind:                         Rule
-    services:
-    - name:                       olaf-radicke-de
-      port:                       80
+k3s_mtls_secreat_namespaces:      []
+  # -                               "live"
+  # -                               "argocd"
 
 
-# ---- ARGOCD ----
-
-argocd_namespace:                 "argocd"
-argocd_fqdn_match:                "Host(`argocd.olaf-radicke.de`)"
-argocd_mtls:                      true
-argocd_letsencrypt:               false
-argocd_reset:                     false
-
-# Anabled argocd apps
-argocd_app_tif_test_state:        "present"
-
-# ---- GitLab runner
-
-gitlab_registration_token:         !vault |
-                $ANSIBLE_VAULT;1.1;AES256
-                63663563316532383138656362663565393265323366356636386166653630303066623830366532
-                3464393266353263313232653264396339613836333133640a663161393638613935313332646435
-                39353364343231366565326662646561346666356262626432313832356564306463356638306265
-                3936336263386230660a663439383864623834653563623433313330326433666334316532316565
-                35393563353431373063353632316137316438623162633334356163376238656531
