@@ -18,8 +18,8 @@ ansible-galaxy collection install kubernetes.core
 ```
 
 
-Run Ansible setup
------------------
+ANSIBLE
+-------
 
 Enter:
 
@@ -53,17 +53,31 @@ ansible-playbook \
   --check
 ```
 
-Pulumi
+PULUMI
 ------
 
-To start Pulumi enter:
+### RUN AND UPDATE
+
+To run Pulumi enter:
 
 ```bash
-cd ./pulumi/baltic-sea/
-# check the cluster:
-kubectx
-export PULUMI_CONFIG_PASSPHRASE_FILE=${HOME}/.ssh/pulumi-passwd
-pulumi up
+pulumi/baltic-sea/run.sh
+```
+
+or
+
+```bash
+pulumi/atlantic-ocean/run.sh
+```
+
+### BACKEND
+
+As backend is S3 from Google Cloud in use: https://cloud.google.com/
+
+G.g.f:
+
+```bash
+gcloud auth application-default login
 ```
 
 

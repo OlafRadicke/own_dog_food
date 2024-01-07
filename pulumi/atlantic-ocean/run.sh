@@ -7,16 +7,17 @@ set -u
 export PULUMI_CONFIG_PASSPHRASE_FILE=${HOME}/.ssh/pulumi-passwd
 START_PWD=$(pwd)
 
-cd pulumi/baltic-sea
+cd pulumi/atlantic-ocean
 
-kubectx baltic-sea
+kubectx atlantic-ocean
 kubectl get node
 
+go mod tidy
 # go get -u
-# go mod tidy
 
-pulumi login
-gs://h9jedp3jch53psor
+
+gcloud config set project pulumi-prod
+pulumi login gs://pulumi-atlantic-ocean
 # pulumi up --yes
 pulumi up
 

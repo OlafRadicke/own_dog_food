@@ -1,9 +1,3 @@
 encryptionsalt: v1:d/282mn5gfA=:v1:wDZl4UWMsrIVjMV3:k3LZwsshFcSdioeP1wqxr7RTVPkDRg==
 config:
   baltic-sea:foo: bar
-  baltic-sea:foox:
-    secure: v1:l5OHOY+J0+OiAWUf:W3pwlXUcOYj0NlFiwJ4quR8UwD0=
-  baltic-sea:fooy:
-    secure: v1:QqrkB1NtnXTZV2bU:nhL2FSSjrS3PsmqO2q80aH76WvM=
-  baltic-sea:oauth2ProxyclientSecret:
-    secure: v1:F6yKopkB4oRCp7Yt:dpdt1/QQAtD4TnKeus9ZCoxMrXHRgi+7
