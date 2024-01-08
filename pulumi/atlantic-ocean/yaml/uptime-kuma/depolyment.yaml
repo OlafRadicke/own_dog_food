@@ -1,7 +1,5 @@
 ---
 
-# A pod for debogging
-
 apiVersion:                 apps/v1
 kind:                       Deployment
 metadata:
@@ -40,54 +38,3 @@ spec:
         - name:           uptime-kuma-app-data
           persistentVolumeClaim:
             claimName:    pvc-uptime-kuma
-
----
-
-kind:                       PersistentVolumeClaim
-apiVersion:                 v1
-metadata:
-  name:                     pvc-uptime-kuma
-  namespace:                pulumi-apps
-spec:
-  accessModes:
-    -                       ReadWriteOnce
-  storageClassName:         local-storage
-  resources:
-    requests:
-      storage:              100Mi
-
-
----
-
-
-apiVersion:                 v1
-kind:                       PersistentVolume
-metadata:
-  name:                     local-pv
-spec:
-  capacity:
-    storage:                500Mi
-  volumeMode:               Filesystem
-  accessModes:
-    -                       ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
-  storageClassName:         local-storage
-  local:
-    path:                   /srv/k8s-pvc
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key:              kubernetes.io/hostname
-          operator:         In
-          values:
-          -                 atlantic-ocean
-
----
-
-kind:                       StorageClass
-apiVersion:                 storage.k8s.io/v1
-metadata:
-  name:                     local-storage
-provisioner:                kubernetes.io/no-provisioner
-volumeBindingMode:          WaitForFirstConsumer

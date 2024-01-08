@@ -1,0 +1,15 @@
+---
+
+kind:                       PersistentVolumeClaim
+apiVersion:                 v1
+metadata:
+  name:                     pvc-uptime-kuma
+  namespace:                pulumi-apps
+spec:
+  accessModes:
+    -                       ReadWriteOnce
+  storageClassName:         local-storage
+  resources:
+    requests:
+      storage:              100Mi
+

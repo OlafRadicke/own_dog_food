@@ -1,0 +1,7 @@
+---
+
+- name: Create a directory for local storage class
+  ansible.builtin.file:
+    path:     /srv/k8s-pvc
+    state:    directory
+    mode:     '0755'
