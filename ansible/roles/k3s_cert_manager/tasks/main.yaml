@@ -26,6 +26,7 @@
     state:                      "{{ k3s_cert_manager_state }}"
     wait:                       "yes"
     src:                        "/tmp/cert-manager.yaml"
+  when:                         not ansible_check_mode
 
 - name: "add ClusterIssuer {{ k3s_cert_manager_production }}"
   kubernetes.core.k8s:
@@ -47,6 +48,7 @@
             - http01:
                 ingress:
                   class:        traefik
+  when:                         not ansible_check_mode
 
 - name: "add ClusterIssuer {{ k3s_cert_manager_stage }}"
   kubernetes.core.k8s:
@@ -68,5 +70,6 @@
             - http01:
                 ingress:
                   class:        traefik
+  when:                         not ansible_check_mode
 
 

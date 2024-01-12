@@ -1,0 +1,45 @@
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   kuma-olaf-radicke-de
+spec:
+  entryPoints:
+                          - websecure
+  routes:
+    - match:              Host(`kuma.olaf-radicke.de`) && PathPrefix(`/`)
+      kind:               Rule
+      services:
+        - name:           uptime-kuma
+          port:           80
+      middlewares:
+        - name:           kuma-olaf-radicke-de
+  tls:
+    secretName:           kuma-olaf-radicke-de
+
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     Middleware
+metadata:
+  name:                   kuma-olaf-radicke-de
+spec:
+  redirectScheme:
+    scheme:               https
+    permanent:            true
+
+---
+
+apiVersion:               cert-manager.io/v1
+kind:                     Certificate
+metadata:
+  name:                   kuma-olaf-radicke-de
+spec:
+  dnsNames:
+                          - kuma.olaf-radicke.de
+  secretName:             kuma-olaf-radicke-de
+  issuerRef:
+    name:                 letsencrypt-staging
+    # name:                 letsencrypt-production
+    kind:                 ClusterIssuer

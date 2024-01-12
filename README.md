@@ -7,65 +7,6 @@ Mission
 *"Eating your (my) own dog food"* :sweat_smile:
 
 
-Pre install requirements
-------------------------
-
-Enter to install needed collections:
-
-
-```bash
-ansible-galaxy collection install kubernetes.core
-```
-
-
-Run Ansible setup
------------------
-
-Enter:
-
-```
-ansible-playbook \
-  -i ./ansible/hosts.yaml \
-  --vault-password-file ~/.ssh/ansible_vault \
-  ./ansible/install_and_update.yaml \
-  --check
-```
-
-or
-
-```bash
-ansible-playbook \
- -i ./ansible/hosts.yaml \
- --vault-password-file ~/.ssh/ansible_vault \
- ./ansible/install_and_update.yaml \
- -l baltic-sea \
-  --check
-```
-
-and
-
-```bash
-ansible-playbook \
- -i ./ansible/hosts.yaml \
- --vault-password-file ~/.ssh/ansible_vault \
- ./ansible/install_and_update.yaml \
- -l atlantic-ocean \
-  --check
-```
-
-Pulumi
-------
-
-To start Pulumi enter:
-
-```bash
-cd ./pulumi/baltic-sea/
-# check the cluster:
-kubectx
-export PULUMI_CONFIG_PASSPHRASE_FILE=${HOME}/.ssh/pulumi-passwd
-pulumi up
-```
-
 
 Change workflow
 ---------------
@@ -81,22 +22,11 @@ Change workflow
 
 ***Note:*** the helm chart repository is maped onliy on the develop branch!
 
-Other READMEs
--------------
+EXTENDED DOKUMENTATION
+----------------------
 
-- [K3s / podman topics](doc/K3s-podman-topics.md)
-- [Troubleshooting](doc/Troubleshooting.md)
-- [Known issue](doc/Known-issue.md)
-- ***Ansible roles***
-  - [os_config](ansible/roles/os_configs/README.md)
-  - [k3s_cert_manager](ansible/roles/k3s_cert_manager/README.md)
-  - [k3s_install](ansible/roles/k3s_install/README.md)
-  - [k8s_ansible_requirements](ansible/roles/k8s_ansible_requirements/README.md)
-  - [argocd](ansible/roles/argocd/README.md)
-  - [k3s_mtls](ansible/roles/k3s_mtls/README.md)
-  - [grafana](ansible/roles/grafana/README.md)
-  - [Prometheus](ansible/roles/prometheus/README.md)
-- [pulumi]()
+See [doc/_index.md](doc/_index.md)
+
 
 Links
 -----

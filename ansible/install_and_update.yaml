@@ -21,9 +21,9 @@
 - name: Run all steps
   hosts: atlantic-ocean
   roles:
-#      - ping
-      - os_configs
-      - k3s_install
-      - k8s_ansible_requirements
+    - os_configs
+    - k3s_install
+    - k8s_ansible_requirements
+    - k3s_cert_manager
 #      - k3s_mtls
 #      - prometheus-node-exporter
