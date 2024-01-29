@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {},
+	"functions": [],
+	"variables": {},
+	"resources": [
+		{
+			"type": "Microsoft.DocumentDB/databaseAccounts/apis/databases",
+			"name": "pulumi-test-database",
+			"apiVersion": "2016-03-31",
+			"properties": {
+				"resource": {
+					"id": "pulumi-test-database"
+				},
+				"options": {
+					"throughput": "400"
+				}
+			}
+		}
+	],
+	"outputs": {}
+}
