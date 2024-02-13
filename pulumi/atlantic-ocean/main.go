@@ -1,9 +1,7 @@
 package main
 
 import (
-	// "fmt"
 	"atlantic-ocean/gocode"
-	// "github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 

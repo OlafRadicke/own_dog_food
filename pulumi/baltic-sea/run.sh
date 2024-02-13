@@ -15,8 +15,7 @@ kubectl get node
 # go get -u
 # go mod tidy
 
-pulumi login
-gs://h9jedp3jch53psor
+pulumi login gs://h9jedp3jch53psor
 # pulumi up --yes
 pulumi up
 

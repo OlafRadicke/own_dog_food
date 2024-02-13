@@ -1,0 +1,3 @@
+name: azure
+runtime: go
+description: IaC for Azure
