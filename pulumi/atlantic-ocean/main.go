@@ -28,6 +28,11 @@ var atlanticOcean = func(ctx *pulumi.Context) error {
 		return err
 	}
 
+	err = gocode.Hugo(ctx, nameSpaceName)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -1,0 +1,18 @@
+---
+
+apiVersion: hugo.gohugo.io/v1alpha1
+kind: Hugo
+metadata:
+  labels:
+    app.kubernetes.io/name: hugo
+    app.kubernetes.io/instance: hugo-test-01
+    app.kubernetes.io/part-of: hugo-operator
+    app.kubernetes.io/managed-by: pulumi
+    app.kubernetes.io/created-by: hugo-operator
+  name: hugo-test-01
+spec:
+  replicas_size: 1
+  git:
+    url: https://github.com/OlafRadicke/the-independent-friend-static/archive/refs/tags/4.6.2.tar.gz
+    protocol: tar
+    path: the-independent-friend-static-4.6.2/
