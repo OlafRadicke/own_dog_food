@@ -29,6 +29,6 @@ fi
 gcloud config set project pulumi-prod
 pulumi login gs://pulumi-azure
 # pulumi up --yes
-pulumi up --stack prod
+pulumi up --debug --stack prod
 
 cd ${START_PWD}
