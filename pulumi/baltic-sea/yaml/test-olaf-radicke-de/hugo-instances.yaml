@@ -1,0 +1,20 @@
+---
+
+apiVersion: hugo.gohugo.io/v1alpha1
+kind: Hugo
+metadata:
+  labels:
+    app.kubernetes.io/name: hugo
+    app.kubernetes.io/instance: test-olaf-radicke-de
+    app.kubernetes.io/part-of: hugo-operator
+    app.kubernetes.io/managed-by: pulumi
+    app.kubernetes.io/created-by: hugo-operator
+  name: test-olaf-radicke-de
+spec:
+  replicas_size:    1
+  archive:
+    url:            "https://github.com/OlafRadicke/olaf-radicke-de/archive/refs/tags/4.3.tar.gz"
+    format:         "tar.gz"
+    dir:            "olaf-radicke-de-4.3"
+    hugo_dir:       "/"
+    hugo_base_url:  "https://test.olaf-radicke.de"
