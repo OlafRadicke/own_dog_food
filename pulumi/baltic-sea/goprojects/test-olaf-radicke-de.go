@@ -8,25 +8,9 @@ import (
 func CreateTestOlafRadickeDE(ctx *pulumi.Context, nameSpaceName string) error {
 
 	yamlConfig := &yaml.ConfigFileArgs{
-		File: "yaml/test-olaf-radicke-de/deployment.yaml",
+		File: "yaml/test-olaf-radicke-de/*.yaml",
 	}
 	_, err := yaml.NewConfigFile(ctx, "test-olaf-radicke-de-deployment", yamlConfig)
-	if err != nil {
-		return err
-	}
-
-	yamlConfig = &yaml.ConfigFileArgs{
-		File: "yaml/test-olaf-radicke-de/ingress.yaml",
-	}
-	_, err = yaml.NewConfigFile(ctx, "test-olaf-radicke-de-ingress", yamlConfig)
-	if err != nil {
-		return err
-	}
-
-	yamlConfig = &yaml.ConfigFileArgs{
-		File: "yaml/test-olaf-radicke-de/service.yaml",
-	}
-	_, err = yaml.NewConfigFile(ctx, "test-olaf-radicke-de-service", yamlConfig)
 	if err != nil {
 		return err
 	}

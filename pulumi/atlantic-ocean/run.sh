@@ -17,7 +17,7 @@ else
 	# INSTALL_AND_UPDATE_GO_MODS="TRUE"
 fi
 
-cd pulumi/atlantic-ocean
+cd ${WORK_DIR}
 
 kubectx atlantic-ocean
 kubectl get node
