@@ -346,7 +346,7 @@ spec:
         env:
         - name: ANSIBLE_GATHERING
           value: explicit
-        image: docker.io/olafradicke/hugo-operator:0.0.18
+        image: docker.io/olafradicke/hugo-operator:0.0.19
         livenessProbe:
           httpGet:
             path: /healthz
