@@ -1,7 +1,6 @@
 package goprojects
 
 import (
-	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/helm/v3"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -28,14 +27,14 @@ func CreateTifTest(ctx *pulumi.Context, nameSpaceName string) error {
 	return err
 }
 
-func CreateTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
-	yamlConfig := &yaml.ConfigFileArgs{
-		File: "yaml/ingress/test-the-independent-friend-de.yaml",
-	}
-	_, err := yaml.NewConfigFile(ctx, "test-the-independent-friend-de", yamlConfig)
-	if err != nil {
-		return err
-	}
+// func CreateTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
+// 	yamlConfig := &yaml.ConfigFileArgs{
+// 		File: "yaml/ingress/test-the-independent-friend-de.yaml",
+// 	}
+// 	_, err := yaml.NewConfigFile(ctx, "test-the-independent-friend-de", yamlConfig)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }

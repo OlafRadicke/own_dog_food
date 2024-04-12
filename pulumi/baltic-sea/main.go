@@ -32,20 +32,20 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	err = goprojects.CreateTifTestIngress(ctx, nameSpaceName)
-	if err != nil {
-		return err
-	}
+	// err = goprojects.CreateTifTestIngress(ctx, nameSpaceName)
+	// if err != nil {
+	// 	return err
+	// }
 
 	err = goprojects.CreateTheIndependentFriendDe(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}
 
-	err = goprojects.CreateTheIndependentFriendDeIngress(ctx, nameSpaceName)
-	if err != nil {
-		return err
-	}
+	// err = goprojects.CreateTheIndependentFriendDeIngress(ctx, nameSpaceName)
+	// if err != nil {
+	// 	return err
+	// }
 
 	err = goprojects.CreateTestOlafRadickeDE(ctx, nameSpaceName)
 	if err != nil {
@@ -53,6 +53,11 @@ var balticSea = func(ctx *pulumi.Context) error {
 	}
 
 	err = goprojects.CreateOlafRadickeDE(ctx, nameSpaceName)
+	if err != nil {
+		return err
+	}
+
+	err = goprojects.CreateIngress(ctx, nameSpaceName)
 	if err != nil {
 		return err
 	}

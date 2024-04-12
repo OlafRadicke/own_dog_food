@@ -1,7 +1,6 @@
 package goprojects
 
 import (
-	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/helm/v3"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -28,14 +27,14 @@ func CreateTheIndependentFriendDe(ctx *pulumi.Context, nameSpaceName string) err
 	return err
 }
 
-func CreateTheIndependentFriendDeIngress(ctx *pulumi.Context, nameSpaceName string) error {
-	yamlConfig := &yaml.ConfigFileArgs{
-		File: "yaml/the-independent-friend-de/ingress.yaml",
-	}
-	_, err := yaml.NewConfigFile(ctx, "the-independent-friend-de-ingress", yamlConfig)
-	if err != nil {
-		return err
-	}
+// func CreateTheIndependentFriendDeIngress(ctx *pulumi.Context, nameSpaceName string) error {
+// 	yamlConfig := &yaml.ConfigFileArgs{
+// 		File: "yaml/the-independent-friend-de/ingress.yaml",
+// 	}
+// 	_, err := yaml.NewConfigFile(ctx, "the-independent-friend-de-ingress", yamlConfig)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
