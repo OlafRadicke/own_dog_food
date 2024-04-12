@@ -21,7 +21,7 @@ func CreateTheIndependentFriendDe(ctx *pulumi.Context, nameSpaceName string) err
 			"image": pulumi.Map{
 				"repository": pulumi.String("olafradicke/the-independent-friend-de"),
 				"pullPolicy": pulumi.String("IfNotPresent"),
-				"tag":        pulumi.String("4.5.16"),
+				"tag":        pulumi.String("4.8.3"),
 			},
 		},
 	})

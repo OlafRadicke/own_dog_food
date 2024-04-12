@@ -15,7 +15,7 @@ spec:
         - name:           olaf-radicke-de
           port:           80
       middlewares:
-        - name:           redirect-https-pulumi
+        - name:           olaf-radicke-de
   tls:
     secretName:           olaf-radicke-de
 

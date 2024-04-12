@@ -7,7 +7,7 @@ import (
 )
 
 func CreateTifTest(ctx *pulumi.Context, nameSpaceName string) error {
-	_, err := helm.NewChart(ctx, "tif-test", helm.ChartArgs{
+	_, err := helm.NewChart(ctx, "test-the-independent-friend-de", helm.ChartArgs{
 		Namespace: pulumi.String(nameSpaceName),
 		Chart:     pulumi.String("the_independent_friend_de"),
 		Version:   pulumi.String("0.1.1"),
@@ -21,7 +21,7 @@ func CreateTifTest(ctx *pulumi.Context, nameSpaceName string) error {
 			"image": pulumi.Map{
 				"repository": pulumi.String("olafradicke/the-independent-friend-de"),
 				"pullPolicy": pulumi.String("IfNotPresent"),
-				"tag":        pulumi.String("4.5.16"),
+				"tag":        pulumi.String("4.8.2"),
 			},
 		},
 	})
@@ -30,9 +30,9 @@ func CreateTifTest(ctx *pulumi.Context, nameSpaceName string) error {
 
 func CreateTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
 	yamlConfig := &yaml.ConfigFileArgs{
-		File: "yaml/tif-test/ingress.yaml",
+		File: "yaml/ingress/test-the-independent-friend-de.yaml",
 	}
-	_, err := yaml.NewConfigFile(ctx, "tif-test-ingress", yamlConfig)
+	_, err := yaml.NewConfigFile(ctx, "test-the-independent-friend-de", yamlConfig)
 	if err != nil {
 		return err
 	}

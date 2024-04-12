@@ -32,10 +32,10 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	// err = goprojects.CreateTifTestIngress(ctx, nameSpaceName)
-	// if err != nil {
-	// 	return err
-	// }
+	err = goprojects.CreateTifTestIngress(ctx, nameSpaceName)
+	if err != nil {
+		return err
+	}
 
 	err = goprojects.CreateTheIndependentFriendDe(ctx, nameSpaceName)
 	if err != nil {
@@ -57,10 +57,10 @@ var balticSea = func(ctx *pulumi.Context) error {
 		return err
 	}
 
-	err = goprojects.Hugo(ctx, nameSpaceName)
-	if err != nil {
-		return err
-	}
+	// err = goprojects.Hugo(ctx, nameSpaceName)
+	// if err != nil {
+	// 	return err
+	// }
 
 	// err = createPrometheusIngress(ctx, nameSpaceName)
 	// if err != nil {
