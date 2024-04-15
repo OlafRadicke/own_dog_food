@@ -17,6 +17,6 @@ kubectl get node
 
 pulumi login gs://h9jedp3jch53psor
 # pulumi up --yes
-pulumi up
+pulumi --stack prod up
 
 cd ${START_PWD}

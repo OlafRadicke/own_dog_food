@@ -20,21 +20,9 @@ func CreateTheIndependentFriendDe(ctx *pulumi.Context, nameSpaceName string) err
 			"image": pulumi.Map{
 				"repository": pulumi.String("olafradicke/the-independent-friend-de"),
 				"pullPolicy": pulumi.String("IfNotPresent"),
-				"tag":        pulumi.String("4.8.3"),
+				"tag":        pulumi.String("4.8.4"),
 			},
 		},
 	})
 	return err
 }
-
-// func CreateTheIndependentFriendDeIngress(ctx *pulumi.Context, nameSpaceName string) error {
-// 	yamlConfig := &yaml.ConfigFileArgs{
-// 		File: "yaml/the-independent-friend-de/ingress.yaml",
-// 	}
-// 	_, err := yaml.NewConfigFile(ctx, "the-independent-friend-de-ingress", yamlConfig)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	return nil
-// }

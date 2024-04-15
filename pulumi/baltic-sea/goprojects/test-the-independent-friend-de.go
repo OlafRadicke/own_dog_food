@@ -26,15 +26,3 @@ func CreateTifTest(ctx *pulumi.Context, nameSpaceName string) error {
 	})
 	return err
 }
-
-// func CreateTifTestIngress(ctx *pulumi.Context, nameSpaceName string) error {
-// 	yamlConfig := &yaml.ConfigFileArgs{
-// 		File: "yaml/ingress/test-the-independent-friend-de.yaml",
-// 	}
-// 	_, err := yaml.NewConfigFile(ctx, "test-the-independent-friend-de", yamlConfig)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	return nil
-// }
