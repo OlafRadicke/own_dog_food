@@ -7,6 +7,26 @@ metadata:
 spec:
   entryPoints:
                           - web
+  routes:
+    - match:              Host(`olaf-radicke.de`)
+      kind:               Rule
+      # services:
+      #   - name:           olaf-radicke-de
+      #     port:           80
+      middlewares:
+        - name:           olaf-radicke-de
+  tls:
+    secretName:           olaf-radicke-de
+
+
+---
+
+apiVersion:               traefik.containo.us/v1alpha1
+kind:                     IngressRoute
+metadata:
+  name:                   https-olaf-radicke-de
+spec:
+  entryPoints:
                           - websecure
   routes:
     - match:              Host(`olaf-radicke.de`) && PathPrefix(`/`)
@@ -14,8 +34,6 @@ spec:
       services:
         - name:           olaf-radicke-de
           port:           80
-      middlewares:
-        - name:           olaf-radicke-de
   tls:
     secretName:           olaf-radicke-de
 
