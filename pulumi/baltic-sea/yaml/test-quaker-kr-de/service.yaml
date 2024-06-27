@@ -1,0 +1,17 @@
+---
+
+apiVersion:               v1
+kind:                     Service
+metadata:
+  name:                   "test-quaker-kr-de"
+  labels:
+    app:                  "test-quaker-kr-de"
+spec:
+  type:                   ClusterIP
+  selector:
+    app:                  "test-quaker-kr-de"
+  ports:
+    - targetPort:         80
+      port:               80
+
+
