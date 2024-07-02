@@ -27,4 +27,3 @@ k3s_mtls_secreat_namespaces:      []
   # -                               "live"
   # -                               "argocd"
 
-
