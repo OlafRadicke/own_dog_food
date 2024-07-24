@@ -1,61 +1,61 @@
----
+# ---
 
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     IngressRoute
-metadata:
-  name:                   test-quaker-kr-de-ingressroute
-spec:
-  entryPoints:
-                          - web
-  routes:
-    - match:              Host(`test.quaker-kr.de`)
-      kind:               Rule
-      services:
-        - name:           test-quaker-kr-de
-          port:           80
-      middlewares:
-        - name:           redirect-https-pulumi
+# apiVersion:               traefik.containo.us/v1alpha1
+# kind:                     IngressRoute
+# metadata:
+#   name:                   test-quaker-kr-de-ingressroute
+# spec:
+#   entryPoints:
+#                           - web
+#   routes:
+#     - match:              Host(`test.quaker-kr.de`)
+#       kind:               Rule
+#       services:
+#         - name:           test-quaker-kr-de
+#           port:           80
+#       middlewares:
+#         - name:           redirect-https-pulumi
 
----
+# ---
 
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     IngressRoute
-metadata:
-  name:                   https-test-quaker-kr-de-ingressroute
-spec:
-  entryPoints:
-                          - websecure
-  routes:
-    - match:              Host(`test.quaker-kr.de`) && PathPrefix(`/`)
-      kind:               Rule
-      services:
-        - name:           test-quaker-kr-de
-          port:           80
-  tls:
-    secretName:           test-quaker-kr-de
+# apiVersion:               traefik.containo.us/v1alpha1
+# kind:                     IngressRoute
+# metadata:
+#   name:                   https-test-quaker-kr-de-ingressroute
+# spec:
+#   entryPoints:
+#                           - websecure
+#   routes:
+#     - match:              Host(`test.quaker-kr.de`) && PathPrefix(`/`)
+#       kind:               Rule
+#       services:
+#         - name:           test-quaker-kr-de
+#           port:           80
+#   tls:
+#     secretName:           test-quaker-kr-de
 
----
+# ---
 
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     Middleware
-metadata:
-  name:                   test-quaker-kr-de
-spec:
-  redirectScheme:
-    scheme:               https
-    permanent:            true
+# apiVersion:               traefik.containo.us/v1alpha1
+# kind:                     Middleware
+# metadata:
+#   name:                   test-quaker-kr-de
+# spec:
+#   redirectScheme:
+#     scheme:               https
+#     permanent:            true
 
----
+# ---
 
-apiVersion:               cert-manager.io/v1
-kind:                     Certificate
-metadata:
-  name:                   test-quaker-kr-de
-spec:
-  dnsNames:
-                          - test.quaker-kr.de
-  secretName:             test-quaker-kr-de
-  issuerRef:
-    # name:                 letsencrypt-staging
-    name:                 letsencrypt-production
-    kind:                 ClusterIssuer
+# apiVersion:               cert-manager.io/v1
+# kind:                     Certificate
+# metadata:
+#   name:                   test-quaker-kr-de
+# spec:
+#   dnsNames:
+#                           - test.quaker-kr.de
+#   secretName:             test-quaker-kr-de
+#   issuerRef:
+#     # name:                 letsencrypt-staging
+#     name:                 letsencrypt-production
+#     kind:                 ClusterIssuer
