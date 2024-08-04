@@ -15,6 +15,7 @@ kubectl get node
 # go get -u
 # go mod tidy
 
+gcloud auth application-default set-quota-project pulumi-prod
 pulumi login gs://h9jedp3jch53psor
 # pulumi up --yes
 pulumi --stack prod up

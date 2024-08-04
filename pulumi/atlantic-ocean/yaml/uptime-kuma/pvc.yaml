@@ -3,13 +3,12 @@
 kind:                       PersistentVolumeClaim
 apiVersion:                 v1
 metadata:
-  name:                     pvc-uptime-kuma
+  name:                     uptime-kuma
   namespace:                pulumi-apps
 spec:
   accessModes:
     -                       ReadWriteOnce
-  storageClassName:         local-storage
+  storageClassName:         local-storage-uptime-kuma
   resources:
     requests:
       storage:              100Mi
-

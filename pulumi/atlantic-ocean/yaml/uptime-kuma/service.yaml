@@ -12,3 +12,19 @@ spec:
       port:                 80
       targetPort:           web-ui
       type:                 ClusterIP
+
+Olaf Radicke, [1/29/23 7:36 PM]
+/mybots
+
+Olaf Radicke, [1/29/23 7:40 PM]
+/getid
+
+BotFather, [8/4/24 1:04 PM]
+Unrecognized command. Say what?
+
+BotFather, [8/4/24 1:05 PM]
+Here is the token for bot grafana @zYi3skR75XSgjg_bot:
+
+5966119037:AAFbXDdnsJ3PJbl8qZirlHElWbYghgTjS-Q
+
+https://api.telegram.org/zYi3skR75XSgjg_bot:5966119037:AAFbXDdnsJ3PJbl8qZirlHElWbYghgTjS-Q/getUpdates

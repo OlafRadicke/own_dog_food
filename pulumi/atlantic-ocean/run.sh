@@ -30,7 +30,7 @@ else
 	echo "don't update go modules."
 fi
 
-
+gcloud auth application-default set-quota-project pulumi-prod
 gcloud config set project pulumi-prod
 pulumi login gs://pulumi-atlantic-ocean
 # pulumi up --yes
