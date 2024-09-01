@@ -14,7 +14,14 @@ spec:
         - name:           quaker-kr-de
           port:           80
       middlewares:
-        - name:           redirect-https-pulumi
+        - name:           quaker-kr-de
+    # - match:              Host(`test.quaker-kr.de`) && PathPrefix(`/`)
+    #   kind:               Rule
+    #   services:
+    #     - name:           quaker-kr-de
+    #       port:           80
+    #   middlewares:
+    #     - name:           quaker-kr-de
 
 ---
 
