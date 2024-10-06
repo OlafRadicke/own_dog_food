@@ -56,6 +56,6 @@
 #                           - test.quaker-kr.de
 #   secretName:             test-quaker-kr-de
 #   issuerRef:
-#     # name:                 letsencrypt-staging
-#     name:                 letsencrypt-production
+#     name:                 letsencrypt-staging
+#     # name:                 letsencrypt-production
 #     kind:                 ClusterIssuer

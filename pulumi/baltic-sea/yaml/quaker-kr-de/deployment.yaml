@@ -7,6 +7,7 @@ metadata:
   labels:
     app:                  "quaker-kr-de"
 spec:
+  replicas:               2
   selector:
     matchLabels:
       app:                "quaker-kr-de"
@@ -17,7 +18,7 @@ spec:
     spec:
       containers:
       - name:             "quaker-kr-de"
-        image:            "olafradicke/quaker-kr-de:0.1.21"
+        image:            "olafradicke/quaker-kr-de:0.2.7"
         imagePullPolicy:  IfNotPresent
         resources:
           requests:
