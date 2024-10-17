@@ -1,7 +1,7 @@
 DOCUMENTATION
 =============
 
-- [Ansible](../doc/ansible.md)
+- [Ansible](ansible.md)
   - [os_config](../ansible/roles/os_configs/README.md)
   - [k3s_cert_manager](../ansible/roles/k3s_cert_manager/README.md)
   - [k3s_install](../ansible/roles/k3s_install/README.md)
@@ -10,8 +10,8 @@ DOCUMENTATION
   - [k3s_mtls](../ansible/roles/k3s_mtls/README.md)
   - [grafana](../ansible/roles/grafana/README.md)
   - [Prometheus](../ansible/roles/prometheus/README.md)
-- [Pulumi](../doc/pulumi.mmd)
-- [K8s/K3s](../doc/kubernets.md)
-- [Podman](../doc/podman.md)
-- [Troubleshooting](../doc/Troubleshooting.md)
-- [Known issue](../doc/Known-issue.md)
+- [Pulumi](pulumi.mmd)
+- [K8s/K3s](kubernets.md)
+- [Podman](podman.md)
+- [Troubleshooting](Troubleshooting.md)
+- [Known issue](Known-issue.md)
