@@ -18,7 +18,7 @@ spec:
       containers:
       - name:             "olaf-radicke-de"
         # image:            "olafradicke/olaf-radicke-de:2.12"
-        image:            "olafradicke/olaf-radicke-de:6.0"
+        image:            "olafradicke/olaf-radicke-de:7.1"
         imagePullPolicy:  IfNotPresent
         resources:
           requests:
