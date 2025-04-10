@@ -27,3 +27,8 @@
     - k3s_cert_manager
 #      - k3s_mtls
 #      - prometheus-node-exporter
+
+- name: Run configuration of irish-sea
+  hosts: irish-sea
+  roles:
+    - os_configs

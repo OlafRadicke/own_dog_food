@@ -52,3 +52,15 @@ ansible-playbook \
  -l atlantic-ocean \
   --check
 ```
+
+
+and
+
+```bash
+ansible-playbook \
+ -i ./ansible/hosts.yaml \
+ --vault-password-file ~/.ssh/ansible_vault \
+ ./ansible/install_and_update.yaml \
+ -l irish-sea \
+  --check
+```

@@ -6,8 +6,8 @@
 - name: Setup timezone
   include_tasks:  timezone.yaml
 
-- name: Setup hostname
-  include_tasks:  hostname.yaml
+# - name: Setup hostname
+#   include_tasks:  hostname.yaml
 
 - name: Setup auto upgrade
   include_tasks:  auto_upgrade.yaml

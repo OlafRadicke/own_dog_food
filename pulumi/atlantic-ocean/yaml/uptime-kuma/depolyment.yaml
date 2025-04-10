@@ -49,4 +49,5 @@ spec:
       volumes:
         - name:               uptime-kuma-app-data
           persistentVolumeClaim:
-            claimName:        pvc-uptime-kuma
+            claimName:        local-storage-uptime-kuma
+            # claimName:        pvc-uptime-kuma
