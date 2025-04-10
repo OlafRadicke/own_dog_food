@@ -1,0 +1,6 @@
+---
+
+argocd_state:       "present"
+argocd_version:     "v2.14.9"
+
+

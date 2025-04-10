@@ -1,0 +1,56 @@
+---
+
+- name: Create AppProject for app of apps
+  kubernetes.core.k8s:
+    kubeconfig: "{{ global_kubeconfig }}"
+    state: "{{ app_of_apps_state }}"
+    wait: "yes"
+    definition:
+      apiVersion: argoproj.io/v1alpha1
+      kind: AppProject
+      metadata:
+        name: app-of-apps
+        namespace: argocd
+      spec:
+        sourceRepos:
+          - '*'
+        destinations:
+          - namespace: '*'
+            server: '*'
+        clusterResourceWhitelist:
+          - group: '*'
+            kind: '*'
+
+
+- name: Create app of apps
+  kubernetes.core.k8s:
+    kubeconfig: "{{ global_kubeconfig }}"
+    state: "{{ app_of_apps_state }}"
+    wait: "yes"
+    definition:
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: app-of-apps
+        namespace: argocd
+        finalizers:
+         - resources-finalizer.argocd.argoproj.io
+      spec:
+        destination:
+          namespace: argocd
+          server: https://kubernetes.default.svc
+        project: app-of-apps
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+            allowEmpty: false
+          syncOptions:
+            - CreateNamespace=true
+        source:
+          path: argocd-app-of-apps/cluster/irish-sea
+          repoURL: https://github.com/OlafRadicke/own_dog_food.git
+          targetRevision: HEAD
+          directory:
+            recurse: true
+            include: '*.argo.yaml'
