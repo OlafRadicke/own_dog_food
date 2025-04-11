@@ -3,7 +3,7 @@
 kind:                       PersistentVolumeClaim
 apiVersion:                 v1
 metadata:
-  name:                     uptime-kuma
+  name:                     local-storage-uptime-kuma
   # namespace:                uptime-kuma
 spec:
   accessModes:
