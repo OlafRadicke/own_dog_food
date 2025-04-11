@@ -8,7 +8,8 @@ metadata:
 spec:
   accessModes:
     -                       ReadWriteOnce
-  storageClassName:         local-storage-uptime-kuma
+  # storageClassName:         local-storage-uptime-kuma
+  storageClassName:         uptime-kuma
   resources:
     requests:
       storage:              100Mi
