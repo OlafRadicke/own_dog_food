@@ -1,15 +1,20 @@
 ---
-
+# https://www.fadhil-blog.dev/blog/rancher-local-path-provisioner/
 kind:                       PersistentVolumeClaim
 apiVersion:                 v1
 metadata:
   name:                     local-storage-uptime-kuma
   # namespace:                uptime-kuma
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-volume-pvc
+  annotations:
+    volumeType: local
 spec:
   accessModes:
-    -                       ReadWriteOnce
-  # storageClassName:         local-storage-uptime-kuma
-  storageClassName:         uptime-kuma
+    - ReadWriteOnce
+  storageClassName: local-path
   resources:
     requests:
-      storage:              100Mi
+      storage: 128Mi
