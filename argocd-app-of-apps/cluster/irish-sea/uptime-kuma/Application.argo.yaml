@@ -9,7 +9,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: argocd
+    namespace: uptime-kuma
     server: https://kubernetes.default.svc
   project: uptime-kuma
   syncPolicy:
@@ -20,9 +20,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    path: argocd-app-of-apps/cluster/irish-sea
+    path: argocd-app-of-apps/cluster/irish-sea/uptime-kuma/manifests
     repoURL: https://github.com/OlafRadicke/own_dog_food.git
     targetRevision: HEAD
     directory:
       recurse: true
-      include: '*.argo.yaml'
+      # include: '*.argo.yaml'
