@@ -1,0 +1,14 @@
+---
+
+kind:                       PersistentVolumeClaim
+apiVersion:                 v1
+metadata:
+  name:                     uptime-kuma
+  # namespace:                uptime-kuma
+spec:
+  accessModes:
+    -                       ReadWriteOnce
+  storageClassName:         local-storage-uptime-kuma
+  resources:
+    requests:
+      storage:              100Mi
