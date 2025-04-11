@@ -1,5 +1,6 @@
 ---
 # https://www.fadhil-blog.dev/blog/rancher-local-path-provisioner/
+# sudo ls -lah /var/lib/rancher/k3s/storage
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -8,7 +9,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  # storageClassName: local-path
+  storageClassName: local-storage
   resources:
     requests:
       storage: 128Mi
