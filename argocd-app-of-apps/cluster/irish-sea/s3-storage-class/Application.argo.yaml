@@ -22,7 +22,7 @@ spec:
   source:
     chart: aws-mountpoint-s3-csi-driver
     repoURL: https://awslabs.github.io/mountpoint-s3-csi-driver
-    targetRevision: 1.14
+    targetRevision: v1.14
     # helm:
     #   values: |
     #     awsAccessSecret:
