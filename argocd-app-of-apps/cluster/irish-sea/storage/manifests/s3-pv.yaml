@@ -12,7 +12,7 @@ spec:
     namespace: default # Namespace is required even though it's in "default" namespace.
     name: s3-pvc # Name of your PVC
   mountOptions:
-    - endpoint-url https://hel1.your-objectstorage.com
+    - endpoint-url https://hel1.XXyour-objectstorage.com
     - allow-delete
     - region eu-central
     # - prefix some-s3-prefix/
