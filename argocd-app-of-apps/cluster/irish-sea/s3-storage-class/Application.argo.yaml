@@ -20,9 +20,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    chart: aws-mountpoint-s3-csi-driver
-    repoURL: https://awslabs.github.io/mountpoint-s3-csi-driver
-    targetRevision: v1.14
+    path: charts/aws-mountpoint-s3-csi-driver
+    repoURL: https://github.com/awslabs/mountpoint-s3-csi-driver.git
+    targetRevision: release-1.14
     # helm:
     #   values: |
     #     awsAccessSecret:
