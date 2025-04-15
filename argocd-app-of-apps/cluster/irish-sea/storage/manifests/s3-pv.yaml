@@ -4,7 +4,7 @@ metadata:
   name: s3-pv
 spec:
   capacity:
-    storage: 1Gi # Ignored, required
+    storage: 2Gi # Ignored, required
   accessModes:
     - ReadWriteMany # Supported options: ReadWriteMany / ReadOnlyMany
   storageClassName: "" # Required for static provisioning
