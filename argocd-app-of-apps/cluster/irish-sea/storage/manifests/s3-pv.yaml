@@ -7,14 +7,14 @@ spec:
     storage: 2Gi # Ignored, required
   accessModes:
     - ReadWriteMany # Supported options: ReadWriteMany / ReadOnlyMany
-  storageClassName: "s3-storageclass" # Required for static provisioning
+  storageClassName: "" # Required for static provisioning
   claimRef: # To ensure no other PVCs can claim this PV
     namespace: default # Namespace is required even though it's in "default" namespace.
     name: s3-pvc # Name of your PVC
   mountOptions:
-    - endpoint-url https://hel1.XXyour-objectstorage.com
+    - endpoint-url https://hel1.your-objectstorage.com
     - allow-delete
-    - region eu-central
+    # - region eu-central
     # - prefix some-s3-prefix/
   csi:
     driver: s3.csi.aws.com # Required
@@ -30,7 +30,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany # Supported options: ReadWriteMany / ReadOnlyMany
-  storageClassName: "s3-storageclass" # Required for static provisioning
+  storageClassName: "" # Required for static provisioning
   resources:
     requests:
       storage: 1Gi # Ignored, required
