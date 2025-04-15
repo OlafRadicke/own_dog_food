@@ -5,6 +5,6 @@ all:
   hosts:
     localhost:
     'olaf-radicke-02':
-    atlantic-ocean:
+    # atlantic-ocean:
     baltic-sea:
     irish-sea:
