@@ -1,7 +1,7 @@
 apiVersion: vault.banzaicloud.com/v1alpha1
 kind: Vault
 metadata:
-  name: vault-01
+  name: vault
 spec:
   # size: 1
   # image: hashicorp/vault:1.14.8
