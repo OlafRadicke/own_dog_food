@@ -11,7 +11,7 @@ spec:
     # namespace: s3-storageclass
     namespace: vault-server
     server: https://kubernetes.default.svc
-  project: s3-storageclass
+  project: vault-server
   syncPolicy:
     automated:
       prune: true
