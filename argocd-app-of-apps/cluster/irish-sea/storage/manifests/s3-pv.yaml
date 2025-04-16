@@ -14,7 +14,7 @@ spec:
   mountOptions:
     - endpoint-url https://hel1.your-objectstorage.com
     - allow-delete
-    # - region eu-central
+    - region eu-central
     # - prefix some-s3-prefix/
   csi:
     driver: s3.csi.aws.com # Required
