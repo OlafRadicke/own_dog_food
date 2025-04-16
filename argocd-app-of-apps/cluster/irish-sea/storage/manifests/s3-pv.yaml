@@ -22,19 +22,19 @@ spec:
     volumeAttributes:
       bucketName: egwsmpsfx
 
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: s3-pvc
-# spec:
-#   accessModes:
-#     - ReadWriteMany # Supported options: ReadWriteMany / ReadOnlyMany
-#   storageClassName: "s3-pv-sc" # Required for static provisioning
-#   resources:
-#     requests:
-#       storage: 1Gi # Ignored, required
-#   # volumeName: s3-pv # Name of your PV
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: s3-pvc
+spec:
+  accessModes:
+    - ReadWriteMany # Supported options: ReadWriteMany / ReadOnlyMany
+  storageClassName: "s3-pv-sc" # Required for static provisioning
+  resources:
+    requests:
+      storage: 1Gi # Ignored, required
+  # volumeName: s3-pv # Name of your PV
 
 # ---
 # apiVersion: v1
