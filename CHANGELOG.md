@@ -1,8 +1,11 @@
 CHANGELOG
 =========
 
-17.2
----
+
+
+
+17.1.1-s3-storagclass
+---------------------
 
 - Add CHANGELOG file
 - Update TODO file
