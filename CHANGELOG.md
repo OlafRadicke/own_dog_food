@@ -1,7 +1,10 @@
 CHANGELOG
 =========
 
+17.3.x
+------
 
+- Add an Vault server
 
 
 17.2.0

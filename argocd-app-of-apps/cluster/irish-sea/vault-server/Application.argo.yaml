@@ -1,0 +1,40 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-server
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    # namespace: s3-storageclass
+    namespace: vault-server
+    server: https://kubernetes.default.svc
+  project: s3-storageclass
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    path: ./
+    repoURL: https://github.com/hashicorp/vault-helm.git
+    targetRevision: v0.30.0
+    helm:
+      values: |
+          dataStorage:
+            enabled: true
+            # Size of the PVC created
+            size: 1Gi
+            # Location where the PVC will be mounted.
+            mountPath: "/vault/data"
+            # Name of the storage class to use.  If null it will use the
+            # configured default Storage Class.
+            storageClass: local-path
+            # Access Mode of the storage device being used for the PVC
+            accessMode: ReadWriteOnce
+
+
