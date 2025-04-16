@@ -23,13 +23,13 @@ spec:
     path: charts/aws-mountpoint-s3-csi-driver
     repoURL: https://github.com/awslabs/mountpoint-s3-csi-driver.git
     targetRevision: v1.14.0
-    # helm:
-    #   values: |
-    #     awsAccessSecret:
-    #       name: aws-secret
-    #       keyId: key_id
-    #       accessKey: access_key
-    #       sessionToken: session_token
+    helm:
+      values: |
+        awsAccessSecret:
+          name: aws-secret-02
+          keyId: key_id
+          accessKey: access_key
+          sessionToken: session_token
 
 # ---
 # apiVersion: argoproj.io/v1alpha1
