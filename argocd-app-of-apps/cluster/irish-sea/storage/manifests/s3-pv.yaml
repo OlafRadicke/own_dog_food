@@ -7,9 +7,9 @@ spec:
     storage: 2Gi # Ignored, required
   accessModes:
     - ReadWriteMany # Supported options: ReadWriteMany / ReadOnlyMany
-  storageClassName: "" # Required for static provisioning
+  storageClassName: "s3-pv-sc" # Required for static provisioning
   claimRef: # To ensure no other PVCs can claim this PV
-    namespace: default # Namespace is required even though it's in "default" namespace.
+    namespace: storage # Namespace is required even though it's in "default" namespace.
     name: s3-pvc # Name of your PVC
   mountOptions:
     - endpoint-url https://hel1.your-objectstorage.com
@@ -30,11 +30,11 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany # Supported options: ReadWriteMany / ReadOnlyMany
-  storageClassName: "" # Required for static provisioning
+  storageClassName: "s3-pv-sc" # Required for static provisioning
   resources:
     requests:
       storage: 1Gi # Ignored, required
-  volumeName: s3-pv # Name of your PV
+  # volumeName: s3-pv # Name of your PV
 
 ---
 apiVersion: v1

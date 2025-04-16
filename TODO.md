@@ -1,6 +1,7 @@
 Todos
 =====
 
+- [s3fs-fuse](https://github.com/s3fs-fuse/s3fs-fuse#examples)
 - Use own hugo operator for tif page.
 - [Check ssl](https://www.ssllabs.com/ssltest/?ref=traefik.io)
 - https://www.pulumi.com/registry/packages/kubernetes/api-docs/helm/v3/chart/
@@ -18,6 +19,7 @@ Todos
 Won't do
 --------
 
+- [s3-csi-driver](https://github.com/awslabs/mountpoint-s3-csi-driver/) noy possible with k3s.
 - (Grafana) backup https://velero.io/
 - CI/CD
   - Tekton
