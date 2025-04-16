@@ -25,6 +25,8 @@ spec:
     targetRevision: v0.30.0
     helm:
       values: |
+          ha:
+            enabled: false
           dataStorage:
             enabled: true
             # Size of the PVC created
