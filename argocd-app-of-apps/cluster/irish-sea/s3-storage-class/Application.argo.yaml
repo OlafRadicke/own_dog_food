@@ -26,41 +26,8 @@ spec:
     helm:
       values: |
         awsAccessSecret:
-          name: aws-secret-02
+          name: s3-driver-secret
           keyId: key_id
           accessKey: access_key
           sessionToken: session_token
 
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: s3-storageclass
-#   namespace: argocd
-#   finalizers:
-#     - resources-finalizer.argocd.argoproj.io
-# spec:
-#   destination:
-#     namespace: s3-storageclass
-#     server: https://kubernetes.default.svc
-#   project: s3-storageclass
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#       allowEmpty: false
-#     syncOptions:
-#       - CreateNamespace=true
-#   source:
-#     path: /deploy/kubernetes/overlays/stable/
-#     repoURL: https://github.com/awslabs/mountpoint-s3-csi-driver.git
-#     targetRevision: release-1.14
-#     # kustomize:
-#     #   patches:
-#     #     - target:
-#     #         kind: Deployment
-#     #         name: guestbook-ui
-#     #       patch: |-
-#     #         - op: replace
-#     #           path: /spec/template/spec/containers/0/ports/0/containerPort
-#     #           value: 443
