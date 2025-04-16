@@ -4,6 +4,12 @@ CHANGELOG
 
 
 
+17.2.0
+------
+
+- remove s3 driver experiment
+
+
 17.1.1-s3-storagclass
 ---------------------
 
