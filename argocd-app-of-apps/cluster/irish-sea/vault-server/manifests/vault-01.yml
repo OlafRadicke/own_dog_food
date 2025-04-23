@@ -102,9 +102,9 @@ spec:
               default_ttl: 2m
               max_ttl: 10m
 
-  credentialsConfig:
-    path: /db-password/pw
-    secretName: db-password
+  # credentialsConfig:
+  #   path: /db-password/pw
+  #   secretName: db-password
 
   # Marks presence of Istio, which influences things like port namings
   istioEnabled: false
