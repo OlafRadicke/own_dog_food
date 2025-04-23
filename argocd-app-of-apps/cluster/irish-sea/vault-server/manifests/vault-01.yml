@@ -1,4 +1,5 @@
 apiVersion: vault.banzaicloud.com/v1alpha1
+# https://github.com/bank-vaults/vault-operator/blob/main/deploy/examples/cr-file.yaml
 kind: Vault
 metadata:
   name: vault
