@@ -4,7 +4,7 @@ kind: Vault
 metadata:
   name: vault
 spec:
-  # size: 1
+  size: 1
   # image: hashicorp/vault:1.14.8
   # bankVaultsImage: ghcr.io/bank-vaults/bank-vaults:latest
 
