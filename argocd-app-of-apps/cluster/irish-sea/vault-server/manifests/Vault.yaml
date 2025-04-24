@@ -69,7 +69,7 @@ spec:
         - '*'
         bound_service_account_namespaces:
         - vault-server
-        name: vault
+        name: vault-server
         policies:
         - allow_secrets
         ttl: 1h
