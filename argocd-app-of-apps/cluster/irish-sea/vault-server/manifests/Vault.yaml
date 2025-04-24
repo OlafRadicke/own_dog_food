@@ -46,7 +46,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: vault
-  namespace: default
+  namespace:  vault-server
 ---
 apiVersion: vault.banzaicloud.com/v1alpha1
 kind: Vault
@@ -69,6 +69,7 @@ spec:
         - '*'
         bound_service_account_namespaces:
         - default
+        - vault-server
         name: default
         policies:
         - allow_secrets
