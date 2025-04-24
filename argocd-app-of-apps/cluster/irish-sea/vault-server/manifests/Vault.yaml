@@ -4,11 +4,11 @@ kind: Vault
 metadata:
   name: vault
 spec:
-  size: 3
+  size: 1
   # image: hashicorp/vault:1.14.8
   # bankVaultsImage: ghcr.io/bank-vaults/bank-vaults:latest
 
-  serviceAccount: vault-01
+  serviceAccount: vault
 
   # Use local disk to store Vault file data, see config section.
   volumes:

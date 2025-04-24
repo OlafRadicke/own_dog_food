@@ -9,4 +9,5 @@ rules:
     verbs: ["*"]
   - apiGroups: [""]
     resources: ["pods"]
-    verbs: ["get", "update", "patch"]
+    verbs: ["*"]
+    # verbs: ["get", "update", "patch"]
