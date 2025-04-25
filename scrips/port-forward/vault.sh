@@ -4,8 +4,8 @@ set -x
 set -e
 set -u
 
-MY_NAMESPACE=vault-server
-MY_SERVICE=vault
+MY_NAMESPACE=vault-01
+MY_SERVICE=vault-01-server
 MY_PORT_IN=8200
 MY_PORT_OUT=8082
 
