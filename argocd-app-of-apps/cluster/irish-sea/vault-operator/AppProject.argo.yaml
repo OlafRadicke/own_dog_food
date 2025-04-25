@@ -1,17 +1,17 @@
----
+# ---
 
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: vault-operator
-  namespace: argocd
-spec:
-  sourceRepos:
-    - '*'
-  destinations:
-    - namespace: '*'
-      server: '*'
-  clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+# apiVersion: argoproj.io/v1alpha1
+# kind: AppProject
+# metadata:
+#   name: vault-operator
+#   namespace: argocd
+# spec:
+#   sourceRepos:
+#     - '*'
+#   destinations:
+#     - namespace: '*'
+#       server: '*'
+#   clusterResourceWhitelist:
+#     - group: '*'
+#       kind: '*'
 
