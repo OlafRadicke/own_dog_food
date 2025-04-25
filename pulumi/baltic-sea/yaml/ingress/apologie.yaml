@@ -61,7 +61,7 @@ metadata:
   name:                   apologie
 spec:
   dnsNames:
-                          - quaker-kr.de
+                          - apologie.the-independent-friend.de
   secretName:             apologie
   issuerRef:
     # name:                 letsencrypt-staging
