@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name:             "apologie"
-        image:            "olafradicke/apologie:0.2.0"
+        image:            "olafradicke/apologie:0.2.3"
         imagePullPolicy:  IfNotPresent
         resources:
           requests:
