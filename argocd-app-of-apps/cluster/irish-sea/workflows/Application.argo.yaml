@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-01
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    # namespace: s3-storageclass
+    namespace: argo
+    server: https://kubernetes.default.svc
+  project: workflows
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    path: argocd-app-of-apps/cluster/irish-sea/workflows/manifests
+    repoURL: https://github.com/OlafRadicke/own_dog_food.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+
