@@ -5,6 +5,10 @@ CHANGELOG
 
 - Add OpenBao a Vault alternativ
 
+17.3.1
+------
+
+- Add Argo Workflows
 
 17.3.x
 ------

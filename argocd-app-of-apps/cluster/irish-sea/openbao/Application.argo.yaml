@@ -19,7 +19,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    path: /charts/openbao
+    path: charts/openbao
     repoURL: https://github.com/openbao/openbao-helm.git
     targetRevision: openbao-0.12.0
     helm:
