@@ -2,13 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-01
+  name: workflows
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    # namespace: s3-storageclass
     namespace: argo
     server: https://kubernetes.default.svc
   project: workflows
