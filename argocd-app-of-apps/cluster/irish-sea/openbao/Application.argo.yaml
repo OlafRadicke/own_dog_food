@@ -1,0 +1,46 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openbao
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: openbao
+    server: https://kubernetes.default.svc
+  project: openbao
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    path: /charts/openbao
+    repoURL: https://github.com/openbao/openbao-helm.git
+    targetRevision: openbao-0.12.0
+    helm:
+      values: |
+        server:
+          dataStorage:
+            ## @param server.persistence.enabled Enable persistence using Persistent Volume Claims
+            ##
+            enabled: true
+            ## @param server.persistence.mountPath Persistent Volume mount root path
+            ##
+            # Size of the PVC created
+            size: 500Mi
+            mountPath: /bitnami/vault/data
+            ## @param server.persistence.storageClass Persistent Volume storage class
+            ## If defined, storageClassName: <storageClass>
+            ## If set to "-", storageClassName: "", which disables dynamic provisioning
+            ## If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner
+            ##
+            storageClass: "local-path"
+            ## @param server.persistence.accessModes [array] Persistent Volume access modes
+            ##
+
+

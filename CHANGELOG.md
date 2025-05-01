@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+17.4.x
+
+- Add OpenBao a Vault alternativ
+
+
 17.3.x
 ------
 
