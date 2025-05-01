@@ -5,7 +5,7 @@ set -e
 set -u
 
 MY_NAMESPACE=openbao
-MY_SERVICE=openbao-server
+MY_SERVICE=openbao
 MY_PORT_IN=8200
 MY_PORT_OUT=8083
 
