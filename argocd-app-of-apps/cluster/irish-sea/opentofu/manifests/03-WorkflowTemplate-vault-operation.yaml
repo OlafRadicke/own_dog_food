@@ -48,7 +48,10 @@ spec:
         - name:     VAULT_ADDR
           value:    "{{workflow.parameters.example-path}}"
         - name:     VAULT_TOKEN
-          value:    'ChaNG_mE,plEAse!!'
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key:  token
         args:
                     - "write"
                     - "sops/keys/default"
