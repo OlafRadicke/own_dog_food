@@ -1,2 +1,3 @@
 ./ansible/downloads/*
 ansible/downloads/
+./workspace
