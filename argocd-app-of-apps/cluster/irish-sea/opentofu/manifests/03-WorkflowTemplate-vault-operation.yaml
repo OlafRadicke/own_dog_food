@@ -14,8 +14,10 @@ spec:
         - name:     VAULT_ADDR
           value:    "{{workflow.parameters.example-path}}"
         - name:     VAULT_TOKEN
-          value:    'ChaNG_mE,plEAse!!'
-        # command:  [sh, -c]
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key:  token
         args:       ["status"]
         workingDir: /
 
@@ -26,7 +28,10 @@ spec:
         - name:     VAULT_ADDR
           value:    "{{workflow.parameters.example-path}}"
         - name:     VAULT_TOKEN
-          value:    'ChaNG_mE,plEAse!!'
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key:  token
         command:    ["vault"]
         args:
                     - "secrets"
