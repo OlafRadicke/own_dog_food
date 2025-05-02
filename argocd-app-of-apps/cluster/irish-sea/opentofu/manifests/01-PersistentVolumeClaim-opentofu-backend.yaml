@@ -1,0 +1,12 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: opentofu-backend
+spec:
+  storageClassName: local-path
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 500Mi
+
