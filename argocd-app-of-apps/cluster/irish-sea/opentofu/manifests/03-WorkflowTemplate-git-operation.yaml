@@ -8,10 +8,6 @@ spec:
   templates:
 
     - name:         git-clone
-      inputs:
-        parameters:
-          - name:   gitRepo
-          - name:   gitBranch
       initContainers:
         - name:     git-data
           image:    k8s.gcr.io/git-sync:v3.1.6
