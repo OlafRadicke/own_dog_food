@@ -18,10 +18,10 @@ spec:
           args:
                     - "--one-time"
                     - "--timeout=200"
-                    - "--repo={{workflow.parameters.terraform-gitrepo}}"
+                    - "--repo={{workflow.parameters.examplePath}}"
                     - "--root=/src/clone"
                     - "--max-sync-failures=3"
-                    - "--branch={{inputs.parameters.gitBranch}}"
+                    - "--branch={{workflow.parameters.gitBranch}}"
                     # - "-depth 2"
                     # - "--ssh"
           volumeMounts:
@@ -35,7 +35,7 @@ spec:
                           pwd \
                           && ls -lah \
                           && git branch \
-                          && git checkout {{inputs.parameters.gitBranch}} \
+                          && git checkout {{workflow.parameters.gitBranch}} \
                           && git status \
                           && ls -lah terraform/examples-01
         workingDir: /src/clone

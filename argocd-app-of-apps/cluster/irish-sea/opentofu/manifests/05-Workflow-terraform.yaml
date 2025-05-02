@@ -11,10 +11,12 @@ spec:
     parameters:
     - name:             example-path
       value:            /src/clone/terraform/examples-01
-    - name:             terraform-gitrepo
+    - name:             examplePath
       value:            https://github.com/OlafRadicke/own_dog_food.git
     - name:             vault-addr
       value:            'http://openbao.openbao:8200'
+    - name:             gitBranch
+      value:            "main"
   # A PVC for hand over the working directory between
   # singles steps and his containers.
   volumeClaimTemplates:
@@ -50,11 +52,6 @@ spec:
               name:     git-operation
               template: git-clone
             arguments:
-              parameters:
-              - name:   gitRepo
-                value:  https://github.com/OlafRadicke/own_dog_food.git
-              - name:   gitBranch
-                value:  "main"
 
 # Mozilla SOPS operations
 
