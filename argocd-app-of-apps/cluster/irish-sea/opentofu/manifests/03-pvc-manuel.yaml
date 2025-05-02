@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual-sc
   hostPath:
-    path: "/srv/data"
+    path: "/srv/k3s-pv"
 
 
 ---
@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: manual-pvc
+  name: opentofu-backend
   annotations:
     argocd.argoproj.io/sync-wave: "4"
 spec:
