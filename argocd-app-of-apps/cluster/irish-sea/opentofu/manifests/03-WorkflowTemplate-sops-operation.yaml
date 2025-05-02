@@ -1,0 +1,46 @@
+apiVersion:         argoproj.io/v1alpha1
+kind:               WorkflowTemplate
+metadata:
+  name:             sops-operation
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  templates:
+    - name:         get-version
+      container:
+        image:      docker.io/olafradicke/alpine-sops:0.7.2
+        args:       ["--version"]
+
+    - name:         get-conten-of-dir
+      container:
+        image:      docker.io/olafradicke/alpine-sops:0.7.2
+        command:    [sh, -c]
+        args:       ["ls -lah"]
+        workingDir: "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:     argo-workdir
+          mountPath: /src
+
+    - name:         decrypt-with-secret
+      container:
+        image:      docker.io/olafradicke/fedora-sops:0.7.12-ci
+        env:
+        - name:     VAULT_ADDR
+          value:    'http://vault-server.vault:8200'
+        - name:     VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key:  token
+        command:    [sh, -c]
+        args:
+                    - |
+                      echo "$VAULT_TOKEN $VAULT_ADDR" &&
+                      sops --decrypt \
+                      --config <(echo '') \
+                      --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \
+                      terragrunt.hcl.sops > terragrunt.hcl
+        workingDir: "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:     argo-workdir
+          mountPath: /src

@@ -1,0 +1,80 @@
+apiVersion:           argoproj.io/v1alpha1
+kind:                 WorkflowTemplate
+metadata:
+  name:               terragrunt-operation
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  templates:
+    - name:           get-content-of-dir
+      container:
+        image:        alpine/terragrunt:1.10.3
+        command:      [sh, -c]
+        args:
+                      - |
+                        pwd
+                        ls -lah
+        workingDir:   "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:       argo-workdir
+          mountPath:  /src
+    - name:           get-version
+      container:
+        image:        alpine/terragrunt:1.10.3
+        command:      [terraform]
+        args:
+                      - "version"
+        workingDir:   "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:       argo-workdir
+          mountPath:  /src
+    - name:           get-terragrunt-version
+      container:
+        image:        alpine/terragrunt:1.10.3
+        command:      [terragrunt]
+        args:
+                      - "version"
+        workingDir:   "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:       argo-workdir
+          mountPath:  /src
+    - name:           run-terraform-init
+      container:
+        image:        alpine/terragrunt:1.10.3
+        command:      ["terragrunt"]
+        args:
+                      - "init"
+                      - "-no-color"
+        workingDir:   "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:       tofu-backend-vol
+          mountPath:  /terraform/state/
+        - name:       argo-workdir
+          mountPath:  /src
+    - name:           run-terraform-plan
+      container:
+        image:        alpine/terragrunt:1.10.3
+        command:      ["terragrunt"]
+        args:
+                      - "plan"
+                      - "-no-color"
+        workingDir:   "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:       tofu-backend-vol
+          mountPath:  /terraform/state/
+        - name:       argo-workdir
+          mountPath:  /src
+    - name:           run-terraform-apply
+      container:
+        image:        alpine/terragrunt:1.10.3
+        command:      ["terragrunt"]
+        args:
+                      - "apply"
+                      - "-auto-approve"
+                      - "--terragrunt-no-color"
+        workingDir:   "{{workflow.parameters.example-path}}"
+        volumeMounts:
+        - name:       tofu-backend-vol
+          mountPath:  /terraform/state/
+        - name:       argo-workdir
+          mountPath:  /src

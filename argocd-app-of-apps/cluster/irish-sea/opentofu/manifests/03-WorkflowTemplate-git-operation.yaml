@@ -1,0 +1,45 @@
+apiVersion:         argoproj.io/v1alpha1
+kind:               WorkflowTemplate
+metadata:
+  name:             git-operation
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  templates:
+
+    - name:         git-clone
+      inputs:
+        parameters:
+          - name:   gitRepo
+          - name:   gitBranch
+      initContainers:
+        - name:     git-data
+          image:    k8s.gcr.io/git-sync:v3.1.6
+          args:
+                    - "--one-time"
+                    - "--timeout=200"
+                    - "--repo={{inputs.parameters.gitRepo}}"
+                    - "--root=/src/clone"
+                    - "--max-sync-failures=3"
+                    - "--branch={{inputs.parameters.gitBranch}}"
+                    # - "-depth 2"
+                    # - "--ssh"
+          volumeMounts:
+            - name: argo-workdir
+              mountPath: /src
+      container:
+        image:      golang:1.10
+        command:    [sh, -c]
+        args:
+                      - |
+                          pwd \
+                          && ls -lah \
+                          && git branch \
+                          && git checkout {{inputs.parameters.gitBranch}} \
+                          && git status \
+                          && ls -lah terraform/examples-01
+        workingDir: /src/clone
+        volumeMounts:
+        - name:     argo-workdir
+          mountPath: /src
+
