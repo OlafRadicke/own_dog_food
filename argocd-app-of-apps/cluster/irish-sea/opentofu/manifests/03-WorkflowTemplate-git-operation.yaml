@@ -18,7 +18,7 @@ spec:
           args:
                     - "--one-time"
                     - "--timeout=200"
-                    - "--repo={{inputs.parameters.gitRepo}}"
+                    - "--repo={{workflow.parameters.terraform-gitrepo}}"
                     - "--root=/src/clone"
                     - "--max-sync-failures=3"
                     - "--branch={{inputs.parameters.gitBranch}}"

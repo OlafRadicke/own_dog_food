@@ -26,7 +26,7 @@ spec:
         image:      docker.io/olafradicke/fedora-sops:0.7.12-ci
         env:
         - name:     VAULT_ADDR
-          value:    'http://vault-server.vault:8200'
+          value:    {{workflow.parameters.vault-addr}} 'http://vault-server.vault:8200'
         - name:     VAULT_TOKEN
           valueFrom:
             secretKeyRef:
