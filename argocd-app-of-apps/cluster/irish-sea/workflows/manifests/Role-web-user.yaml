@@ -6,7 +6,7 @@ metadata:
 rules:
   # k8s standard APIs
   - apiGroups:
-      - ""
+      - "*"
     resources:
       - events
       - pods
