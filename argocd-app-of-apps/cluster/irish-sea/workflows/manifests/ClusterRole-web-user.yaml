@@ -8,26 +8,6 @@ rules:
 - apiGroups:
   - argoproj.io
   resources:
-  - workflows
-  - workflows/finalizers
-  - workfloweventbindings
-  - workfloweventbindings/finalizers
-  - workflowtemplates
-  - workflowtemplates/finalizers
-  - cronworkflows
-  - cronworkflows/finalizers
-  - clusterworkflowtemplates
-  - clusterworkflowtemplates/finalizers
-  - workflowtasksets
-  - workflowtasksets/finalizers
-  - workflowtaskresults
-  - workflowtaskresults/finalizers
+  - "*"
   verbs:
-  - create
-  - delete
-  - deletecollection
-  - get
-  - list
-  - patch
-  - update
-  - watch
+  - "*"
