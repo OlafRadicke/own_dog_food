@@ -5,10 +5,9 @@ metadata:
   namespace: argo
 rules:
 - apiGroups:
-  - argoproj.io
+  - "*"
   resources:
-  - workflows
-  - cronworkflows
+  - "*"
   verbs:
   - list
   - update
