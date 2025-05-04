@@ -5,9 +5,8 @@ metadata:
   namespace: argo
 rules:
 - apiGroups:
-  - "*"
+  - ""
   resources:
   - "*"
   verbs:
-  - list
-  - update
+  - "*"
