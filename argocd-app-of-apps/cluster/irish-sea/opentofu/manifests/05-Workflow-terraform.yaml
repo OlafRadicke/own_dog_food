@@ -1,5 +1,5 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Workflow
+apiVersion:             argoproj.io/v1alpha1
+kind:                   Workflow
 metadata:
   name:                 terraform-job
   annotations:
@@ -51,7 +51,6 @@ spec:
             templateRef:
               name:     git-operation
               template: git-clone
-            arguments:
 
 # Mozilla SOPS operations
 
