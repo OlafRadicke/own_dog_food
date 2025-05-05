@@ -11,6 +11,6 @@ spec:
   resources:
     requests:
       storage: 300Mi
-  # storageClassName: manual-sc
+  storageClassName: manual-sc
   volumeName: manual-pv
 
