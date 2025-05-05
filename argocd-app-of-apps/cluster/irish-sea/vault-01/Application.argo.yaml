@@ -1,46 +1,46 @@
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: vault-01
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    # namespace: s3-storageclass
-    namespace: vault-01
-    server: https://kubernetes.default.svc
-  project: vault-01
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-      allowEmpty: true
-    syncOptions:
-      - CreateNamespace=true
-  source:
-    path: bitnami/vault
-    repoURL: https://github.com/bitnami/charts.git
-    targetRevision: main
-    # targetRevision: vault/1.7.5
-    helm:
-      values: |
-        server:
-          persistence:
-            ## @param server.persistence.enabled Enable persistence using Persistent Volume Claims
-            ##
-            enabled: true
-            ## @param server.persistence.mountPath Persistent Volume mount root path
-            ##
-            mountPath: /bitnami/vault/data
-            ## @param server.persistence.storageClass Persistent Volume storage class
-            ## If defined, storageClassName: <storageClass>
-            ## If set to "-", storageClassName: "", which disables dynamic provisioning
-            ## If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner
-            ##
-            storageClass: "local-path"
-            ## @param server.persistence.accessModes [array] Persistent Volume access modes
-            ##
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: vault-01
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     # namespace: s3-storageclass
+#     namespace: vault-01
+#     server: https://kubernetes.default.svc
+#   project: vault-01
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#       allowEmpty: true
+#     syncOptions:
+#       - CreateNamespace=true
+#   source:
+#     path: bitnami/vault
+#     repoURL: https://github.com/bitnami/charts.git
+#     targetRevision: main
+#     # targetRevision: vault/1.7.5
+#     helm:
+#       values: |
+#         server:
+#           persistence:
+#             ## @param server.persistence.enabled Enable persistence using Persistent Volume Claims
+#             ##
+#             enabled: true
+#             ## @param server.persistence.mountPath Persistent Volume mount root path
+#             ##
+#             mountPath: /bitnami/vault/data
+#             ## @param server.persistence.storageClass Persistent Volume storage class
+#             ## If defined, storageClassName: <storageClass>
+#             ## If set to "-", storageClassName: "", which disables dynamic provisioning
+#             ## If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner
+#             ##
+#             storageClass: "local-path"
+#             ## @param server.persistence.accessModes [array] Persistent Volume access modes
+#             ##
 
 
