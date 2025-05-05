@@ -19,7 +19,7 @@ spec:
               name: vault-token
               key:  token
         command:    ["sh"]
-        args:       ["sleep 1200"]
+        args:       ["sleep", "1200"]
         workingDir: /
 
     - name:         get-vault-status
