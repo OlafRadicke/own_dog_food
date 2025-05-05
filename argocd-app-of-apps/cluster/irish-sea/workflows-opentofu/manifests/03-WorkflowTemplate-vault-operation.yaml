@@ -18,7 +18,7 @@ spec:
             secretKeyRef:
               name: vault-token
               key:  token
-        command:    ["sh"]
+        command:    ["sh", "-c"]
         args:       ["sleep", "1200"]
         workingDir: /
 
