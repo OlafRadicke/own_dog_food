@@ -13,3 +13,5 @@
 #       storage: 300Mi
 #   storageClassName: manual-sc
 #   volumeName: manual-pv
+
+Unable to delete application: error patching application with finalizers: Application.argoproj.io "workflows-opentofu" is invalid: metadata.finalizers: Forbidden: no new finalizers can be added if the object is being deleted, found new finalizers []string{"resources-finalizer.argocd.argoproj.io/foreground"}

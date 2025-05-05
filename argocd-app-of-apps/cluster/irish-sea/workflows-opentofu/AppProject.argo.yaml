@@ -5,8 +5,6 @@ kind: AppProject
 metadata:
   name: workflows-opentofu
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   sourceRepos:
     - '*'
