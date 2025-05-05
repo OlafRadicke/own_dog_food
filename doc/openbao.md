@@ -61,7 +61,7 @@ Add file `${HOME}/.ssh/openbao.env` with content:
 
 ```bash
 export VAULT_TOKEN=XXXXXXX
-export VAULT_ADDR='http://openbao.openbao:8083'
+export VAULT_ADDR='http://openbao.openbao:8200'
 ```
 
 Add this line in file `~/.bashrc`

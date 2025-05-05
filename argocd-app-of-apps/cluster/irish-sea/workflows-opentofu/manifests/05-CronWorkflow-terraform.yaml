@@ -31,13 +31,13 @@ spec:
   # A PVC for hand over the working directory between
   # singles steps and his containers.
     volumeClaimTemplates:
-    - metadata:
-        name:           argo-workdir
-      spec:
-        accessModes:    [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage:    1Gi
+      - metadata:
+          name:           argo-workdir
+        spec:
+          accessModes:    [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage:    1Gi
     # Persistent pvc for the backend of Terraform/OpenTofu
     volumes:
       - name:             tofu-backend-vol
@@ -47,6 +47,12 @@ spec:
     templates:
       - name:           start-terraform-cronjob
         steps:
+
+# Sleep
+        - - name:       get-vault-sleep
+            templateRef:
+              name:     vault-operation
+              template: get-vault-sleep
 # vault
 # Checks the connection to the Vaultserver
 

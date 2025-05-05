@@ -7,7 +7,7 @@ set -u
 MY_NAMESPACE=openbao
 MY_SERVICE=openbao
 MY_PORT_IN=8200
-MY_PORT_OUT=8083
+MY_PORT_OUT=8200
 
 echo "go to: http://localhost:${MY_PORT_OUT}/ui"
 # kubectx irish-sea

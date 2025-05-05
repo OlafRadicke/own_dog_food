@@ -7,6 +7,21 @@ metadata:
 spec:
   templates:
 
+    - name:         get-vault-sleep
+      container:
+        image:      docker.io/olafradicke/alpine-vault:0.7.4-ci
+        env:
+        - name:     VAULT_ADDR
+          value:    "{{workflow.parameters.terraformCodePath}}"
+        - name:     VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key:  token
+        command:    ["sh"]
+        args:       ["sleep 1200"]
+        workingDir: /
+
     - name:         get-vault-status
       container:
         image:      docker.io/olafradicke/alpine-vault:0.7.4-ci
