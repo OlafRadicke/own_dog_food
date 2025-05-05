@@ -42,7 +42,7 @@ spec:
     volumes:
       - name:             tofu-backend-vol
         persistentVolumeClaim:
-          claimName:      opentofu-backend-sc
+          claimName:      opentofu-backend-pvc
 
     templates:
       - name:           start-terraform-cronjob
