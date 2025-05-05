@@ -18,19 +18,13 @@ spec:
     # Global arguments for WorkflowTemplates
     arguments:
       parameters:
-      - name:             example-path
+      - name:             terraformCodePath
         value:            /src/clone/terraform/examples-01
-
-    # Global arguments for WorkflowTemplates
-    arguments:
-      parameters:
-      - name:             example-path
-        value:            /src/clone/terraform/examples-01
-      - name:             examplePath
+      - name:             terraformCodeRepo
         value:            https://github.com/OlafRadicke/own_dog_food.git
-      - name:             vault-addr
+      - name:             vaultAddr
         value:            'http://openbao.openbao:8200'
-      - name:             gitBranch
+      - name:             terraformGitBranch
         value:            "main"
 
 
@@ -48,7 +42,7 @@ spec:
     volumes:
       - name:             tofu-backend-vol
         persistentVolumeClaim:
-          claimName:      tofu-backend
+          claimName:      opentofu-backend-sc
 
     templates:
       - name:           start-terraform-cronjob

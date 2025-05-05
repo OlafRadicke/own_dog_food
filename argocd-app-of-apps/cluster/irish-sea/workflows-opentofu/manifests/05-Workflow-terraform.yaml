@@ -9,13 +9,13 @@ spec:
   # Global arguments for WorkflowTemplates
   arguments:
     parameters:
-    - name:             example-path
+    - name:             terraformCodePath
       value:            /src/clone/terraform/examples-01
-    - name:             examplePath
+    - name:             terraformCodeRepo
       value:            https://github.com/OlafRadicke/own_dog_food.git
-    - name:             vault-addr
+    - name:             vaultAddr
       value:            'http://openbao.openbao:8200'
-    - name:             gitBranch
+    - name:             terraformGitBranch
       value:            "main"
   # A PVC for hand over the working directory between
   # singles steps and his containers.

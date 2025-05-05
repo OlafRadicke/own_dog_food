@@ -11356,8 +11356,8 @@ spec:
                               required:
                               - pdName
                               type: object
-                            gitRepo:
-                              description: 'gitRepo represents a git repository at
+                            terraformCodeRepo:
+                              description: 'terraformCodeRepo represents a git repository at
                                 a particular revision. DEPRECATED: GitRepo is deprecated.
                                 To provision a container with a git repo, mount an
                                 EmptyDir into an InitContainer that clones the repo
