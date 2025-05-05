@@ -1,16 +1,16 @@
 
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: opentofu-backend
-#   annotations:
-#     argocd.argoproj.io/sync-wave: "3"
-# spec:
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 300Mi
-#   storageClassName: manual-sc
-#   volumeName: manual-pv
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: opentofu-backend-pv
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 300Mi
+  # storageClassName: manual-sc
+  volumeName: manual-pv
 
