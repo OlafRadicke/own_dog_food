@@ -20,7 +20,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    path: argocd-app-of-apps/cluster/irish-sea/opentofu/manifests
+    path: argocd-app-of-apps/cluster/irish-sea/workflows-opentofu/manifests
     repoURL: https://github.com/OlafRadicke/own_dog_food.git
     targetRevision: HEAD
     directory:
