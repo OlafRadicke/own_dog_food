@@ -3,15 +3,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: opentofu
+  name: workflows-opentofu
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: opentofu
+    namespace: argo
     server: https://kubernetes.default.svc
-  project: opentofu
+  project: workflows-opentofu
   syncPolicy:
     automated:
       prune: true
