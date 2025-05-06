@@ -87,10 +87,10 @@ spec:
 
         # Decrypt the secret with help of SOPS and the
         # Vault server.
-        - - name:       decrypt-with-secret
-            templateRef:
-              name:     sops-operation
-              template: decrypt-with-secret
+        # - - name:       decrypt-with-secret
+        #     templateRef:
+        #       name:     sops-operation
+        #       template: decrypt-with-secret
 
         # List the conten fof die example directory after
         # decryption operation.
