@@ -49,10 +49,10 @@ spec:
         steps:
 
 # Sleep
-        - - name:       get-vault-sleep
-            templateRef:
-              name:     vault-operation
-              template: get-vault-sleep
+        # - - name:       get-vault-sleep
+        #     templateRef:
+        #       name:     vault-operation
+        #       template: get-vault-sleep
 # vault
 # Checks the connection to the Vaultserver
 
