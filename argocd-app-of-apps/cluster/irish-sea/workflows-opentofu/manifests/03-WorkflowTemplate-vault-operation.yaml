@@ -18,7 +18,7 @@ spec:
             secretKeyRef:
               name: vault-token
               key:  token
-        command:    ["/bin/sleep", "sleep", "1200"]
+        command:    ["/bin/sleep", "1200"]
         workingDir: /
 
     - name:         get-vault-status
