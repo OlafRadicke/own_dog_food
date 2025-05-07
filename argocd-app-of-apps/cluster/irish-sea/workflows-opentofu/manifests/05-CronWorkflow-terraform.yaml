@@ -19,7 +19,7 @@ spec:
     arguments:
       parameters:
       - name:             terraformCodePath
-        value:            /src/clone/terraform/examples-01
+        value:            /src/clone/terraform/openbao
       - name:             terraformCodeRepo
         value:            https://github.com/OlafRadicke/own_dog_food.git
       - name:             vaultAddr
