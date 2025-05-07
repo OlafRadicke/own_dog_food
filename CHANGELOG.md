@@ -1,11 +1,16 @@
 CHANGELOG
 =========
 
-### 17.5.x
+### 17.10.x (#10)
+
+- Add PKI CA in OpenBao with OpenTofu.
+
+### 17.5.x (#9)
 
 - Add OpenTofu with Workflows (Issue #9)
+- Deactivating Hashicorp Vault server
 
-### 17.4.x
+### 17.4.x (#8)
 
 - Add OpenBao a Vault alternativ
 
@@ -13,7 +18,7 @@ CHANGELOG
 
 - Add Argo Workflows
 
-### 17.3.x
+### 17.3.x (#7)
 
 - Add an Vault server
 
