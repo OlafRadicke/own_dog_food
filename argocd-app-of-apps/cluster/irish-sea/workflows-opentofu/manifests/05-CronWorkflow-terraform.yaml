@@ -101,10 +101,10 @@ spec:
 
 # Terragrunt / Terraform / OpenTofu operations
 
-        - - name:       get-terraform-env
+        - - name:       terraform-sleep
             templateRef:
               name:     terragrunt-operation
-              template: get-terraform-env
+              template: terraform-sleep
         # Run init step of Terraforn
         - - name:       terraform-run-init
             templateRef:

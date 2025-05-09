@@ -38,7 +38,16 @@ spec:
         volumeMounts:
         - name:       argo-workdir
           mountPath:  /src
-
+    - name:         terraform-sleep
+      container:
+        image:      alpine/terragrunt:1.10.3
+        command:    ["/bin/sleep", "1200"]
+        env:
+        - name:     VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key:  token
     - name:           get-terraform-env
       container:
         image:        alpine/terragrunt:1.10.3
