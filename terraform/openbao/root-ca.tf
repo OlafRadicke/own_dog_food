@@ -20,10 +20,6 @@ provider "vault" {
 }
 
 
-resource "vault_namespace" "example" {
-  path = "example"
-}
-
 resource "vault_mount" "example" {
   path        = "secret"
   type        = "kv"
