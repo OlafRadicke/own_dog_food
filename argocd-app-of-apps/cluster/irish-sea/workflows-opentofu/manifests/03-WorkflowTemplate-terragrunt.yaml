@@ -45,7 +45,19 @@ spec:
         args:
                       - "init"
                       - "-no-color"
+                      - '-var "vault_token=${VAULT_TOKEN}"'
         workingDir:   "{{workflow.parameters.terraformCodePath}}"
+        env:
+        - name:       VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name:   vault-token
+              key:    token
+        # - name:       TF_VAR_vault_token
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name:   vault-token
+        #       key:    token
         volumeMounts:
         - name:       tofu-backend-vol
           mountPath:  /terraform/state/
