@@ -33,7 +33,7 @@ resource "vault_mount" "example" {
 }
 
 resource "vault_generic_secret" "example" {
-  path = "secret/data/example"
+  path = "secret/example"
   data_json = jsonencode({
     username = "my-user"
     password = "my-password"
