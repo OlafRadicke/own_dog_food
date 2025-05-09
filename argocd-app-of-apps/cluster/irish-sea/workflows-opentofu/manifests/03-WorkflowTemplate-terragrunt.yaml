@@ -64,6 +64,11 @@ spec:
           mountPath:  /terraform/state/
         - name:       argo-workdir
           mountPath:  /src
+        - name:       VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name:   vault-token
+              key:    token
     - name:           run-terraform-apply
       container:
         image:        alpine/terragrunt:1.10.3
