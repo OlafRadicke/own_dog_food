@@ -4,3 +4,6 @@ variable "user_name" {
  default     = "Peter"
 }
 
+variable "vault_token" {
+  type = string
+}
