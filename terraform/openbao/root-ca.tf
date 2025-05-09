@@ -19,6 +19,19 @@ provider "vault" {
 #   token   = "your-vault-token"
 }
 
+
+resource "vault_namespace" "example" {
+  path = "example"
+}
+
+resource "vault_mount" "example" {
+  path        = "secret"
+  type        = "kv"
+  options     = {
+    version = "2"
+  }
+}
+
 resource "vault_generic_secret" "example" {
   path = "secret/example"
   data_json = jsonencode({
