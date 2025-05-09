@@ -58,6 +58,7 @@ spec:
         args:
                       - "plan"
                       - "-no-color"
+                      - "-var "token=${VAULT_TOKEN}"
         workingDir:   "{{workflow.parameters.terraformCodePath}}"
         env:
         - name:       VAULT_TOKEN
