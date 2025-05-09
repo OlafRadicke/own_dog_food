@@ -11,9 +11,13 @@
 #    }
 # }
 
+variable "vault_token" {
+  type = string
+}
+
 provider "vault" {
   address = "http://openbao.openbao:8200"
-  token   = ${var.vault_token}
+  token   = var.vault_token
 #   token   = "your-vault-token"
 }
 
