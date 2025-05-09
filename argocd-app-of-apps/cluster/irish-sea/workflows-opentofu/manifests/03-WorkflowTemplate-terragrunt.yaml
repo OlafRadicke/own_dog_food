@@ -48,18 +48,12 @@ spec:
             secretKeyRef:
               name: vault-token
               key:  token
-    - name:           get-terraform-env
-      container:
-        image:        alpine/terragrunt:1.10.3
-        command:      ["echo"]
-        args:
-                      - '${VAULT_TOKEN}'
-        env:
-        - name:       VAULT_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name:   vault-token
-              key:    token
+        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+        volumeMounts:
+        - name:       tofu-backend-vol
+          mountPath:  /terraform/state/
+        - name:       argo-workdir
+          mountPath:  /src
     - name:           run-terraform-init
       container:
         image:        alpine/terragrunt:1.10.3
