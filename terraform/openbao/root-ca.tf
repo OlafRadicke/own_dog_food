@@ -20,21 +20,21 @@ provider "vault" {
 }
 
 
-resource "vault_mount" "example" {
-  path        = "secret"
-  type        = "kv"
-  options     = {
-    version = "2"
-  }
-}
+# resource "vault_mount" "example" {
+#   path        = "secret"
+#   type        = "kv"
+#   options     = {
+#     version = "2"
+#   }
+# }
 
-resource "vault_generic_secret" "example" {
-  path = "secret/example"
-  data_json = jsonencode({
-    username = "my-user"
-    password = "my-password"
-  })
-}
+# resource "vault_generic_secret" "example" {
+#   path = "secret/example"
+#   data_json = jsonencode({
+#     username = "my-user"
+#     password = "my-password"
+#   })
+# }
 
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/pki_secret_backend_root_cert#backend-1
 
