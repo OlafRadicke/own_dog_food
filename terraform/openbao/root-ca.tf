@@ -33,6 +33,15 @@ resource "vault_mount" "pki" {
 #   })
 # }
 
+resource "vault_generic_secret" "pki" {
+  path = "issuers/generate/root/internal"
+  data_json = jsonencode({
+    username = "my-user"
+    password = "my-password"
+  })
+}
+
+
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/pki_secret_backend_root_cert#backend-1
 
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
