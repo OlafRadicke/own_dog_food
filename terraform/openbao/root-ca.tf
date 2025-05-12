@@ -20,13 +20,13 @@ provider "vault" {
 }
 
 
-# resource "vault_mount" "example" {
-#   path        = "secret"
-#   type        = "kv"
-#   options     = {
-#     version = "2"
-#   }
-# }
+resource "vault_mount" "pki" {
+  path        = "pki"
+  type        = "pki"
+  options     = {
+    version = "2"
+  }
+}
 
 # resource "vault_generic_secret" "example" {
 #   path = "secret/example"
