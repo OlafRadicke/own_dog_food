@@ -83,12 +83,6 @@ spec:
     - name:           run-terraform-plan
       container:
         image:        alpine/terragrunt:1.10.3
-        command:      ["terragrunt"]
-        args:
-                      - "plan"
-                      - "-no-color"
-                      # - '-var'
-                      # - '"vault_token=${VAULT_TOKEN}"'
         workingDir:   "{{workflow.parameters.terraformCodePath}}"
         env:
         - name:       VAULT_TOKEN
@@ -96,6 +90,12 @@ spec:
             secretKeyRef:
               name:   vault-token
               key:    token
+        command:      ["terragrunt"]
+        args:
+                      - "plan"
+                      - "-no-color"
+                      # - '-var'
+                      # - '"vault_token=${VAULT_TOKEN}"'
         # - name:       TF_VAR_vault_token
         #   valueFrom:
         #     secretKeyRef:
@@ -109,12 +109,18 @@ spec:
     - name:           run-terraform-apply
       container:
         image:        alpine/terragrunt:1.10.3
+        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+        env:
+        - name:       VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name:   vault-token
+              key:    token
         command:      ["terragrunt"]
         args:
                       - "apply"
                       - "-auto-approve"
                       - "--terragrunt-no-color"
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
         volumeMounts:
         - name:       tofu-backend-vol
           mountPath:  /terraform/state/
