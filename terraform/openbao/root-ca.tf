@@ -39,11 +39,11 @@ resource "vault_mount" "pki_root_ca" {
   description = "PKI Secrets Engine"
 }
 
-resource "vault_pki_secret_backend_config_cluster" "example" {
-  backend  = vault_mount.pki_root_ca.path
-  path     = "http://openbao.openbao:8200/v1/pki-root"
-  aia_path = "http://openbao.openbao:8200/v1/pki-root"
-}
+# resource "vault_pki_secret_backend_config_cluster" "example" {
+#   backend  = vault_mount.pki_root_ca.path
+#   path     = "http://openbao.openbao:8200/v1/pki-root"
+#   aia_path = "http://openbao.openbao:8200/v1/pki-root"
+# }
 
 # # Workarount https://www.infralovers.com/de/blog/2023-10-16-hashicorp-vault-acme-terraform-configuration/
 # resource "vault_generic_endpoint" "root_config_cluster" {
@@ -87,7 +87,7 @@ resource "vault_pki_secret_backend_config_cluster" "example" {
 
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
   depends_on            = [vault_mount.pki_root_ca]
-  backend               = "http://openbao.openbao:8200/pki_root_ca"
+  backend               = [vault_mount.pki_root_ca.path]
   type                  = "internal"
   common_name           = "root_ca.irish.sea"
   ttl                   = "315360000"
