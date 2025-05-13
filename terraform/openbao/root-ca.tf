@@ -87,7 +87,7 @@ resource "vault_mount" "pki_root_ca" {
 
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
   depends_on            = [vault_mount.pki_root_ca]
-  backend               = [vault_mount.pki_root_ca.path]
+  backend               = vault_mount.pki_root_ca.path
   type                  = "internal"
   common_name           = "root_ca.irish.sea"
   ttl                   = "315360000"
