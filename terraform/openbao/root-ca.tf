@@ -33,30 +33,30 @@ provider "vault" {
 #   })
 # }
 
-resource "vault_mount" "pki" {
-  path = "pki-issuer"
+resource "vault_mount" "pki-root-ca" {
+  path = "pki-root-ca"
   type = "pki"
   description = "PKI Secrets Engine"
 }
 
 # Workarount https://www.infralovers.com/de/blog/2023-10-16-hashicorp-vault-acme-terraform-configuration/
 resource "vault_generic_endpoint" "root_config_cluster" {
-  depends_on           = [vault_mount.pki]
-  path                 = "${vault_mount.pki.path}/config/cluster"
+  depends_on           = [vault_mount.pki-root-ca]
+  path                 = "${vault_mount.pki-root-ca.path}/config/cluster"
   ignore_absent_fields = true
   disable_delete       = true
 
   data_json = <<EOT
 {
-    "aia_path": "http://openbao.openbao:8200/v1/${vault_mount.pki.path}",
-    "path": "http://openbao.openbao:8200/v1/${vault_mount.pki.path}"
+    "aia_path": "http://openbao.openbao:8200/v1/${vault_mount.pki-root-ca.path}",
+    "path": "http://openbao.openbao:8200/v1/${vault_mount.pki-root-ca.path}"
 }
 EOT
 }
 
 resource "vault_generic_endpoint" "root_config_urls" {
-  depends_on           = [vault_mount.pki, vault_generic_endpoint.root_config_cluster]
-  path                 = "${vault_mount.pki.path}/config/urls"
+  depends_on           = [vault_mount.pki-root-ca, vault_generic_endpoint.root_config_cluster]
+  path                 = "${vault_mount.pki-root-ca.path}/config/urls"
   ignore_absent_fields = true
   disable_delete       = true
 
@@ -70,8 +70,8 @@ resource "vault_generic_endpoint" "root_config_urls" {
 EOT
 }
 
-resource "vault_pki_secret_backend_role" "server-pki" {
-  backend        = vault_mount.pki.path
+resource "vault_pki_secret_backend_role" "pki-root-ca" {
+  backend        = vault_mount.pki-root-ca.path
   name           = "server-pki"
   no_store       = false
   allow_any_name = true
@@ -80,7 +80,7 @@ resource "vault_pki_secret_backend_role" "server-pki" {
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/pki_secret_backend_root_cert#backend-1
 
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
-  depends_on            = [vault_mount.pki]
+  depends_on            = [vault_mount.pki-root-ca]
   backend               = "http://openbao.openbao:8200"
   type                  = "internal"
   common_name           = "root-ca.irish.sea"
