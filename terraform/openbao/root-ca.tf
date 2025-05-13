@@ -34,7 +34,7 @@ provider "vault" {
 # }
 
 resource "vault_mount" "pki" {
-  path = "pki/issuer"
+  path = "pki"
   type = "pki"
   description = "PKI Secrets Engine"
 }
