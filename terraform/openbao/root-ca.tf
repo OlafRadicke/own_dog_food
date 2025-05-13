@@ -20,10 +20,10 @@ provider "vault" {
 }
 
 
-resource "vault_mount" "pki-issuer" {
-  path        = "pki/issuer"
-  type        = "pki"
-}
+# resource "vault_mount" "pki-issuer" {
+#   path        = "pki/issuer"
+#   type        = "pki"
+# }
 
 # resource "vault_generic_secret" "example" {
 #   path = "secret/example"
@@ -34,7 +34,7 @@ resource "vault_mount" "pki-issuer" {
 # }
 
 resource "vault_mount" "pki" {
-  path = "pki"
+  path = "pki/issuer"
   type = "pki"
   description = "PKI Secrets Engine"
 }
