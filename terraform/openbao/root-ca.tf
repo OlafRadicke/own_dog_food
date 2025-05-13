@@ -34,7 +34,7 @@ resource "vault_mount" "pki-issuer" {
 # }
 
 resource "vault_mount" "pki" {
-  path = "issuers/generate/root/internal"
+  path = "pki"
   type = "pki"
 }
 
