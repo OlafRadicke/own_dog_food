@@ -39,55 +39,13 @@ resource "vault_mount" "pki_root_ca" {
   description = "PKI Secrets Engine"
 }
 
-# resource "vault_pki_secret_backend_config_cluster" "example" {
-#   backend  = vault_mount.pki_root_ca.path
-#   path     = "http://openbao.openbao:8200/v1/pki-root"
-#   aia_path = "http://openbao.openbao:8200/v1/pki-root"
-# }
 
-# # Workarount https://www.infralovers.com/de/blog/2023-10-16-hashicorp-vault-acme-terraform-configuration/
-# resource "vault_generic_endpoint" "root_config_cluster" {
-#   depends_on           = [vault_mount.pki_root_ca]
-#   path                 = "${vault_mount.pki_root_ca.path}/config/cluster"
-#   ignore_absent_fields = true
-#   disable_delete       = true
-
-#   data_json = <<EOT
-# {
-#     "aia_path": "http://openbao.openbao:8200/v1/${vault_mount.pki_root_ca.path}",
-#     "path": "http://openbao.openbao:8200/v1/${vault_mount.pki_root_ca.path}"
-# }
-# EOT
-# }
-
-# resource "vault_generic_endpoint" "root_config_urls" {
-#   depends_on           = [vault_mount.pki_root_ca, vault_generic_endpoint.root_config_cluster]
-#   path                 = "${vault_mount.pki_root_ca.path}/config/urls"
-#   ignore_absent_fields = true
-#   disable_delete       = true
-
-#   data_json = <<EOT
-# {
-#     "enable_templating": true,
-#     "issuing_certificates": "{{cluster_aia_path}}/issuer/{{issuer_id}}/der",
-#     "crl_distribution_points": "{{cluster_aia_path}}/issuer/{{issuer_id}}/crl/der",
-#     "ocsp_servers": "{{cluster_path}}/ocsp"
-# }
-# EOT
-# }
-
-# resource "vault_pki_secret_backend_role" "pki_root_ca" {
-#   backend        = vault_mount.pki_root_ca.path
-#   name           = "server-pki"
-#   no_store       = false
-#   allow_any_name = true
-# }
 
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/pki_secret_backend_root_cert#backend-1
 
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
   depends_on            = [vault_mount.pki_root_ca]
-  backend               = vault_mount.pki_root_ca.path
+  backend               = ${vault_mount.pki_root_ca.path}
   type                  = "internal"
   common_name           = "root_ca.irish.sea"
   ttl                   = "315360000"
