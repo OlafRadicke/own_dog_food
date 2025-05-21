@@ -32,7 +32,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01"
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "sign_policy_ca_01" {
   depends_on           = [vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01]
-  backend              = vault_mount.root_ca.path
+  backend              = vault_mount.pki_root_ca.path
   csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
   exclude_cn_from_sans = true
