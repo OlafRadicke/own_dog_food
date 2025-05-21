@@ -13,7 +13,7 @@ resource "vault_mount" "pki_policy_ca_01" {
 resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
   backend     = vault_pki_secret_backend_root_cert.root_ca.backend
   issuer_ref  = vault_pki_secret_backend_root_cert.root_ca.issuer_id
-  issuer_name = "Irish sea root CA 01"
+  issuer_name = "policy_ca_01"
 }
 
 resource "vault_pki_secret_backend_config_issuers" "config" {
