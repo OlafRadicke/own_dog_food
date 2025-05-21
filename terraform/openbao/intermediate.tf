@@ -29,15 +29,11 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01"
   common_name = "Irish sea policy CA 01"
 }
 
-resource "vault_pki_secret_backend_intermediate_set_signed" "example" {
-  backend     = vault_mount.pki_policy_ca_01.path
-  certificate = vault_pki_secret_backend_root_sign_intermediate.sign_policy_ca_01.certificate
-}
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "sign_policy_ca_01" {
   depends_on           = [vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01]
-  backend              = vault_mount.root.path
-  csr                  = vault_pki_secret_backend_intermediate_cert_request.example.csr
+  backend              = vault_mount.root_ca.path
+  csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
   exclude_cn_from_sans = true
   ou                   = "irish sea"
@@ -46,4 +42,10 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "sign_policy_ca_01" {
   locality             = "Krefeld"
   province             = "NRW"
   revoke               = true
+}
+
+
+resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
+  backend     = vault_mount.pki_policy_ca_01.path
+  certificate = vault_pki_secret_backend_root_sign_intermediate.sign_policy_ca_01.certificate
 }
