@@ -1,17 +1,3 @@
-# https://developer.hashicorp.com/terraform/tutorials/cloud/dynamic-credentials-no-code
-
-
-# https://developer.hashicorp.com/vault/tutorials/get-started/learn-terraform
-# provider "vault" {
-#    auth_login {
-#       path = "auth/userpass/login/${var.login_username}"
-#       parameters = {
-#          password = var.login_password
-#       }
-#    }
-# }
-
-
 
 provider "vault" {
   address = "http://openbao.openbao:8200"
@@ -19,27 +5,11 @@ provider "vault" {
 #   token   = "your-vault-token"
 }
 
-
-# resource "vault_mount" "pki-issuer" {
-#   path        = "pki/issuer"
-#   type        = "pki"
-# }
-
-# resource "vault_generic_secret" "example" {
-#   path = "secret/example"
-#   data_json = jsonencode({
-#     username = "my-user"
-#     password = "my-password"
-#   })
-# }
-
 resource "vault_mount" "pki_root_ca" {
   path = "pki_root_ca"
   type = "pki"
   description = "PKI Secrets Engine"
 }
-
-
 
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/pki_secret_backend_root_cert#backend-1
 
@@ -47,7 +17,7 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
   depends_on            = [vault_mount.pki_root_ca]
   backend               = vault_mount.pki_root_ca.path
   type                  = "internal"
-  common_name           = "root_ca.irish.sea"
+  common_name           = "Irish sea root CA 01"
   ttl                   = "315360000"
   format                = "pem"
   private_key_format    = "der"
@@ -56,19 +26,23 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
   exclude_cn_from_sans  = true
   ou                    = "irish sea"
   organization          = "own dog food"
+  country               = "DE"
+  locality              = "Krefeld"
+  province              = "NRW"
 }
 
 
-# resource "vault_pki_secret_backend_role" "example_role" {
-#   backend         = vault_mount.pki.path
-#   name            = "example-role"
-#   allowed_domains = ["example.com"]
-#   allow_subdomains = true
-#   max_ttl         = "720h"
+# resource "vault_pki_secret_backend_issuer" "issuer_root_ca" {
+#   backend     = vault_pki_secret_backend_root_cert.root_ca.backend
+#   issuer_ref  = vault_pki_secret_backend_root_cert.root_ca.issuer_id
+#   issuer_name = "Irish sea root CA 01 issuer"
 # }
 
-# resource "vault_pki_secret_backend_cert" "example_cert" {
-#   backend     = vault_mount.pki.path
-#   name        = vault_pki_secret_backend_role.example_role.name
-#   common_name = "app.example.com"
+# resource "vault_pki_secret_backend_config_issuers" "config" {
+#   backend                       = vault_mount.pki_root_ca.path
+#   default                       = vault_pki_secret_backend_issuer.issuer_root_ca.issuer_id
+#   default_follows_latest_issuer = true
 # }
+
+# https://www.infralovers.com/de/blog/2023-10-16-hashicorp-vault-acme-terraform-configuration/
+
