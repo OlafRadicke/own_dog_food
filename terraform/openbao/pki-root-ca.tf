@@ -48,7 +48,7 @@ resource "vault_pki_secret_backend_config_ca" "ca_config" {
     tls_self_signed_cert.ca_cert
   ]
   backend       = vault_mount.pki_root_ca.path
-  pem_bundle    = local_file.ca_pem_bundle.sensitive_content
+  pem_bundle    = tls_private_key.root-ca-key.sensitive_content
 }
 
 
