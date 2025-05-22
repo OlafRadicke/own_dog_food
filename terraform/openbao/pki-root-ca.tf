@@ -11,16 +11,9 @@ resource "vault_mount" "pki_root_ca" {
   description = "PKI Secrets Engine"
 }
 
-
-resource "vault_pki_secret_backend" "root_ca" {
-  path = "pki-root"
-}
-
-
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
   depends_on            = [vault_mount.pki_root_ca]
-  # backend               = vault_mount.pki_root_ca.path
-  backend      = vault_pki_secret_backend.root_ca.path
+  backend               = vault_mount.pki_root_ca.path
   type                  = "internal"
   common_name           = "Irish sea root CA 01"
   # ttl                   = "315360000"
