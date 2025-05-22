@@ -60,7 +60,7 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate" {
 # Role for server certs
 # This creates certs of machinename.mydomain.com
 resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-  backend            = vault_mount.pki_policy_ca.path
+  backend            = vault_mount.pki_policy_ca_01.path
   name               = "Service 01"
   allowed_domains    = [var.server_cert_domain]
   allow_subdomains   = true
