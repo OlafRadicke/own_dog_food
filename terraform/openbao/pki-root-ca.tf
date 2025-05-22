@@ -19,7 +19,7 @@ resource "tls_self_signed_cert" "ca_cert" {
 
   }
   # 20 Jahre
-  validity_period_hours = 175200h
+  validity_period_hours = 175200
   allowed_uses = [
     "cert_signing",
     "crl_signing"
