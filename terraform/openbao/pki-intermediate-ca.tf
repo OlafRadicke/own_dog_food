@@ -10,20 +10,6 @@ resource "vault_mount" "pki_policy_ca_01" {
 }
 
 
-resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
-  backend     = vault_pki_secret_backend_root_cert.root_ca.backend
-  issuer_ref  = vault_pki_secret_backend_root_cert.root_ca.issuer_id
-  issuer_name = "policy_ca_01"
-}
-
-resource "vault_pki_secret_backend_config_issuers" "config" {
-  depends_on                    = [vault_pki_secret_backend_issuer.policy_ca_01]
-  backend                       = vault_mount.pki_policy_ca_01.path
-  default                       = vault_pki_secret_backend_issuer.policy_ca_01.issuer_id
-  default_follows_latest_issuer = true
-}
-
-
 resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01" {
   backend     = vault_mount.pki_policy_ca_01.path
   type        = vault_pki_secret_backend_root_cert.root_ca.type
@@ -31,9 +17,9 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01"
 }
 
 
-resource "vault_pki_secret_backend_root_sign_intermediate" "sign_policy_ca_01" {
+resource "vault_pki_secret_backend_root_sign_intermediate" "root" {
   depends_on           = [vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01]
-  backend              = vault_mount.pki_root_ca.path
+  backend              = vault_mount.pki_policy_ca_01.path
   csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
   exclude_cn_from_sans = true
@@ -42,11 +28,42 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "sign_policy_ca_01" {
   country              = "DE"
   locality             = "Krefeld"
   province             = "NRW"
-  revoke               = true
 }
 
 
-resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
-  backend     = vault_mount.pki_policy_ca_01.path
-  certificate = vault_pki_secret_backend_root_sign_intermediate.sign_policy_ca_01.certificate
-}
+# resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
+#   backend     = vault_pki_secret_backend_root_cert.root_ca.backend
+#   issuer_ref  = vault_pki_secret_backend_root_cert.root_ca.issuer_id
+#   issuer_name = "policy_ca_01"
+# }
+
+# resource "vault_pki_secret_backend_config_issuers" "config" {
+#   depends_on                    = [vault_pki_secret_backend_issuer.policy_ca_01]
+#   backend                       = vault_mount.pki_policy_ca_01.path
+#   default                       = vault_pki_secret_backend_issuer.policy_ca_01.issuer_id
+#   default_follows_latest_issuer = true
+# }
+
+
+
+
+
+# resource "vault_pki_secret_backend_root_sign_intermediate" "sign_policy_ca_01" {
+#   depends_on           = [vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01]
+#   backend              = vault_mount.pki_root_ca.path
+#   csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
+#   common_name          = "Irish sea policy CA 01"
+#   exclude_cn_from_sans = true
+#   ou                   = "irish sea"
+#   organization         = "own dog food"
+#   country              = "DE"
+#   locality             = "Krefeld"
+#   province             = "NRW"
+#   revoke               = true
+# }
+
+
+# resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
+#   backend     = vault_mount.pki_policy_ca_01.path
+#   certificate = vault_pki_secret_backend_root_sign_intermediate.sign_policy_ca_01.certificate
+# }
