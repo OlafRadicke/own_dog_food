@@ -6,25 +6,25 @@ provider "vault" {
 }
 
 
-resource tls_self_signed_cert ca_cert {
-   private_key_pem = tls_private_key.ca_key.private_key_pem
-   key_algorithm = "RSA"
-   subject {
-     common_name            = "Irish sea root CA 01"
-     organization           = "own dog food"
-     organizational_unit    = "irish sea"
-      country               = "DE"
-      locality              = "Krefeld"
-      province              = "NRW"
+resource "tls_self_signed_cert" "ca_cert" {
+  private_key_pem = tls_private_key.ca_key.private_key_pem
+  key_algorithm = "RSA"
+  subject {
+    common_name            = "Irish sea root CA 01"
+    organization           = "own dog food"
+    organizational_unit    = "irish sea"
+    country               = "DE"
+    locality              = "Krefeld"
+    province              = "NRW"
 
-   }
-
-   validity_period_hours = 175200h # 20 Jahre
-   allowed_uses = [
-     "cert_signing",
-     "crl_signing"
-   ]
-   is_ca_certificate = true
+  }
+  # 20 Jahre
+  validity_period_hours = 175200h
+  allowed_uses = [
+    "cert_signing",
+    "crl_signing"
+  ]
+  is_ca_certificate = true
 }
 
 
@@ -34,6 +34,16 @@ resource "vault_mount" "pki_root_ca" {
   type = "pki"
   description = "PKI Secrets Engine"
 }
+
+resource "vault_pki_secret_backend_config_ca" "ca_config" {
+  depends_on    = [
+    vault_mount.pki_root_ca,
+    tls_self_signed_cert.ca_cert
+  ]
+  backend       = vault_mount.pki_root_ca.path
+  pem_bundle    = local_file.ca_pem_bundle.sensitive_content
+}
+
 
 # resource "vault_pki_secret_backend_root_cert" "root_ca" {
 #   depends_on            = [vault_mount.pki_root_ca]
