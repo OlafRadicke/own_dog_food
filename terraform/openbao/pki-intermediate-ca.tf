@@ -73,10 +73,10 @@ resource "vault_pki_secret_backend_role" "role-server-cer-01" {
   server_flag        = true
   client_flag        = false
   ou                 = ["irish sea"]
-  organization       = "own dog food"
-  country            = "DE"
-  locality           = "Krefeld"
-  province           = "NRW"
+  organization       = ["own dog food"]
+  country            = ["DE"]
+  locality           = ["Krefeld"]
+  province           = ["NRW"]
   # 2 years
   max_ttl = 63113904
   # 30 days
