@@ -31,7 +31,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
   ]
   backend = vault_mount.pki_policy_ca_01.path
   # backend              = vault_mount.pki_root_ca.path
-  issuer_ref           = tls_self_signed_cert.root_ca_cert
+  issuer_ref           = tls_self_signed_cert.root_ca_cert.id
   csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
   exclude_cn_from_sans = true
