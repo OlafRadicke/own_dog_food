@@ -58,7 +58,7 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 # Role for server certs
 # This creates certs of machinename.mydomain.com
 resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-  depends_on = [vault_mount.pki_policy_ca_01.path]
+  depends_on = [vault_mount.pki_policy_ca_01]
   backend    = vault_mount.pki_policy_ca_01.path
   name       = "Service 01"
   allowed_domains = [
