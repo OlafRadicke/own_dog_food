@@ -6,8 +6,14 @@ provider "vault" {
 }
 
 
+resource "tls_private_key" "root-ca-key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+
 resource "tls_self_signed_cert" "ca_cert" {
-  private_key_pem = tls_private_key.ca_key.private_key_pem
+  private_key_pem = tls_private_key.root-ca-key.private_key_pem
   key_algorithm = "RSA"
   subject {
     common_name            = "Irish sea root CA 01"

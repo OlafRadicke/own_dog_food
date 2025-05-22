@@ -38,6 +38,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "root" {
   country              = "DE"
   locality             = "Krefeld"
   province             = "NRW"
+  ttl                   = 252288000 #8 years
 }
 
 
