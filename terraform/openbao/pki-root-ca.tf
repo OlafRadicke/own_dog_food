@@ -2,7 +2,7 @@
 provider "vault" {
   address = "http://openbao.openbao:8200"
   token   = var.vault_token
-#   token   = "your-vault-token"
+  #   token   = "your-vault-token"
 }
 
 
@@ -12,19 +12,19 @@ resource "tls_private_key" "root-ca-key" {
 }
 
 
-resource "tls_self_signed_cert" "ca_cert" {
-  depends_on    = [
+resource "tls_self_signed_cert" "root_ca_cert" {
+  depends_on = [
     tls_private_key.root-ca-key,
   ]
   private_key_pem = tls_private_key.root-ca-key.private_key_pem
   # key_algorithm = "RSA"
   subject {
-    common_name            = "Irish sea root CA 01"
-    organization           = "own dog food"
-    organizational_unit    = "irish sea"
-    country               = "DE"
-    locality              = "Krefeld"
-    province              = "NRW"
+    common_name         = "Irish sea root CA 01"
+    organization        = "own dog food"
+    organizational_unit = "irish sea"
+    country             = "DE"
+    locality            = "Krefeld"
+    province            = "NRW"
 
   }
   # 20 Jahre
@@ -40,20 +40,18 @@ resource "tls_self_signed_cert" "ca_cert" {
 
 
 resource "vault_mount" "pki_root_ca" {
-  path = "pki_root_ca"
-  type = "pki"
+  path        = "pki_root_ca"
+  type        = "pki"
   description = "PKI Secrets Engine"
 }
 
 resource "vault_pki_secret_backend_config_ca" "ca_config" {
-  depends_on    = [
+  depends_on = [
     vault_mount.pki_root_ca,
-    tls_self_signed_cert.ca_cert
+    tls_self_signed_cert.root_ca_cert
   ]
-  backend       = vault_mount.pki_root_ca.path
-  # pem_bundle    = tls_private_key.root-ca-key.sensitive_content
-  # pem_bundle    = tls_private_key.root-ca-key.private_key_openssh
-  pem_bundle    = tls_private_key.root-ca-key.private_key_pem
+  backend    = vault_mount.pki_root_ca.path
+  pem_bundle = tls_private_key.root-ca-key.private_key_pem
   # pem_bundle    = tls_private_key.root-ca-key.private_key_pem_pkcs8
 
 }

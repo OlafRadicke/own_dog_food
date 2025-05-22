@@ -1,124 +1,121 @@
-apiVersion:             argoproj.io/v1alpha1
-kind:                   CronWorkflow
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
 metadata:
-  name:                 terraform-cronjob
+  name: terraform-cronjob
   annotations:
     argocd.argoproj.io/sync-wave: "5"
 spec:
-  schedule:             "*/1 * * * *"
-  concurrencyPolicy:    "Forbid"
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: "Forbid"
   # startingDeadlineSeconds: 0
   successfulJobsHistoryLimit: 6
   failedJobsHistoryLimit: 3
 
   workflowSpec:
-    entrypoint:         start-terraform-cronjob
-    archiveLogs:        true
+    entrypoint: start-terraform-cronjob
+    archiveLogs: true
 
     # Global arguments for WorkflowTemplates
     arguments:
       parameters:
-      - name:             terraformCodePath
-        value:            /src/clone/terraform/openbao
-      - name:             terraformCodeRepo
-        value:            https://github.com/OlafRadicke/own_dog_food.git
-      - name:             vaultAddr
-        value:            'http://openbao.openbao:8200'
-      - name:             terraformGitBranch
-        value:            "main"
+        - name: terraformCodePath
+          value: /src/clone/terraform/openbao
+        - name: terraformCodeRepo
+          value: https://github.com/OlafRadicke/own_dog_food.git
+        - name: vaultAddr
+          value: "http://openbao.openbao:8200"
+        - name: terraformGitBranch
+          value: "main"
 
-
-  # A PVC for hand over the working directory between
-  # singles steps and his containers.
+    # A PVC for hand over the working directory between
+    # singles steps and his containers.
     volumeClaimTemplates:
       - metadata:
-          name:           argo-workdir
+          name: argo-workdir
         spec:
-          accessModes:    [ "ReadWriteOnce" ]
+          accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage:    1Gi
+              storage: 1Gi
     # Persistent pvc for the backend of Terraform/OpenTofu
     volumes:
-      - name:             tofu-backend-vol
+      - name: tofu-backend-vol
         persistentVolumeClaim:
-          claimName:      opentofu-backend-pvc
+          claimName: opentofu-backend-pvc
 
     templates:
-      - name:           start-terraform-cronjob
+      - name: start-terraform-cronjob
         steps:
+          # Sleep
+          # - - name:       get-vault-sleep
+          #     templateRef:
+          #       name:     vault-operation
+          #       template: get-vault-sleep
+          # vault
+          # Checks the connection to the Vaultserver
 
-# Sleep
-        # - - name:       get-vault-sleep
-        #     templateRef:
-        #       name:     vault-operation
-        #       template: get-vault-sleep
-# vault
-# Checks the connection to the Vaultserver
+          - - name: vault-get-status
+              templateRef:
+                name: vault-operation
+                template: get-vault-status
 
-        - - name:       vault-get-status
-            templateRef:
-              name:     vault-operation
-              template: get-vault-status
+          # git
+          # Clone the Terraform code from a Git repository
 
-# git
-# Clone the Terraform code from a Git repository
+          - - name: clone-terraform-code-from-git
+              templateRef:
+                name: git-operation
+                template: git-clone
 
-        - - name:       clone-terraform-code-from-git
-            templateRef:
-              name:     git-operation
-              template: git-clone
+          # Mozilla SOPS operations
 
-# Mozilla SOPS operations
+          # Check the version of SOPS
+          - - name: sops-get-version
+              templateRef:
+                name: sops-operation
+                template: get-version
 
-        # Check the version of SOPS
-        - - name:       sops-get-version
-            templateRef:
-              name:     sops-operation
-              template: get-version
+          # List the conten of the git clone before the
+          # the secrets a be decrypted.
+          - - name: sops-get-conten-of-dir-before
+              templateRef:
+                name: sops-operation
+                template: get-conten-of-dir
 
-        # List the conten of the git clone before the
-        # the secrets a be decrypted.
-        - - name:       sops-get-conten-of-dir-before
-            templateRef:
-              name:     sops-operation
-              template: get-conten-of-dir
+          # Decrypt the secret with help of SOPS and the
+          # Vault server.
+          # - - name:       decrypt-with-secret
+          #     templateRef:
+          #       name:     sops-operation
+          #       template: decrypt-with-secret
 
+          # List the conten fof die example directory after
+          # decryption operation.
+          - - name: sops-get-conten-of-dir-after
+              templateRef:
+                name: sops-operation
+                template: get-conten-of-dir
 
-        # Decrypt the secret with help of SOPS and the
-        # Vault server.
-        # - - name:       decrypt-with-secret
-        #     templateRef:
-        #       name:     sops-operation
-        #       template: decrypt-with-secret
+          # Terragrunt / Terraform / OpenTofu operations
 
-        # List the conten fof die example directory after
-        # decryption operation.
-        - - name:       sops-get-conten-of-dir-after
-            templateRef:
-              name:     sops-operation
-              template: get-conten-of-dir
+          # - - name:       terraform-sleep
+          #     templateRef:
+          #       name:     terragrunt-operation
+          #       template: terraform-sleep
+          # Run init step of Terraforn
+          - - name: terraform-run-init
+              templateRef:
+                name: terragrunt-operation
+                template: run-terraform-init
 
-# Terragrunt / Terraform / OpenTofu operations
+          #  Run Terraform plan
+          - - name: terraform-run-plan
+              templateRef:
+                name: terragrunt-operation
+                template: run-terraform-plan
 
-        # - - name:       terraform-sleep
-        #     templateRef:
-        #       name:     terragrunt-operation
-        #       template: terraform-sleep
-        # Run init step of Terraforn
-        - - name:       terraform-run-init
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-init
-
-        #  Run Terraform plan
-        - - name:       terraform-run-plan
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-plan
-
-        #  Run Terraform apply
-        - - name:       terraform-run-apply
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-apply
+          #  Run Terraform apply
+          - - name: terraform-run-apply
+              templateRef:
+                name: terragrunt-operation
+                template: run-terraform-apply

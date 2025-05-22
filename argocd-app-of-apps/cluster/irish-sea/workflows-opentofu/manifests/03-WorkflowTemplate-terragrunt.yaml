@@ -1,128 +1,128 @@
-apiVersion:           argoproj.io/v1alpha1
-kind:                 WorkflowTemplate
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
 metadata:
-  name:               terragrunt-operation
+  name: terragrunt-operation
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
   templates:
-    - name:           get-content-of-dir
+    - name: get-content-of-dir
       container:
-        image:        alpine/terragrunt:1.10.3
-        command:      [sh, -c]
+        image: alpine/terragrunt:1.10.3
+        command: [sh, -c]
         args:
-                      - |
-                        pwd
-                        ls -lah
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+          - |
+            pwd
+            ls -lah
+        workingDir: "{{workflow.parameters.terraformCodePath}}"
         volumeMounts:
-        - name:       argo-workdir
-          mountPath:  /src
-    - name:           get-version
+          - name: argo-workdir
+            mountPath: /src
+    - name: get-version
       container:
-        image:        alpine/terragrunt:1.10.3
-        command:      [terraform]
+        image: alpine/terragrunt:1.10.3
+        command: [terraform]
         args:
-                      - "version"
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+          - "version"
+        workingDir: "{{workflow.parameters.terraformCodePath}}"
         volumeMounts:
-        - name:       argo-workdir
-          mountPath:  /src
-    - name:           get-terragrunt-version
+          - name: argo-workdir
+            mountPath: /src
+    - name: get-terragrunt-version
       container:
-        image:        alpine/terragrunt:1.10.3
-        command:      [terragrunt]
+        image: alpine/terragrunt:1.10.3
+        command: [terragrunt]
         args:
-                      - "version"
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+          - "version"
+        workingDir: "{{workflow.parameters.terraformCodePath}}"
         volumeMounts:
-        - name:       argo-workdir
-          mountPath:  /src
-    - name:         terraform-sleep
+          - name: argo-workdir
+            mountPath: /src
+    - name: terraform-sleep
       container:
-        image:      alpine/terragrunt:1.10.3
-        command:    ["/bin/sleep", "1200"]
+        image: alpine/terragrunt:1.10.3
+        command: ["/bin/sleep", "1200"]
         env:
-        - name:     VAULT_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: vault-token
-              key:  token
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+          - name: VAULT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: vault-token
+                key: token
+        workingDir: "{{workflow.parameters.terraformCodePath}}"
         volumeMounts:
-        - name:       tofu-backend-vol
-          mountPath:  /terraform/state/
-        - name:       argo-workdir
-          mountPath:  /src
-    - name:           run-terraform-init
+          - name: tofu-backend-vol
+            mountPath: /terraform/state/
+          - name: argo-workdir
+            mountPath: /src
+    - name: run-terraform-init
       container:
-        image:        alpine/terragrunt:1.10.3
-        command:      ["terragrunt"]
+        image: alpine/terragrunt:1.10.3
+        command: ["terragrunt"]
         args:
-                      - "init"
-                      - "-no-color"
-                      # - '-var'
-                      # - '"vault_token=${VAULT_TOKEN}"'
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+          - "init"
+          - "-no-color"
+          # - '-var'
+          # - '"vault_token=${VAULT_TOKEN}"'
+        workingDir: "{{workflow.parameters.terraformCodePath}}"
         env:
-        - name:       VAULT_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name:   vault-token
-              key:    token
+          - name: VAULT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: vault-token
+                key: token
         # - name:       TF_VAR_vault_token
         #   valueFrom:
         #     secretKeyRef:
         #       name:   vault-token
         #       key:    token
         volumeMounts:
-        - name:       tofu-backend-vol
-          mountPath:  /terraform/state/
-        - name:       argo-workdir
-          mountPath:  /src
-    - name:           run-terraform-plan
+          - name: tofu-backend-vol
+            mountPath: /terraform/state/
+          - name: argo-workdir
+            mountPath: /src
+    - name: run-terraform-plan
       container:
-        image:        alpine/terragrunt:1.10.3
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+        image: alpine/terragrunt:1.10.3
+        workingDir: "{{workflow.parameters.terraformCodePath}}"
         env:
-        - name:       VAULT_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name:   vault-token
-              key:    token
-        command:      ["terragrunt"]
+          - name: VAULT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: vault-token
+                key: token
+        command: ["terragrunt"]
         args:
-                      - "plan"
-                      - "-no-color"
-                      # - '-var'
-                      # - '"vault_token=${VAULT_TOKEN}"'
+          - "plan"
+          - "-no-color"
+          # - '-var'
+          # - '"vault_token=${VAULT_TOKEN}"'
         # - name:       TF_VAR_vault_token
         #   valueFrom:
         #     secretKeyRef:
         #       name:   vault-token
         #       key:    token
         volumeMounts:
-        - name:       tofu-backend-vol
-          mountPath:  /terraform/state/
-        - name:       argo-workdir
-          mountPath:  /src
-    - name:           run-terraform-apply
+          - name: tofu-backend-vol
+            mountPath: /terraform/state/
+          - name: argo-workdir
+            mountPath: /src
+    - name: run-terraform-apply
       container:
-        image:        alpine/terragrunt:1.10.3
-        workingDir:   "{{workflow.parameters.terraformCodePath}}"
+        image: alpine/terragrunt:1.10.3
+        workingDir: "{{workflow.parameters.terraformCodePath}}"
         env:
-        - name:       VAULT_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name:   vault-token
-              key:    token
-        command:      ["terragrunt"]
+          - name: VAULT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: vault-token
+                key: token
+        command: ["terragrunt"]
         args:
-                      - "apply"
-                      - "-auto-approve"
-                      - "--terragrunt-no-color"
+          - "apply"
+          - "-auto-approve"
+          - "--terragrunt-no-color"
         volumeMounts:
-        - name:       tofu-backend-vol
-          mountPath:  /terraform/state/
-        - name:       argo-workdir
-          mountPath:  /src
+          - name: tofu-backend-vol
+            mountPath: /terraform/state/
+          - name: argo-workdir
+            mountPath: /src
