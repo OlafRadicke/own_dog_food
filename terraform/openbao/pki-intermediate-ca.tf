@@ -27,8 +27,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "csr_policy_ca_01" {
   depends_on = [
     vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
     vault_mount.pki_root_ca,
-    tls_self_signed_cert.ca_cert,
-    vault_pki_secret_backend_config_ca.ca_config,
+    vault_pki_secret_backend_config_ca.root_ca_config,
   ]
   # backend              = vault_mount.pki_policy_ca_01.path
   backend              = vault_mount.pki_root_ca.path

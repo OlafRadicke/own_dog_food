@@ -45,7 +45,7 @@ resource "vault_mount" "pki_root_ca" {
   description = "PKI Secrets Engine"
 }
 
-resource "vault_pki_secret_backend_config_ca" "ca_config" {
+resource "vault_pki_secret_backend_config_ca" "root_ca_config" {
   depends_on = [
     vault_mount.pki_root_ca,
     tls_self_signed_cert.root_ca_cert
