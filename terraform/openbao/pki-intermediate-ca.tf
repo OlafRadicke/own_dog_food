@@ -52,7 +52,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
 # the intermedaite cert and not the whole chain.
 resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
   backend     = vault_mount.pki_policy_ca_01.path
-  certificate = "${vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.certificate}\n${tls_self_signed_cert.root_ca_cert.cert_pem}"
+  certificate = vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.certificate
 }
 
 
