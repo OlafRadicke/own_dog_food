@@ -13,6 +13,9 @@ resource "tls_private_key" "root-ca-key" {
 
 
 resource "tls_self_signed_cert" "ca_cert" {
+  depends_on    = [
+    tls_private_key.root-ca-key,
+  ]
   private_key_pem = tls_private_key.root-ca-key.private_key_pem
   # key_algorithm = "RSA"
   subject {
