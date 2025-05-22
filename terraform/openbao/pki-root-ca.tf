@@ -22,7 +22,8 @@ resource "tls_self_signed_cert" "ca_cert" {
   validity_period_hours = 175200
   allowed_uses = [
     "cert_signing",
-    "crl_signing"
+    "crl_signing",
+    "server_auth",
   ]
   is_ca_certificate = true
 }

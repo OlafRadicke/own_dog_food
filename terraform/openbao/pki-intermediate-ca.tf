@@ -11,14 +11,24 @@ resource "vault_mount" "pki_policy_ca_01" {
 
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01" {
+  depends_on = [ vault_mount.pki_policy_ca_01 ]
   backend     = vault_mount.pki_policy_ca_01.path
-  type        = vault_pki_secret_backend_root_cert.root_ca.type
+  type        = "internal"
   common_name = "Irish sea policy CA 01"
+  format = "pem"
+  private_key_format = "der"
+  key_type = "rsa"
+  key_bits = "4096"
 }
 
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "root" {
-  depends_on           = [vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01]
+  depends_on           = [
+    vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
+    vault_mount.pki_root_ca,
+    tls_self_signed_cert.ca_cert,
+    vault_pki_secret_backend_config_ca.ca_config,
+  ]
   backend              = vault_mount.pki_policy_ca_01.path
   csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
