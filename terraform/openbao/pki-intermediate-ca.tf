@@ -47,8 +47,8 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "csr_policy_ca_01" {
 # mount point.  IF you do not put the CA in here, the
 # chained_ca output of a generated cert will only be
 # the intermedaite cert and not the whole chain.
-resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate" {
-  backend = vault_mount.pki_policy_ca_01t.path
+resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
+  backend = vault_mount.pki_policy_ca_01.path
 
   certificate = "${vault_pki_secret_backend_root_sign_intermediate.pki_policy_ca_01.certificate}\n${tls_self_signed_cert.root_ca_cert.cert_pem}"
 }
