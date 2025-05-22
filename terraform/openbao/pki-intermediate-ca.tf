@@ -1,7 +1,7 @@
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/pki_secret_backend_intermediate_set_signed
 
 resource "vault_mount" "pki_policy_ca_01" {
-  depends_on                = [vault_pki_secret_backend_config_ca.ca_config]
+  depends_on                = [vault_pki_secret_backend_config_ca.root_ca_config]
   path                      = "pki_policy_ca_01"
   type                      = vault_mount.pki_root_ca.type
   description               = "intermediate"
@@ -59,8 +59,9 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate" {
 # Role for server certs
 # This creates certs of machinename.mydomain.com
 resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-  backend = vault_mount.pki_policy_ca_01.path
-  name    = "Service 01"
+  depends_on = [vault_mount.pki_policy_ca_01.path]
+  backend    = vault_mount.pki_policy_ca_01.path
+  name       = "Service 01"
   allowed_domains = [
     "my.fun",
     "your.fun",
