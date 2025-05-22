@@ -18,7 +18,7 @@ resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
 
 resource "vault_pki_secret_backend_config_issuers" "config" {
   backend                       = vault_mount.pki_policy_ca_01.path
-  default                       = vault_pki_secret_backend_root_cert.root_ca.issuer_id
+  default                       = vault_pki_secret_backend_issuer.policy_ca_01.issuer_id
   default_follows_latest_issuer = true
 }
 
