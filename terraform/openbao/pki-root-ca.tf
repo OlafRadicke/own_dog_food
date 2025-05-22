@@ -45,16 +45,16 @@ resource "vault_mount" "pki_root_ca" {
   description = "PKI Secrets Engine"
 }
 
-resource "vault_pki_secret_backend_config_ca" "root_ca_config" {
-  depends_on = [
-    vault_mount.pki_root_ca,
-    tls_self_signed_cert.root_ca_cert
-  ]
-  backend    = vault_mount.pki_root_ca.path
-  pem_bundle = tls_private_key.root-ca-key.private_key_pem
-  # pem_bundle    = tls_private_key.root-ca-key.private_key_pem_pkcs8
+# resource "vault_pki_secret_backend_config_ca" "root_ca_config" {
+#   depends_on = [
+#     vault_mount.pki_root_ca,
+#     tls_self_signed_cert.root_ca_cert
+#   ]
+#   backend    = vault_mount.pki_root_ca.path
+#   pem_bundle = tls_private_key.root-ca-key.private_key_pem
+#   # pem_bundle    = tls_private_key.root-ca-key.private_key_pem_pkcs8
 
-}
+# }
 
 
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
