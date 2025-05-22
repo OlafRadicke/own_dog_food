@@ -23,7 +23,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01"
 }
 
 
-resource "vault_pki_secret_backend_root_sign_intermediate" "csr_policy_ca_01" {
+resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
   depends_on = [
     vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
     vault_mount.pki_root_ca,
@@ -48,9 +48,8 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "csr_policy_ca_01" {
 # chained_ca output of a generated cert will only be
 # the intermedaite cert and not the whole chain.
 resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
-  backend = vault_mount.pki_policy_ca_01.path
-
-  certificate = "${vault_pki_secret_backend_root_sign_intermediate.pki_policy_ca_01.certificate}\n${tls_self_signed_cert.root_ca_cert.cert_pem}"
+  backend     = vault_mount.pki_policy_ca_01.path
+  certificate = "${vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.certificate}\n${tls_self_signed_cert.root_ca_cert.cert_pem}"
 }
 
 
