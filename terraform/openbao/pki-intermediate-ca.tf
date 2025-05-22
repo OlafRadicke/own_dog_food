@@ -1,7 +1,9 @@
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/pki_secret_backend_intermediate_set_signed
 
 resource "vault_mount" "pki_policy_ca_01" {
-  depends_on                = [vault_pki_secret_backend_config_ca.root_ca_config]
+  depends_on = [
+    "vault_pki_secret_backend_root_cert.root_ca",
+  ]
   path                      = "pki_policy_ca_01"
   type                      = vault_mount.pki_root_ca.type
   description               = "intermediate"
