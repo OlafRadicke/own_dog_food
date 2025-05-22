@@ -14,7 +14,7 @@ resource "tls_private_key" "root-ca-key" {
 
 resource "tls_self_signed_cert" "ca_cert" {
   private_key_pem = tls_private_key.root-ca-key.private_key_pem
-  key_algorithm = "RSA"
+  # key_algorithm = "RSA"
   subject {
     common_name            = "Irish sea root CA 01"
     organization           = "own dog food"
