@@ -72,7 +72,7 @@ resource "vault_pki_secret_backend_role" "role-server-cer-01" {
   allow_ip_sans      = true
   server_flag        = true
   client_flag        = false
-  ou                 = "irish sea"
+  ou                 = ["irish sea"]
   organization       = "own dog food"
   country            = "DE"
   locality           = "Krefeld"
