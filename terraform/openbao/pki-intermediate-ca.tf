@@ -22,15 +22,16 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01"
   key_bits           = "4096"
 }
 
-
+# Have the Root CA Sign our CSR
 resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
   depends_on = [
     vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
     vault_mount.pki_root_ca,
     vault_pki_secret_backend_config_ca.root_ca_config,
   ]
-  # backend              = vault_mount.pki_policy_ca_01.path
-  backend              = vault_mount.pki_root_ca.path
+  backend = vault_mount.pki_policy_ca_01.path
+  # backend              = vault_mount.pki_root_ca.path
+  issuer_ref           = tls_self_signed_cert.root_ca_cert
   csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
   exclude_cn_from_sans = true
