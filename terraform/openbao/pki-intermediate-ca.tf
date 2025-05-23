@@ -2,7 +2,7 @@
 
 resource "vault_mount" "pki_policy_ca_01" {
   depends_on = [
-    "vault_pki_secret_backend_root_cert.root_ca",
+    vault_pki_secret_backend_root_cert.root_ca,
   ]
   path                      = "pki_policy_ca_01"
   type                      = vault_mount.pki_root_ca.type
@@ -57,13 +57,27 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 
 
 
+resource "vault_mount" "pki_service_01" {
+  depends_on = [
+    vault_pki_secret_backend_root_cert.root_ca,
+  ]
+  path                      = "pki_service_01"
+  type                      = "pki"
+  description               = "leaf certs"
+  default_lease_ttl_seconds = 2592000
+  max_lease_ttl_seconds     = 2592000
+}
+
 #
 # Role for server certs
 # This creates certs of machinename.mydomain.com
 resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-  depends_on = [vault_mount.pki_policy_ca_01]
-  backend    = vault_mount.pki_policy_ca_01.path
-  name       = "Service 01"
+  depends_on = [
+    vault_mount.pki_service_01,
+    vault_pki_secret_backend_root_sign_intermediate.policy_ca_01
+  ]
+  backend = vault_mount.pki_service_01.path
+  name    = "Service 01"
   allowed_domains = [
     "my.fun",
     "your.fun",
