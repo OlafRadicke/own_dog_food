@@ -80,7 +80,7 @@ resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
     vault_mount.root_ca,
     vault_pki_secret_backend_root_cert.root_ca
   ]
-  backend     = vault_pki_secret_backend_root_cert.root_ca.path
+  backend     = vault_mount.root_ca.path
   issuer_ref  = vault_pki_secret_backend_root_cert.root_ca.issuer_id
   issuer_name = "root-ca"
 }
