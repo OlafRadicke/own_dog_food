@@ -13,15 +13,15 @@ resource "vault_mount" "pki_policy_ca_01" {
 
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01" {
-  depends_on = [vault_mount.pki_policy_ca_01]
-  # backend            = vault_mount.pki_policy_ca_01.path
-  backend            = vault_mount.pki_root_ca.path
+  depends_on         = [vault_mount.pki_policy_ca_01]
+  backend            = vault_mount.pki_policy_ca_01.path
   type               = "internal"
   common_name        = "Irish sea policy CA 01"
   format             = "pem"
   private_key_format = "der"
   key_type           = "rsa"
   key_bits           = "4096"
+  # backend            = vault_mount.pki_root_ca.path
 }
 
 # Have the Root CA Sign our CSR
@@ -30,9 +30,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
     vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
     vault_mount.pki_root_ca,
   ]
-  # backend = vault_mount.pki_policy_ca_01.path
-  backend = vault_mount.pki_root_ca.path
-  # issuer_ref           = tls_self_signed_cert.root_ca_cert.id
+  backend              = vault_mount.pki_root_ca.path
   issuer_ref           = vault_pki_secret_backend_root_cert.root_ca.id
   csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
@@ -43,6 +41,8 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
   locality             = "Krefeld"
   province             = "NRW"
   ttl                  = 252288000 #8 years
+  # backend = vault_mount.pki_policy_ca_01.path
+  # issuer_ref           = tls_self_signed_cert.root_ca_cert.id
 }
 
 # Now that CSR is processed and we have a signed cert
