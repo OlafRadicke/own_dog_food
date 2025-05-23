@@ -15,7 +15,8 @@ resource "vault_mount" "pki_policy_ca_01" {
 
 # Generate a key
 resource "vault_pki_secret_backend_key" "policy_ca_01" {
-  path     = vault_mount.pki_policy_ca_01.path
+  # path     = vault_mount.pki_policy_ca_01.path
+  backend  = vault_mount.pki_policy_ca_01.backend
   type     = "internal"
   key_type = "rsa"
   key_bits = "4096"
