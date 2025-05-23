@@ -12,16 +12,34 @@ resource "vault_mount" "pki_policy_ca_01" {
 }
 
 
-resource "vault_pki_secret_backend_intermediate_cert_request" "csr_policy_ca_01" {
-  depends_on         = [vault_mount.pki_policy_ca_01]
-  backend            = vault_mount.pki_policy_ca_01.path
-  type               = "internal"
-  common_name        = "Irish sea policy CA 01"
-  format             = "pem"
-  private_key_format = "der"
-  key_type           = "rsa"
-  key_bits           = "4096"
+resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
+  backend     = vault_mount.pki_policy_ca_01.path # Pfad des PKI-Backends
+  issuer_ref  = vault_pki_secret_backend_root_cert.pki_root_ca.issuer_id
+  issuer_name = "root-ca"
+}
+
+# Generate a key
+resource "vault_pki_secret_backend_key" "policy_ca_01" {
+  backend  = var.issuer.backend
+  type     = "internal"
+  key_type = "rsa"
+  key_bits = "4096"
+  key_name = "policy_ca_01"
+}
+
+
+resource "vault_pki_secret_backend_intermediate_cert_request" "policy_ca_01" {
+  depends_on  = [vault_mount.pki_policy_ca_01]
+  backend     = vault_mount.pki_root_ca.path
+  type        = "existing"
+  common_name = "Irish sea policy CA 01"
+  key_ref     = vault_pki_secret_backend_key.policy_ca_01.key_id
+  # format             = "pem"
+  # private_key_format = "der"
+  # key_type           = "rsa"
+  # key_bits           = "4096"
   # backend            = vault_mount.pki_root_ca.path
+  # backend            = vault_mount.pki_policy_ca_01.path
 }
 
 # Have the Root CA Sign our CSR
@@ -30,9 +48,9 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
     vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
     vault_mount.pki_root_ca,
   ]
-  backend              = "pki_root_ca"
+  backend              = vault_mount.pki_policy_ca_01.path
   issuer_ref           = vault_pki_secret_backend_root_cert.root_ca.id
-  csr                  = vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01.csr
+  csr                  = vault_pki_secret_backend_intermediate_cert_request.policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
   exclude_cn_from_sans = true
   ou                   = "irish sea"
@@ -57,51 +75,6 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 }
 
 
-
-resource "vault_mount" "pki_service_01" {
-  depends_on = [
-    vault_pki_secret_backend_root_cert.root_ca,
-  ]
-  path                      = "pki_service_01"
-  type                      = "pki"
-  description               = "leaf certs"
-  default_lease_ttl_seconds = 2592000
-  max_lease_ttl_seconds     = 2592000
-}
-
-#
-# Role for server certs
-# This creates certs of machinename.mydomain.com
-resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-  depends_on = [
-    vault_mount.pki_service_01,
-    vault_pki_secret_backend_root_sign_intermediate.policy_ca_01
-  ]
-  backend = vault_mount.pki_service_01.path
-  name    = "Service 01"
-  allowed_domains = [
-    "my.fun",
-    "your.fun",
-  ]
-  allow_subdomains   = true
-  allow_glob_domains = false
-  allow_any_name     = false
-  enforce_hostnames  = true
-  allow_ip_sans      = true
-  server_flag        = true
-  client_flag        = false
-  ou                 = ["irish sea"]
-  organization       = ["own dog food"]
-  country            = ["DE"]
-  locality           = ["Krefeld"]
-  province           = ["NRW"]
-  # 2 years
-  max_ttl = 63113904
-  # 30 days
-  ttl      = 2592000
-  no_store = true
-
-}
 
 
 
