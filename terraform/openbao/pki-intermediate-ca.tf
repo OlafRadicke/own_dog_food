@@ -11,16 +11,17 @@ resource "vault_mount" "pki_policy_ca_01" {
   max_lease_ttl_seconds     = 2592000
 }
 
-
+# Set the issuer of the polecy ca
 resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
-  backend     = vault_mount.pki_policy_ca_01.path # Pfad des PKI-Backends
+  backend     = vault_pki_secret_backend_root_cert.pki_root_ca.backend
   issuer_ref  = vault_pki_secret_backend_root_cert.pki_root_ca.issuer_id
   issuer_name = "root-ca"
 }
 
 # Generate a key
 resource "vault_pki_secret_backend_key" "policy_ca_01" {
-  backend  = var.issuer.backend
+  backend  = vault_mount.pki_policy_ca_01.backend
+  path     = "keys/policy_ca_01"
   type     = "internal"
   key_type = "rsa"
   key_bits = "4096"
@@ -30,7 +31,7 @@ resource "vault_pki_secret_backend_key" "policy_ca_01" {
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "policy_ca_01" {
   depends_on  = [vault_mount.pki_policy_ca_01]
-  backend     = vault_mount.pki_root_ca.path
+  backend     = vault_mount.pki_root_ca.backend
   type        = "existing"
   common_name = "Irish sea policy CA 01"
   key_ref     = vault_pki_secret_backend_key.policy_ca_01.key_id
@@ -48,7 +49,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
     vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
     vault_mount.pki_root_ca,
   ]
-  backend              = vault_mount.pki_policy_ca_01.path
+  backend              = vault_mount.pki_policy_ca_01.backend
   issuer_ref           = vault_pki_secret_backend_root_cert.root_ca.id
   csr                  = vault_pki_secret_backend_intermediate_cert_request.policy_ca_01.csr
   common_name          = "Irish sea policy CA 01"
@@ -70,7 +71,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
 # chained_ca output of a generated cert will only be
 # the intermedaite cert and not the whole chain.
 resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
-  backend     = vault_mount.pki_policy_ca_01.path
+  backend     = vault_mount.pki_policy_ca_01.backend
   certificate = vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.certificate
 }
 
