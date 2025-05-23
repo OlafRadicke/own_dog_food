@@ -48,8 +48,8 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
     vault_pki_secret_backend_intermediate_cert_request.policy_ca_01,
     vault_mount.root_ca,
   ]
-  backend              = vault_mount.policy_ca_01.path
-  issuer_ref           = vault_pki_secret_backend_root_cert.root_ca.id
+  backend = vault_mount.policy_ca_01.path
+  # issuer_ref           = vault_pki_secret_backend_root_cert.root_ca.id
   csr                  = vault_pki_secret_backend_intermediate_cert_request.policy_ca_01.csr
   format               = "pem"
   common_name          = "Irish sea policy CA 01"
