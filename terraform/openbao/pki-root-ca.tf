@@ -1,5 +1,5 @@
-resource "vault_mount" "pki_root_ca" {
-  path        = "pki_root_ca"
+resource "vault_mount" "root_ca" {
+  path        = "root_ca"
   type        = "pki"
   description = "PKI Secrets Engine"
 }
@@ -7,8 +7,8 @@ resource "vault_mount" "pki_root_ca" {
 
 
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
-  depends_on  = [vault_mount.pki_root_ca]
-  backend     = vault_mount.pki_root_ca.path
+  depends_on  = [vault_mount.root_ca]
+  backend     = vault_mount.root_ca.path
   type        = "internal"
   common_name = "Irish sea root CA 01"
   # ttl                   = "315360000"
@@ -33,7 +33,7 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
 # }
 
 # resource "vault_pki_secret_backend_config_issuers" "config" {
-#   backend                       = vault_mount.pki_root_ca.path
+#   backend                       = vault_mount.root_ca.path
 #   default                       = vault_pki_secret_backend_issuer.issuer_root_ca.issuer_id
 #   default_follows_latest_issuer = true
 # }
