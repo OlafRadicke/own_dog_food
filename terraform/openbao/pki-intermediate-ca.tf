@@ -11,12 +11,7 @@ resource "vault_mount" "pki_policy_ca_01" {
   max_lease_ttl_seconds     = 2592000
 }
 
-# Set the issuer of the polecy ca
-resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
-  backend     = vault_pki_secret_backend_root_cert.pki_root_ca.backend
-  issuer_ref  = vault_pki_secret_backend_root_cert.pki_root_ca.issuer_id
-  issuer_name = "root-ca"
-}
+
 
 # Generate a key
 resource "vault_pki_secret_backend_key" "policy_ca_01" {
@@ -77,7 +72,12 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 
 
 
-
+# Set the issuer of the polecy ca
+resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
+  backend     = vault_pki_secret_backend_root_cert.pki_root_ca.backend
+  issuer_ref  = vault_pki_secret_backend_root_cert.pki_root_ca.issuer_id
+  issuer_name = "root-ca"
+}
 
 
 # resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
