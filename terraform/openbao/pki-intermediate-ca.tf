@@ -15,12 +15,12 @@ resource "vault_mount" "pki_policy_ca_01" {
 
 # Generate a key
 resource "vault_pki_secret_backend_key" "policy_ca_01" {
-  backend  = vault_mount.pki_policy_ca_01.backend
-  path     = "keys/policy_ca_01"
+  path     = vault_mount.pki_policy_ca_01.path
   type     = "internal"
   key_type = "rsa"
   key_bits = "4096"
   key_name = "policy_ca_01"
+  # backend  = vault_mount.pki_policy_ca_01.backend
 }
 
 
@@ -74,6 +74,11 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 
 # Set the issuer of the polecy ca
 resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
+  depends_on = [
+    vault_pki_secret_backend_intermediate_cert_request.csr_policy_ca_01,
+    vault_mount.pki_root_ca,
+    vault_pki_secret_backend_root_cert.pki_root_ca
+  ]
   backend     = vault_pki_secret_backend_root_cert.pki_root_ca.backend
   issuer_ref  = vault_pki_secret_backend_root_cert.pki_root_ca.issuer_id
   issuer_name = "root-ca"
