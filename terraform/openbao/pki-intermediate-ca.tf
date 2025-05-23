@@ -16,18 +16,21 @@ resource "vault_mount" "policy_ca_01" {
 # Generate a key
 resource "vault_pki_secret_backend_key" "policy_ca_01" {
   backend  = vault_mount.policy_ca_01.path
+  key_name = "policy_ca_01"
   type     = "internal"
   key_type = "rsa"
   key_bits = "4096"
-  key_name = "policy_ca_01"
   # backend  = vault_mount.policy_ca_01.backend
   # path     = vault_mount.policy_ca_01.path
 }
 
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "policy_ca_01" {
-  depends_on  = [vault_mount.policy_ca_01]
-  backend     = vault_mount.root_ca.path
+  depends_on = [
+    vault_mount.root_ca,
+    vault_mount.policy_ca_01
+  ]
+  backend     = vault_mount.policy_ca_01.path
   type        = "existing"
   common_name = "Irish sea policy CA 01"
   key_ref     = vault_pki_secret_backend_key.policy_ca_01.key_id
