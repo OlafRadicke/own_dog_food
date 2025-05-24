@@ -21,14 +21,15 @@ resource "vault_pki_secret_backend_key" "policy_ca_01" {
 
 # Generate an CSR
 resource "vault_pki_secret_backend_intermediate_cert_request" "policy_ca_01" {
-  depends_on = [
-    vault_mount.root_ca,
-    vault_mount.policy_ca_01
-  ]
-  backend     = vault_mount.policy_ca_01.path
-  type        = "existing"
+  # depends_on = [
+  #   vault_mount.root_ca,
+  #   vault_mount.policy_ca_01
+  # ]
   common_name = "Irish sea policy CA 01"
-  key_ref     = vault_pki_secret_backend_key.policy_ca_01.key_id
+  backend     = vault_mount.policy_ca_01.path
+  type        = vault_mount.policy_ca_01.type
+  # type        = "existing"
+  # key_ref     = vault_pki_secret_backend_key.policy_ca_01.key_id
   # format             = "pem"
   # private_key_format = "der"
   # key_type           = "rsa"
