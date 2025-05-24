@@ -44,9 +44,10 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
     vault_pki_secret_backend_intermediate_cert_request.policy_ca_01,
     vault_mount.root_ca,
   ]
-  backend              = vault_mount.root_ca.path
-  csr                  = vault_pki_secret_backend_intermediate_cert_request.policy_ca_01.csr
-  format               = "pem"
+  backend = vault_mount.root_ca.path
+  csr     = vault_pki_secret_backend_intermediate_cert_request.policy_ca_01.csr
+  # format               = "pem"
+  format               = "pem_bundle"
   common_name          = "Irish sea policy CA 01"
   exclude_cn_from_sans = true
   ou                   = "irish sea"
@@ -72,6 +73,6 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
   backend = vault_mount.policy_ca_01.path
   # issuer_ref = vault_pki_secret_backend_issuer.root_ca.issuer_id
-  issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.policy_ca_01.issuers_id
+  # issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.policy_ca_01.issuers_id
   issuer_name = "policy-ca-01"
 }
