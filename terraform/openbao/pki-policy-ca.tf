@@ -64,7 +64,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
 # the intermedaite cert and not the whole chain.
 resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
   backend     = vault_mount.policy_ca_01.path
-  certificate = vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.certificate
+  certificate = vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.certificate vault_pki_secret_backend_root_cert.root_ca.certificate
 }
 
 # Set the issuer of the policy ca
