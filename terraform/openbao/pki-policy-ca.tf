@@ -69,10 +69,7 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 # Set the issuer of the policy ca
 # TODO: is it right?
 resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
-  depends_on = [
-    vault_pki_secret_backend_root_cert.policy_ca_01
-  ]
   backend     = vault_mount.policy_ca_01.path
-  issuer_ref  = vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.issuing_ca
+  issuer_ref  = vault_pki_secret_backend_issuer.root_ca.issuer_id
   issuer_name = "policy-ca-01"
 }
