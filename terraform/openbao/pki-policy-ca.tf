@@ -27,7 +27,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "policy_ca_01" {
   # ]
   common_name = "Irish sea policy CA 01"
   backend     = vault_mount.policy_ca_01.path
-  type        = vault_mount.root_ca.type
+  type        = vault_pki_secret_backend_root_cert.root_ca.type
   # type        = "existing"
   # key_ref     = vault_pki_secret_backend_key.policy_ca_01.key_id
   # format             = "pem"
