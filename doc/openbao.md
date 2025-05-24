@@ -10,6 +10,7 @@ OpenBao
 		- [Use vault cli](#use-vault-cli)
 	- [Use OpenBao / Vault cli](#use-openbao--vault-cli)
 		- [Status](#status)
+	- [PKI-TUTORAL](#pki-tutoral)
 
 
 K8s-secret with OpenBao-Token
@@ -95,3 +96,8 @@ Cluster Name    vault-cluster-248e257a
 Cluster ID      681288cb-727b-b80d-4b64-f131b46c71c1
 HA Enabled      false
 ```
+
+PKI-TUTORAL
+-----------
+
+PKI with Terraform and Vault [tutoral](https://developer.hashicorp.com/vault/tutorials/pki/pki-engine-external-ca)
