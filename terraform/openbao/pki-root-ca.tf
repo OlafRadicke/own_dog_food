@@ -24,19 +24,3 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
   locality             = "Krefeld"
   province             = "NRW"
 }
-
-
-# resource "vault_pki_secret_backend_issuer" "issuer_root_ca" {
-#   backend     = vault_pki_secret_backend_root_cert.root_ca.backend
-#   issuer_ref  = vault_pki_secret_backend_root_cert.root_ca.issuer_id
-#   issuer_name = "Irish sea root CA 01 issuer"
-# }
-
-# resource "vault_pki_secret_backend_config_issuers" "config" {
-#   backend                       = vault_mount.root_ca.path
-#   default                       = vault_pki_secret_backend_issuer.issuer_root_ca.issuer_id
-#   default_follows_latest_issuer = true
-# }
-
-# https://www.infralovers.com/de/blog/2023-10-16-hashicorp-vault-acme-terraform-configuration/
-
