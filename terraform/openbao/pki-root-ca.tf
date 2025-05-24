@@ -5,7 +5,7 @@ resource "vault_mount" "root_ca" {
 }
 
 
-
+# Create an self sign root certificate
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
   depends_on  = [vault_mount.root_ca]
   backend     = vault_mount.root_ca.path
@@ -24,3 +24,25 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
   locality             = "Krefeld"
   province             = "NRW"
 }
+
+
+# Set the issuer of the policy ca
+# TODO: is it right?
+resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
+  depends_on = [
+    vault_pki_secret_backend_intermediate_cert_request.policy_ca_01,
+    vault_mount.root_ca,
+    vault_pki_secret_backend_root_cert.root_ca
+  ]
+  backend     = vault_mount.root_ca.path
+  issuer_ref  = vault_pki_secret_backend_root_cert.root_ca.issuer_id
+  issuer_name = "root-ca"
+}
+
+
+# resource "vault_pki_secret_backend_config_issuers" "config" {
+#   depends_on                    = [vault_pki_secret_backend_issuer.policy_ca_01]
+#   backend                       = vault_mount.policy_ca_01.path
+#   default                       = vault_pki_secret_backend_issuer.policy_ca_01.issuer_id
+#   default_follows_latest_issuer = true
+# }
