@@ -28,10 +28,8 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
 
 # Set the issuer of the policy ca
 # TODO: is it right?
-resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
+resource "vault_pki_secret_backend_issuer" "root_ca" {
   depends_on = [
-    vault_pki_secret_backend_intermediate_cert_request.policy_ca_01,
-    vault_mount.root_ca,
     vault_pki_secret_backend_root_cert.root_ca
   ]
   backend     = vault_mount.root_ca.path
