@@ -27,7 +27,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "policy_ca_01" {
   # ]
   common_name = "Irish sea policy CA 01"
   backend     = vault_mount.policy_ca_01.path
-  type        = vault_mount.policy_ca_01.type
+  type        = vault_mount.root_ca.type
   # type        = "existing"
   # key_ref     = vault_pki_secret_backend_key.policy_ca_01.key_id
   # format             = "pem"
@@ -70,7 +70,8 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 # Set the issuer of the policy ca
 # TODO: is it right?
 resource "vault_pki_secret_backend_issuer" "policy_ca_01" {
-  backend     = vault_mount.policy_ca_01.path
-  issuer_ref  = vault_pki_secret_backend_issuer.root_ca.issuer_id
+  backend    = vault_mount.policy_ca_01.path
+  issuer_ref = vault_pki_secret_backend_issuer.root_ca.issuer_id
+  # issuer_ref  = vault_pki_secret_backend_intermediate_set_signed.policy_ca_01.imported_issuers
   issuer_name = "policy-ca-01"
 }
