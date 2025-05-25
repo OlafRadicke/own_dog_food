@@ -1,6 +1,8 @@
 Todos
 =====
 
+- PKI with Terraform and Vault [tutoral](https://developer.hashicorp.com/vault/tutorials/pki/pki-engine-external-ca)
+- [Yubi HSM + Vault](https://developer.hashicorp.com/vault/docs/configuration)
 - [s3fs-fuse](https://github.com/s3fs-fuse/s3fs-fuse#examples)
 - Use own hugo operator for tif page.
 - [Check ssl](https://www.ssllabs.com/ssltest/?ref=traefik.io)
