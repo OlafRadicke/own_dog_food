@@ -37,24 +37,24 @@ resource "vault_mount" "pki_service_01" {
 
 # Alternativ: vault_pki_secret_backend_sign
 
-resource "vault_pki_secret_backend_cert_request" "service-01" {
-  backend            = vault_mount.pki_service_01.path
-  name               = "service-01"
-  common_name        = "service-01.irish.sea"
-  alt_names          = ["www.service-01.irish.sea"]
-  ttl                = "8760h"
-  format             = "pem"
-  private_key_format = "pkcs8"
-}
+# resource "vault_pki_secret_backend_cert_request" "service-01" {
+#   backend            = vault_mount.pki_service_01.path
+#   name               = "service-01"
+#   common_name        = "service-01.irish.sea"
+#   alt_names          = ["www.service-01.irish.sea"]
+#   ttl                = "8760h"
+#   format             = "pem"
+#   private_key_format = "pkcs8"
+# }
 
-resource "vault_pki_secret_backend_sign" "service-01" {
-  backend     = vault_mount.policy_ca_01.path
-  name        = "service-01"
-  common_name = "service-01.irish.sea"
-  csr         = vault_pki_secret_backend_cert_request.service-01.csr
-  format      = "pem_bundle"
-  ttl         = "8760h"
-}
+# resource "vault_pki_secret_backend_sign" "service-01" {
+#   backend     = vault_mount.policy_ca_01.path
+#   name        = "service-01"
+#   common_name = "service-01.irish.sea"
+#   csr         = vault_pki_secret_backend_cert_request.service-01.csr
+#   format      = "pem_bundle"
+#   ttl         = "8760h"
+# }
 
 resource "vault_pki_secret_backend_cert" "service-02" {
   backend     = vault_mount.policy_ca_01.path
