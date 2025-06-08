@@ -87,10 +87,7 @@ resource "vault_pki_secret_backend_role" "server-01" {
 }
 
 resource "vault_pki_secret_backend_cert" "app" {
-  depends_on = [vault_pki_secret_backend_role.admin]
-
-  backend = vault_mount.policy_ca_01.path
-  name    = vault_pki_secret_backend_role.server-01.name
-
+  backend     = vault_mount.policy_ca_01.path
+  name        = vault_pki_secret_backend_role.server-01.name
   common_name = "service-01.irish.sea"
 }
