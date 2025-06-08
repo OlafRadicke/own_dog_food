@@ -6,8 +6,8 @@ resource "vault_mount" "policy_ca_01" {
   path                      = "policy_ca_01"
   type                      = vault_mount.root_ca.type
   description               = "intermediate"
-  default_lease_ttl_seconds = 2592000
-  max_lease_ttl_seconds     = 2592000
+  default_lease_ttl_seconds = "46656000" # 3 months
+  max_lease_ttl_seconds     = "46656000" # 3 months
 }
 
 # Generate a key
@@ -17,6 +17,7 @@ resource "vault_pki_secret_backend_key" "policy_ca_01" {
   type     = "internal"
   key_type = "rsa"
   key_bits = "4096"
+  ttl      = "46656000"
 }
 
 # Generate an CSR
