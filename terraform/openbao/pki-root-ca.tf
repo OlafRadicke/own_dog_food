@@ -9,11 +9,11 @@ resource "vault_mount" "root_ca" {
 
 # Create an self sign root certificate
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
-  depends_on           = [vault_mount.root_ca]
-  backend              = vault_mount.root_ca.path
-  type                 = "internal"
-  common_name          = "Irish sea root CA 01"
-  ttl                  = "630720000" # 20 Jahre
+  depends_on  = [vault_mount.root_ca]
+  backend     = vault_mount.root_ca.path
+  type        = "internal"
+  common_name = "Irish sea root CA 01"
+  # ttl                  = "630720000" # 20 Jahre
   format               = "pem"
   private_key_format   = "der"
   key_type             = "rsa"
