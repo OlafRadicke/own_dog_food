@@ -18,6 +18,7 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
   private_key_format   = "der"
   key_type             = "rsa"
   key_bits             = 4096
+  not_after            = "2045-06-08T12:00:00Z"
   exclude_cn_from_sans = true
   ou                   = "irish sea"
   organization         = "own dog food"
