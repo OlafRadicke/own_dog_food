@@ -17,8 +17,9 @@ resource "vault_pki_secret_backend_key" "policy_ca_01" {
   type     = "internal"
   key_type = "rsa"
   key_bits = "4096"
-  ttl      = "46656000"
+  ttl      = vault_mount.policy_ca_01.default_lease_ttl_seconds
 }
+# ttl      = "46656000"
 
 # Generate an CSR
 resource "vault_pki_secret_backend_intermediate_cert_request" "policy_ca_01" {
@@ -56,7 +57,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "policy_ca_01" {
   country              = "DE"
   locality             = "Krefeld"
   province             = "NRW"
-  ttl                  = 252288000 #8 years
+  ttl                  = "46656000" #8 years
 }
 
 # Now that CSR is processed and we have a signed cert
