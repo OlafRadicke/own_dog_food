@@ -1,14 +1,14 @@
 
-# resource "vault_mount" "pki_service_01" {
-#   depends_on = [
-#     vault_pki_secret_backend_root_cert.root_ca,
-#   ]
-#   path                      = "pki_service_01"
-#   type                      = "pki"
-#   description               = "leaf certs"
-#   default_lease_ttl_seconds = 2592000
-#   max_lease_ttl_seconds     = 2592000
-# }
+resource "vault_mount" "pki_service_01" {
+  depends_on = [
+    vault_pki_secret_backend_root_cert.root_ca,
+  ]
+  path                      = "pki_service_01"
+  type                      = "pki"
+  description               = "service 01 leaf certs"
+  default_lease_ttl_seconds = "2592000" # 30 days
+  max_lease_ttl_seconds     = "2592000" # 30 days
+}
 
 # #
 # # Role for server certs
