@@ -10,9 +10,6 @@ resource "vault_mount" "pki_service_01" {
   max_lease_ttl_seconds     = "2592000" # 30 days
 }
 
-path "pki_service_01/roles/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
 
 # # Role for server certs
 # # This creates certs of machinename.mydomain.com
