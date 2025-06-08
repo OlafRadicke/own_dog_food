@@ -10,17 +10,16 @@ resource "vault_mount" "pki_service_01" {
   max_lease_ttl_seconds     = "2592000" # 30 days
 }
 
+path "pki_service_01/roles/*" {
+  capabilities = ["create", "read", "update", "delete", "list"]
+}
 
 # # Role for server certs
 # # This creates certs of machinename.mydomain.com
 resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-  depends_on = [
-    vault_mount.pki_service_01,
-    vault_pki_secret_backend_root_sign_intermediate.policy_ca_01
-  ]
   backend            = vault_mount.pki_service_01.path
   name               = "Service 01"
-  allowed_domains    = ["service-01irish.sea"]
+  allowed_domains    = ["service-01.irish.sea"]
   allow_subdomains   = true
   allow_glob_domains = false
   allow_any_name     = false
