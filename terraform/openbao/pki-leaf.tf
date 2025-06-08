@@ -18,12 +18,9 @@ resource "vault_pki_secret_backend_role" "role-server-cer-01" {
     vault_mount.pki_service_01,
     vault_pki_secret_backend_root_sign_intermediate.policy_ca_01
   ]
-  backend = vault_mount.pki_service_01.path
-  name    = "Service 01"
-  allowed_domains = [
-    "my.fun",
-    "your.fun",
-  ]
+  backend            = vault_mount.pki_service_01.path
+  name               = "Service 01"
+  allowed_domains    = ["service-01irish.sea"]
   allow_subdomains   = true
   allow_glob_domains = false
   allow_any_name     = false
@@ -31,7 +28,6 @@ resource "vault_pki_secret_backend_role" "role-server-cer-01" {
   allow_ip_sans      = true
   server_flag        = true
   client_flag        = false
-  common_name        = "Service 01"
   ou                 = ["irish sea"]
   organization       = ["own dog food"]
   country            = ["DE"]
