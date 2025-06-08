@@ -81,23 +81,3 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "policy_ca_01" {
 #   issuer_name = "policy-ca-01"
 # }
 
-# resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-#   #   backend            = vault_mount.pki_service_01.path
-#   backend            = vault_mount.policy_ca_01.path
-#   name               = "Service 01"
-#   allowed_domains    = ["service-01.irish.sea"]
-#   allow_subdomains   = true
-#   allow_glob_domains = false
-#   allow_any_name     = false
-#   enforce_hostnames  = true
-#   allow_ip_sans      = true
-#   server_flag        = true
-#   client_flag        = false
-#   ou                 = ["irish sea"]
-#   organization       = ["own dog food"]
-#   country            = ["DE"]
-#   locality           = ["Krefeld"]
-#   province           = ["NRW"]
-#   ttl                = vault_mount.pki_service_01.default_lease_ttl_seconds
-#   no_store           = true
-# }
