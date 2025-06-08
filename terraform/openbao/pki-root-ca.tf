@@ -1,18 +1,19 @@
 resource "vault_mount" "root_ca" {
-  path        = "root_ca"
-  type        = "pki"
-  description = "PKI Secrets Engine"
+  path                      = "root_ca"
+  type                      = "pki"
+  description               = "PKI root CA"
+  default_lease_ttl_seconds = "630720000" # 20 Jahre
+  max_lease_ttl_seconds     = "630720000" # 20 Jahre
 }
 
 
 # Create an self sign root certificate
 resource "vault_pki_secret_backend_root_cert" "root_ca" {
-  depends_on  = [vault_mount.root_ca]
-  backend     = vault_mount.root_ca.path
-  type        = "internal"
-  common_name = "Irish sea root CA 01"
-  # ttl                   = "315360000"
-  ttl                  = "175200h" # 20 Jahre
+  depends_on           = [vault_mount.root_ca]
+  backend              = vault_mount.root_ca.path
+  type                 = "internal"
+  common_name          = "Irish sea root CA 01"
+  ttl                  = "630720000" # 20 Jahre
   format               = "pem"
   private_key_format   = "der"
   key_type             = "rsa"
@@ -25,6 +26,8 @@ resource "vault_pki_secret_backend_root_cert" "root_ca" {
   province             = "NRW"
 }
 
+# ttl                   = "315360000"
+# ttl                  = "175200h" # 20 Jahre
 
 # Set the issuer of the policy ca
 # TODO: is it right?
