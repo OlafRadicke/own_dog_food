@@ -56,10 +56,40 @@ resource "vault_mount" "pki_service_01" {
 #   ttl         = "8760h"
 # }
 
-resource "vault_pki_secret_backend_cert" "service-02" {
-  backend     = vault_mount.policy_ca_01.path
-  name        = "service-02"
-  common_name = "service-02.irish.sea"
-  alt_names   = ["www.service-01.irish.sea"]
-  ttl         = "8760h"
+# resource "vault_pki_secret_backend_cert" "service-02" {
+#   backend     = vault_mount.policy_ca_01.path
+#   name        = "service-02"
+#   common_name = "service-02.irish.sea"
+#   alt_names   = ["www.service-01.irish.sea"]
+#   ttl         = "8760h"
+# }
+
+resource "vault_pki_secret_backend_role" "server-01" {
+  #   backend            = vault_mount.pki_service_01.path
+  backend            = vault_mount.policy_ca_01.path
+  name               = "Service 01"
+  allowed_domains    = ["service-01.irish.sea"]
+  allow_subdomains   = true
+  allow_glob_domains = false
+  allow_any_name     = false
+  enforce_hostnames  = true
+  allow_ip_sans      = true
+  server_flag        = true
+  client_flag        = false
+  ou                 = ["irish sea"]
+  organization       = ["own dog food"]
+  country            = ["DE"]
+  locality           = ["Krefeld"]
+  province           = ["NRW"]
+  ttl                = vault_mount.pki_service_01.default_lease_ttl_seconds
+  no_store           = true
+}
+
+resource "vault_pki_secret_backend_cert" "app" {
+  depends_on = [vault_pki_secret_backend_role.admin]
+
+  backend = vault_mount.policy_ca_01.path
+  name    = vault_pki_secret_backend_role.server-01.name
+
+  common_name = "service-01.irish.sea"
 }
