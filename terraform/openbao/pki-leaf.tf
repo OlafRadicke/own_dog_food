@@ -50,6 +50,7 @@ resource "vault_pki_secret_backend_sign" "service-01" {
   name        = "service-01"
   common_name = "service-01.irish.sea"
   csr         = vault_pki_secret_backend_cert_request.service-01.csr
+  issuer_ref  = vault_pki_secret_backend_root_sign_intermediate.policy_ca_01.id
   format      = "pem_bundle"
   ttl         = "8760h"
 }
