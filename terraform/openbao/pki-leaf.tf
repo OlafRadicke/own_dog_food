@@ -14,7 +14,8 @@ resource "vault_mount" "pki_service_01" {
 # # Role for server certs
 # # This creates certs of machinename.mydomain.com
 resource "vault_pki_secret_backend_role" "role-server-cer-01" {
-  backend            = vault_mount.pki_service_01.path
+  #   backend            = vault_mount.pki_service_01.path
+  backend            = "pki_service_01"
   name               = "Service 01"
   allowed_domains    = ["service-01.irish.sea"]
   allow_subdomains   = true
@@ -29,10 +30,9 @@ resource "vault_pki_secret_backend_role" "role-server-cer-01" {
   country            = ["DE"]
   locality           = ["Krefeld"]
   province           = ["NRW"]
-  max_ttl            = vault_mount.pki_service_01.default_lease_ttl_seconds
   ttl                = vault_mount.pki_service_01.default_lease_ttl_seconds
   no_store           = true
-
 }
+#   max_ttl            = vault_mount.pki_service_01.default_lease_ttl_seconds
 
 # Alternativ: vault_pki_secret_backend_sign
