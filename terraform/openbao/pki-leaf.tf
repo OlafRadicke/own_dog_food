@@ -15,7 +15,7 @@ resource "vault_mount" "pki_service_01" {
 # # This creates certs of machinename.mydomain.com
 resource "vault_pki_secret_backend_role" "role-server-cer-01" {
   #   backend            = vault_mount.pki_service_01.path
-  backend            = "pki_service_01"
+  backend            = vault_mount.policy_ca_01.path
   name               = "Service 01"
   allowed_domains    = ["service-01.irish.sea"]
   allow_subdomains   = true
