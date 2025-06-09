@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### 17.11.x
+
+- Add [Smallstep Autocert](https://smallstep.com/docs/certificate-manager/)
+
 ### 17.10.x (#10)
 
 - Add PKI CA in OpenBao with OpenTofu.
