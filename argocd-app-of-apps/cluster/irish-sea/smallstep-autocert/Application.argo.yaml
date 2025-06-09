@@ -24,4 +24,4 @@ spec:
     targetRevision: v0.20.1
     directory:
       recurse: true
-      include: "*autocert.yaml"
+      include: "{*autocert.yaml, *rbac.yaml}"
