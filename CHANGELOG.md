@@ -3,7 +3,7 @@ CHANGELOG
 
 ### 17.11.x
 
-- Add [Smallstep Autocert](https://smallstep.com/docs/certificate-manager/)
+- Add [Smallstep Autocert](https://github.com/smallstep/autocert)
 
 ### 17.10.x (#10)
 

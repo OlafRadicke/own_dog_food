@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: smallstep-autocert
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: smallstep-autocert
+    server: https://kubernetes.default.svc
+  project: smallstep-autocert
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    path: /install/
+    repoURL: https://github.com/smallstep/autocert.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+      include: "02-autocert.yaml"
