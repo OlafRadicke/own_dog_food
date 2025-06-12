@@ -1,34 +1,30 @@
 ---
-
-apiVersion:               apps/v1
-kind:                     Deployment
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name:                   "apologie"
+  name: "apologie"
   labels:
-    app:                  "apologie"
+    app: "apologie"
 spec:
-  replicas:               2
+  replicas: 2
   selector:
     matchLabels:
-      app:                "apologie"
+      app: "apologie"
   template:
     metadata:
       labels:
-        app:              "apologie"
+        app: "apologie"
     spec:
       containers:
-      - name:             "apologie"
-        image:            "olafradicke/apologie:0.2.6"
-        imagePullPolicy:  IfNotPresent
-        resources:
-          requests:
-            memory:       "64Mi"
-            cpu:          "50m"
-          limits:
-            memory:       "128Mi"
-            cpu:          "500m"
-        ports:
-          - containerPort:  80
-
-
-
+        - name: "apologie"
+          image: "olafradicke/apologie:0.2.7"
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
