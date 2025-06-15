@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autocert
+  namespace: step
+  labels:
+    app: autocert
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autocert
+  template:
+    metadata:
+      labels:
+        app: autocert
+    spec:
+      containers:
+        - name: autocert
+          image: cr.smallstep.com/smallstep/autocert-controller:0.17.0
+          resources:
+            requests:
+              cpu: 100m
+              memory: 20Mi
+          env:
+            - name: PROVISIONER_NAME
+              value: autocert
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          volumeMounts:
+            - name: config
+              mountPath: /home/step/config
+              readOnly: true
+            - name: certs
+              mountPath: /home/step/certs
+              readOnly: true
+            - name: autocert-password
+              mountPath: /home/step/password
+              readOnly: true
+            - name: autocert-config
+              mountPath: /home/step/autocert
+              readOnly: true
+          securityContext:
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 4443
+              scheme: HTTPS
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 4443
+              scheme: HTTPS
+      volumes:
+        - name: config
+          configMap:
+            name: config
+        - name: certs
+          configMap:
+            name: certs
+        - name: autocert-password
+          secret:
+            secretName: autocert-password
+        - name: autocert-config
+          configMap:
+            name: autocert-config

@@ -18,10 +18,16 @@ spec:
       allowEmpty: false
     syncOptions:
       - CreateNamespace=true
+  # source:
+  #   path: install/
+  #   repoURL: https://github.com/smallstep/autocert.git
+  #   targetRevision: v0.20.1
+  #   directory:
+  #     recurse: true
+  #     include: "{*autocert.yaml, *rbac.yaml}"
   source:
-    path: install/
-    repoURL: https://github.com/smallstep/autocert.git
-    targetRevision: v0.20.1
+    path: argocd-app-of-apps/cluster/irish-sea/smallstep-autocert/manifests
+    repoURL: https://github.com/OlafRadicke/own_dog_food.git
+    targetRevision: HEAD
     directory:
       recurse: true
-      include: "{*autocert.yaml, *rbac.yaml}"
