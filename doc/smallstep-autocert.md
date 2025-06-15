@@ -27,7 +27,22 @@ step ca bootstrap --ca-url small.irish-sea \
 ```
 
 
+INIT AUTOCERT
+-------------
 
+Install the root CA certificat of the root CA:
+
+
+
+```bash
+kubectl -n smallstep-root-ca \
+  get configmap \
+  smallstep-root-ca-step-certificates-certs -o jsonpath="{.data.root_ca\.crt}" > /tmp/step-root_ca.crt
+```
+
+```bash
+kubectl -n step create configmap certs --from-file=/tmp/step-root_ca.crt
+```
 
 INSTALL OPERATOR
 ----------------
