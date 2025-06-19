@@ -7,10 +7,10 @@ metadata:
 data:
   ca.json: |
     {
-      "root": "/home/or/.step/certs/root_ca.crt",
+      "root": "/home/step/certs/step-root_ca.crt",
       "federatedRoots": null,
-      "crt": "/home/or/.step/certs/intermediate_ca.crt",
-      "key": "/home/or/.step/secrets/intermediate_ca_key",
+      "crt": "/home/step/certs/intermediate_ca.crt",
+      "key": "/home/step/secrets/intermediate_ca_key",
       "address": ":8083",
       "insecureAddress": "",
       "dnsNames": ["localhost"],
@@ -19,7 +19,7 @@ data:
       },
       "db": {
         "type": "badgerv2",
-        "dataSource": "/home/or/.step/db",
+        "dataSource": "/home/step/db",
         "badgerFileLoadingMode": ""
       },
       "authority": {
@@ -52,7 +52,7 @@ data:
     }
   defaults.json: |
     {
-      "ca-url": "https://localhost:8083",
+      "ca-url": "https://smallstep-root-ca-step-certificates.smallstep-root-ca:443",
       "ca-config": "/home/step/config/ca.json",
       "fingerprint": "0a6c41ea968bd520860b949f0dc5f865b0b11cb730c68c0878a09150cafc5dee",
       "root": "/home/step/certs/step-root_ca.crt"
