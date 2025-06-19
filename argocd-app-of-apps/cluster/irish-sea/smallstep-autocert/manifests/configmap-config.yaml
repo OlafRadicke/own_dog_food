@@ -53,7 +53,7 @@ data:
   defaults.json: |
     {
       "ca-url": "https://localhost:8083",
-      "ca-config": "/home/or/.step/config/ca.json",
+      "ca-config": "/home/step/config/ca.json",
       "fingerprint": "0a6c41ea968bd520860b949f0dc5f865b0b11cb730c68c0878a09150cafc5dee",
-      "root": "/home/or/.step/certs/root_ca.crt"
+      "root": "/home/step/certs/step-root_ca.crt"
     }
