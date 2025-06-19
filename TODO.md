@@ -1,7 +1,7 @@
 Todos
 =====
 
-- PKI with Terraform and Vault [tutoral](https://developer.hashicorp.com/vault/tutorials/pki/pki-engine-external-ca)
+- Remove argocd-app-of-apps/cluster/irish-sea/smallstep-autocert/manifests/secret-autocert-password.ymal
 - [Yubi HSM + Vault](https://developer.hashicorp.com/vault/docs/configuration)
 - [s3fs-fuse](https://github.com/s3fs-fuse/s3fs-fuse#examples)
 - Use own hugo operator for tif page.

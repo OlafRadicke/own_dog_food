@@ -35,18 +35,41 @@ Install the root CA certificat of the root CA:
 
 
 ```bash
-kubectl -n smallstep-root-ca \
-  get configmap \
-  smallstep-root-ca-step-certificates-certs -o jsonpath="{.data.root_ca\.crt}" > /tmp/step-root_ca.crt
+$ kubectl -n smallstep-root-ca \
+    get configmap \
+    smallstep-root-ca-step-certificates-certs \
+    -o jsonpath="{.data.root_ca\.crt}" > /tmp/step-root_ca.crt
 ```
 
 ```bash
 $ AUTOCERT_NAMESPACE=smallstep-autocert
-kubectl -n $AUTOCERT_NAMESPACE \
-  create configmap certs \
-  --from-file=/tmp/step-root_ca.crt \
-  --dry-run=true \
-  -o yaml
+$ kubectl -n $AUTOCERT_NAMESPACE \
+    create configmap certs \
+    --from-file=/tmp/step-root_ca.crt \
+    --dry-run=true \
+    -o yaml
+```
+
+Create secret with password
+
+```bash
+$ kubectl -n $AUTOCERT_NAMESPACE \
+    create secret generic \
+    autocert-password \
+    --from-file=password=autocert-password.txt \
+    --dry-run=true \
+    -o yaml
+```
+
+Create configmap config
+
+```bash
+$ kubectl -n $AUTOCERT_NAMESPACE \
+    create configmap config \
+    --from-file $(step path)/config \
+    --dry-run=true \
+    -o yaml
+
 ```
 
 INSTALL OPERATOR
