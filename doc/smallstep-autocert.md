@@ -42,7 +42,11 @@ kubectl -n smallstep-root-ca \
 
 ```bash
 $ AUTOCERT_NAMESPACE=smallstep-autocert
-kubectl -n $AUTOCERT_NAMESPACE create configmap certs --from-file=/tmp/step-root_ca.crt
+kubectl -n $AUTOCERT_NAMESPACE \
+  create configmap certs \
+  --from-file=/tmp/step-root_ca.crt \
+  --dry-run=true \
+  -o yaml
 ```
 
 INSTALL OPERATOR
