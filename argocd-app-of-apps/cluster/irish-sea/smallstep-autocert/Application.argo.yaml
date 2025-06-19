@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: step
+    namespace: smallstep-autocert
     server: https://kubernetes.default.svc
   project: smallstep-autocert
   syncPolicy:
