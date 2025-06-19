@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  config.yaml: |
+    logFormat: json # or text
+    restrictCertificatesToNamespace: false
+    clusterDomain: cluster.local
+    # caUrl: https://ca.step.svc.cluster.local
+    caUrl: https://smallstep-root-ca-step-certificates.smallstep-root-ca.svc.cluster.local
+    certLifetime: 24h
+    renewer:
+      name: autocert-renewer
+      image: cr.smallstep.com/smallstep/autocert-renewer:0.17.0
+      resources: {requests: {cpu: 10m, memory: 20Mi}}
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+      - name: certs
+        mountPath: /var/run/autocert.step.sm
+    bootstrapper:
+      name: autocert-bootstrapper
+      image: cr.smallstep.com/smallstep/autocert-bootstrapper:0.17.0
+      resources: {requests: {cpu: 10m, memory: 20Mi}}
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+      - name: certs
+        mountPath: /var/run/autocert.step.sm
+    certsVolume:
+      name: certs
+      emptyDir: {}
