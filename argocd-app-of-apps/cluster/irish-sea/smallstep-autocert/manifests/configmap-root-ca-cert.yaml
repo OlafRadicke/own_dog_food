@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: certs
 data:
-  step-root_ca.crt: |
+  root_ca.crt: |
     -----BEGIN CERTIFICATE-----
     MIIBxDCCAWmgAwIBAgIQGt1UWxPXaTqIgEg7YtUYdzAKBggqhkjOPQQDAjBAMRow
     GAYDVQQKExFTdGVwIENlcnRpZmljYXRlczEiMCAGA1UEAxMZU3RlcCBDZXJ0aWZp

@@ -38,14 +38,14 @@ Install the root CA certificat of the root CA:
 $ kubectl -n smallstep-root-ca \
     get configmap \
     smallstep-root-ca-step-certificates-certs \
-    -o jsonpath="{.data.root_ca\.crt}" > /tmp/step-root_ca.crt
+    -o jsonpath="{.data.root_ca\.crt}" > /tmp/root_ca.crt
 ```
 
 ```bash
 $ AUTOCERT_NAMESPACE=smallstep-autocert
 $ kubectl -n $AUTOCERT_NAMESPACE \
     create configmap certs \
-    --from-file=/tmp/step-root_ca.crt \
+    --from-file=/tmp/root_ca.crt \
     --dry-run=true \
     -o yaml
 ```

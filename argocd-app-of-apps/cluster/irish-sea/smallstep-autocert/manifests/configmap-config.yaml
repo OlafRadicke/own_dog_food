@@ -7,7 +7,7 @@ metadata:
 data:
   ca.json: |
     {
-      "root": "/home/step/certs/step-root_ca.crt",
+      "root": "/home/step/certs/root_ca.crt",
       "federatedRoots": null,
       "crt": "/home/step/certs/intermediate_ca.crt",
       "key": "/home/step/secrets/intermediate_ca_key",
@@ -55,5 +55,5 @@ data:
       "ca-url": "https://smallstep-root-ca-step-certificates.smallstep-root-ca:443",
       "ca-config": "/home/step/config/ca.json",
       "fingerprint": "0a6c41ea968bd520860b949f0dc5f865b0b11cb730c68c0878a09150cafc5dee",
-      "root": "/home/step/certs/step-root_ca.crt"
+      "root": "/home/step/certs/root_ca.crt"
     }
