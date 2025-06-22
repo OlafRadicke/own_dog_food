@@ -19,9 +19,16 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    path: external-secrets
-    repoURL: https://charts.external-secrets.io
-    targetRevision: v0.18.0
+    path: deploy/crds
+    repoURL: https://github.com/external-secrets/external-secrets.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+
+    # path: external-secrets
+    # repoURL: https://charts.external-secrets.io
+    # targetRevision: v0.18.0
+
     # path: deploy/charts/external-secrets
     # repoURL: https://github.com/external-secrets/external-secrets.git
     # targetRevision: v0.18.0
