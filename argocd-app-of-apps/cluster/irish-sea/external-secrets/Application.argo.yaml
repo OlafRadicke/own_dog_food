@@ -25,14 +25,6 @@ spec:
     directory:
       recurse: true
 
-    # path: external-secrets
-    # repoURL: https://charts.external-secrets.io
-    # targetRevision: v0.18.0
-
-    # path: deploy/charts/external-secrets
-    # repoURL: https://github.com/external-secrets/external-secrets.git
-    # targetRevision: v0.18.0
-
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -54,9 +46,21 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    path: external-secrets
-    repoURL: https://charts.external-secrets.io/index.yaml
+    path: deploy/charts/external-secrets
+    repoURL: https://github.com/external-secrets/external-secrets.git
     targetRevision: v0.18.0
     helm:
       values: |
         installCRDs: false
+
+    # path: external-secrets
+    # repoURL: https://charts.external-secrets.io/index.yaml
+    # targetRevision: v0.18.0
+
+    # path: external-secrets
+    # repoURL: https://charts.external-secrets.io
+    # targetRevision: v0.18.0
+
+    # path: deploy/charts/external-secrets
+    # repoURL: https://github.com/external-secrets/external-secrets.git
+    # targetRevision: v0.18.0
