@@ -21,7 +21,7 @@ spec:
   source:
     path: deploy/crds
     repoURL: https://github.com/external-secrets/external-secrets.git
-    targetRevision: HEAD
+    targetRevision: v0.18.0
     directory:
       recurse: true
 
