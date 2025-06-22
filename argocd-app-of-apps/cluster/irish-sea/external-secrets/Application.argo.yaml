@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: external-secrets
+    namespace: external-secrets-crd
     server: https://kubernetes.default.svc
   project: external-secrets
   syncPolicy:
@@ -37,7 +37,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-secrets
+  name: external-secrets-chart
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
