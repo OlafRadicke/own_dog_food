@@ -1,9 +1,13 @@
 CHANGELOG
 =========
 
-### 17.11.x
+### 17.12.x
 
 - Add [Smallstep Autocert](https://github.com/smallstep/autocert)
+
+### 17.11.x
+
+- Add [external-secret](https://external-secrets.io/latest/introduction/getting-started/) operatot.
 
 ### 17.10.x (#10)
 
