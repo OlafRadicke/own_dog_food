@@ -20,7 +20,7 @@ spec:
       - CreateNamespace=true
   source:
     path: external-secrets
-    repoURL: external-secrets https://charts.external-secrets.io
+    repoURL: https://charts.external-secrets.io
     targetRevision: v0.18.0
     # path: deploy/charts/external-secrets
     # repoURL: https://github.com/external-secrets/external-secrets.git
