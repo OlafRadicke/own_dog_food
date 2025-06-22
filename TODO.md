@@ -1,6 +1,8 @@
 Todos
 =====
 
+- [https://github.com/OlafRadicke/own_dog_food/issues/13] Pre request of [doc/smallstep-certificates.md]
+- Configure [doc/smallstep-certificates.md]
 - Remove argocd-app-of-apps/cluster/irish-sea/smallstep-autocert/manifests/secret-autocert-password.ymal
 - [Yubi HSM + Vault](https://developer.hashicorp.com/vault/docs/configuration)
 - [s3fs-fuse](https://github.com/s3fs-fuse/s3fs-fuse#examples)
