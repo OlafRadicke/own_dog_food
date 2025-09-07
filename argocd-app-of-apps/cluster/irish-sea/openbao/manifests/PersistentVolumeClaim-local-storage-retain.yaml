@@ -8,4 +8,5 @@ spec:
   resources:
     requests:
       storage: 500Mi
-  storageClassName: "local-storage-retain"
+  # storageClassName: "local-storage-retain"
+  storageClassName: ""
