@@ -6,7 +6,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: local-storage-retain
+  storageClassName: "local-storage-retain"
   capacity:
     storage: 500Mi
   volumeMode: Filesystem
