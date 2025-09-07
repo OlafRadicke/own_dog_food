@@ -26,10 +26,10 @@ spec:
                       key: token
               volumeMounts:
                 - name: renew-tokens
-                  mountPath: "/" # tokens.yaml
+                  mountPath: "/tokens.yaml" # tokens.yaml
                   readOnly: true
                 - name: root-ca
-                  mountPath: "/" # tokens.yaml
+                  mountPath: "/root-ca.crt" # tokens.yaml
                   readOnly: true
               # command:
               #   - /bin/sh
