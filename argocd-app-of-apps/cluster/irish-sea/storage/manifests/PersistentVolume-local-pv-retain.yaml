@@ -14,7 +14,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   local:
-    path: /srv/k3s-pvc-retain
+    path: /srv/k3s-pv-retain
   nodeAffinity:
     required:
       nodeSelectorTerms:
