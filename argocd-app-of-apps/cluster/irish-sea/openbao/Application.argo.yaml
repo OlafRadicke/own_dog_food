@@ -48,7 +48,7 @@ spec:
               storageClass: "local-storage-retain"
               ## @param server.persistence.accessModes [array] Persistent Volume access modes
               ##
-            server:
-              pod:
-                nodeSelector:
-                  kubernetes.io/hostname: irish-sea
+  # server:
+  #   pod:
+  #     nodeSelector:
+  #       kubernetes.io/hostname: irish-sea
