@@ -48,22 +48,7 @@ spec:
               storageClass: "local-storage-retain"
               ## @param server.persistence.accessModes [array] Persistent Volume access modes
               ##
-            csi:
+            server:
               pod:
                 nodeSelector:
-                  - matchExpressions:
-                    - key: kubernetes.io/hostname
-                      operator: In
-                      values:
-                        - irish-sea
-
-                # Affinity Settings
-                # This should be either a multi-line string or YAML matching the PodSpec's affinity field.
-                affinity:
-                  requiredDuringSchedulingIgnoredDuringExecution:
-                    nodeSelectorTerms:
-                      - matchExpressions:
-                        - key: kubernetes.io/hostname
-                          operator: In
-                          values:
-                            - irish-sea
+                  kubernetes.io/hostname: irish-sea
