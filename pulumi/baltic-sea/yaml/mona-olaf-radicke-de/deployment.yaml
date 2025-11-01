@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "mona-olaf-radicke-de"
+  labels:
+    app: "mona-olaf-radicke-de"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "mona-olaf-radicke-de"
+  template:
+    metadata:
+      labels:
+        app: "mona-olaf-radicke-de"
+    spec:
+      containers:
+        - name: "mona-olaf-radicke-de"
+          image: "olafradicke/mona:0.0.2"
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80

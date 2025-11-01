@@ -1,0 +1,56 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mona-olaf-radicke-de
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`mona.olaf-radicke.de`)
+      kind: Rule
+      middlewares:
+        - name: mona-olaf-radicke-de
+  tls:
+    secretName: mona-olaf-radicke-de
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https-mona-olaf-radicke-de
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`mona.olaf-radicke.de`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: mona-olaf-radicke-de
+          port: 8080
+  tls:
+    secretName: mona-olaf-radicke-de
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: mona-olaf-radicke-de
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mona-olaf-radicke-de
+spec:
+  dnsNames:
+    - mona.olaf-radicke.de
+  secretName: mona-olaf-radicke-de
+  issuerRef:
+    # name: letsencrypt-staging
+    name: letsencrypt-production
+    kind: ClusterIssuer
