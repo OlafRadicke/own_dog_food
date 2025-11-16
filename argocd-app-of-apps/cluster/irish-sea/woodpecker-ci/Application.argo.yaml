@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   sources:
-    - chart: woodpecker
+    - path: .
       repoURL: oci://ghcr.io/woodpecker-ci/helm/woodpecker
       targetRevision: 3.4.1
       helm:
