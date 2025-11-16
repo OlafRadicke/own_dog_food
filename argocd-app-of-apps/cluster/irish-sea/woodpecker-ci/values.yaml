@@ -187,12 +187,19 @@ server:
   #   tag: ""
 
   # -- Add environment variables for the server component
-  # env:
+  env:
   #   WOODPECKER_FORGE: gitea
   #   WOODPECKER_GITEA_URL: "https://codeberg.org/"
-  #   WOODPECKER_ADMIN: "woodpecker,admin"
+  #   WOODPECKER_ADMIN: "woodpecker,admin, gitea_admin"
   #   WOODPECKER_HOST: "https://codeberg.org/"
   #   # WOODPECKER_GITHUB: "true"
+
+
+      WOODPECKER_FORGEJO: true
+      WOODPECKER_FORGEJO_URL: http://forgejo-http.forgejo
+      WOODPECKER_FORGEJO_CLIENT: YOUR_FORGEJO_CLIENT
+      WOODPECKER_FORGEJO_SECRET: YOUR_FORGEJO_CLIENT_SECRET
+
   env:
     - name: WOODPECKER_FORGE
       value: gitea
@@ -201,7 +208,7 @@ server:
     - name: WOODPECKER_ADMIN
       value: OlafRadicke
     - name: WOODPECKER_SERVER_ADDR
-      value: ":9000"
+      value: "forgejo-http.forgejo:9000"
 
 #   # -- Add extra environment variables from the secrets list
 #   extraSecretNamesForEnvFrom: []
