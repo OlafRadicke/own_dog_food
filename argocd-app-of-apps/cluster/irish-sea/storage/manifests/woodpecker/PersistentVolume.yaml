@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: woodpecker-local-storage
   local:
-    path: /srv/srv/k3s-pv-woodpecker-data
+    path: /srv/k3s-pv-woodpecker-data
   nodeAffinity:
     required:
       nodeSelectorTerms:
