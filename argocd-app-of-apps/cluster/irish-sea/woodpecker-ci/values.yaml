@@ -187,10 +187,21 @@ server:
   #   tag: ""
 
   # -- Add environment variables for the server component
+  # env:
+  #   WOODPECKER_FORGE: gitea
+  #   WOODPECKER_GITEA_URL: "https://codeberg.org/"
+  #   WOODPECKER_ADMIN: "woodpecker,admin"
+  #   WOODPECKER_HOST: "https://codeberg.org/"
+  #   # WOODPECKER_GITHUB: "true"
   env:
-    WOODPECKER_ADMIN: "woodpecker,admin"
-    WOODPECKER_HOST: "https://codeberg.org/"
-    # WOODPECKER_GITHUB: "true"
+    - name: WOODPECKER_FORGE
+      value: gitea
+    - name: WOODPECKER_GITEA_URL
+      value: https://codeberg.org/
+    - name: WOODPECKER_ADMIN
+      value: OlafRadicke
+    - name: WOODPECKER_SERVER_ADDR
+      value: ":9000"
 
 #   # -- Add extra environment variables from the secrets list
 #   extraSecretNamesForEnvFrom: []
