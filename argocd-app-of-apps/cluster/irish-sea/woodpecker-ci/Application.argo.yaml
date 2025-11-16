@@ -9,7 +9,7 @@ metadata:
 spec:
   sources:
     - chart: woodpecker
-      repoURL: oci://ghcr.io/woodpecker-ci/helm
+      repoURL: oci://ghcr.io/woodpecker-ci/helm/woodpecker
       targetRevision: 3.4.1
       helm:
         valueFiles:
