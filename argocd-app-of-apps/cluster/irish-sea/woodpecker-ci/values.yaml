@@ -50,7 +50,7 @@ agent:
     mountPath: "/etc/woodpecker"
     # -- Defines the storageClass of the persistent volume
     # storageClass: ""
-    storageClass: "local-storage"
+    storageClass: "woodpecker-local-storage"
     # -- Defines the access mode of the persistent volume
     accessModes:
       - ReadWriteOnce
