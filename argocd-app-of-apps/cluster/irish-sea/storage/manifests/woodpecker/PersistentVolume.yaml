@@ -18,4 +18,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - dein-node-name # ← hier den tatsächlichen Node-Namen einsetzen
+                - irish-sea
