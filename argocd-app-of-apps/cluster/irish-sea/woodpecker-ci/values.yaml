@@ -197,7 +197,7 @@ server:
     - name: WOODPECKER_FORGE
       value: gitea
     - name: WOODPECKER_GITEA_URL
-      value: https://codeberg.org/
+      value: http://forgejo-http.forgejo
     - name: WOODPECKER_ADMIN
       value: OlafRadicke
     - name: WOODPECKER_SERVER_ADDR
