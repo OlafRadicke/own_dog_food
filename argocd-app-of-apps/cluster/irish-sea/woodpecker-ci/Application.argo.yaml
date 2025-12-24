@@ -13,7 +13,7 @@ spec:
       targetRevision: 3.4.1
       helm:
         valueFiles:
-          - $values/argocd-app-of-apps/cluster/irish-sea/woodpecker-ci/values.yaml
+          - $values/argocd-app-of-apps-XX/cluster/irish-sea/woodpecker-ci/values.yaml
     - repoURL: "https://github.com/OlafRadicke/own_dog_food.git"
       targetRevision: main
       ref: values
