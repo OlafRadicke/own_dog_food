@@ -22,14 +22,14 @@ agent:
 
   # extraSecretNamesForEnvFrom: []
 
-  persistence:
-    enabled: "true"
-    existingClaim: woodpecker-pvc
-    size: 1Gi
-    mountPath: "/etc/woodpecker"
-    storageClass: ""
-    accessModes:
-      - ReadWriteOnce
+  # persistence:
+  #   enabled: "true"
+  #   existingClaim: woodpecker-pvc
+  #   size: 1Gi
+  #   mountPath: "/etc/woodpecker"
+  #   storageClass: ""
+  #   accessModes:
+  #     - ReadWriteOnce
 
 server:
   enabled: true
