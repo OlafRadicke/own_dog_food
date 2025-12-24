@@ -10,7 +10,7 @@ spec:
   sources:
     - path: .
       repoURL: oci://ghcr.io/woodpecker-ci/helm/woodpecker
-      targetRevision: 3.4.1
+      targetRevision: 3.4.2
       helm:
         valueFiles:
           - $values/argocd-app-of-apps/cluster/irish-sea/woodpecker-ci/values.yaml
