@@ -37,7 +37,8 @@ server:
   enabled: true
 
   # -- Add environment variables for the server component
-  env: WOODPECKER_LOG_LEVEL=debug
+  env:
+    WOODPECKER_LOG_LEVEL: debug
   #   WOODPECKER_ADMIN: "woodpecker,admin,gitea_admin,OlafRadicke"
   #   WOODPECKER_HOST: "https://codeberg.org/"
   # WOODPECKER_GITHUB: "true"
