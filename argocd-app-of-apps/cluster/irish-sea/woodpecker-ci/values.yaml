@@ -41,10 +41,12 @@ server:
     WOODPECKER_LOG_LEVEL: debug
     WOODPECKER_FORGE_TYPE: gitea
     WOODPECKER_GITEA_URL: "http://forgejo-http.forgejo"
+    # -- OAuth connection
     # WOODPECKER_GITEA_CLIENT: "<client-id>"
     # WOODPECKER_GITEA_SECRET: "<client-secret>"
+    # -- Token connection
+    # WOODPECKER_GITEA_TOKEN: <personal-access-token>
     WOODPECKER_GITEA_SKIP_VERIFY: "false"
-    WOODPECKER_GITEA_TOKEN: <personal-access-token>
   #   WOODPECKER_ADMIN: "woodpecker,admin,gitea_admin,OlafRadicke"
   #   WOODPECKER_HOST: "https://codeberg.org/"
 
