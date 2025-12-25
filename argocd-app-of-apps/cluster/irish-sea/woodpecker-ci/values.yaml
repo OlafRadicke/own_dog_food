@@ -20,18 +20,7 @@ agent:
   #       name: woodpecker-database-secret
   #       key: datasource
 
-  # extraSecretNamesForEnvFrom: []
-
   mapAgentSecret: true
-
-  # persistence:
-  #   enabled: "true"
-  #   existingClaim: woodpecker-pvc
-  #   size: 1Gi
-  #   mountPath: "/etc/woodpecker"
-  #   storageClass: ""
-  #   accessModes:
-  #     - ReadWriteOnce
 
 server:
   enabled: true
@@ -47,69 +36,13 @@ server:
     # -- Token connection
     # WOODPECKER_GITEA_TOKEN: <personal-access-token>
     WOODPECKER_GITEA_SKIP_VERIFY: "false"
-  #   WOODPECKER_ADMIN: "woodpecker,admin,gitea_admin,OlafRadicke"
-  #   WOODPECKER_HOST: "https://codeberg.org/"
+    WOODPECKER_ADMIN: "woodpecker,admin,gitea_admin,OlafRadicke"
+    WOODPECKER_HOST: "https://codeberg.org/"
 
   # -- Add extra environment variables from the secrets list
   extraSecretNamesForEnvFrom:
     - woodpecker-gitea-token
-  # env:
-  #   - name: WOODPECKER_FORGE
-  #     value: gitea
-  #   - name: WOODPECKER_GITEA_URL
-  #     value: http://forgejo-http.forgejo
-  #   - name: WOODPECKER_ADMIN
-  #     value: OlafRadicke
-  #   - name: WOODPECKER_SERVER_ADDR
-  #     value: "forgejo-http.forgejo:9000"
-
-  #   # whether to create the default WOODPECKER_AGENT_SECRET in woodpecker-default-agent-secret
   createAgentSecret: true
-  # extraSecretNamesForEnvFrom:
-  #   - "woodpecker-default-agent-secret"
-
-#   persistentVolume:
-#     # -- Enable the creation of the persistent volume
-#     enabled: true
-#     # -- Defines the size of the persistent volume
-#     size: 10Gi
-#     # -- Defines the path where the volume should be mounted
-#     mountPath: "/var/lib/woodpecker"
-#     # -- Defines the storageClass of the persistent volume
-#     storageClass: ""
-
-#   service:
-#     # -- The type of the service
-#     type: ClusterIP
-#     # -- The port of the service
-#     port: &servicePort 80
-#     # -- The cluster IP of the service (optional)
-#     clusterIP:
-#     # -- The loadbalancer IP of the service (optional)
-#     loadBalancerIP:
-
-#   ingress:
-#     # -- Enable the ingress for the server component
-#     enabled: false
-#     # -- Add annotations to the ingress
-#     annotations:
-#     # kubernetes.io/ingress.class: nginx
-#     # kubernetes.io/tls-acme: "true"
-
-#     # -- Defines which ingress controller will implement the resource
-#     ingressClassName: ""
-
-#     hosts:
-#       - host: chart-example.local
-#         paths:
-#           - path: /
-#             backend:
-#               serviceName: chart-example.local
-#               servicePort: *servicePort
-#     tls: []
-#     #  - secretName: chart-example-tls
-#     #    hosts:
-#     #      - chart-example.local
 
 metrics:
   enabled: false
