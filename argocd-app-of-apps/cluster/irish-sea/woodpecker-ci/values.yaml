@@ -34,14 +34,14 @@ server:
     # WOODPECKER_GITEA_CLIENT: "<client-id>"
     # WOODPECKER_GITEA_SECRET: "<client-secret>"
     # -- Token connection
-    # WOODPECKER_GITEA_TOKEN: <personal-access-token>
+    WOODPECKER_GITEA_TOKEN: "changeMe"
     WOODPECKER_GITEA_SKIP_VERIFY: "false"
     WOODPECKER_ADMIN: "woodpecker,admin,gitea_admin,OlafRadicke"
     WOODPECKER_HOST: "https://codeberg.org/"
 
   # -- Add extra environment variables from the secrets list
-  extraSecretNamesForEnvFrom:
-    - woodpecker-gitea-token
+  # extraSecretNamesForEnvFrom:
+  #   - woodpecker-gitea-token
   createAgentSecret: true
 
 metrics:
