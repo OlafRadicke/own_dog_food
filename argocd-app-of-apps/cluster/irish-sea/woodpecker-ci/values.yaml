@@ -39,17 +39,18 @@ server:
   # -- Add environment variables for the server component
   env:
     WOODPECKER_LOG_LEVEL: debug
+    WOODPECKER_FORGE_TYPE: gitea
+    WOODPECKER_GITEA_URL: "http://forgejo-http.forgejo"
+    # WOODPECKER_GITEA_CLIENT: "<client-id>"
+    # WOODPECKER_GITEA_SECRET: "<client-secret>"
+    WOODPECKER_GITEA_SKIP_VERIFY: "false"
+    WOODPECKER_GITEA_TOKEN: <personal-access-token>
   #   WOODPECKER_ADMIN: "woodpecker,admin,gitea_admin,OlafRadicke"
   #   WOODPECKER_HOST: "https://codeberg.org/"
-  # WOODPECKER_GITHUB: "true"
-
-  # WOODPECKER_FORGEJO: true
-  # WOODPECKER_FORGEJO_URL: http://forgejo-http.forgejo
-  # WOODPECKER_FORGEJO_CLIENT: YOUR_FORGEJO_CLIENT
-  # WOODPECKER_FORGEJO_SECRET: YOUR_FORGEJO_CLIENT_SECRET
 
   # -- Add extra environment variables from the secrets list
-  extraSecretNamesForEnvFrom: []
+  extraSecretNamesForEnvFrom:
+    - woodpecker-gitea-token
   # env:
   #   - name: WOODPECKER_FORGE
   #     value: gitea
