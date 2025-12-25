@@ -59,6 +59,8 @@ server:
 
   #   # whether to create the default WOODPECKER_AGENT_SECRET in woodpecker-default-agent-secret
   createAgentSecret: true
+  extraSecretNamesForEnvFrom:
+    - "woodpecker-default-agent-secret"
 
 #   persistentVolume:
 #     # -- Enable the creation of the persistent volume
