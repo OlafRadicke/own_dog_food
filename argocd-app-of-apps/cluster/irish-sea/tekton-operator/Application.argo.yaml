@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton-operator
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  sources:
+    - path: charts/tekton-operator
+      repoURL: https://github.com/tektoncd/operator.git
+      targetRevision: 3.4.2
+      helm:
+        valueFiles:
+          - $values/argocd-app-of-apps/cluster/irish-sea/tekton-operator/values.yaml
+    - repoURL: https://github.com/tektoncd/operator.git"
+      targetRevision: v0.78.1
+      ref: values
+
+  destination:
+    namespace: tekton-operator
+    server: https://kubernetes.default.svc
+  project: tekton-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
