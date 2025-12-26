@@ -10,12 +10,12 @@ spec:
   sources:
     - path: charts/tekton-operator
       repoURL: https://github.com/tektoncd/operator.git
-      targetRevision: 3.4.2
+      targetRevision: v0.78.1
       helm:
         valueFiles:
           - $values/argocd-app-of-apps/cluster/irish-sea/tekton-operator/values.yaml
-    - repoURL: https://github.com/tektoncd/operator.git"
-      targetRevision: v0.78.1
+    - repoURL: "https://github.com/OlafRadicke/own_dog_food.git"
+      targetRevision: main
       ref: values
 
   destination:
