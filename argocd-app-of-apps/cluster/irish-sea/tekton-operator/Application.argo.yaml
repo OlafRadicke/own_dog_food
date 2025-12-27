@@ -18,7 +18,11 @@ spec:
       targetRevision: main
       ref: values
 
-    - path: "stable/release.yaml"
+    # - path: "stable/release.yaml"
+    #   repoURL: "https://raw.githubusercontent.com/openshift-pipelines/pipelines-as-code/"
+    #   targetRevision: HEAD
+
+    - path: "stable/release.k8s.yaml"
       repoURL: "https://raw.githubusercontent.com/openshift-pipelines/pipelines-as-code/"
       targetRevision: HEAD
 
