@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton-pac
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  sources:
+    - path: argocd-app-of-apps/cluster/irish-sea/tekton-pac/manifests
+      repoURL: https://github.com/OlafRadicke/own_dog_food.git
+      targetRevision: HEAD
+      directory:
+        recurse: true
+
+  destination:
+    namespace: tekton-pac
+    server: https://kubernetes.default.svc
+  project: tekton-pac
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
