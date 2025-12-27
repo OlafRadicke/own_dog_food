@@ -2,9 +2,9 @@ apiVersion: pipelinesascode.tekton.dev/v1alpha1
 kind: Repository
 metadata:
   name: forgejo-olaf-test-repo
-  namespace: tekton-pipelines # gleich wie der PaC-Controller
+  namespace: pipelines-as-code # gleich wie der PaC-Controller
 spec:
-  url: "https://git.example.org/olaf/test-repo" # deine Forgejo-Repo-URL
+  url: "https://forgejo-http.forgejo:3000/olaf/test-repo" # deine Forgejo-Repo-URL
 
   # Webhook-Signatur
   webhookSecret:
