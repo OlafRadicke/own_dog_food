@@ -19,7 +19,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: debugger
-          image: olafradicke/debugging-tools:0.0.3
+          image: olafradicke/debugging-tools:0.0.5
           imagePullPolicy: IfNotPresent
           command: ["/usr/local/bin/keepalive.sh"]
           resources:
