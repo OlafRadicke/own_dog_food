@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debugger-deployment
+  labels:
+    app: debugger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debugger
+  template:
+    metadata:
+      labels:
+        app: debugger
+    spec:
+      securityContext:
+        runAsUser: 1500
+        runAsNonRoot: true
+      containers:
+        - name: debugger
+          image: olafradicke/debugging-tools:0.0.3
+          imagePullPolicy: IfNotPresent
+          command: ["/usr/local/bin/keepalive.sh"]
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

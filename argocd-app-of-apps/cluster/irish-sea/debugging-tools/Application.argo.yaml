@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: debugging-tools
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  sources:
+    - path: argocd-app-of-apps/cluster/irish-sea/debugging-tools/manifests
+      repoURL: https://github.com/OlafRadicke/own_dog_food.git
+      targetRevision: HEAD
+      directory:
+        recurse: true
+
+  destination:
+    namespace: debugging-tools
+    server: https://kubernetes.default.svc
+  project: debugging-tools
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
