@@ -1,0 +1,58 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tekton-pac-ingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`tekton-pac.olaf-radicke.de`)
+      kind: Rule
+      services:
+        - name: tekton-pac
+          port: 80
+      middlewares:
+        - name: tekton-pac
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https-tekton-pac-ingressroute
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    # - match: Host(`https://tekton-pac.olaf-radicke.de`) && PathPrefix(`/`)
+    - match: Host(`tekton-pac.olaf-radicke.de`)
+      kind: Rule
+      services:
+        - name: tekton-pac
+          port: 80
+  tls:
+    secretName: tekton-pac
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: tekton-pac
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tekton-pac
+spec:
+  dnsNames:
+    - tekton-pac.olaf-radicke.de
+  secretName: tekton-pac
+  issuerRef:
+    name: letsencrypt-staging
+    # name: letsencrypt-production
+    kind: ClusterIssuer
