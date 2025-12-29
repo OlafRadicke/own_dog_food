@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/part-of: pipelines-as-code
+    app.kubernetes.io/version: v0.39.3
+  name: pipelines-as-code
+data:
+  application-name: Pipelines as Code CI
+  auto-configure-new-github-repo: "false"
+  auto-configure-repo-namespace-template: ""
+  auto-configure-repo-repository-template: ""
+  bitbucket-cloud-additional-source-ip: ""
+  bitbucket-cloud-check-source-ip: "true"
+  default-max-keep-runs: ""
+  enable-cancel-in-progress-on-pull-requests: "false"
+  enable-cancel-in-progress-on-push: "false"
+  error-detection-from-container-logs: "true"
+  error-detection-max-number-of-lines: "50"
+  error-detection-simple-regexp:
+    ^(?P<filename>[^:]*):(?P<line>[0-9]+):(?P<column>[0-9]+)?([
+    ]*)?(?P<error>.*)
+  error-log-snippet: "true"
+  error-log-snippet-number-of-lines: "3"
+  hub-catalog-type: artifacthub
+  hub-url: https://artifacthub.io
+  max-keep-run-upper-limit: ""
+  remember-ok-to-test: "false"
+  remote-tasks: "true"
+  require-ok-to-test-sha: "false"
+  secret-auto-create: "true"
+  secret-github-app-scope-extra-repos: ""
+  secret-github-app-token-scoped: "true"
+  skip-push-event-for-pr-commits: "true"
+  tekton-dashboard-url: ""
