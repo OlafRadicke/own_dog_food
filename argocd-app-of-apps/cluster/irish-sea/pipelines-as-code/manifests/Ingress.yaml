@@ -1,19 +1,19 @@
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: tekton-pac-ingressroute
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`tekton-pac.olaf-radicke.de`)
-      kind: Rule
-      services:
-        - name: tekton-pac
-          port: 80
-      middlewares:
-        - name: tekton-pac
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: tekton-pac-ingressroute
+# spec:
+#   entryPoints:
+#     - web
+#   routes:
+#     - match: Host(`tekton-pac.olaf-radicke.de`)
+#       kind: Rule
+#       services:
+#         - name: tekton-pac
+#           port: 80
+#       middlewares:
+#         - name: tekton-pac
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -28,8 +28,8 @@ spec:
     - match: Host(`tekton-pac.olaf-radicke.de`)
       kind: Rule
       services:
-        - name: tekton-pac
-          port: 80
+        - name: pipelines-as-code-controller.pipelines-as-code.svc
+          port: 8080
   tls:
     secretName: tekton-pac
 
