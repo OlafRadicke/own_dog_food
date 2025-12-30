@@ -55,5 +55,5 @@ spec:
   secretName: tekton-pac
   issuerRef:
     name: letsencrypt-staging
-    # name: letsencrypt-production
-    kind: ClusterIssuer
+    name: letsencrypt-production
+    # kind: ClusterIssuer
