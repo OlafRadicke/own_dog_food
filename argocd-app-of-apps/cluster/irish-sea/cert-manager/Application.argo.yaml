@@ -8,9 +8,11 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   sources:
-    - path: cert-manager.yaml
-      repoURL: https://github.com/cert-manager/cert-manager/releases/latest/download/
-      targetRevision: head
+    - path: argocd-app-of-apps/cluster/irish-sea/cert-manager/manifests
+      repoURL: https://github.com/OlafRadicke/own_dog_food.git
+      targetRevision: HEAD
+      directory:
+        recurse: true
 
   destination:
     namespace: cert-manager
