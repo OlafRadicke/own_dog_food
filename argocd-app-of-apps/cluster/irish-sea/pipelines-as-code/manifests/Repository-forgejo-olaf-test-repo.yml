@@ -4,12 +4,13 @@ metadata:
   name: forgejo-olaf-test-repo
   namespace: pipelines-as-code # gleich wie der PaC-Controller
 spec:
+  concurrency_limit: 1
   git_provider:
     # Secret reference for authentication with the Git provider. Contains the token,
     # password, or private key used to authenticate requests to the Git provider API.
-    secret:
-      name: pac-webhook-secret
-      key: webhook-secret
+    # secret:
+    #   name: pac-webhook-secret
+    #   key: webhook-secret
     type: gitea
     webhook_secret:
       name: pac-webhook-secret
