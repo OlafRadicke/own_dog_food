@@ -11,13 +11,14 @@ spec:
       name: pac-webhook-secret
       key: webhook-secret
     type: gitea
-  url: https://codeberg.org/OlafRadicke/teckton-pac-demo
+    webhook_secret:
+      name: pac-webhook-secret
+      key: webhook-secret
+  url:
+    https://codeberg.org/OlafRadicke/teckton-pac-demo
     # url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
     # url: "https://forgejo-http.forgejo:3000/gitea_admin/teckton-pac-test.git" # deine Forgejo-Repo-URL
     # user: OlafRadicke
 
     # WebhookSecret reference for webhook validation. Contains the shared secret used to
     # validate that incoming webhooks are legitimate and coming from the Git provider.
-    webhook_secret:
-      name: pac-webhook-secret
-      key: webhook-secret
