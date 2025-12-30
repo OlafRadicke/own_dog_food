@@ -4,13 +4,19 @@ metadata:
   name: forgejo-olaf-test-repo
   namespace: pipelines-as-code # gleich wie der PaC-Controller
 spec:
-  url: "https://forgejo-http.forgejo:3000/gitea_admin/teckton-pac-test.git" # deine Forgejo-Repo-URL
+  git_provider:
+    # Secret reference for authentication with the Git provider. Contains the token,
+    # password, or private key used to authenticate requests to the Git provider API.
+    secret:
+      name: pac-webhook-secret
+      key: webhook-secret
+    type: gitea
+    url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
+    # url: "https://forgejo-http.forgejo:3000/gitea_admin/teckton-pac-test.git" # deine Forgejo-Repo-URL
+    # user: OlafRadicke
 
-  # Webhook-Signatur
-  webhookSecret:
-    name: pac-webhook-secret
-    key: webhook-secret
-
-  # optional: Events einschränken (PRs, Pushes etc.)
-  # gitProvider ist bei neueren PaC-Versionen meist nicht nötig,
-  # PaC erkennt den Provider über die URL.
+    # WebhookSecret reference for webhook validation. Contains the shared secret used to
+    # validate that incoming webhooks are legitimate and coming from the Git provider.
+    webhook_secret:
+      name: pac-webhook-secret
+      key: webhook-secret
