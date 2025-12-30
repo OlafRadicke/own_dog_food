@@ -14,6 +14,7 @@ spec:
     webhook_secret:
       name: pac-webhook-secret
       key: webhook-secret
+    url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
   url:
     https://codeberg.org/OlafRadicke/teckton-pac-demo
     # url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
