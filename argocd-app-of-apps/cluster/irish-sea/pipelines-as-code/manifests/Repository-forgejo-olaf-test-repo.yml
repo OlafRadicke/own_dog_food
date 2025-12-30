@@ -6,16 +6,18 @@ metadata:
 spec:
   concurrency_limit: 1
   git_provider:
+    type: gitea
+    # url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
+    url: https://codeberg.org/
+    apiurl: https://codeberg.org/api/v1
     # Secret reference for authentication with the Git provider. Contains the token,
     # password, or private key used to authenticate requests to the Git provider API.
     secret:
       name: pac-git-token
       key: token
-    type: gitea
     webhook_secret:
       name: pac-webhook-secret
       key: webhook-secret
-    url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
   url:
     https://codeberg.org/OlafRadicke/teckton-pac-demo
     # url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
