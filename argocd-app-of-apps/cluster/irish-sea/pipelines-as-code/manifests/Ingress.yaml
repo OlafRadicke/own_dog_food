@@ -28,20 +28,21 @@ spec:
     - match: Host(`tekton-pac.olaf-radicke.de`)
       kind: Rule
       services:
-        - name: pipelines-as-code-controller.pipelines-as-code.svc
+        - name: pipelines-as-code-controller
+          namespace: pipelines-as-code
           port: 8080
   tls:
     secretName: tekton-pac
 
----
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: tekton-pac
-spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
+# ---
+# apiVersion: traefik.io/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: tekton-pac
+# spec:
+#   redirectScheme:
+#     scheme: https
+#     permanent: true
 
 ---
 apiVersion: cert-manager.io/v1
