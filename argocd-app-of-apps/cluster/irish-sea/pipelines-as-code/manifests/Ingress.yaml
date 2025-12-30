@@ -54,6 +54,6 @@ spec:
     - tekton-pac.olaf-radicke.de
   secretName: tekton-pac
   issuerRef:
-    name: letsencrypt-staging
+    # name: letsencrypt-staging
     name: letsencrypt-production
-    # kind: ClusterIssuer
+    kind: ClusterIssuer
