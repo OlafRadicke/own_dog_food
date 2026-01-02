@@ -15,7 +15,7 @@ gitea:
       WORK_IN_PROGRESS_PREFIXES: "WIP:,[WIP]:"
 deployment:
   env:
-    - name: ROOT_URL
+    - name: FORGEJO__SERVER__ROOT_URL
       value: "http://localhost:8086/"
-    - name: SSH_DOMAIN
+    - name: FORGEJO__SERVER__SSH_DOMAIN
       value: "https://localhost:8486/"
