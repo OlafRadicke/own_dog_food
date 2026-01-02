@@ -1,5 +1,5 @@
 resources:
-  - ../base
+  - ../base/tekton-deshboar-v0.63.1-LTE-release.yaml
 
 patches:
   - target:
