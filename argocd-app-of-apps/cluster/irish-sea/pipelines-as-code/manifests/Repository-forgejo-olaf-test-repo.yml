@@ -1,18 +1,18 @@
-apiVersion: pipelinesascode.tekton.dev/v1alpha1
-kind: Repository
-metadata:
-  name: forgejo-olaf-test-repo
-  namespace: pipelines-as-code
-spec:
-  concurrency_limit: 1
-  git_provider:
-    type: gitea
-    url: http://localhost:8086/
-    apiurl: http://localhost:8086/api/v1
-    secret:
-      name: pac-git-token
-      key: token
-    webhook_secret:
-      name: pac-webhook-secret
-      key: webhook-secret
-  url: http://localhost:8086/gitea_admin/teckton-pac-test
+# apiVersion: pipelinesascode.tekton.dev/v1alpha1
+# kind: Repository
+# metadata:
+#   name: forgejo-olaf-test-repo
+#   namespace: pipelines-as-code
+# spec:
+#   concurrency_limit: 1
+#   git_provider:
+#     type: gitea
+#     url: http://localhost:8086/
+#     apiurl: http://localhost:8086/api/v1
+#     secret:
+#       name: pac-git-token
+#       key: token
+#     webhook_secret:
+#       name: pac-webhook-secret
+#       key: webhook-secret
+#   url: http://localhost:8086/gitea_admin/teckton-pac-test
