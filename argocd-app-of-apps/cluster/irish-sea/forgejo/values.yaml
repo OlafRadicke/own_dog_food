@@ -1,3 +1,6 @@
+global:
+  storageClass: "local-storage-retain"
+
 gitea:
   config:
     # values in the DEFAULT section
