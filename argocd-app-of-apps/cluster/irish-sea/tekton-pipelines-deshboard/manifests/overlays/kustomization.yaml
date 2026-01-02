@@ -1,0 +1,67 @@
+resources:
+  - ../base
+
+patches:
+  - target:
+      kind: ServiceAccount
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
+
+  - target:
+      kind: Role
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
+
+  - target:
+      kind: ClusterRole
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
+
+  - target:
+      kind: RoleBinding
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
+
+  - target:
+      kind: ClusterRoleBinding
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
+
+  - target:
+      kind: ConfigMap
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
+
+  - target:
+      kind: Service
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
+
+  - target:
+      kind: Deployment
+      name: tekton-dashboard
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: tekton-deshboard
