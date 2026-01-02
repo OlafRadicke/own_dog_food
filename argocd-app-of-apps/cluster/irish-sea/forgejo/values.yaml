@@ -1,6 +1,7 @@
 global:
   storageClass: "local-storage-retain"
 
+replicaCount: 1
 gitea:
   config:
     # values in the DEFAULT section
@@ -19,6 +20,6 @@ gitea:
 deployment:
   env:
     - name: FORGEJO__SERVER__ROOT_URL
-      value: "http://localhost:8086/"
+      value: "http://forgejo-http.forgejo:3000"
     - name: FORGEJO__SERVER__SSH_DOMAIN
-      value: "https://localhost:8486/"
+      value: "http://forgejo-http.forgejo:22"

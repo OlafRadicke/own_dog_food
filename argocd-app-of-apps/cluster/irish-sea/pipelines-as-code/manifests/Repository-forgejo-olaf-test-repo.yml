@@ -16,7 +16,3 @@ spec:
       name: pac-webhook-secret
       key: webhook-secret
   url: http://localhost:8086/gitea_admin/teckton-pac-test
-
-
-
-http://git.example.com/gitea_admin/teckton-pac-test
