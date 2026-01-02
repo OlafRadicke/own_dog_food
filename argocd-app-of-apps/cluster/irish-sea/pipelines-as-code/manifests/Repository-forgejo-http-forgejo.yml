@@ -1,7 +1,7 @@
 apiVersion: pipelinesascode.tekton.dev/v1alpha1
 kind: Repository
 metadata:
-  name: forgejo-olaf-test-repo
+  name: forgejo-http-forgejo
   namespace: pipelines-as-code
 spec:
   concurrency_limit: 1
