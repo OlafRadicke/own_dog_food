@@ -2,27 +2,17 @@ apiVersion: pipelinesascode.tekton.dev/v1alpha1
 kind: Repository
 metadata:
   name: forgejo-olaf-test-repo
-  namespace: pipelines-as-code # gleich wie der PaC-Controller
+  namespace: pipelines-as-code
 spec:
   concurrency_limit: 1
   git_provider:
     type: gitea
-    # url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
-    url: https://codeberg.org/
-    apiurl: https://codeberg.org/api/v1
-    # Secret reference for authentication with the Git provider. Contains the token,
-    # password, or private key used to authenticate requests to the Git provider API.
+    url: http://localhost:8086/
+    apiurl: http://localhost:8086/api/v1
     secret:
       name: pac-git-token
       key: token
     webhook_secret:
       name: pac-webhook-secret
       key: webhook-secret
-  url:
-    https://codeberg.org/OlafRadicke/teckton-pac-demo
-    # url: https://codeberg.org/OlafRadicke/teckton-pac-demo.git
-    # url: "https://forgejo-http.forgejo:3000/gitea_admin/teckton-pac-test.git" # deine Forgejo-Repo-URL
-    # user: OlafRadicke
-
-    # WebhookSecret reference for webhook validation. Contains the shared secret used to
-    # validate that incoming webhooks are legitimate and coming from the Git provider.
+  url: http://localhost:8086/gitea_admin/teckton-pac-test
