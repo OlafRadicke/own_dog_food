@@ -32,4 +32,4 @@ data:
   secret-github-app-scope-extra-repos: ""
   secret-github-app-token-scoped: "true"
   skip-push-event-for-pr-commits: "true"
-  tekton-dashboard-url: ""
+  tekton-dashboard-url: "https://tekton-dashbord.olaf-radicke.de"
