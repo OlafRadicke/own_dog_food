@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   sources:
-    - path: argocd-app-of-apps/cluster/irish-sea/tekton-pipelines-deshboard/manifests/overlays
+    - path: argocd-app-of-apps/cluster/irish-sea/tekton-deshboard/manifests/overlays
       repoURL: "https://github.com/OlafRadicke/own_dog_food.git"
       targetRevision: main
       ref: values
