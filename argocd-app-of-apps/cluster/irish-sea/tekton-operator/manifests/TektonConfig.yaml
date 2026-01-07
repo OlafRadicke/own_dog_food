@@ -64,7 +64,7 @@ spec:
   #     webhookConfigurationOptions: {}
   pruner:
     disabled: false
-    schedule: "0 8 * * *"
+    schedule: "*/15 * * * *"
     resources:
       - taskrun
       - pipelinerun
