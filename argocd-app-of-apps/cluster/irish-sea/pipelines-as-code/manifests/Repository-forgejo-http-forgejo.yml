@@ -10,7 +10,7 @@ spec:
     url: http://forgejo-http.forgejo:3000/
     apiurl: http://forgejo-http.forgejo:3000/api/v1
     secret:
-      name: pac-git-token
+      name: pac-git-token-forgejo
       key: token
     webhook_secret:
       name: pac-webhook-secret

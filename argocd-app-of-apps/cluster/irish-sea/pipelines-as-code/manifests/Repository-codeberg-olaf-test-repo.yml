@@ -13,7 +13,7 @@ spec:
     # Secret reference for authentication with the Git provider. Contains the token,
     # password, or private key used to authenticate requests to the Git provider API.
     secret:
-      name: pac-git-token
+      name: pac-git-token-codeberg
       key: token
     # Secret reference for web kook token
     webhook_secret:
