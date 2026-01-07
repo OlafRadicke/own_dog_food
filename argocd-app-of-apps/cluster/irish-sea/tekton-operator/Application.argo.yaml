@@ -18,6 +18,12 @@ spec:
       targetRevision: main
       ref: values
 
+    - path: argocd-app-of-apps/cluster/irish-sea/tekton-operator/manifests
+      repoURL: https://github.com/OlafRadicke/own_dog_food.git
+      targetRevision: HEAD
+      directory:
+        recurse: true
+
   destination:
     namespace: tekton-operator
     server: https://kubernetes.default.svc
