@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: "quaker-kr-de"
-          image: "olafradicke/quaker-kr-de:0.7.3"
+          image: "olafradicke/quaker-kr-de:0.8.0"
           imagePullPolicy: IfNotPresent
           resources:
             requests:
