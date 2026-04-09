@@ -15,6 +15,7 @@ spec:
       helm:
         values: |
           validationFailureAction: audit
+    # enforce
     - path: argocd-app-of-apps/cluster/irish-sea/kyverno/manifests
       repoURL: https://github.com/OlafRadicke/own_dog_food.git
       targetRevision: HEAD
