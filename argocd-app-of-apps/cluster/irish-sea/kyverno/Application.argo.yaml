@@ -12,9 +12,9 @@ spec:
     - chart: kyverno
       repoURL: https://kyverno.github.io/kyverno/
       targetRevision: 3.7.1
-      # helm:
-      #   values: |
-      #     server:
+      helm:
+        values: |
+          validationFailureAction: audit
     - path: argocd-app-of-apps/cluster/irish-sea/kyverno/manifests
       repoURL: https://github.com/OlafRadicke/own_dog_food.git
       targetRevision: HEAD
