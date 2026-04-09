@@ -32,7 +32,7 @@ metadata:
   name: quaker-kr-de
 spec:
   dnsNames:
-    - quaker-kr.de
+    - test.quaker-kr.de
   secretName: quaker-kr-de
   issuerRef:
     name: letsencrypt-staging
