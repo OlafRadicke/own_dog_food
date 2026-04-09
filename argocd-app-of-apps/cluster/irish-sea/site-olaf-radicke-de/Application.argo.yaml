@@ -2,21 +2,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: quaker-kr-de
+  name: site-olaf-radicke-de
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: quaker-kr-de
+  project: site-olaf-radicke-de
   sources:
-    - path: argocd-app-of-apps/cluster/irish-sea/quaker-kr-de/manifests
+    - path: argocd-app-of-apps/cluster/irish-sea/site-olaf-radicke-de/manifests
       repoURL: https://github.com/OlafRadicke/own_dog_food.git
       targetRevision: HEAD
       directory:
         recurse: true
 
   destination:
-    namespace: quaker-kr-de
+    namespace: site-olaf-radicke-de
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
