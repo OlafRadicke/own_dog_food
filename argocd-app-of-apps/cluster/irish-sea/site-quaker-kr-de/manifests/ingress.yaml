@@ -1,6 +1,23 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
+  name: http-quaker-kr-de-redirect
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`test.quaker-kr.de`)
+      kind: Rule
+      middlewares:
+        - name: quaker-kr-de
+      services:
+        - name: quaker-kr-de
+          port: 80
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
   name: https-quaker-kr-de-ingressroute
 spec:
   entryPoints:
