@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "quaker-kr-de"
+  labels:
+    app: "quaker-kr-de"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "quaker-kr-de"
+  template:
+    metadata:
+      labels:
+        app: "quaker-kr-de"
+    spec:
+      containers:
+        - name: "quaker-kr-de"
+          image: "olafradicke/quaker-kr-de:0.8.8"
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
