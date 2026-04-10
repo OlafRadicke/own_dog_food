@@ -16,9 +16,13 @@ spec:
         values: |
           validationFailureAction: enforce
     # enforce / audit
-    - chart: kyverno-policies
-      repoURL: https://kyverno.github.io/kyverno/
-      targetRevision: 3.7.1
+    # - chart: kyverno-policies
+    #   repoURL: https://kyverno.github.io/kyverno/
+    #   targetRevision: 3.7.1
+
+    - repoURL: https://github.com/olafradicke/cluster-policies.git
+      targetRevision: main
+      path: kyverno
 
     - path: argocd-app-of-apps/cluster/irish-sea/kyverno/manifests
       repoURL: https://github.com/OlafRadicke/own_dog_food.git
