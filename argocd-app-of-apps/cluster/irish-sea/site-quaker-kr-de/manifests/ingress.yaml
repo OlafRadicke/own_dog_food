@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`test.quaker-kr.de`)
+    - match: Host(`quaker-kr.de`)
       kind: Rule
       middlewares:
         - name: quaker-kr-de
@@ -24,7 +24,7 @@ spec:
     - websecure
   routes:
     # - match:              Host(`quaker-kr.de`) && PathPrefix(`/`)
-    - match: Host(`test.quaker-kr.de`)
+    - match: Host(`quaker-kr.de`)
       kind: Rule
       services:
         - name: quaker-kr-de
@@ -49,9 +49,9 @@ metadata:
   name: quaker-kr-de
 spec:
   dnsNames:
-    - test.quaker-kr.de
+    - quaker-kr.de
   secretName: quaker-kr-de
   issuerRef:
-    name: letsencrypt-staging
-    # name:                 letsencrypt-production
+    # name: letsencrypt-staging
+    name: letsencrypt-production
     kind: ClusterIssuer
