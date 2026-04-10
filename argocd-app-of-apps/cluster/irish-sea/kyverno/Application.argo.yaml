@@ -9,16 +9,30 @@ metadata:
 spec:
   project: kyverno
   sources:
-    - chart: kyverno
-      repoURL: https://kyverno.github.io/kyverno/
-      targetRevision: 3.6.3
+    - repoURL: https://github.com/kyverno/kyverno.git
+      targetRevision: kyverno-chart-3.7.1
+      path: charts/kyverno
       helm:
         values: |
           validationFailureAction: enforce
-    # enforce / audit
-    - chart: kyverno-policies
-      repoURL: https://kyverno.github.io/kyverno/
-      targetRevision: 3.6.3
+
+    - repoURL: https://github.com/kyverno/kyverno.git
+      targetRevision: kyverno-policies-chart-3.7.1
+      path: charts/kyverno-policies
+      # helm:
+      #   valueFiles:
+      #     - values.yaml
+
+    # - chart: kyverno
+    #   repoURL: https://kyverno.github.io/kyverno/
+    #   targetRevision: 3.6.3
+    #   helm:
+    #     values: |
+    #       validationFailureAction: enforce
+    # # enforce / audit
+    # - chart: kyverno-policies
+    #   repoURL: https://kyverno.github.io/kyverno/
+    #   targetRevision: 3.6.3
 
     - path: argocd-app-of-apps/cluster/irish-sea/kyverno/manifests
       repoURL: https://github.com/OlafRadicke/own_dog_food.git
