@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: quaker-kr-de
+  name: site-apologie
   namespace: argocd
 spec:
   sourceRepos:
