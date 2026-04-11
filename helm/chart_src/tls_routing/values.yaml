@@ -1,8 +1,0 @@
-app: {}
-  # name: exampleapp
-  # fqdn: exampleapp.exampledom.com
-  # service: example-main-server
-  # servive_port: 80
-mtls: {}
-  # enabled: true
-  # secretnames: mtls-ca

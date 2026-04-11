@@ -1,7 +1,0 @@
-apiVersion: v2
-name: tekton
-description: A Helm chart for Kubernete
-type: application
-version: "0.0.3"
-# See: https://github.com/tektoncd/pipeline https://github.com/tektoncd/pipeline/releases
-appVersion: "0.37.2"
