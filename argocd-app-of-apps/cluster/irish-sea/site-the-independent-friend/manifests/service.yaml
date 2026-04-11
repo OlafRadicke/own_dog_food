@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "the-independent-friend-de"
+  labels:
+    app: the-independent-friend-de
+spec:
+  type: ClusterIP
+  selector:
+    app: the-independent-friend-de
+  ports:
+    - targetPort: 80
+      port: 80

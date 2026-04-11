@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: site-the-independent-friend
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: site-the-independent-friend
+  sources:
+    - path: argocd-app-of-apps/cluster/irish-sea/site-the-independent-friend/manifests
+      repoURL: https://github.com/OlafRadicke/own_dog_food.git
+      targetRevision: HEAD
+      directory:
+        recurse: true
+
+  destination:
+    namespace: site-the-independent-friend
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true

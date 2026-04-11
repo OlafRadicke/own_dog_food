@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-independent-friend-de
+  labels:
+    app: the-independent-friend-de
+spec:
+  selector:
+    matchLabels:
+      app: the-independent-friend-de
+  template:
+    metadata:
+      labels:
+        app: the-independent-friend-de
+    spec:
+      containers:
+        - name: the-independent-friend-de
+          image: "olafradicke/the-independent-friend-de:4.10.3"
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: regcred

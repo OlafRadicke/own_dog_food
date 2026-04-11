@@ -1,0 +1,56 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: apologie-ingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`the-independent-friend.de`)
+      kind: Rule
+      middlewares:
+        - name: apologie
+      services:
+        - name: apologie
+          port: 80
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https-apologie-ingressroute
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`the-independent-friend.de`)
+      kind: Rule
+      services:
+        - name: apologie
+          port: 80
+  tls:
+    secretName: apologie
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: apologie
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: apologie
+spec:
+  dnsNames:
+    - the-independent-friend.de
+  secretName: apologie
+  issuerRef:
+    # name:                 letsencrypt-staging
+    name: letsencrypt-production
+    kind: ClusterIssuer
