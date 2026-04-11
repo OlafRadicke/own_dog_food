@@ -1,64 +1,58 @@
----
-
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     IngressRoute
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name:                   olaf-radicke-de
+  name: olaf-radicke-de
 spec:
   entryPoints:
-                          - web
+    - web
   routes:
-    - match:              Host(`olaf-radicke.de`)
-      kind:               Rule
-      # services:
-      #   - name:           olaf-radicke-de
-      #     port:           80
+    - match: Host(`olaf-radicke.de`)
+      kind: Rule
       middlewares:
-        - name:           olaf-radicke-de
+        - name: olaf-radicke-de
+      services:
+        - name: olaf-radicke-de
+          port: 80
   tls:
-    secretName:           olaf-radicke-de
-
+    secretName: olaf-radicke-de
 
 ---
-
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     IngressRoute
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name:                   https-olaf-radicke-de
+  name: https-olaf-radicke-de
 spec:
   entryPoints:
-                          - websecure
+    - websecure
   routes:
-    - match:              Host(`olaf-radicke.de`) && PathPrefix(`/`)
-      kind:               Rule
+    - match: Host(`olaf-radicke.de`)
+      kind: Rule
       services:
-        - name:           olaf-radicke-de
-          port:           80
+        - name: olaf-radicke-de
+          port: 80
   tls:
-    secretName:           olaf-radicke-de
+    secretName: olaf-radicke-de
 
 ---
-
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     Middleware
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
 metadata:
-  name:                   olaf-radicke-de
+  name: olaf-radicke-de
 spec:
   redirectScheme:
-    scheme:               https
-    permanent:            true
+    scheme: https
+    permanent: true
 
 ---
-
-apiVersion:               cert-manager.io/v1
-kind:                     Certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
 metadata:
-  name:                   olaf-radicke-de
+  name: olaf-radicke-de
 spec:
   dnsNames:
-                          - olaf-radicke.de
-  secretName:             olaf-radicke-de
+    - olaf-radicke.de
+  secretName: olaf-radicke-de
   issuerRef:
-    # name:                 letsencrypt-staging
-    name:                 letsencrypt-production
-    kind:                 ClusterIssuer
+    # name: letsencrypt-staging
+    name: letsencrypt-production
+    kind: ClusterIssuer
