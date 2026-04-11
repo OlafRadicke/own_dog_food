@@ -11,7 +11,7 @@ spec:
       middlewares:
         - name: apologie
       services:
-        - name: apologie
+        - name: the-independent-friend-de
           port: 80
 
 ---
@@ -26,7 +26,7 @@ spec:
     - match: Host(`the-independent-friend.de`)
       kind: Rule
       services:
-        - name: apologie
+        - name: the-independent-friend-de
           port: 80
   tls:
     secretName: apologie
