@@ -1,69 +1,56 @@
----
-
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     IngressRoute
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name:                   apologie-ingressroute
+  name: apologie-ingressroute
 spec:
   entryPoints:
-                          - web
+    - web
   routes:
-    - match:              Host(`apologie.the-independent-friend.de`)
-      kind:               Rule
-      services:
-        - name:           apologie
-          port:           80
+    - match: Host(`apologie.the-independent-friend.de`)
+      kind: Rule
       middlewares:
-        - name:           apologie
-    # - match:              Host(`apologie.the-independent-friend.de`) && PathPrefix(`/`)
-    #   kind:               Rule
-    #   services:
-    #     - name:           apologie
-    #       port:           80
-    #   middlewares:
-    #     - name:           apologie
+        - name: apologie
+      services:
+        - name: apologie
+          port: 80
 
 ---
-
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     IngressRoute
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name:                   https-apologie-ingressroute
+  name: https-apologie-ingressroute
 spec:
   entryPoints:
-                          - websecure
+    - websecure
   routes:
-    # - match:              Host(`https://apologie.the-independent-friend.de`) && PathPrefix(`/`)
-    - match:              Host(`apologie.the-independent-friend.de`)
-      kind:               Rule
+    - match: Host(`apologie.the-independent-friend.de`)
+      kind: Rule
       services:
-        - name:           apologie
-          port:           80
+        - name: apologie
+          port: 80
   tls:
-    secretName:           apologie
+    secretName: apologie
 
 ---
-
-apiVersion:               traefik.containo.us/v1alpha1
-kind:                     Middleware
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
 metadata:
-  name:                   apologie
+  name: apologie
 spec:
   redirectScheme:
-    scheme:               https
-    permanent:            true
+    scheme: https
+    permanent: true
 
 ---
-
-apiVersion:               cert-manager.io/v1
-kind:                     Certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
 metadata:
-  name:                   apologie
+  name: apologie
 spec:
   dnsNames:
-                          - apologie.the-independent-friend.de
-  secretName:             apologie
+    - apologie.the-independent-friend.de
+  secretName: apologie
   issuerRef:
     # name:                 letsencrypt-staging
-    name:                 letsencrypt-production
-    kind:                 ClusterIssuer
+    name: letsencrypt-production
+    kind: ClusterIssuer

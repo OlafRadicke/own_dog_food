@@ -23,7 +23,6 @@ spec:
   entryPoints:
     - websecure
   routes:
-    # - match:              Host(`quaker-kr.de`) && PathPrefix(`/`)
     - match: Host(`quaker-kr.de`)
       kind: Rule
       services:
